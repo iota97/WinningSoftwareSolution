@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article}
+
+\begin{document}
+
+\section{Introduzone}
+\subsection{Scopo del documento}
+Lo scopo del presente documento è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni qui presentate.
+
+\section{Processi di supporto}
+
+\subsection{Documentazione}
+
+\subsubsection{Strumenti utilizzati}
+Per la stesura dei documenti verrà utilizzato il linguaggio \LaTeX.
+
+\subsubsection{Versionamento}
+Ogni documento è univocamente identificabile dal titolo e dalla versione. La versione è definita da tre numeri nel formato \texttt{$<$x$>$.$<$y$>$.$<$z$>$}
+
+\subsubsection{Struttura dei documenti}
+
+\subsubsection{Organizzazione dei file}
+I file della documentazione saranno tutti denominati \texttt{$<$nome$>$.tex}, dove \texttt{$<$nome$>$} è il nome del file come definito nella sezione \ref{documentazione-documenti}.
+
+Tutta la documentazione sarà contenuta all'interno della cartella \texttt{docs}. La cartella è a sua volta divisa in due sottocartelle \texttt{interni} ed \texttt{esterni}, che conterranno rispettivamente la documentazione interna al gruppo e quella da condividere con gli altri stakeholders.
+
+Tutti i verbali saranno conservati nella sottocartella \texttt{interni/verbali}.
+
+
+\subsubsection{Documenti}\label{documentazione-documenti}
+
+\paragraph{Norme di progetto}
+\subparagraph{Scopo}
+Lo scopo delle norme di progetto è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni lì presentate.
+\subparagraph{Titolo}
+Il titolo del documento è ``Norme di progetto"
+\subparagraph{Nome del file}
+Il file sarà chiamato \texttt{norme\_di\_progetto.tex}.
+
+\paragraph{Verbali}
+\subparagraph{Scopo}
+Lo scopo dei verbali è tenere traccia del dialogo interno ed esterno al gruppo e delle eventuali decisioni prese.
+\subparagraph{Titolo}
+Ogni verbale sarà titolato ``Verbale del $<$data$>$", dove $<$data$>$ indica la data dell'incontro nel formato europeo. In caso all'incontro siano presenti persone esterne al gruppo verà aggiunta la dicitura ``[con $<$esterni$>$]", dove $<$esterni$>$ indica i partecipanti alla riunione separati da virgole. Gli esterni possono essere identificati collettivamente tramite il nome dell'azienda o ente che rappresentano, tramite nome e cognome o tramite titolo e cognome.\\
+Esempi:
+\begin{itemize}
+\item Verbale del 09/11/2021
+\item Verbale del 28/10/2021 con SyncLab
+\item Verbale del 25/12/2021 con prof. Cardin
+\end{itemize}
+\subparagraph{Nome dei file}
+I file saranno chiamati \texttt{$<$data$>$\_$<$tipo$>$.tex}, dove \texttt{$<$data$>$} è la data dell'incontro in formato \texttt{$<$yyyy$>$\_$<$mm$>$\_$<$dd$>$} e \texttt{$<$tipo$>$} è \texttt{I} se non sono presenti persone esterne al gruppo, \texttt{E} altrimenti.
+\subparagraph{Struttura}
+Ogni verbale deve riportare:
+\begin{itemize}
+\item data, ora e durata;
+\item luogo;
+\item partecipanti;
+\item ordine del giorno;
+\item riassunto dei contenuti;
+\item eventuali impegni assunti.
+\end{itemize}
+
+\subsection{Configurazione}
+
+\subsubsection{Repository GitHub}
+
+% Ogni altro file generato dal compilatore \LaTeX non dovrà essere considerato. 
+
+
+\end{document}
