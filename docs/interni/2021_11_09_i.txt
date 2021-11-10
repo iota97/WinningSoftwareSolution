@@ -1,0 +1,20 @@
+Verbale del 09/11/2021
+
+Data: 9/11/2021
+Ora: 16:00
+Durata: 3 ore
+Luogo: Server Discord
+Partecipanti: Alberto Nicoletti, Andrea Volpe, Elia Scandaletti, Federico, Raffaele, Matteo Galvagni.
+
+Ordine del giorno:
+definire i primi documenti da stilare e gli strumenti da usare
+
+riassunto dei contenuti:
+-Si è scelta Github come repository, Latex come linguaggio per produrre i documenti. Si è valutato Overleaf come editor per i documenti. Questa possibilità è stata scartata preferendo l'editing locale ed individuale, poi condividento i documenti nella repository.
+-Si è iniziato a compilare il documento di norme di progetto
+-Si è definita la necessità di ulteriori 2 incontri prima della presentazione della candidatura
+-Si è diviso il lavoro di compilazione di verbali degli incontri con i proponenti in gruppi: Raffaele ed Alberto per il capitolato C3, Andrea, Elia e Matteo per il capitolato C2
+-Si sono definiti i documenti da presentare per la candidatura: verbali incontri con proponenti, preventivo costi, impegno di consegna.
+
+impegni presi:
+-stilare i verbali degli incontri con proponenti
