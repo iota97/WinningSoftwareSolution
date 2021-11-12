@@ -2,6 +2,8 @@
 
 \begin{document}
 
+\input{../../template/front_page}
+
 \section{Introduzone}
 \subsection{Scopo del documento}
 Lo scopo del presente documento è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni qui presentate.
@@ -13,18 +15,101 @@ Lo scopo del presente documento è definire procedure, strumenti e criteri di qu
 \subsubsection{Strumenti utilizzati}
 Per la stesura dei documenti verrà utilizzato il linguaggio \LaTeX.
 
-\subsubsection{Versionamento}
-Ogni documento è univocamente identificabile dal titolo e dalla versione. La versione è definita da tre numeri nel formato \texttt{$<$x$>$.$<$y$>$.$<$z$>$}
+\subsubsection{Ciclo di vita}
+Ogni documento passa per le seguenti fasi di vita:
+\begin{itemize}
+\item \textbf{Pianificazione:} il documento viene discusso e delineato per sommi capi sulla base delle necessità a cui deve rispondere;
+\item \textbf{Stesura:} un membro del gruppo, nel ruolo di redattore, scrive fisicamente il documento;
+\item \textbf{Revisione:} un membro del gruppo, nel ruolo di revisore, controlla che non siano presenti errori grammaticali e che sia aderente alle norme di progetto;
+\item \textbf{Approvazione:} un membro del gruppo, nel ruolo di responsabile, verifica che il contenuto del documento sia corretto e coerente con lo scopo dello stesso.
+\end{itemize}
 
-\subsubsection{Struttura dei documenti}
+Non è possibile per un membro del gruppo coprire più ruoli nella gestione dello stesso documento.
+
+Una volta che un documento è revisionato o approvato può comunque tornare in fase di stesura sulla base delle esigenze del momento.
+
+\subsubsection{Versionamento}
+Ogni documento è univocamente identificabile dal titolo e dalla versione. La versione è definita da tre numeri nel formato \texttt{$<$x$>$.$<$y$>$.$<$z$>$}.
+
+La prima versione è la \texttt{0.0.0}
+
+Il numero \texttt{$<$z$>$} viene modificato ogni volta che viene effettuata una stesura del documento. \\
+Il numero \texttt{$<$y$>$} viene modificato ogni volta che viene effettuata una revisione del documento. \\
+Il numero \texttt{$<$x$>$} viene modificato ogni volta che viene effettuata un'approvazione del documento.
+
+Se il numero \texttt{$<$x$>$} viene modificato, \texttt{$<$y$>$} e \texttt{$<$z$>$} tornano a 0. \\
+Se il numero \texttt{$<$y$>$} viene modificato, \texttt{$<$z$>$} torna a 0.
+
+I verbali sono esclusi dal sistema di versionamento poiché non possono essere modificati nel tempo.
 
 \subsubsection{Organizzazione dei file}
-I file della documentazione saranno tutti denominati \texttt{$<$nome$>$.tex}, dove \texttt{$<$nome$>$} è il nome del file come definito nella sezione \ref{documentazione-documenti}.
+Tutta la documentazione sarà contenuta all'interno della cartella \texttt{docs/}. La cartella è a sua volta divisa in due sottocartelle \texttt{docs/interni/} e \texttt{docs/esterni/}, che conterranno rispettivamente la documentazione interna al gruppo e quella da condividere con gli altri stakeholders.
 
-Tutta la documentazione sarà contenuta all'interno della cartella \texttt{docs}. La cartella è a sua volta divisa in due sottocartelle \texttt{interni} ed \texttt{esterni}, che conterranno rispettivamente la documentazione interna al gruppo e quella da condividere con gli altri stakeholders.
+Tutti i verbali saranno conservati nella sottocartella \texttt{interni/verbali/}.
 
-Tutti i verbali saranno conservati nella sottocartella \texttt{interni/verbali}.
+Per ogni documento sarà presente una cartella che sarà chiamata \texttt{$<$nome$>$/}, dove \texttt{$<$nome$>$} è il nome del documento come specificato nella sezione \ref{documentazione-documenti}.
 
+Il file principale di ogni documento sarà all'interno della rispettiva cartella e sarà chiamato \texttt{$<$nome$>$.tex}, dove \texttt{$<$nome$>$} è il nome del file come definito nella sezione \ref{documentazione-documenti}.
+
+Eventuali altri file utilizzati nella stesura del documento saranno posizionati all'interno della stessa cartella.
+
+\subsubsection{Struttura dei documenti}
+Ogni documento avrà una pagina di intestazione e una pagina con l'elenco delle versioni, laddove il versionamento del documento è ammesso.
+Sarà inserita una pagina con l'indice, a meno di indicazione contraria nella sezione \ref{documentazione-documenti}.
+
+\paragraph{Pagina di intestazione}
+La pagina di intestazione contiene:
+\begin{itemize}
+\item logo e nome del gruppo;
+\item nome del progetto;
+\item contatto;
+\item titolo del documento;
+\item informazioni sul documento:
+\begin{itemize}
+	\item elenco dei redattori;
+	\item elenco dei revisori;
+	\item elenco dei responsabili;
+	\item versione, laddove prevista;
+	\item destinazione d'uso interna o esterna;
+\end{itemize}
+\item breve descrizione.
+\end{itemize}
+
+Ogni documento userà per la prima pagina il template \texttt{docs/template/front\_page.tex}.\\
+Eventuali risorse che dovessero servire per il template, saranno nella stessa cartella.
+
+\paragraph{Elenco delle versioni}
+L'elenco delle versioni è una tabella con le seguenti colonne:
+\begin{itemize}
+\item versione;
+\item data;
+\item persona;
+\item attività;
+\item descrizione.
+\end{itemize}
+
+Con persona si intende il membro del gruppo che svolge l'attività.
+
+Le possibili attività su un documento sono la stesura, la revisione e la approvazione.
+
+Le righe della tabella sono in ordine cronologico.
+
+\subsubsection{Convenzioni utilizzate}
+Per indicare il nome di un file o di una cartella si utilizza il  \texttt{testo monospaziato}.
+
+Il nome di una cartella termina sempre con \texttt{/}.
+
+Le stringhe vengono scritte tra doppi apici `` ''.
+
+Per indicare un parametro in un nome o una stringa si usa del testo tra parentesi angolari $<$ $>$. Il parametro non può contenere spazi.
+
+Per indicare una parte di nome o stringa opzionale si usa del testo tra parentesi quadre [ ].
+
+Negli elenchi puntati o numerati ogni item termina con un punto e virgola, salvo l'ultimo che termina con un punto.
+
+Se la voce di un elenco descrive un concetto, un termine o un oggetto, allora esso va scritto in grassetto seguito da due punti. 
+
+Ogni frase termina con un punto.
 
 \subsubsection{Documenti}\label{documentazione-documenti}
 
@@ -32,7 +117,7 @@ Tutti i verbali saranno conservati nella sottocartella \texttt{interni/verbali}.
 \subparagraph{Scopo}
 Lo scopo delle norme di progetto è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni lì presentate.
 \subparagraph{Titolo}
-Il titolo del documento è ``Norme di progetto"
+Il titolo del documento è ``Norme di progetto".
 \subparagraph{Nome del file}
 Il file sarà chiamato \texttt{norme\_di\_progetto.tex}.
 
@@ -40,15 +125,17 @@ Il file sarà chiamato \texttt{norme\_di\_progetto.tex}.
 \subparagraph{Scopo}
 Lo scopo dei verbali è tenere traccia del dialogo interno ed esterno al gruppo e delle eventuali decisioni prese.
 \subparagraph{Titolo}
-Ogni verbale sarà titolato ``Verbale del $<$data$>$", dove $<$data$>$ indica la data dell'incontro nel formato europeo. In caso all'incontro siano presenti persone esterne al gruppo verà aggiunta la dicitura ``[con $<$esterni$>$]", dove $<$esterni$>$ indica i partecipanti alla riunione separati da virgole. Gli esterni possono essere identificati collettivamente tramite il nome dell'azienda o ente che rappresentano, tramite nome e cognome o tramite titolo e cognome.\\
+Ogni verbale sarà titolato ``Verbale del $<$data$>$[ con $<$esterni$>$]", dove $<$data$>$ indica la data dell'incontro nel formato europeo. In caso all'incontro siano presenti persone esterne al gruppo, verrà usata anche la dicitura ``con $<$esterni$>$", dove $<$esterni$>$ indica i partecipanti alla riunione separati da virgole. Gli esterni possono essere identificati collettivamente tramite il nome dell'azienda o ente che rappresentano, tramite nome e cognome o tramite titolo e cognome.\\
 Esempi:
 \begin{itemize}
-\item Verbale del 09/11/2021
-\item Verbale del 28/10/2021 con SyncLab
-\item Verbale del 25/12/2021 con prof. Cardin
+\item ``Verbale del 09/11/2021'';
+\item ``Verbale del 28/10/2021 con SyncLab'';
+\item ``Verbale del 25/12/2021 con prof. Cardin''.
 \end{itemize}
 \subparagraph{Nome dei file}
 I file saranno chiamati \texttt{$<$data$>$\_$<$tipo$>$.tex}, dove \texttt{$<$data$>$} è la data dell'incontro in formato \texttt{$<$yyyy$>$\_$<$mm$>$\_$<$dd$>$} e \texttt{$<$tipo$>$} è \texttt{I} se non sono presenti persone esterne al gruppo, \texttt{E} altrimenti.
+\subparagraph{Indice}
+Non è presente una pagina con l'indice.
 \subparagraph{Struttura}
 Ogni verbale deve riportare:
 \begin{itemize}
