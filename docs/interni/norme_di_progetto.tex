@@ -156,24 +156,24 @@ Ogni componente del gruppo clonera il repo in locale:\\
 
 Workflow per la modifica del repo:
 \begin{itemize}
-\item Per creare una modifica al repo prima sincronizzare all'ultima versione del remote\\
-	\texttt{git pull};
 \item Selezionare la branch main\\
-	\texttt{git checkout main};
+	\texttt{git checkout main}
+\item Sincronizzare all'ultima versione del remote\\
+	\texttt{git pull}
 \item Creare una nuova branch nel formato $<$iniziali\_nome\_cognome$>$-$<$nome\_branch$>$\\
-	\texttt{git branch gc-istruzioni-git};
+	\texttt{git branch gc-istruzioni-git}
 \item Passare alla branch specificata\\
-	\texttt{git checkout gc-istruzioni-git};
-\item Creare le modifiche necessarie;
+	\texttt{git checkout gc-istruzioni-git}
+\item Creare le modifiche necessarie
 \item Aggiungere le modifiche alla stage area\\
-	\texttt{git add .};
+	\texttt{git add .}
 \item Creare il commit con le modifiche\\
-	\texttt{git commit};
+	\texttt{git commit}
 \item Pushare sul remote la nuova branch\\
-	\texttt{git push --set-upstream origin gc-istruzioni-git};
-\item Da GitHub creare la PR;
+	\texttt{git push --set-upstream origin gc-istruzioni-git}
+\item Da GitHub creare la PR
 \item Se necessarie ulteriori modifiche modificare i file e pushare i cambiamenti\\
-	\texttt{git push}.
+	\texttt{git push}
 \end{itemize}
 
 \textbf{NB}: Prima di pushare usare \texttt{git status} per verificare di essere nella branch corretta etc...\\\\
