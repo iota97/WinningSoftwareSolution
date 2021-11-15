@@ -8,7 +8,10 @@
 \newcommand{\setredattori}[1]{\newcommand{\redattori}{#1\\}}
 \newcommand{\setrevisori}[1]{\newcommand{\revisori}{#1\\}}
 \newcommand{\setresponsabili}[1]{\newcommand{\responsabili}{#1\\}}
-\newcommand{\setversione}[1]{\newcommand{\versione}{#1\\}}
+\newcommand{\setversione}[1]{
+	\ifdefined\versione\renewcommand{\versione}{#1\\}
+	\else\newcommand{\versione}{#1\\}\fi
+}
 \newcommand{\setdestuso}[1]{\newcommand{\uso}{#1\\}}
 \newcommand{\setdescrizione}[1]{\newcommand{\descrizione}{#1\\}}
 

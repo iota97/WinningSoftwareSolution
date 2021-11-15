@@ -5,6 +5,9 @@
 \def\vers#1-#2-#3-#4-#5\\{#1&#2&#3&#4&#5\\\hline}
 
 \newcommand{\addversione}[5]{
+	\ifdefined\setversione
+		\setversione{#1}
+	\else\fi
 	\ifdefined\versioni
 		\let\old\versioni
 		\renewcommand{\versioni}{#1&#2&#3&#4&#5\\\hline\old}
