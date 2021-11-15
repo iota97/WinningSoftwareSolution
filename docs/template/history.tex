@@ -1,0 +1,31 @@
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{tabularx}
+
+\def\vers#1-#2-#3-#4-#5\\{#1&#2&#3&#4&#5\\\hline}
+
+\newcommand{\addversione}[5]{
+	\ifdefined\setversione
+		\setversione{#1}
+	\else\fi
+	\ifdefined\versioni
+		\let\old\versioni
+		\renewcommand{\versioni}{#1&#2&#3&#4&#5\\\hline\old}
+	\else
+		\newcommand{\versioni}{#1&#2&#3&#4&#5\\\hline}
+	\fi
+}
+
+\newcommand{\setversioni}[1]{\newcommand{\versioni}{#1}}
+
+\newcommand{\makeversioni}{
+	\begin{center}
+		\begin{tabularx}{\textwidth}{|c|c|c|c|X|}
+		\hline
+		\textbf{Versione} & \textbf{Data} & \textbf{Persona} & \textbf{Attivtà} & \textbf{Descrizione} \\
+		\hline
+		\versioni
+		\end{tabularx}
+	\end{center}
+	\clearpage
+}

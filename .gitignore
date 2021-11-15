@@ -1,5 +1,7 @@
 ## LaTeX
 *.aux
+*.out
+*.dvi
 *.log
 *.synctex.gz
 *.pdf

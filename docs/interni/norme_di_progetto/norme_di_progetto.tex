@@ -1,8 +1,24 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper, 12pt]{article}
+
+\input{../../template/style}
+\input{../../template/front_page}
+\input{../../template/history}
+
+\settitolo{Norme di progetto}
+\setredattori{Elia Scandaletti}
+\setdestuso{interno}
+\setdescrizione{
+Questo documento contiene le procedure, gli strumenti e i criteri di qualità che verranno usati nel progetto. 
+}
+
+\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Redazione}{Stesura \ref{documentazione}}
+\addversione{0.0.1}{14/11/2021}{Elia Scandaletti}{Redazione}{Stesura \ref{configurazione-github}}
 
 \begin{document}
 
-\input{../../template/front_page}
+\makefrontpage
+
+\makeversioni
 
 \section{Introduzone}
 \subsection{Scopo del documento}
@@ -10,7 +26,7 @@ Lo scopo del presente documento è definire procedure, strumenti e criteri di qu
 
 \section{Processi di supporto}
 
-\subsection{Documentazione}
+\subsection{Documentazione}\label{documentazione}
 
 \subsubsection{Strumenti utilizzati}
 Per la stesura dei documenti verrà utilizzato il linguaggio \LaTeX.
@@ -19,7 +35,7 @@ Per la stesura dei documenti verrà utilizzato il linguaggio \LaTeX.
 Ogni documento passa per le seguenti fasi di vita:
 \begin{itemize}
 \item \textbf{Pianificazione:} il documento viene discusso e delineato per sommi capi sulla base delle necessità a cui deve rispondere;
-\item \textbf{Stesura:} un membro del gruppo, nel ruolo di redattore, scrive fisicamente il documento;
+\item \textbf{Redazione:} un membro del gruppo, nel ruolo di redattore, scrive fisicamente il documento;
 \item \textbf{Revisione:} un membro del gruppo, nel ruolo di revisore, controlla che non siano presenti errori grammaticali e che sia aderente alle norme di progetto;
 \item \textbf{Approvazione:} un membro del gruppo, nel ruolo di responsabile, verifica che il contenuto del documento sia corretto e coerente con lo scopo dello stesso.
 \end{itemize}
@@ -33,11 +49,14 @@ Ogni documento è univocamente identificabile dal titolo e dalla versione. La ve
 
 La prima versione è la \texttt{0.0.0}
 
-Il numero \texttt{$<$z$>$} viene modificato ogni volta che viene effettuata una stesura del documento. \\
-Il numero \texttt{$<$y$>$} viene modificato ogni volta che viene effettuata una revisione del documento. \\
+Il numero \texttt{$<$z$>$} viene modificato ogni volta che viene effettuata una stesura del documento.
+
+Il numero \texttt{$<$y$>$} viene modificato ogni volta che viene effettuata una revisione del documento.
+
 Il numero \texttt{$<$x$>$} viene modificato ogni volta che viene effettuata un'approvazione del documento.
 
-Se il numero \texttt{$<$x$>$} viene modificato, \texttt{$<$y$>$} e \texttt{$<$z$>$} tornano a 0. \\
+Se il numero \texttt{$<$x$>$} viene modificato, \texttt{$<$y$>$} e \texttt{$<$z$>$} tornano a 0.
+
 Se il numero \texttt{$<$y$>$} viene modificato, \texttt{$<$z$>$} torna a 0.
 
 I verbali sono esclusi dal sistema di versionamento poiché non possono essere modificati nel tempo.
@@ -61,7 +80,7 @@ Sarà inserita una pagina con l'indice, a meno di indicazione contraria nella se
 La pagina di intestazione contiene:
 \begin{itemize}
 \item logo e nome del gruppo;
-\item nome del progetto;
+\item nome del progetto e azienda cliente;
 \item contatto;
 \item titolo del documento;
 \item informazioni sul documento:
@@ -70,12 +89,15 @@ La pagina di intestazione contiene:
 	\item elenco dei revisori;
 	\item elenco dei responsabili;
 	\item versione, laddove prevista;
-	\item destinazione d'uso interna o esterna;
+	\item destinazione d'uso;
 \end{itemize}
 \item breve descrizione.
 \end{itemize}
 
-Ogni documento userà per la prima pagina il template \texttt{docs/template/front\_page.tex}.\\
+La destinazione d'uso può essere ``interno'' o ``esterno''.
+
+Ogni documento userà per la prima pagina il template \texttt{docs/template/front\_page.tex}.
+
 Eventuali risorse che dovessero servire per il template, saranno nella stessa cartella.
 
 \paragraph{Elenco delle versioni}
@@ -90,26 +112,32 @@ L'elenco delle versioni è una tabella con le seguenti colonne:
 
 Con persona si intende il membro del gruppo che svolge l'attività.
 
-Le possibili attività su un documento sono la stesura, la revisione e la approvazione.
+Le possibili attività su un documento sono ``Redazione'', ``Revisione'' e ``Approvazione''.
 
-Le righe della tabella sono in ordine cronologico.
+Le righe della tabella sono in ordine cronologico inverso.
+
+\paragraph{Stile}
+Ogni documento dovrà includere il file \texttt{docs/template/style.tex} che contiene indicazioni di stile.
+
+
 
 \subsubsection{Convenzioni utilizzate}
+\paragraph{Riferimenti a file e cartelle}
 Per indicare il nome di un file o di una cartella si utilizza il  \texttt{testo monospaziato}.
 
 Il nome di una cartella termina sempre con \texttt{/}.
 
+\paragraph{Stringhe e nomi}
 Le stringhe vengono scritte tra doppi apici `` ''.
 
 Per indicare un parametro in un nome o una stringa si usa del testo tra parentesi angolari $<$ $>$. Il parametro non può contenere spazi.
 
 Per indicare una parte di nome o stringa opzionale si usa del testo tra parentesi quadre [ ].
 
-Negli elenchi puntati o numerati ogni item termina con un punto e virgola, salvo l'ultimo che termina con un punto.
+\paragraph{Riferimenti tra documenti}
+Per riferirsi a sezioni all'interno dello stesso documento si usa il comando \verb-\ref-.
 
-Se la voce di un elenco descrive un concetto, un termine o un oggetto, allora esso va scritto in grassetto seguito da due punti. 
-
-Ogni frase termina con un punto.
+Per riferirsi a sezioni di un altro documento si usa il nome di quella sezione scritto in corsivo.
 
 \subsubsection{Documenti}\label{documentazione-documenti}
 
@@ -125,7 +153,8 @@ Il file sarà chiamato \texttt{norme\_di\_progetto.tex}.
 \subparagraph{Scopo}
 Lo scopo dei verbali è tenere traccia del dialogo interno ed esterno al gruppo e delle eventuali decisioni prese.
 \subparagraph{Titolo}
-Ogni verbale sarà titolato ``Verbale del $<$data$>$[ con $<$esterni$>$]", dove $<$data$>$ indica la data dell'incontro nel formato europeo. In caso all'incontro siano presenti persone esterne al gruppo, verrà usata anche la dicitura ``con $<$esterni$>$", dove $<$esterni$>$ indica i partecipanti alla riunione separati da virgole. Gli esterni possono essere identificati collettivamente tramite il nome dell'azienda o ente che rappresentano, tramite nome e cognome o tramite titolo e cognome.\\
+Ogni verbale sarà titolato ``Verbale del $<$data$>$[ con $<$esterni$>$]", dove $<$data$>$ indica la data dell'incontro nel formato europeo. In caso all'incontro siano presenti persone esterne al gruppo, verrà usata anche la dicitura ``con $<$esterni$>$", dove $<$esterni$>$ indica i partecipanti alla riunione separati da virgole. Gli esterni possono essere identificati collettivamente tramite il nome dell'azienda o ente che rappresentano, tramite nome e cognome o tramite titolo e cognome.
+
 Esempi:
 \begin{itemize}
 \item ``Verbale del 09/11/2021'';
@@ -149,9 +178,45 @@ Ogni verbale deve riportare:
 
 \subsection{Configurazione}
 
-\subsubsection{Repository GitHub}
+\subsubsection{Repository GitHub}\label{configurazione-github}
+Per il versionamento del progetto si è scelto di utilizzare git su piattaforma GitHub.
 
-% Ogni altro file generato dal compilatore \LaTeX non dovrà essere considerato. 
+La repository \url{https://github.com/iota97/WinningSoftwareSolution} conterrà tutti i file del progetto.
 
+\paragraph{Workflow di lavoro}
+Ogni modifica alla repository dovrà seguire i seguenti passaggi:
+\begin{itemize}
+\item modifica del codice su repository locale;
+\item push su un branch ad hoc nominato \texttt{$<$iniziali\_autore$>$\_$<$descrizione$>$};
+\item pull request tramite piattaforma web GitHub;
+\item review della pull request;
+\item merge sul branch \texttt{main}.
+\end{itemize}
+
+Prima di effettuare un push alla repository remota o un merge al branch \texttt{main} è necessario fare uno squash dei commit superflui.
+
+Chi effettua la modifica e chi fa la review devono essere membri del gruppo distinti.
+
+Chi effettua la review può accettare la pull request.
+
+Dopo che è stato fatto il merge di una pull request, il corrispondente branch va eliminato.
+
+È consentito modifcare solamente i propri branch.
+
+Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
+
+Non è consentito forzare i push sulla repository remota.
+
+\paragraph{Comandi utili}
+Alcuni comandi utili sono:
+\begin{itemize}
+\item \textbf{Sincronizzazione con repository remota:} \texttt{git pull};
+\item \textbf{Creazione di un nuovo branch}: \texttt{git branch $<$nome\_branch$>$};
+\item \textbf{Passaggio a un branch specificata:} \texttt{git checkout $<$nome\_branch$>$};
+\item \textbf{Aggiunta delle modifiche alla stage area:} \texttt{git add .};
+\item \textbf{Creazione del commit con le modifiche:} \texttt{git commit};
+\item \textbf{Push sul remote di un nuovo branch:} \texttt{git push --set-upstream origin $<$nome\_branch$>$};
+\item \textbf{Push su un branch già esistente:} \texttt{git push}.
+\end{itemize}
 
 \end{document}
