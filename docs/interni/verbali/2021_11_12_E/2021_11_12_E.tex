@@ -1,12 +1,21 @@
-\documentclass[a4paper,12pt]{article}
-\author{}
-\date{}
+\documentclass[a4paper, 12pt]{article}
 
-% redattore: Federico, revisore: Andrea
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 12/11/2021 con SyncLab}
+\setredattori{Federico Marchi\\Elia Scandaletti}
+\setrevisori{Andrea Volpe}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 12/11/2021 con l'azienda SyncLab. 
+}
 
 \begin{document}
-\title{Verbale del 12/11/2021 con SyncLab}
-\maketitle
+
+\makefrontpage
 
 \section{Informazioni}
 \textbf{Data}: 12/11/2021\\
@@ -52,7 +61,7 @@ Si è riflettuto su questo punto arrivando alla conclusione che per semplicità 
 Un altro punto su cui si è discusso è il frequente cambio di valore nel tempo (volatilità) di diverse valute. Questo potrebbe diventare un problema qualora nello smart contract venga bloccata una valuta molto volatile. Si è pensato ad una possibile soluzione ovvero quella di convertire tutti i pagamenti in valuta stabile prima di bloccare i fondi nello smart contract.
  
 \item \textbf{Come è possibile garantire la sicurezza ed evitare che un “man in the middle” tra l’e-commerce e la landing page possa accedere alle informazioni del venditore?}
-Durante la discussione sono sorte diverse possibili soluzioni tra le quali la verifica dell’identità del venditore attraverso un check sulla coppia di chiave pubblica e privata oppure con l’utilizzo di un server aziendale, il quale verifica l’identità dopo aver ricevuto una notifica prima del pagamento.
+Durante la discussione è sorta una possibile soluzione: prima di ogni acquisto il server dell'e-commerce comunica al server BlockChange l'intenzione di ricevere un pagamento attraverso un canale criptato con sistema a chiave asimmetrica; in questo modo, qual'ora il server BlockChange ricevesse dall'utente finale una richiesta discordante, sarebbe in grado di individuare un attacco MitM. La necessità dell'e-commerce di possedere una chiave privata fornita da BlockChange permetterebbe anche di fornire il servizio selettivamente. Il contro della soluzione è l'e-commerce sarebbe costretto a modificare il proprio backend per renderlo compatibile.
 
 \item \textbf{Come comportarsi in caso di eventuali contestazioni e come gestire lo sblocco del denaro nello smart contract?}
 Si è pensato di reindirizzare all’e-commerce possibili contestazioni da parte dell’acquirente, tenendo conto della legge Europea riguardo la possibile restituzione nei 14 giorni successivi all’acquisto.
