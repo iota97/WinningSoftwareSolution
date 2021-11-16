@@ -1,0 +1,76 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 12/11/2021 con SyncLab}
+\setredattori{Federico Marchi\\Elia Scandaletti}
+\setrevisori{Andrea Volpe}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 12/11/2021 con l'azienda SyncLab. 
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 12/11/2021\\
+\textbf{Durata}: 45 minuti\\
+\textbf{Luogo}: Aula Virtuale \textit{Google Meet}\\\\
+
+\textbf{Partecipanti}
+\begin{itemize}
+	\item Andrea Volpe
+	\item Giovanni Cocco
+	\item Federico Marchi
+	\item Alberto Nicoletti
+	\item Matteo Galvagni
+	\item Elia Scandaletti
+	\item Fabio Pallaro
+\end{itemize}
+
+\section{Ordine del giorno}
+\begin{enumerate}
+	\item Domande da parte del gruppo al proponente.
+	\item Varie ed eventuali
+\end{enumerate}
+
+\section{Svolgimento}
+
+\subsection{Domande da parte del gruppo al proponente}
+Sono state richieste delucidazioni riguardo ad alcuni argomenti non chiari circa le richieste del proponente.
+
+\begin{itemize}
+
+\item \textbf{Cosa si intende per caricare il codice QR in blockchain?}
+Abbiamo discusso sul fatto che il caricamento del QR code in blockchain sotto forma di stringa sia dispendioso (aumenta le fees della transazione) e non 	necessario. Dunque si è optato di risolvere il problema della verifica dell’identità dell’utente che scannerizza il codice QR richiedendo una sorta di login attraverso l’uso del medesimo wallet che ha effettuato il pagamento (quindi verificando che l’utente che scannerizza e che dunque sbloccherà i fondi nello smart contract sia realmente l’acquirente).
+
+\item \textbf{Quali dati vanno caricati sul DB aziendale e quali invece in blockchain?}
+In blockchain saranno presenti solamente i dati riguardanti la transazione e i wallet che l’hanno effettuata/ricevuta con data e ora. Non è importante essere a conoscenza dell’oggetto acquistato.
+ Dunque la blockchain non avrà funzione di database, le altre informazioni relative all’acquisto saranno salvate su DB aziendale.
+
+\item \textbf{Come viene gestita la visualizzazione dei vari ordini sulla pagina web? Sarà possibile visualizzare tutti gli ordini o solo il proprio?}
+La pagina web deve permettere al venditore di visualizzare lo stato di ciascuna transazione (non necessariamente visualizzare a che punto e dove si trova il pacco durante la consegna). Sarà possibile, attraverso l’identificazione tramite il proprio wallet, visualizzare esclusivamente le transazioni che comprendono l’address di quel determinato wallet.
+
+\item \textbf{Bisogna dare la possibilità di pagare con qualsiasi cryptovaluta o scegliere la valuta nativa della blockchain utilizzata?}
+Si è riflettuto su questo punto arrivando alla conclusione che per semplicità conviene permettere il pagamento solo attraverso l’utilizzo della valuta nativa della blockchain utilizzata. Tuttavia un possibile plus è quello di permettere il pagamento con qualsiasi valuta compatibile con quella determinata blockchain per poi convertirla successivamente con l’ausilio di un exchange (attenzione però alle fees aggiuntive). 
+Un altro punto su cui si è discusso è il frequente cambio di valore nel tempo (volatilità) di diverse valute. Questo potrebbe diventare un problema qualora nello smart contract venga bloccata una valuta molto volatile. Si è pensato ad una possibile soluzione ovvero quella di convertire tutti i pagamenti in valuta stabile prima di bloccare i fondi nello smart contract.
+ 
+\item \textbf{Come è possibile garantire la sicurezza ed evitare che un “man in the middle” tra l’e-commerce e la landing page possa accedere alle informazioni del venditore?}
+Durante la discussione è sorta una possibile soluzione: prima di ogni acquisto il server dell'e-commerce comunica al server BlockChange l'intenzione di ricevere un pagamento attraverso un canale criptato con sistema a chiave asimmetrica; in questo modo, qual'ora il server BlockChange ricevesse dall'utente finale una richiesta discordante, sarebbe in grado di individuare un attacco MitM. La necessità dell'e-commerce di possedere una chiave privata fornita da BlockChange permetterebbe anche di fornire il servizio selettivamente. Il contro della soluzione è l'e-commerce sarebbe costretto a modificare il proprio backend per renderlo compatibile.
+
+\item \textbf{Come comportarsi in caso di eventuali contestazioni e come gestire lo sblocco del denaro nello smart contract?}
+Si è pensato di reindirizzare all’e-commerce possibili contestazioni da parte dell’acquirente, tenendo conto della legge Europea riguardo la possibile restituzione nei 14 giorni successivi all’acquisto.
+
+\item \textbf{Tempistiche e durata del progetto}
+Il proponente ha affermato che solitamente sono necessari 3/4 mesi con una possibile conclusione del progetto verso i mesi di Marzo e Aprile.
+\end{itemize}
+
+\section{Conclusioni}
+Attraverso il confronto con il proponente è stato possibile chiarire alcuni dubbi e comprendere al meglio alcuni dettagli del progetto.
+
+\end{document}
