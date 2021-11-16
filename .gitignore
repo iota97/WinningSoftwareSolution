@@ -6,3 +6,4 @@
 *.synctex.gz
 *.pdf
 *.rubbercache
+!docs/esterni/candidatura/*.pdf
