@@ -191,25 +191,43 @@ La repository \url{https://github.com/iota97/WinningSoftwareSolution} conterrà 
 Ogni modifica alla repository dovrà seguire i seguenti passaggi:
 \begin{itemize}
 \item modifica del codice su repository locale;
-\item push su un branch ad hoc nominato \texttt{$<$iniziali\_autore$>$-$<$descrizione$>$};
-\item pull request tramite piattaforma web GitHub;
+\item push su un branch personale;
+\item eventuale merge su un branch collettivo;
+\item pull request tramite piattaforma web GitHub per merge sul branch main;
 \item review della pull request;
 \item merge sul branch \texttt{main}.
 \end{itemize}
 
-Prima di effettuare un push alla repository remota o un merge al branch \texttt{main} è necessario fare uno squash dei commit superflui.
+Un branch collettivo è un branch su cui operano più membri del gruppo e ha come scopo l'elaborazione di un prodotto. Il branch si chiamerà come il prodotto.
 
-Chi effettua la modifica e chi fa la review devono essere membri del gruppo distinti.
+Non sarà possibile fare commit su un branch collettivo ma ogni modifica avverrà attraverso il merge di un branch personale.
 
-Chi effettua la review può accettare la pull request.
+Ogni membro del gruppo può modifcare solamente i propri branch personali, che saranno nominati \texttt{$<$iniziali\_autore$>$-$<$prodotto$>$}. Dove \texttt{$<$prodotto$>$} indica il branch collettivo da cui deriva.
 
-Dopo che è stato fatto il merge di una pull request, il corrispondente branch va eliminato.
+Prima di effettuare un push alla repository remota o un merge è necessario fare uno squash dei commit superflui.
 
-È consentito modifcare solamente i propri branch.
+La review dovrà essere fatta dal verificatore. Il verificatore potrà accettare la pull request.
+
+Dopo che è stato fatto il merge di un branch personale, quest'ultimo va eliminato.
 
 Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
 
 Non è consentito forzare i push sulla repository remota.
+
+\paragraph{Tracciamento dei progressi}
+Per tracciare l'avanzamento del progetto, oltre alla dashboard nel \textit{Piano di Progetto}, verrà utilizzato il sistema di issues e di milestone di GitHub.
+
+Il \textit{Piano di Progetto} definisce quali sono le milestone.
+
+Per ogni milestone verranno create delle issues, in accordo con il \textit{Piano di Progetto}.
+
+Gli issues sono obiettivi intermedi, necessari a raggiungere la milestone corrispondente.
+
+Ogni issue è legato a una milestone.
+
+Un issue può essere diviso in più parti utilizzando una task list.
+
+Ogni sotto-task può essere trasformata in un issue. Quest'ultimo dovrà essere collegato alla stessa milestone dell'issue padre.
 
 \paragraph{Comandi utili}
 Alcuni comandi utili sono:
