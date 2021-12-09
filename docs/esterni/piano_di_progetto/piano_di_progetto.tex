@@ -1,0 +1,146 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{eurosym}
+\usepackage{pgfgantt}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Piano di Progetto}
+\setredattori{Elia Scandaletti}
+\setdestuso{esterno}
+\setdescrizione{
+Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei costi sostenuti fino ad oggi e li confronta con i costi preventivati, in relazione agli obiettivi fissati.
+}
+
+\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Redazione}{Stesura iniziale}
+
+\def\pgfcalendarmonthitname#1{%
+\ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
+}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\section{Programmazione}
+\subsection{Revisioni di avanzamento}
+\paragraph{RTB}
+Prodotti necessari:
+\begin{itemize}
+\item Analisi dei Requisiti;
+\item Analisi delle Tecnologie;
+\item Proof of Concept.
+\end{itemize}
+Processi coinvolti:
+\begin{itemize}
+\item Amministrazione di Progetto.
+\end{itemize}
+
+
+\subsection{RTB}
+\paragraph{Analisi dei Requisiti}
+Inizio: 01/12/2021\par
+Fine prevista: 23/12/2021\par
+Fine effettiva: TBD
+
+Ore richieste:\\[0.5em]
+\begin{tabular}{|l|l|l||l|l|l|l|}\hline
+Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
+Analista & 42 & TBD & 25\euro & 1050\euro & TBD \\\hline
+Verificatore & 8 & TBD & 15\euro & 120\euro & TBD \\\hline
+Totale ore: & 50 & TBD & Totale costi: & 1170\euro & TBD \\\hline
+\multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
+\end{tabular}
+
+Ruoli assegnati:\\[0.5em]
+\begin{tabular}{|l|l|l|l|l|}\hline
+Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
+Andrea Volpe & Analista & 21 & TBD & TBD \\\hline
+Alberto Nicoletti & Analista & 21 & TBD & TBD \\\hline
+Giovanni Cocco & Verificatore & 8 & TBD & TBD \\\hline
+\end{tabular}
+
+\paragraph{Analisi delle Tecnologie}
+Inizio: 01/12/2021\par
+Fine prevista: 23/12/2021\par
+Fine effettiva: TBD
+
+Ore richieste:\\[0.5em]
+\begin{tabular}{|l|l|l||l|l|l|l|}\hline
+Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
+Analista & 42 & TBD & 25\euro & 1050\euro & TBD \\\hline
+Verificatore & 6 & TBD & 15\euro & 90\euro & TBD \\\hline
+Totale ore: & 50 & TBD & Totale costi: & 1140\euro & TBD \\\hline
+\multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
+\end{tabular}
+
+Ruoli assegnati:\\[0.5em]
+\begin{tabular}{|l|l|l|l|l|}\hline
+Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
+Matteo Galvagni & Analista & 21 & TBD & TBD \\\hline
+Federico Marchi & Analista & 21 & TBD & TBD \\\hline
+Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
+\end{tabular}
+
+\paragraph{Sviluppo Proof of Concept}
+Inizio: 23/12/2021\par
+Fine prevista: 07/12/2021\par
+Fine effettiva: TBD
+
+\paragraph{Verifica Proof of Concept}
+Inizio: 01/01/2021\par
+Fine prevista: 15/01/2022\par
+Fine effettiva: TBD
+
+\paragraph{Amministrazione di Progetto}
+Inizio: 01/12/2021\par
+Fine prevista: 23/12/2021\par
+Fine effettiva: TBD
+
+Ore richieste:\\[0.5em]
+\begin{tabular}{|l|l|l||l|l|l|l|}\hline
+Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
+Responsabile & 21 & TBD & 30\euro & 630\euro & TBD \\\hline
+Amminstratore & 21 & TBD & 20\euro & 420\euro & TBD \\\hline
+Verificatore & 6 & TBD & 15\euro & 90\euro & TBD \\\hline
+Totale ore: & 50 & TBD & Totale costi: & 1140\euro & TBD \\\hline
+\multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
+\end{tabular}
+
+Ruoli assegnati:\\[0.5em]
+\begin{tabular}{|l|l|l|l|l|}\hline
+Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
+Elia Scandaletti & Responsabile & 21 & TBD & TBD \\\hline
+Raffaele Oliviero & Amministratore & 21 & TBD & TBD \\\hline
+Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
+\end{tabular}
+
+\paragraph{Grafico di Gannt}
+\begin{ganttchart}[
+		expand chart = \textwidth,
+	    progress label text ={#1}\%,
+	    hgrid,
+	    x unit=0.6mm,
+	    time slot format=isodate,
+	    today label=OGGI,
+	    today={\the\year-\the\month-\the\day}
+	]{2021-12-01}{2022-04-30}
+  	\gantttitlecalendar{year, month=itname} \\
+	\ganttgroup[progress=5]{RTB}{2021-12-01}{2022-01-15} \\
+  	\ganttbar[progress=10]{Analisi dei Requisiti}{2021-12-01}{2021-12-23} \\
+  	\ganttbar[progress=0]{Analisi delle Tecnologie}{2021-12-01}{2021-12-23} \\
+  	\ganttbar[progress=0]{Sviluppo PoC}{2021-12-23}{2022-01-07} \\
+  	\ganttbar[progress=0]{Verifica PoC}{2022-01-01}{2022-01-15} \\
+  	\ganttbar[progress=50]{Amministrazione di Progetto}{2021-12-01}{2021-12-23} \\
+  	\ganttvrule{RTB}{2022-01-15}
+  	\ganttvrule{PB}{2022-03-15}
+  	\ganttvrule{CA}{2022-04-29}
+\end{ganttchart}
+
+\subsection{Grafico dei costi}
+
+\end{document}
