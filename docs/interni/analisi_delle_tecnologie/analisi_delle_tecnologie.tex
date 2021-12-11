@@ -5,6 +5,9 @@
 \input{\templates/front_page}
 \input{\templates/history}
 
+%package
+\usepackage[table,xcdraw]{xcolor}
+
 \settitolo{Analisi delle tecnologie}
 \setredattori{Federico Marchi \\ Matteo Galvagni}
 \setdestuso{interno}
@@ -18,6 +21,49 @@ Analisi delle tecnologie.
 
 \section{Analisi delle Blockchain}
 \subsection*{Premesse}
+
+\renewcommand\arraystretch{1.6}
+
+%Tabella scalabilità
+\begin{center}
+\begin{tabular}{lc
+>{\columncolor[HTML]{ADE694}}c
+>{\columncolor[HTML]{ADE694}}c
+>{\columncolor[HTML]{ADE694}}c c
+>{\columncolor[HTML]{ADE694}}c }
+& \multicolumn{1}{l}{}                            & \multicolumn{5}{c}{\cellcolor[HTML]{D1D1D1}\textbf{Scalability}}    \\
+\cellcolor[HTML]{D1D1D1}\textbf{BlockChain} & \cellcolor[HTML]{D1D1D1}\textbf{Type}           & \cellcolor[HTML]{EFEFEF}\textbf{Thx fee} & \cellcolor[HTML]{FFFFFF}\textbf{Thx time} & \cellcolor[HTML]{EFEFEF}\textbf{Block Time} & \cellcolor[HTML]{FFFFFF}\textbf{Block Size}      & \cellcolor[HTML]{EFEFEF}\textbf{TPS}       \\
+\cellcolor[HTML]{EFEFEF}Ethereum            & \cellcolor[HTML]{EFEFEF}L1                      & \cellcolor[HTML]{FF8F8C}13\$    & \cellcolor[HTML]{FF8F8C}3m       & \cellcolor[HTML]{FFDD99}12s - 15s  & \cellcolor[HTML]{ADE694}$\sim$66 KBytes & \cellcolor[HTML]{FF8F8C}$\sim$15  \\
+Polygon                                     & L2 (ETH)                                 & \textless{}0.001\$              & 6s                               & 1-2s                               & \cellcolor[HTML]{ADE694}$\sim$82 KBytes & $\sim$7.2k                        \\
+\cellcolor[HTML]{EFEFEF}xDai                & \cellcolor[HTML]{EFEFEF}L2 (ETH)         & \textless{}0.001\$              & 5s                               & 5s                                 & \cellcolor[HTML]{ADE694}$\sim$66 KBytes & \cellcolor[HTML]{FFDD99}$\sim$90  \\
+Solana                                      & L1                                              & 0.0025\$                        & 2s                               & 2-6s                               & \cellcolor[HTML]{ADE694}$\sim$64 KBytes & $\sim$50k                         \\
+\cellcolor[HTML]{EFEFEF}Algorand            & \cellcolor[HTML]{EFEFEF}L1                      & \textless{}0.01\$               & 5s                               & 4.5s                               & \cellcolor[HTML]{FF8F8C}$\sim$1 MByte   & $\sim$1k                          \\
+Avalanche                                   & L1                                              & \cellcolor[HTML]{FFDD99}0.3\$   & \textless{}1s                    & \cellcolor[HTML]{D9D9D9}-          & \cellcolor[HTML]{FF8F8C}$\sim$1 MByte   & $\sim$4.5k                        \\
+\cellcolor[HTML]{EFEFEF}Fantom              & \cellcolor[HTML]{EFEFEF}L1                      & \textless{}0.01\$               & 1s                               & 1-2s                               & \cellcolor[HTML]{FFDD99}$\sim$4 KBytes  & $\sim$10k                         \\
+Cardano                                     & L1                                              & \cellcolor[HTML]{FFDD99}0.5\$   & \cellcolor[HTML]{FFDD99}20s      & 4s                                 & \cellcolor[HTML]{ADE694}$\sim$72 KBytes & \cellcolor[HTML]{FFDD99}$\sim$250 \\
+\cellcolor[HTML]{EFEFEF}Harmony             & \multicolumn{1}{c}{\cellcolor[HTML]{EFEFEF}L1} & \textless{}0.001\$            & 1-2s                             & 2-3s                               & \cellcolor[HTML]{FF8F8C}$\sim$2 MBytes  & $\sim$8k
+\end{tabular}
+\end{center}
+
+%Tabella Sicurezza & decentralizzazione
+\begin{center}
+\begin{tabular}{lc
+>{\columncolor[HTML]{ADE694}}c cc}
+& \multicolumn{1}{l}{}                            & \multicolumn{3}{c}{\cellcolor[HTML]{D1D1D1}\textbf{Security \& Decentralization}}                                               \\
+\cellcolor[HTML]{D1D1D1}\textbf{BlockChain} & \cellcolor[HTML]{D1D1D1}\textbf{Type}           & \cellcolor[HTML]{FFFFFF}\textbf{\phantom . Consensus  \phantom . } & \cellcolor[HTML]{EFEFEF}\textbf{Miners/Validators} & \cellcolor[HTML]{FFFFFF}\textbf{Top 100 Wallet}         \\
+\cellcolor[HTML]{EFEFEF}Ethereum            & \cellcolor[HTML]{EFEFEF}L1                      & \cellcolor[HTML]{FFDD99}POW       & \cellcolor[HTML]{ADE694}1 500 000         & \cellcolor[HTML]{ADE694}$\sim$12.66\% of Supply \\
+Polygon                                     & L2 (ETH)                                        & POS                               & \cellcolor[HTML]{FF8F8C}100               & \cellcolor[HTML]{ADE694}$\sim$7.5\% of Supply   \\
+\cellcolor[HTML]{EFEFEF}xDai                & \cellcolor[HTML]{EFEFEF}L2 (ETH)                & POS                               & \cellcolor[HTML]{FF8F8C}24                & \cellcolor[HTML]{ADE694}$\sim$14\% of Supply    \\
+Solana                                      & L1                                              & POS                               & \cellcolor[HTML]{FFDD99}1 272             & \cellcolor[HTML]{FF8F8C}$\sim$30\% of Supply    \\
+\cellcolor[HTML]{EFEFEF}Algorand            & \cellcolor[HTML]{EFEFEF}L1                      & POS                               & \cellcolor[HTML]{FF8F8C}380               & \cellcolor[HTML]{FFDD99}$\sim$26\% of Supply    \\
+Avalanche                                   & L1                                              & POS                               & \cellcolor[HTML]{FFDD99}1 180             & \cellcolor[HTML]{ADE694}$\sim$9.3\% of Supply   \\
+\cellcolor[HTML]{EFEFEF}Fantom              & \cellcolor[HTML]{EFEFEF}L1                      & POS                               & \cellcolor[HTML]{FF8F8C}60                & \cellcolor[HTML]{FFDD99}$\sim$23\% of Supply    \\
+Cardano                                     & L1                                              & POS                               & \cellcolor[HTML]{FFDD99}2 965             & \cellcolor[HTML]{ADE694}$\sim$9.94\% of Supply  \\
+\cellcolor[HTML]{EFEFEF}Harmony             & \multicolumn{1}{c}{\cellcolor[HTML]{EFEFEF}L1} & POS                               & \cellcolor[HTML]{FF8F8C}280               & \cellcolor[HTML]{FF8F8C}$\sim$40\% of Supply
+\end{tabular}
+\end{center}
+
+
 \subsection*{Ethereum}
 \subsection*{Polygon}
 \subsection*{xDai}
