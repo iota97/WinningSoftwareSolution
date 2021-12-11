@@ -1,0 +1,84 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Analisi dei requisiti}
+\setprogetto{ShopChain}
+\setcommittenti{SyncLab}
+\setredattori{Alberto Nicoletti, Andrea Volpe}
+\setdestuso{esterno}
+\setdescrizione{
+Questo documento contiene..
+}
+
+\addversione{0.0.0}{11/12/2021}{Alberto Nicoletti}{Redazione}{Struttura del documento, stesura sezioni 1 e 2}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\section{Introduzone}
+\subsection{Scopo del documento}
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. Casi d'uso e requisiti saranno tenunuti in considerazione nella fase di progettazione, assicurandosi la soddisfazione dei requisiti. 
+\subsection{Glossario}
+Di seguito un elenco di parole usate in questo documento, la cui definizione può essere trovata nel Glossario.
+parola, parola, parola.
+
+\section{Descrizione del prodotto}
+L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
+BlockChain}. Consiste nel realizzare un prototipo di una piattaforma in grado di ‘affiancare’ un crypto-e-commerce nella fasi di pagamento fino alla consegna.
+\subsection{Scopo del prodotto}
+Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile e in sicurezza l'acquisto di prodotti tramite criptovalute. Il processo di trasferimento del denaro avviene seguendo queste fasi:
+\begin{enumerate}
+\item Caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract.
+\item Trasferimento del denaro dal wallet dell'acquirente in blockchain.
+\item Notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain.
+\item Conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un Qr Code nel prodotto acquistato.
+\item Sblocco del denaro e trasferimento nel wallet del venditore.
+\end{enumerate}
+\subsection{Parti del prodotto}
+Il prodotto software è composta dalle seguenti parti:
+\begin{itemize}
+\item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
+\item Piattaforma web per la gestione dei pagamenti da parte del venditore.
+\item App o web app per la scannerizzazione del Qr code .
+\end{itemize}
+\subsection{Caratteristiche utenti}
+Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
+\begin{itemize}
+\item Venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere le criptovalute come metodo di pagamento.
+\item Acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
+\end{itemize}
+Tutti gli utenti sono in possesso di un wallet per criptovalute. 
+Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti.
+\subsection{Vincoli e preferenze}
+La proponente non impone vincoli nella scelta della tipologia di tecnologie, va ci sono comunque delle scelte preferenziali da considerare:
+\begin{itemize}
+\item Utilizzo di blockchain pubblica
+\item utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
+\item utilizzo di database Postgres
+\end{itemize}
+
+Per il completamento del progetto la proponente richiede che siano realizzati i seguenti risultati:
+\begin{itemize}
+\item server, completo di UI
+\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell' 80\% correlata di report.
+\item documentazione su: scelte implementative e progettuali effettuate e relative motivazioni, problemi aperti e eventuali soluzioni proposte da esplorare.
+\end{itemize}
+
+\section{Casi d'uso}
+elenco
+
+\section{Requisiti}
+elenco
+
+\section{Riferimenti}
+
+
+
+\end{document}
