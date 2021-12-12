@@ -126,15 +126,13 @@ anche nella sicurezza: con pochi nodi attivi nella rete ottenerne più della met
 \item \textbf{Top 100 wallet: }
 È la percentuale di token nativi che posseggono i 100 wallet più ricchi.
 È utile per avere un'idea di quanto potere è in mano a quanti pochi wallet.
-Questa metrica esclude il saldo di token di \textit{smart contracts} e di \textit{exchanges}, in quanto sono soggetti a regole di protocollo/regolamentazioni politiche e
-non possono esercitare potere diretto sulla rete.
+Questa metrica esclude il saldo di token di \textit{smart contracts} e di \textit{exchanges} in quanto sono soggetti a regole di protocollo/regolamentazioni politiche e
+non possono esercitare potere diretto sulla rete, ma NON esclude saldi di pool di miners o pool di validatori.
 Un'alta percentuale di token nei primi 100 wallet può indicare un rischio di aggiornamenti o modifiche alla rete non decise dalla community (nei casi dove i token
 vengono utilizzati per votare gli upgrade in modo democratico dalla community) e quindi un forte sbilanciamento di potere verso una sola entità, come può anche indicare un rischio
 di estrema perdita di valore dei token e conseguentemente di fiducia nella rete con effetti a cascata disastrosi (perdita di nodi attivi, centralizzazione, perdita di investitori) nel caso gli sviluppatori o chi detiene una grande percentuale dei token li vendesse a prezzo di mercato in un breve periodo di tempo.
 
 \end{itemize}
-
-
 
 \renewcommand\arraystretch{1.6}
 
@@ -178,6 +176,39 @@ Cardano                                     & L1                                
 \end{center}
 
 \subsection*{Ethereum}
+Ethereum è una rete peer-to-peer per la creazione e la pubblicazione di smart contracts rilasciata nel 2015 e da allora leader tra le piattaforme decentralizzate
+per contratti digitali.
+Ethereum rappresenta uno standard \textit{de-facto} nel mondo degli smart contracts: il suo linguaggio di programmazione nativo Solidity è
+tra i più apprezzati dalla comunità di sviluppatori di contratti digitali, tanto che è stato adottato da diverse altre blockchain come linguaggio predefinito; inoltre, lo standard ERC-20 che definisce l'interfaccia dei token creabili tramite contratti è ormai standard per tutte le piattaforme simili.
+Ethereum può ad oggi vantare una delle reti più distribuite nel campo ma soffre ormai da tempo di problemi di congestione legati alla forte domanda di utilizzo e a tecnologie appartenenti ad un periodo passato in attesa di essere aggiornate e modernizzate.
+
+\subsubsection*{Scalabilità}
+Il punto più critico di Ethereum ad oggi è sicuramente la scalabilità.
+Come il suo co-fondatore \textit{Vitalik Buterin} ha dichiarato riguardo al problema da lui stesso definito "il trilemma delle blockchain" (Scalabilità, Sicurezza, Decentralizzazione)
+Ethereum è stata progettata per priorizzare sicurezza e decentralizzazione, a discapito della scalabilità.
+Attualmente, i costi di transazione su Ethereum non sono accettabili per normali transazioni tra privati, come non lo sono il numero di transazioni al secondo che può
+processare e il tempo di finalità medio delle stesse.
+Esistono (e sono in corso di sviluppo) soluzioni dette "\textit{Layer 2}" che mirano a risolvere i problemi di scalabilità di Ethereum non rinunciando alla sua sicurezza
+o alla sua decentralizzazione, ma spostando gran parte delle computazioni "\textit{off-chain}" salvando sulla blockchain solo le prove che tali computazioni non sono
+fraudolente. Questo tipo di soluzioni vengono definite "\textit{rollups}" e si dividono in due tipologie: Optimistic rollups e zkRollups.
+Tuttavia, ad oggi solo la prima delle due tipologie di rollups è utilizzabile per scrittura e pubblicazione di smart contracts, e analizzati alcuni esempi
+implementativi di tale tipologia di rollup (Arbitrum, Optimism) riteniamo che, seppur riducono i costi e i tempi di transazione significativamente,
+non è ancora abbastanza per definire la rete Ethereum scalabile.
+
+\subsubsection*{Sicurezza \& Decentralizzazione}
+Ethereum eccelle in sicurezza e in decentralizzazione: il suo algoritmo di consenso attuale (PoW), seppur computazionalmente dispendioso, garantisce la sicurezza della rete sin dalla sua creazione. Il numero di miners è superiore a quello di qualsiasi altra blockchain simile, e la distribuzione dei token è più che accettabile.
+Il costo per attaccare la rete grazie al grande numero di nodi sarebbe incredibilmente alto, e i nodi sono geograficamente distribuiti in modo accettabile.
+Per questi motivi riteniamo sia la rete più sicura tra quelle analizzate.
+
+\subsubsection*{Considerazioni finali}
+Ethereum è un'ottima rete che ha scelto di sacrificare la scalabilità in favore di una piattaforma realmente decentralizzata e altamente sicura; è in continua evoluzione
+e ha una community di sviluppatori tra le più grandi. Tuttavia, per questo progetto non è possibile accettare dei compromessi del genere: i costi e la velocità delle transazioni
+sono oltre il limite dell'accettabile e, mentre rimane un'ottima rete per transazioni di grande valore economico, non è attualmente adatta a scambi ordinari.
+In aggiunta, da tempo Ethereum sta attraversando una fase di evoluzione divisa in più step che la vedrà cambiare algoritmo di consenso (da PoW a PoS) nonchè implementare
+lo sharding (sotto-chain divise e comunicanti tra loro) per migliorarne la scalabilità: quando la transizione sarà ultimata, riteniamo che una nuova analisi delle performance
+della rete aggiornata sia importante per valutare se fosse auspicabile migrare il contratto del progetto in esame verso Ethereum per godere della sua sicurezza intrinseca.
+
+
 \subsection*{Polygon}
 \subsection*{xDai}
 \subsection*{Solana}
@@ -195,5 +226,15 @@ Pecca sotto l’aspetto della decentralizzazione poiché sono presenti solo 60 v
 Nonostante sia una delle migliori blockchain sotto il punto di vista della scalabilità, non è stata scelta poiché riteniamo, al fine di garantire una lunga prospettiva di vita al progetto, che sia fondamentale utilizzare una blockchain maggiormente decentralizzata, dunque con un numero di validatori superiore.
 \subsection*{Cardano}
 \subsection*{Harmony}
+
+\subsection*{Conclusioni}
+\begin{itemize}
+
+    \item \textbf{Scelta finale e motivazioni: }
+
+    \item \textbf{Uno sguardo al futuro: }
+
+\end{itemize}
+
 \section{Analisi seconda tecnologia}
 \end{document}
