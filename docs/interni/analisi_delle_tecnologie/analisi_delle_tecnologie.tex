@@ -188,6 +188,8 @@ Come il suo co-fondatore \textit{Vitalik Buterin} ha dichiarato riguardo al prob
 Ethereum è stata progettata per priorizzare sicurezza e decentralizzazione, a discapito della scalabilità.
 Attualmente, i costi di transazione su Ethereum non sono accettabili per normali transazioni tra privati, come non lo sono il numero di transazioni al secondo che può
 processare e il tempo di finalità medio delle stesse.
+Ethereum non ha un limite della grandezza di un blocco, ma vi è un limite massimo di gas (tasse per transazioni) che può essere speso per blocco: la grandezza di un blocco si adatta
+in base alla domanda di utilizzo.
 Esistono (e sono in corso di sviluppo) soluzioni dette "\textit{Layer 2}" che mirano a risolvere i problemi di scalabilità di Ethereum non rinunciando alla sua sicurezza
 o alla sua decentralizzazione, ma spostando gran parte delle computazioni "\textit{off-chain}" salvando sulla blockchain solo le prove che tali computazioni non sono
 fraudolente. Questo tipo di soluzioni vengono definite "\textit{rollups}" e si dividono in due tipologie: Optimistic rollups e zkRollups.
@@ -208,9 +210,48 @@ In aggiunta, da tempo Ethereum sta attraversando una fase di evoluzione divisa i
 lo sharding (sotto-chain divise e comunicanti tra loro) per migliorarne la scalabilità: quando la transizione sarà ultimata, riteniamo che una nuova analisi delle performance
 della rete aggiornata sia importante per valutare se fosse auspicabile migrare il contratto del progetto in esame verso Ethereum per godere della sua sicurezza intrinseca.
 
+\newpage
 
 \subsection*{Polygon}
+Polygon è una sidechain di Ethereum rilasciata ufficialmente nel 2020 che mira a risolvere i problemi di scalabilità di Ethereum rinunciando a parte della sua sicurezza.
+Seppure Polygon sia una blockchain separata da Ethereum con un suo proprio meccanismo di validazione dei blocchi, Polygon sfrutta parte della sicurezza di Ethereum salvando il suo stato attuale a checkpoint su di essa.
+
+\subsubsection*{Scalabilità}
+Polygon offre costi e velocità di transazioni ottimi e un numero massimo di TPS altrettanto eccellente.
+Inoltre, il numero di TPS non è dato da un blocco molto grande (che avrebbe altri problemi, come discusso precedentemente) ma dall'effettiva velocità della rete.
+
+\subsubsection*{Sicurezza \& Decentralizzazione}
+In cambio di tali attributi di scalabilità, Polygon pecca in decentralizzazione.
+L'algoritmo di consenso utilizzato è di tipo PoS con delegatori: è vero che esistono solo 100 possibili validatori, ma è anche vero che tali validatori sono eletti dai delegatori che delegano il proprio stack di token a un dato validatore in base alle sue performance (se un validatore non ha buone performance, un delegatore non ha incentivo economico a delegare il suo stack a quel validatore in quanto è probabile che gli faccia perdere del denaro o comunque non guadagnarne quanto gli farebbe fare un validatore con ottime performance), dunque idealmente i 100 validatori sono i nodi più performanti e un validatore che smette di performare bene (Es.: approva blocchi fraudolenti, va spesso offline) viene escluso dai delegatori e quindi dalla lista dei validatori attivi.
+Inoltre, grazie al meccanismo di salvataggio a checkpoint su Ethereum (attualmente a intervalli di circa 12 minuti), e data la dimostrata sicurezza e decentralizzazione di Ethereum,
+in caso di gravi problemi sulla rete di Polygon anche dovuti alla sua poca decentralizzazione è comunque possibile riprendere l'ultimo stato valido della blockchain salvato su Ethereum.
+
+\subsubsection*{Considerazioni finali}
+Nonostante la velocità e i costi di Polygon siano ottimi per il progetto in esame, il basso numero di validatori da solo non può garantire la sicurezza di cui necessitiamo.
+In condizioni in cui generalmente una blockchain con queste caratteristiche non potrebbe essere scelta per questo tipo di progetto, il meccanismo di checkpoint su Ethereum cambia radicalmente la situazione: seppure non viene garantita la stessa sicurezza intrinseca di Ethereum, Polygon diventa così sufficientemente sicuro per essere utilizzato in questo progetto.
+Inoltre, il sistema di delegazione dei validatori ci assicura che impossessarsi della rete sia estremamente difficile, perchè richiederebbe sia di ottenere un numero rilevante di validatori (1/3 di quelli totali nelle reti PoS) sia che tali validatori rientrino tutti nella lista dei 100 eletti, dunque abbiano ottime performance e siano scelti da altri delegatori,
+senza contare che un attacco alla rete distruggerebbe il valore dei token nello stake dell'entità attaccante e dei delegatori, incentivando ulteriormente quest'ultimi a scegliere validatori onesti a cui delegare il proprio stake.
+
+\newpage
+
 \subsection*{xDai}
+La sidechain di xDai, nata nel 2018, si basa su transazioni a valore stabile grazie al token nativo xDai che è legato al valore del dollaro statounitense.
+Questa caratteristica è particolarmente interessante per questo progetto perchè aiuterebbe con il problema del cambio di valore dei token nel tempo.
+
+\subsubsection*{Scalabilità}
+Gli attributi di scalabilità di xDai sono molto buoni, ad eccezione del numero massimo di transazioni al secondo.
+La grandezza del blocco deriva da quella media di Ethereum.
+
+\subsubsection*{Sicurezza \& Decentralizzazione}
+Questa sidechain utilizza lo stesso algoritmo di consenso di Polygon, detto \textit{delegated PoS}.
+Purtroppo la natura legata alla valuta stabile di xDai implica una fortissima centralizzazione: i validatori non solo sono molto pochi, ma sono anche posseduti da organizzazioni
+in collaborazione con xDai. I delegatori, inoltre, sono molto pochi (attualmente solo 305), il ché rende poco sicura la blockchain.
+L'unica cosa che mantiene la blockchain sicura attualmente è che i validatori sono molto pochi e scelti a priori, senza dar possibilità ad altri utenti di diventare facilmente validatori.
+È comunque presente un meccanismo di salvataggio a checkpoint su Ethereum, come con Polygon.
+
+\subsubsection*{Considerazioni finali}
+Con una tale centralizzazione, xDai non può essere considerata una blockchain sufficientemente sicura per sviluppare e pubblicare il contratto facente parte delle direttive di questo progetto. Rimane però una sidechain interessante, che (anche se non confermato) con l'implementazione dello sharding su Ethereum potrebbe diventare uno degli shard e dunque beneficiare della sua sicurezza e decentralizzazione, facilitando le applicazioni decentralizzate (dApp) che sfruttano i pagamenti in valuta stabile.
+
 \subsection*{Solana}
 \subsection*{Algorand}
 \subsection*{Avalanche}
