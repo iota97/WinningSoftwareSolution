@@ -253,21 +253,40 @@ L'unica cosa che mantiene la blockchain sicura attualmente è che i validatori s
 Con una tale centralizzazione, xDai non può essere considerata una blockchain sufficientemente sicura per sviluppare e pubblicare il contratto facente parte delle direttive di questo progetto. Rimane però una sidechain interessante, che (anche se non confermato) con l'implementazione dello sharding su Ethereum potrebbe diventare uno degli shard e dunque beneficiare della sua sicurezza e decentralizzazione, facilitando le applicazioni decentralizzate (dApp) che sfruttano i pagamenti in valuta stabile.
 
 \subsection*{Solana}
+La blockchain di Solana è nata nel 2018. Lo scopo per cui è stata creata era quello di offrire lo stesso servizio offerto dalla blockchain di Ethereum, ma garantendo maggior velocità e minori costi di transazione. La principale innovazione introdotta in questo sistema è la PoH (Proof of History), utilizzata per risolvere i problemi legati alla veridicità del timestamp in un network P2P.
+\subsubsection*{Scalabilità}
+Solana è ottimale per effettuare transazioni ed eseguire smart contract a costi molto bassi e in un breve periodo di tempo. La grandezza del blocco è ottimale ed inoltre è in grado di eseguire un elevatissimo numero di transazioni e operazioni al secondo.
+\subsubsection*{Sicurezza \& Decentralizzazione}
+Solana utilizza un algoritmo di consenso di tipo PoS, più precisamente si tratta di una sorta di DPoS (Delegated PoS) dove, per ciascun blocco da aggiungere, tutti i nodi della rete eleggono un insieme di nodi detti "delegati" con incarico raccogliere le transazioni e minare il blocco. Ogni nodo ha un potere nella votazione che è ponderato secondo la sua partecipazione fino a quel momento nella rete. Per poter sincronizzare ed evitare disaccordi sull'ordine delle transazioni, è stato introdotto il PoH precedentemente accennato: non si tratta di un protocollo di consenso, bensì di un sistema in grado di gestire perfettamente in ordine cronologico ogni transazione e dunque di evitare confusione tra i vari nodi e le varie transazioni. Per quanto riguarda la decentralizzazione sono presenti circa 1300 nodi nel network, non è assolutamente paragonabile al numero di nodi di Ethereum, ma si può ritenere un buon compromesso considerando l'ottima scalabilità.
+\subsubsection*{Considerazioni finali}
+Solana è tra le migliori blockchain in circolazione e rispecchia quasi tutti i requisiti fondamentali per la realizzazione del progetto. Tuttavia oltre alla disomogenea distribuzione del token nativo tra i vari wallet, l'elemento che ha decretato l'esclusione dalle possibili scelte è stato il crollo della blockchain avvenuto il 14 settembre, durante il quale il network di Solana è rimasto offline per circa 16 ore in seguito ad un attacco denial-of-service. Nonostante Solana sia successivamente ritornata in funzione perfettamente, riteniamo grave l'accaduto soprattutto perchè il prodotto che deve essere realizzato non permette assolutamente di rimanere offline per periodi di tempo così lunghi.
 \subsection*{Algorand}
 \subsection*{Avalanche}
 \subsection*{Fantom}
+La blockchain Fantom, uscita nel 2018 in testnet e successivamente rilasciata definitivamente nel Dicembre 2019, è un Layer-1 nato per fornire un'alternativa ad Ethereum.
+La Fantom Foundation si è focalizzata nella realizzazione di una blockchain con ottimi attributi di scalabilità, tralasciando tuttavia parzialmente l'aspetto della decentralizzazione.
 \subsubsection*{Scalabilità}
-Si tratta di una blockchain ad alta scalabilità, infatti esegue quasi istantaneamente le transazioni a costi pressoché trascurabili.
+La scalabilità è il punto forte di Fantom, infatti con un numero elevatissimo di TPS, costi di transazioni pressoché trascurabili e velocità quasi istantanea nei trasferimenti risulta in assoluto tra le blockchain più performanti in circolazione.
 \subsubsection*{Sicurezza \& Decentralizzazione}
 L' algoritmo di consenso utilizzato si chiama Lachesis, si tratta di un PoS con BTF (Byzantine Fault Tolerance) secondo il quale la blockchain rimane stabile e in funzione fin tanto che i $\frac{2}{3}$ dei validatori non è malevolo.
 Da un lato questo algoritmo potrebbe facilitare un'ipotetico attacco alla blockchain, tuttavia essendo complesso e oneroso diventare validatore risulta alla fine complesso e controproducente attaccare la blockchain.
 Per poter diventare validatore sono necessari 1 milione di FTM (token nativo di Fantom), circa l’equivalente di 2 milioni di dollari.
 Pecca sotto l’aspetto della decentralizzazione poiché sono presenti solo 60 validatori momentaneamente, di cui 10 appartenenti alla Fantom Foundation.
 \subsubsection*{Considerazioni finali}
-Nonostante sia una delle migliori blockchain sotto il punto di vista della scalabilità, non è stata scelta poiché riteniamo, al fine di garantire una lunga prospettiva di vita al progetto, che sia fondamentale utilizzare una blockchain maggiormente decentralizzata, dunque con un numero di validatori superiore.
+Nonostante sia una delle migliori blockchain sotto il punto di vista della scalabilità, non è stata scelta poiché riteniamo, al fine di garantire una lunga prospettiva di vita al progetto, che sia fondamentale utilizzare una blockchain maggiormente decentralizzata, dunque con un numero maggiore di validatori.
 \subsection*{Cardano}
-\subsection*{Harmony}
 
+\subsection*{Harmony}
+La blockchain di Harmony è stata fondata nel 2018 e condivisa nel 2019. Il fondatore Stephen Tse, un ingegnere specializzato in protocolli crittografici, ha cercato di fornire una valida alternativa più scalabile alla blockchain di Ethereum cercando di risolvere il trilemma attraverso l'introduzione innovativa degli shard.
+\subsubsection*{Scalabilità}
+Indubbiamente Harmony è tra le blockchain più scalabili in assoluto, infatti esegue un numero elevatissimo di TPS ad un costo quasi nullo. L'unica pecca sta nell'elevata grandezza dei blocchi che potrebbe causare ritardi nei tempi di trasmissione tra validatori nel network. Questi ottimi attributi di scalabilità sono permessi dalla suddivisione della blockchain in 4 shard, i quali rendono possibile la suddivisione del carico computazionale richiesto ai validatori così da poter eseguire in parallelo e dunque più velocemente uno smart contract.
+\subsubsection*{Sicurezza \& Decentralizzazione}
+Harmony è la prima blockchain a introdurre lo sharding con un algoritmo di consenso di tipo PoS. Più nello specifico si tratta di ePoS (Effective Proof Of Stake) nel quale ogni 21 ore i validatori vengono suddivisi e successivamente assegnati in maniera randomica  ad uno shard. La divisione randomica permette di evitare il cosiddetto front-running, infatti eventuali validatori malevoli non possono sapere la prossima assegnazione e dunque non sarà possibile organizzarsi per manipolare la blockchain a loro favore.
+Possono esserci fino a 250 validatori per shard, quindi un massimo di 1000 validatori (al momento ci sono 280 validatori).
+Vengono inoltre continuamente monitorati i validatori per individuare e penalizzare (slashing) tutti quelli che non rispettano il protocollo o che vanno offline.
+Per diventare validatore al momento sono necessari 10.000 ONE più uno specifico hardware. Al prezzo attuale di mercato si tratta di circa 2000/3000\$.
+\subsubsection*{Considerazioni finali}
+Nonostante dal punto di vista della scalabilità si tratta di una ottima blockchain per la realizzazione del progetto, è stata esclusa poiché, come per Fantom, la decentralizzazione non è ottimale e buona parte dei validatori di Harmony viene controllata dal team. In più la distribuzione del token nativo tra i vari wallet è esageratamente disomogenea, infatti i primi 100 wallet più ricchi possiedono circa il 40\% della supply circolante.
 \subsection*{Conclusioni}
 \begin{itemize}
 
