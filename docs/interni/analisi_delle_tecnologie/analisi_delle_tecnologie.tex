@@ -324,7 +324,7 @@ La blockchain di Harmony è stata fondata nel 2018 e condivisa nel 2019. Il fond
 \subsubsection*{Scalabilità}
 Indubbiamente Harmony è tra le blockchain più scalabili in assoluto, infatti esegue un numero elevatissimo di TPS ad un costo quasi nullo. L'unica pecca sta nell'elevata grandezza dei blocchi che potrebbe causare ritardi nei tempi di trasmissione tra validatori nel network. Questi ottimi attributi di scalabilità sono permessi dalla suddivisione della blockchain in 4 shard, i quali rendono possibile la suddivisione del carico computazionale richiesto ai validatori così da poter eseguire in parallelo e dunque più velocemente uno smart contract.
 \subsubsection*{Sicurezza \& Decentralizzazione}
-Harmony è la prima blockchain a introdurre lo sharding con un algoritmo di consenso di tipo PoS. Più nello specifico si tratta di ePoS (Effective Proof Of Stake) nel quale ogni 21 ore i validatori vengono suddivisi e successivamente assegnati in maniera randomica  ad uno shard. La divisione randomica permette di evitare il cosiddetto front-running, infatti eventuali validatori malevoli non possono sapere la prossima assegnazione e dunque non sarà possibile organizzarsi per manipolare la blockchain a loro favore.
+Harmony è la prima blockchain a introdurre lo sharding con un algoritmo di consenso di tipo PoS. Più nello specifico si tratta di ePoS (Effective Proof Of Stake) nel quale ogni 21 ore i validatori vengono suddivisi e successivamente assegnati in maniera randomica ad uno shard. La divisione randomica permette di evitare il cosiddetto front-running, infatti eventuali validatori malevoli non possono sapere la prossima assegnazione e dunque non sarà possibile organizzarsi per manipolare la blockchain a loro favore.
 Possono esserci fino a 250 validatori per shard, quindi un massimo di 1000 validatori (al momento ci sono 280 validatori).
 Vengono inoltre continuamente monitorati i validatori per individuare e penalizzare (slashing) tutti quelli che non rispettano il protocollo o che vanno offline.
 Per diventare validatore al momento sono necessari 10.000 ONE più uno specifico hardware. Al prezzo attuale di mercato si tratta di circa 2000/3000\$.
@@ -336,10 +336,30 @@ Nonostante dal punto di vista della scalabilità si tratta di una ottima blockch
 \begin{itemize}
 
     \item \textbf{Scelta finale e motivazioni: }
+    Analizzate le precedentemente trattate blockchain è stata scelta Polygon come più adatta a questo progetto.
+    Mentre alcune delle blockchain esaminate sono state scartate a priori per via di alcune caratteristiche negative a tal punto di non renderle
+    accettabili, altre hanno potuto competere tra di loro per il ruolo di migliore rete per questo progetto: tra di queste, blockchain come Avalanche e Cardano
+    non sono state scelte per sola esclusione in quanto Polygon riporta metriche migliori (tra cui, ma non esclusivamente, costi per transazione estremamente bassi) ma sono
+    ritenute comunque delle valide blockchain con livelli di sicurezza, decentralizzazione e scalabilità accettabili.
+    Riteniamo che l'ottima velocità e i costi di transazione molto bassi di Polygon siano adatti per questo progetto, senza dover però accettare
+    compromessi esagerati sul lato di sicurezza e decentralizzazione.\\
 
     \item \textbf{Uno sguardo al futuro: }
+    È risaputo che gli argomenti trattati in questa prima parte di ricerca sono in continua evoluzione, dunque ciò che è vero al momento della stesura di questo documento potrebbe cambiare negli anni a venire. In un'ottica di mantenimento nel tempo di questo progetto, riserviamo in questa parte conclusiva uno sguardo a quello che potrebbe essere il futuro dello stesso.
+    È attualmente in corso lo sviluppo di rollups di tipo \textit{zero-knowledge} (ZK-rollups) per la blockchain di Ethereum. Tali soluzioni layer-2 puntano a spostare
+    la computazione dei contratti digitali off-chain fornendo alla blockchain solo una prova della correttezza dell'esecuzione di essi.
+    È stimato che questo tipo di soluzioni secondarie raggiungano dalle 2000 alle 20000 TPS, con costi di transazione fino a 50 volte inferiori a quelli di Ethereum.
+    Inoltre, come precedentemente citato, Ethereum è in pieno passaggio ad algoritmo di consenso PoS, che dovrebbe ridurre il consumo di elettricità della rete di oltre il 99\%.
+    La \textit{Beacon Chain} di Ethereum (una copia di Ethereum che funge da test, che per ora valida solo le transazioni senza approvarle o minarle secondo l'algoritmo PoS) conta ad oggi più di 200 000 validatori, molti di più di qualsiasi altra blockchain analizzata in questo documento. Nel passaggio a PoS, in quello che viene definito il \textit{merge} di Ethereum, la Beacon Chain si unirà ad Ethereum segnando il cambiamento dell'algoritmo di consenso. Inoltre, dopo tale merge, Ethereum prevede di implementare lo sharding con 64 shard che dovrebbe migliorarne ulteriormente la scalabilità.
+    Analizzata la roadmap di Ethereum, tutti questi cambiamenti e soluzioni secondarie dovrebbero essere implementate in uno o due anni dalla data attuale.
+    Una volta che tali cambiamenti saranno implementati potrebbe essere interessante una nuova analisi delle tecnologie disponibili allora: la possibilità di utilizzare Ethereum senza problemi di scalabilità ma godendo pienamente della sua sicurezza sarebbe l'ideale per questo progetto, e una migrazione del contratto verso Ethereum potrebbe essere desiderata.
+    In ogni caso, vi è la reale possibilità che durante lo svolgimento del progetto sia rilasciata qualche soluzione layer-2 di tipo ZK: se così fosse e se le metriche
+    di tale layer-2 fossero desiderabili, potrebbe essere desiderabile un nuovo confronto con il Proponente al fine di decidere se fosse auspicabile una migrazione del contratto, che comunque
+    sarebbe facile e veloce in quanto la blockchain scelta è pienamente compatibile con Ethereum e la sua virtual machine (EVM).
 
 \end{itemize}
+
+\newpage
 
 \section{Analisi seconda tecnologia}
 \end{document}
