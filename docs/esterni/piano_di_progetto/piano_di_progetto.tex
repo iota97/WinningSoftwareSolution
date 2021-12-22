@@ -1,6 +1,9 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage{eurosym}
+\usepackage{pdflscape}
 \usepackage{pgfgantt}
+\usepackage{pgfplots}
+
 
 \newcommand{\templates}{../../template}
 \input{\templates/style}
@@ -19,6 +22,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
 }
+\usepgfplotslibrary{dateplot}
 
 \begin{document}
 
@@ -119,9 +123,10 @@ Raffaele Oliviero & Amministratore & 21 & TBD & TBD \\\hline
 Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
 \end{tabular}
 
+\begin{landscape}
 \paragraph{Grafico di Gannt}
 \begin{ganttchart}[
-		expand chart = \textwidth,
+		expand chart = 0.8\paperheight,
 	    progress label text ={#1}\%,
 	    hgrid,
 	    x unit=0.6mm,
@@ -140,7 +145,36 @@ Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
   	\ganttvrule{PB}{2022-03-15}
   	\ganttvrule{CA}{2022-04-29}
 \end{ganttchart}
+\end{landscape}
 
+\begin{landscape}
 \subsection{Grafico dei costi}
+\begin{tikzpicture}
+	\begin{axis}[
+		scale only axis,
+		width = 0.8\paperheight,
+		height = 15cm,
+		date coordinates in = x,
+		date ZERO = 2021-12-01,
+    	xticklabel = \day/\month,
+    	ymin = 0,
+    	ymax = 1000,
+       	xmin = 2021-12-01,
+       	xmax = 2022-05-31]
+	\addplot [green] coordinates {
+    	(2021-12-01, 0)
+	    (2022-04-29, 660)
+	};
+	\addplot [red] coordinates {
+		(2021-12-01, 0)
+		(2021-12-09, 14)
+	};
+	\addplot [red, thick, dotted] coordinates {
+		(2021-12-09, 14)
+		(2022-04-29, 646)
+	};
+   \end{axis}
+\end{tikzpicture}
+\end{landscape}
 
 \end{document}
