@@ -78,7 +78,7 @@ Ore richieste:\\[0.5em]
 Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
 Analista & 42 & TBD & 25\euro & 1050\euro & TBD \\\hline
 Verificatore & 6 & TBD & 15\euro & 90\euro & TBD \\\hline
-Totale ore: & 50 & TBD & Totale costi: & 1140\euro & TBD \\\hline
+Totale ore: & 48 & TBD & Totale costi: & 1140\euro & TBD \\\hline
 \multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
 \end{tabular}
 
@@ -111,7 +111,7 @@ Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
 Responsabile & 21 & TBD & 30\euro & 630\euro & TBD \\\hline
 Amminstratore & 21 & TBD & 20\euro & 420\euro & TBD \\\hline
 Verificatore & 6 & TBD & 15\euro & 90\euro & TBD \\\hline
-Totale ore: & 50 & TBD & Totale costi: & 1140\euro & TBD \\\hline
+Totale ore: & 48 & TBD & Totale costi: & 1140\euro & TBD \\\hline
 \multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
 \end{tabular}
 
@@ -125,6 +125,7 @@ Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
 
 \begin{landscape}
 \paragraph{Grafico di Gannt}
+Aggiornato con i dati disponibili al: 22/12/2021\\
 \begin{ganttchart}[
 		expand chart = 0.8\paperheight,
 	    progress label text ={#1}\%,
@@ -136,19 +137,18 @@ Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
 	]{2021-12-01}{2022-04-30}
   	\gantttitlecalendar{year, month=itname} \\
 	\ganttgroup[progress=5]{RTB}{2021-12-01}{2022-01-15} \\
-  	\ganttbar[progress=10]{Analisi dei Requisiti}{2021-12-01}{2021-12-23} \\
-  	\ganttbar[progress=0]{Analisi delle Tecnologie}{2021-12-01}{2021-12-23} \\
+  	\ganttbar[progress=44]{Analisi dei Requisiti}{2021-12-01}{2021-12-23} \\
+  	\ganttbar[progress=30]{Analisi delle Tecnologie}{2021-12-01}{2021-12-23} \\
   	\ganttbar[progress=0]{Sviluppo PoC}{2021-12-23}{2022-01-07} \\
   	\ganttbar[progress=0]{Verifica PoC}{2022-01-01}{2022-01-15} \\
-  	\ganttbar[progress=50]{Amministrazione di Progetto}{2021-12-01}{2021-12-23} \\
+  	\ganttbar[progress=52]{Amministrazione di Progetto}{2021-12-01}{2021-12-23} \\
   	\ganttvrule{RTB}{2022-01-15}
   	\ganttvrule{PB}{2022-03-15}
   	\ganttvrule{CA}{2022-04-29}
 \end{ganttchart}
-\end{landscape}
 
-\begin{landscape}
 \subsection{Grafico dei costi}
+Aggiornato con i dati disponibili al: 22/12/2022\\
 \begin{tikzpicture}
 	\begin{axis}[
 		scale only axis,
@@ -167,11 +167,25 @@ Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
 	};
 	\addplot [red] coordinates {
 		(2021-12-01, 0)
-		(2021-12-09, 14)
+		(2021-12-06, 4)
+		(2021-12-07, 10)
+		(2021-12-09, 17)
+		(2021-12-12, 44.5)
+		(2021-12-15, 60.5)
+		(2021-12-22, 64.5)
+	};
+	\addplot [yellow] coordinates {
+		(2021-12-01, 0)
+		(2021-12-06, 1)
+		(2021-12-07, 3)
+		(2021-12-09, 5)
+		(2021-12-12, 18.15)
+		(2021-12-15, 19.15)
+		(2021-12-22, 20.15)
 	};
 	\addplot [red, thick, dotted] coordinates {
-		(2021-12-09, 14)
-		(2022-04-29, 646)
+		(2021-12-22, 64.5)
+		(2022-05-15, 660)
 	};
    \end{axis}
 \end{tikzpicture}
