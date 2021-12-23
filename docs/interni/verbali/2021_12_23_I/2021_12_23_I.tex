@@ -48,34 +48,34 @@ Verbale dell'incontro del 23/12/2021.
 \end{enumerate}
 
 \section{Riassunto dei contenuti}
-Andrea Volpe e Alberto Nicoletti ha illustrato agli altri membri del team i casi d'uso realizzati per il documento Analisi dei requisiti.
+Andrea Volpe e Alberto Nicoletti hanno illustrato agli altri membri del team i casi d'uso realizzati per il documento Analisi dei requisiti.
 Sono state concordate con gli altri membri del team modifiche correttive ai casi d'uso realizzati.
 
 Matteo Galvagni e Federico Marchi hanno terminato il documento Analisi delle tecnologie e Matteo Galvagni ha spiegato 
 il lavoro svolto.
 
-Elia Scandaletti e Federico Marchi stanno procedendo coi documenti piano di progetto e piano di qualifica, devono risolvere
+Elia Scandaletti e Raffaele Oliviero stanno procedendo coi documenti piano di progetto e piano di qualifica, devono risolvere
 alcuni dubbi per quanto riguarda il loro contenuto.
 
 \paragraph{Sono stati discussi dubbi in merito all'incontro del 22/12/2021:}
 \begin{itemize}
 \item La soluzione proposta da SyncLab di far accettare manualmente al venditore i pagamenti degli acquirenti mediante 
-una nostra landing page che ha il vantaggio di non modificare il backend dell'ecommerce, ci sembra una cosa poco funzionale
+una nostra web page che ha il vantaggio di non modificare il backend dell'ecommerce, ci sembra una cosa poco funzionale
 a livello di usabilità del sistema;
-\item Come consigliato da SyncLab, salvare l'ecommerce e l'id del prodotto acquistato in blockchain è una cosa negativa a livello
+\item SyncLab ha detto di salvare l'id del prodotto acquistato in blockchain, però è una cosa negativa a livello
 di privacy dell'acquirente;
 \item Linguaggi da preferire per realizzare il backend (tra Java e NodeJS);
 \end{itemize}
 
 \paragraph{Decisioni prese riguardo i dubbi:}
 \begin{itemize}
-\item Apportare delle modifiche al backend dell'ecommerce per installare uno script che valida in maniera automatica con la firma
+\item Apportare delle modifiche al backend dell'ecommerce per installare uno script che valida in maniera automatica con la chiave privata
 del venditore i pagamenti ricevuti, porta a una piccola modifica iniziale del proprio ecommerce da parte del venditore
-ma i vantaggi nell'usabilità a lungo termine sono superiori, dato che il venditore non deve più manualmente confermare o rifiutare
+ma i vantaggi nell'usabilità a lungo termine sono superiori, dato che il venditore non deve più confermare o rifiutare
 ogni transazione manualmente (potrebbero essere molte per ecommerce grandi). Quindi preferiamo la soluzione che installi uno 
-script nel backend del venditore;
-\item Non salviamo ecommerce e id prodotto in blockchain, ma le salviamo in un nostro database con id transazione in blockchain, id 
-prodotto ed ecommerce;
+script realizzato da noi da inserire nel backend del venditore;
+\item Non salviamo l'id prodotto in blockchain, ma lo salviamo in un nostro database nel seguente modo: id transazione in blockchain e id 
+prodotto;
 \item Chiediamo a SyncLab quale linguaggio preferiscano venga da noi utilizzato;
 \end{itemize}
 
