@@ -1,0 +1,202 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Analisi dei requisiti}
+\setprogetto{ShopChain}
+\setcommittenti{SyncLab}
+\setredattori{Alberto Nicoletti, Andrea Volpe}
+\setdestuso{esterno}
+\setdescrizione{
+Questo documento contiene..
+}
+
+\addversione{0.0.0}{11/12/2021}{Alberto Nicoletti}{Redazione}{Struttura del documento, stesura sezioni 1 e 2}
+\addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\section{Introduzone}
+\subsection{Scopo del documento}
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. Casi d'uso e requisiti saranno tenunuti in considerazione nella fase di progettazione, assicurandosi la soddisfazione dei requisiti. 
+\subsection{Glossario}
+Di seguito un elenco di parole usate in questo documento, la cui definizione può essere trovata nel Glossario.
+parola, parola, parola.
+
+\section{Descrizione del prodotto}
+L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
+BlockChain}. Consiste nel realizzare un prototipo di una piattaforma in grado di ‘affiancare’ un crypto-e-commerce nella fasi di pagamento fino alla consegna.
+\subsection{Scopo del prodotto}
+Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile e in sicurezza l'acquisto di prodotti tramite criptovalute. Il processo di trasferimento del denaro avviene seguendo queste fasi:
+\begin{enumerate}
+\item Caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract.
+\item Trasferimento del denaro dal wallet dell'acquirente in blockchain.
+\item Notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain.
+\item Conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un Qr Code nel prodotto acquistato.
+\item Sblocco del denaro e trasferimento nel wallet del venditore.
+\end{enumerate}
+\subsection{Parti del prodotto}
+Il prodotto software è composta dalle seguenti parti:
+\begin{itemize}
+\item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
+\item Piattaforma web per la gestione dei pagamenti da parte del venditore.
+\item App o web app per la scannerizzazione del Qr code .
+\end{itemize}
+\subsection{Caratteristiche utenti}
+Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
+\begin{itemize}
+\item Venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere le criptovalute come metodo di pagamento.
+\item Acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
+\end{itemize}
+Tutti gli utenti sono in possesso di un wallet per criptovalute. 
+Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti.
+\subsection{Vincoli e preferenze}
+La proponente non impone vincoli nella scelta della tipologia di tecnologie, va ci sono comunque delle scelte preferenziali da considerare:
+\begin{itemize}
+\item Utilizzo di blockchain pubblica
+\item utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
+\item utilizzo di database Postgres
+\end{itemize}
+
+Per il completamento del progetto la proponente richiede che siano realizzati i seguenti risultati:
+\begin{itemize}
+\item server, completo di UI
+\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell' 80\% correlata di report.
+\item documentazione su: scelte implementative e progettuali effettuate e relative motivazioni, problemi aperti e eventuali soluzioni proposte da esplorare.
+\end{itemize}
+
+\section{Casi d'uso}
+
+\includegraphics[width=0.9\textwidth]{uc01}
+
+\paragraph{UC1 - Installazione ShopChain}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore ha stipulato un accordo con WinningSoftwareSolution per aggiungere ShopChain come metodo di pagamento sul propiro e-commerce.\\
+\textbf{Postcondizioni}: ShopChain è inserito come metodo di pagamento sull'e-commerce del venditore.\\
+\textbf{Scenario principale}:
+Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pagamento.
+
+\paragraph{UC1.1 - Selezione Wallet}
+\textbf{Attore primario}: Venditore\\
+\textbf{Attore secondario}: Metamask\\
+\textbf{Precondizioni}: Il venditore sta aggiungendo ShopChain come metodo di pagamento al suo e-commerce.\\
+\textbf{Postcondizioni}: Il wallet del venditore è configurato come destinazione delle transazioni con ShopChain.\\
+\textbf{Scenario principale}: Il venditore collega il proprio wallet ai pagamenti che avvengono con ShopChain.
+
+\paragraph{UC2 - Consultazione manuale ShopChain}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
+\textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
+\textbf{Scenario principale}:\\
+\begin{enumerate}
+\item Al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
+\item Il venditore è libero di consultare il manuale in ogni momento.
+\end{enumerate}
+
+
+\paragraph{UC3 - Accesso al sistema}
+\textbf{Attore primario}: Utente non riconosciuto\\
+\textbf{Attore secondario}: Metamask\\
+\textbf{Precondizioni}:  Un utente non riconosciuto vuole accedere al sistema.\\
+\textbf{Postcondizioni}: L'utente viene riconosciuto come venditore nella webapp.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item Viene chiesto all'utente di accedere a Metamask.
+\item L'utente accede a Metamask.
+\item L'utente viene riconosciuto nella webapp.
+\end{enumerate}
+Estensione:\\
+\textbf{UC3.1 Visualizzazione errore venditore}
+\textbf{Attore primario}: Utente non riconosciuto\\
+\textbf{Precondizioni}: Un utente non riconosciuto vuole accedere al sistema, non avendo eseguito correttamente l'accesso a Metamask.\\
+\textbf{Postcondizioni}: L'utente non riconosciuto viene informato del non avvenuto accesso al sistema.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item L'utente che non ha fatto l'accesso a Metamask in modo corretto prova ad accedere alla webapp venditore di ShopChain.
+\item All'utente compare un messaggio di errore nell'accesso.
+\end{enumerate}
+
+\paragraph{UC3.2 - Accesso al sistema con autologin}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Un venditore già con accesso a Metamask vuole entrare nella webapp.\\
+\textbf{Postcondizioni}: Il venditore accede direttamente alla sua pagina nella webapp.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item Un venditore già con accesso a Metamask prova accede alla webapp.
+\item Il sistema riconosce l'accesso già effettuato e porta il venditore alla propria pagina.
+\end{enumerate}
+
+\paragraph{UC4 visualizzazione lista transazioni}
+\textbf{Attore primario}: Venditore \\
+\textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
+\textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni
+Scenario principale.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item Il venditore tramite un menu arriva alla lista delle transazioni.
+\item Il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa).
+\item Il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
+\end{enumerate}
+
+\paragraph{UC5 - visualizzazione dettaglio transazione}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
+\textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
+\begin{enumerate}
+\item Il venditore seleziona una delle transizioni dall'elenco.
+\item Il venditore visualizza i dettagli della singola transizione.
+\end{enumerate}
+
+\paragraph{UC5.1 - Visualizzazione stato transizione}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transizione.\\
+\textbf{Postcondizioni}: Il venditore visualizza lo stato di una transizione.\\
+\textbf{Scenario principale}: Il venditore vede se la transizione è in attesa, oppure è stata completata.\\
+
+\paragraph{UC5.2 - Generazione QR Code}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
+\textbf{Postcondizioni}: Il venditore è in possesso del QR code da applicare sul pacco del prodotto.\\
+\begin{enumerate}
+\item Il venditore visualizza il Qr code della transizione in attesa selezionata.
+\item Il venditore stampa il Qr code e lo appplica sul pacco del prodotto.
+\end{enumerate}
+
+\paragraph{UC5.3 - Visualizzazione importo transazione}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transizione.\\
+\textbf{Postcondizioni}: Il venditore visualizza l'importo di una transizione.\\
+\textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
+
+\paragraph{UC5.4 - Visualizzazione scadenza transazione}
+\textbf{Attore primario}: Venditore\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
+\textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
+\textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale riceverà l'importo anche se non è stato scannerizzato il QR Code.\\
+
+
+%\paragraph{UCx - }
+%\textbf{Attore primario}: \\
+%\textbf{Precondizioni}: \\
+%\textbf{Postcondizioni}: \\
+%\textbf{Scenario principale}: \\
+
+
+\section{Requisiti}
+elenco
+
+\section{Riferimenti}
+
+
+
+\end{document}
