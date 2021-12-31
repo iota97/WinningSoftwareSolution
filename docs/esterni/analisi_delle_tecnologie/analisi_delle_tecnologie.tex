@@ -96,7 +96,7 @@ Principalmente esistono due meccanismi di consenso ritenuti validi: \textit{Proo
     In sintesi, un blocco viene approvato (minato) quando viene trovato un particolare numero che, se messo in coda alla lista delle transazioni, una funzione di hash che prende
     in input la lista seguita da quel numero restituisce un output atteso dal protocollo. Per esempio, analizzando il \textit{whitepaper} di Bitcoin, si scopre che
     l'output in binario che deve restituire la funzione di hash deve avere il numero arbitrario di 30 zeri in testa.
-    Siccome la funzione di hash scelta è un problema in NP, mentre è computazionalmente facile accorgersi se l'output è corretto dato il numero in input, è invece estremamente difficile
+    Siccome la funzione di hash scelta è un problema in NP è computazionalmente facile accorgersi se l'output è corretto dato il numero in input, mentre è invece estremamente difficile
     trovare il numero in input che genera l'output desiderato (assumendo che non esista un algoritmo più efficiente del bruteforce, il che non è dimostrato teoricamente ma è l'assunzione su cui si basa il mining). Il miner che fornisce il numero che genera l'output atteso dal protocollo
     avrà dunque impiegato molte risorse hardware per trovarlo.
     Una volta che un miner "dichiara" di aver trovato il numero corretto, tutti i nodi connessi effettuano un rapido test per stabilire se l'output è quello atteso, procedendo
