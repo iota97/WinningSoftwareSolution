@@ -10,7 +10,7 @@
 
 \settitolo{Analisi delle tecnologie}
 \setredattori{Federico Marchi \\ Matteo Galvagni}
-\setdestuso{interno}
+\setdestuso{Esterno}
 \setdescrizione{
 Analisi delle tecnologie.
 }
@@ -23,7 +23,7 @@ Analisi delle tecnologie.
 
 \subsection*{Premesse}
 Le metriche di valutazione sono state scelte in base alla loro importanza sia nella normale valutazione di una blockchain sia nello svolgimento di questo particolare progetto.
-È importante tenere in considerazione che, mentre alcune delle metriche sono dati di fatto, altre sono medie o stime teoriche che è importante approfondire prima di trarre una conclusione.
+È importante tenere in considerazione che, mentre alcune delle metriche sono dati di fatto, altre sono stime empiriche o valori dichiarati dagli sviluppatori ma mai dimostrati.
 Di seguito una rapida spiegazione di ogni metrica scelta.
 
 \subsubsection*{Scalabilità}
@@ -45,7 +45,7 @@ accettabile anche nel futuro.\\
 \item \textbf{Transaction time: }
 Anche detta \textit{Transaction finality}, è il tempo medio \textit{attuale} in cui una transazione viene confermata e inserita permanentemente nella blockchain.
 Esso è la somma del tempo in cui la transazione, una volta emessa, viene accettata da un miner/validatore inserendola in un blocco e il tempo impiegato da tale blocco per essere
-approvato. Dipende direttamente dalla tassa di transazione: se viene impostato un costo molto più alto del normale i miners/validatori saranno incentivati a includere tale transazione
+approvato (block time). Dipende direttamente dalla tassa di transazione: se viene impostato un costo molto più alto del normale i miners/validatori saranno incentivati a includere tale transazione
 in un blocco e approvare quel blocco il prima possibile, così da aggiudicarsi la tassa di transazione. Al contrario, una tassa impostata per risultare in una transazione più economica
 sarà scelta per ultima dai miners/validatori, in quanto non hanno incentivo economico ad approvare tale transazione prima di altre che pagano di più.
 Per il progetto in esame è fondamentale un tempo di transazione molto basso (idealmente nell'ordine dei secondi) poichè il cliente nella fase di scannerizzazione del codice QR deve
@@ -55,12 +55,12 @@ avere un'esperienza veloce.\\
 
 \item \textbf{Block time: }
 È il tempo medio \textit{attuale} in cui un blocco viene approvato nella blockchain. Indica la velocità con quale i miners/validatori di una rete approvano un blocco e va valutato insieme al parametro "grandezza di blocco": un blocco molto grande può contenere molte transazioni, quindi anche con un tempo di blocco non esemplare il tempo di transazione diminuisce considerevolmente
-perchè molte più transazioni possono essere incluse in un blocco, anche quelle che eventualmente rendono meno profitto ai miners/validatori; al contrario, con un blocco molto piccolo la velocità
-di approvazione di un blocco perde di importanza perchè molte meno transazioni possono essere incluse in un blocco creando forte competizione per ottenere l'approvazione della transazione risultando
+perchè molte più transazioni possono essere incluse in un blocco, anche quelle che eventualmente rendono meno profitto ai miners/validatori; al contrario, un blocco molto piccolo (anche se con velocità
+di approvazione eccellente) causa problemi altrove poichè molte meno transazioni possono essere incluse nel blocco creando forte competizione per ottenere l'approvazione della transazione risultando
 in transazioni con costi impostati per essere medio-bassi molto più lente.\\
 
 \item \textbf{Block size: }
-È il peso in memoria di un blocco. È proporzionale al numero di transazioni che un blocco può contenere: un blocco molto grande risulta in TPS elevate e un costo per transazione
+È il peso in memoria di un blocco. È proporzionale al numero di transazioni che un blocco può contenere: un blocco molto grande risulta in TPS (\textit{Transactions per second}) elevate e un costo per transazione
 moderato/basso poichè vi è poca competizione da parte delle transazioni per essere inserite nel blocco, come spiegato nel punto precedente. Un blocco molto grande, invece, richiederebbe una velocità di connessione e soprattutto una velocità di memorizzazione dei blocchi non indifferenti nei periodi di massimo utilizzo della rete al fine di emettere i blocchi e sincronizzare il nodo in tempo utile per ricevere il compenso economico, spingendo i nodi con requisiti hardware non sufficienti e quindi non economicamente incentivati a non fornire più il loro servizio risultando in una centralizzazione della blockchain.
 È importante considerare che vi è un dibattito aperto riguardo la grandezza \textit{limite} di un blocco: blocchi estremamente piccoli risultano in costi di transazione molto alti in periodi di grande utilizzo della rete, ma sono facilmente minabili/validabili senza requisiti hardware eccessivi e non rappresentano quindi un potenziale pericolo per la decentralizzazione come invece fanno
 dei blocchi molto grandi, che di contro garantiscono costi di transazione bassi e maggiori TPS. Riteniamo che entrambe le argomentazioni siano più che valide, dunque nella
@@ -81,7 +81,7 @@ generalmente molto maggiore di quella della rete reale, in quanto l'ambiente di 
 \subsubsection*{Sicurezza \& Decentralizzazione}
 Le metriche di valutazione della sicurezza e della decentralizzazione vogliono invece dare una stima teorica del livello di resistenza di ogni rete a possibili attacchi da parte di entità
 malevole. I tipi di attacchi possono avere natura diversa: è necessario che la rete scelta sia protetta sia da attacchi di tipo economico (Es.: gli sviluppatori vendono una grande quantità
-di token nativi nel tentativo di intascare il denaro degli investitori facendo crollare prezzo del token e la fiducia verso la rete; un'entità include una transazione malevola (spesa
+di token nativi nel tentativo di intascare il denaro degli investitori; un'entità include una transazione malevola (spesa
 di token non posseduti) in un blocco e riesce a minarlo/validarlo) sia da attacchi mirati alla distruzione della rete (Es.: uno o pochi stati vietano il mining/la validazione dei blocchi
 e la rete perde gran parte o la totalità dei suoi nodi; un'azienda che controlla gran parte dei miners/validatori chiude o viene a sua volta attaccata e l'intera rete va offline).
 
@@ -96,13 +96,13 @@ Principalmente esistono due meccanismi di consenso ritenuti validi: \textit{Proo
     In sintesi, un blocco viene approvato (minato) quando viene trovato un particolare numero che, se messo in coda alla lista delle transazioni, una funzione di hash che prende
     in input la lista seguita da quel numero restituisce un output atteso dal protocollo. Per esempio, analizzando il \textit{whitepaper} di Bitcoin, si scopre che
     l'output in binario che deve restituire la funzione di hash deve avere il numero arbitrario di 30 zeri in testa.
-    Siccome la funzione di hash scelta è un problema in NP, mentre è computazionamente facile accorgersi se l'output è corretto dato il numero in input, è invece estremamente difficile
-    trovare il numero in input che genera l'output desiderato. In pratica, vi è la certezza che il miner che fornisce il numero che genera l'output atteso dal protocollo
-    abbia impiegato molte risorse hardware per trovarlo, dato che l'unico modo per trovarlo è provare ogni singola combinazione finchè l'output non risulta valido.
+    Siccome la funzione di hash scelta è un problema in NP, mentre è computazionalmente facile accorgersi se l'output è corretto dato il numero in input, è invece estremamente difficile
+    trovare il numero in input che genera l'output desiderato (assumendo che non esista un algoritmo più efficiente del bruteforce, il che non è dimostrato teoricamente ma è l'assunzione su cui si basa il mining). Il miner che fornisce il numero che genera l'output atteso dal protocollo
+    avrà dunque impiegato molte risorse hardware per trovarlo.
     Una volta che un miner "dichiara" di aver trovato il numero corretto, tutti i nodi connessi effettuano un rapido test per stabilire se l'output è quello atteso, procedendo
     poi con un voto democratico per includere il blocco nella blockchain.
-    Con la garanzia che validare i blocchi sia computazionalmente difficile, si può garantire la sicurezza della rete da attacchi da parte di entità malevole: per controllare il 50\% + 1 della
-    rete al fine di emettere e approvare blocchi fraudolenti è necessaria un'enorme potenza computazionale e dunque un'enorme disponibilità economica.\\
+    Sapendo che validare i blocchi è computazionalmente difficile (sempre assumendo che non esista algoritmo migliore del bruteforce), si può garantire la sicurezza della rete da attacchi da parte di entità malevole: per controllare il 50\% + 1 della
+    rete al fine di approvare blocchi fraudolenti è necessaria un'enorme potenza computazionale e dunque un'enorme disponibilità economica.\\
 
     \item \textbf{Proof of Stake: }
     In questo tipo di consenso, invece, validare i blocchi non è computazionalmente difficile. La sicurezza deriva dal fatto che per diventare validatore è necessario uno
@@ -139,7 +139,7 @@ di estrema perdita di valore dei token e conseguentemente di fiducia nella rete 
 \subsection*{Tabelle comparativa delle Blockchain}
 Le seguenti tabelle sono state sviluppate per confrontare alcune delle blockchain più famose e ritenute valide secondo le metriche precedentemente definite.
 Anche se inizialmente il confronto voleva essere fatto tramite una formula (che forniti i dati rispetto alle metriche considerate restituisse un valore per quantificare l'adeguatezza di ogni rete per
-questo progetto) si è poi deciso di integrare i dati con una descrizione discorsiva vista l'alta presenza di particolari relativi ad una sola chain e non utilizzabili quindi come metriche in quanto non condivisi da altre reti, rendendo l'utilizzo di una formula impossibile.
+questo progetto) si è poi deciso di integrare i dati con una descrizione discorsiva vista l'alta presenza di particolari relativi ad una sola chain e non utilizzabili quindi come metriche in quanto non condivisi da altre reti, rendendo l'utilizzo di una formula estremamente scomodo.
 Esistendo centinaia di blockchain diverse queste tabelle non sono chiaramente comprensive di tutte: è stato necessario adottare dei criteri di esclusione pre-valutazione per confrontare
 solo le blockchain più adatte.
 Un primo criterio di esclusione riguarda ovviamente la possibilità di pubblicazione di contratti digitali: mentre non è escluso che esistano altre blockchain competitive
@@ -147,6 +147,7 @@ per le normali transazioni, l'assenza della capacità di eseguire contratti digi
 Un altro criterio di esclusione più opinabile, invece, riguarda il tempo di vita della chain stessa: sono state escluse blockchain con data di rilascio risalente a meno di un anno fa,
 perchè ritenuto che almeno un anno di vita senza problemi di stabilità nelle reti sia necessario per garantire almeno una parte della sicurezza delle stesse, soprattutto
 considerando che andremo ad operare con fondi di utenti che andrebbero risarciti in caso di problemi.
+Oltre a blockchain indipendenti (Layer 1) sono state considerate anche alcune sidechain (blockchain che pur funzionando indipendentemente e parallelamente a una blockchain L1 salvano su di essa il proprio stato tramite contratti digitali per sfruttarne parte della sicurezza).
 
 \renewcommand\arraystretch{1.6}
 
@@ -255,7 +256,7 @@ senza contare che un attacco alla rete distruggerebbe il valore dei token nello 
 
 \newpage
 \subsection*{xDai\footnote{Sources: xdaichain.com, xdaichain.com/about-xdai}}
-La sidechain di xDai, nata nel 2018, si basa su transazioni a valore stabile grazie al token nativo xDai che è legato al valore del dollaro statounitense.
+La sidechain di xDai, nata nel 2018, si basa su transazioni a valore stabile grazie al token nativo xDai che è legato al valore del dollaro statunitense.
 Questa caratteristica è particolarmente interessante per questo progetto perchè aiuterebbe con il problema del cambio di valore dei token nel tempo.
 
 \subsubsection*{Scalabilità}
@@ -283,14 +284,14 @@ Solana utilizza un algoritmo di consenso di tipo PoS, più precisamente si tratt
 Solana è tra le migliori blockchain in circolazione e rispecchia quasi tutti i requisiti fondamentali per la realizzazione del progetto. Tuttavia oltre alla disomogenea distribuzione del token nativo tra i vari wallet, l'elemento che ha decretato l'esclusione dalle possibili scelte è stato il crollo della blockchain avvenuto il 14 settembre, durante il quale il network di Solana è rimasto offline per circa 16 ore in seguito ad un attacco denial-of-service. Nonostante Solana sia successivamente ritornata in funzione perfettamente, riteniamo grave l'accaduto soprattutto perchè il prodotto che deve essere realizzato non permette assolutamente di andare offline.
 \newpage
 \subsection*{Algorand\footnote{Sources: algoexplorer.io, metrics.algorand.org}}
-Algorand è stata fondata dal professore italiano Silvio Micali nel 2017. Inizialmente si poteva programmare sono in TEAL, un linguaggio complicato e limitante, ma più sicuro; al giorno d'oggi si sta ampliando e sta importando altri linguaggi oltre ad essere divantata compatibile con la EVM.
+Algorand è stata fondata dal professore italiano Silvio Micali nel 2017. Inizialmente si poteva programmare sono in TEAL, un linguaggio complicato e limitante, ma più sicuro; al giorno d'oggi si sta ampliando e sta importando altri linguaggi oltre ad essere diventata compatibile con la EVM (Ethereum Virtual Machine).
 \subsubsection*{Scalabilità}
 Si tratta di una blockchain altamente scalabile, infatti è in grado di elaborare circa un migliaio di operazioni al secondo a costi inferiori al centesimo di dollaro. Per poter mantenere queste performance Algorand utilizza un'architettura a due layer nativi: L1 e L2, rispettivamente il primo dedicato a tutte quelle operazioni di base che risultano dunque meno onerose, mentre il secondo è dedicato a tutte quelle operazioni più elaborate, onerose ed a quelle elaborate off-chain che hanno bisogno di una conferma on-chain. La grandezza del blocco intorno al MB risulta eccessiva e potrebbe causare di problemi in periodi di forte congestione della chain.
 \subsubsection*{Sicurezza \& Decentralizzazione}
 Algorand utilizza un algoritmo di consenso denominata "Pure PoS". Qualsiasi detentore della valuta nativa ALGO è potenzialmente eleggibile per la validazione di un blocco, la scelta del validatore è randomica e  ponderata a seconda del numero di valuta in possesso. Questa scelta randomica rende sicura la chain poiché un potenziale utente malevolo non potrà sapere in maniera deterministica chi sarà il prossimo validatore del blocco.
 Dal punto di vista della decentralizzazione si tratta di un network altamente decentralizzato proprio perchè i validatori sono i possessori di 1000 token determinati ogni volta che deve essere aggiunto un blocco alla chain, ma siccome la probabilità di essere eletti validatori è direttamente proporzionale al numero di token ALGO detenuti, la distribuzione del token risulta disomogenea, anche se non in maniera esagerata.
 \subsubsection*{Considerazioni finali}
-Algorand è un'ottima blockchain poiché riesce a combinare eccellenti attributi di scalabilità con una buona decentralizzazione. Le principali polemiche ricevute da Algorand riguardano la Tokenomics: infatti la gestione del token ALGO è molto particolare, infatti la supply totale deve ancora essere raggiunta e viene eseguita una politica di immissione di nuovi token qualora il suo valore dovesse salire velocemente (accellerated vesting), questa politica potrebbe disincentivare nuovi investitori poiché l'aumento del prezzo viene placato dall'immissione di nuova valuta.
+Algorand è un'ottima blockchain poiché riesce a combinare buoni attributi di scalabilità con una sufficiente decentralizzazione. Le principali polemiche ricevute da Algorand riguardano la Tokenomics: la gestione del token ALGO è molto particolare, infatti la supply totale deve ancora essere raggiunta e viene attuata una politica di immissione di nuovi token qualora il suo valore dovesse salire velocemente (accellerated vesting), questa politica potrebbe disincentivare nuovi investitori poiché l'aumento del prezzo viene placato dall'immissione di nuova valuta.
 
 \newpage
 \subsection*{Avalanche\footnote{Sources: explorer.avax.network/validators, avascan.info, avascan.info/stats/richlist}}
@@ -303,7 +304,7 @@ L'algoritmo di consenso Avalanche utilizzato è un PoS con delegazione, alla bas
 Si tratta di un network discretamente decentralizzato, infatti vanta poco più di un migliaio di validatori. Non è facile diventare validatori poiché, nonostante non sia necessario un hardware eccessivamente costoso, bisogna possedere circa duemila AVAX (token nativo della chain) che al prezzo attuale di mercato equivalgono a circa 200k\$. Infine, non ci sono problemi per quanto riguarda la distribuzione tra i vari wallet del token nativo perché risulta sufficientemente equilibrata.
 Una nota di particolare preoccupazione riguarda la distribuzione geografica dei validatori di questa rete: più del 50\% dei validatori si trova in due soli stati (Germania e Stati Uniti).
 \subsubsection*{Considerazioni finali}
-Avalanche grazie al suo algoritmo di consenso, il quale è una variazione del classico PoS, permette di usufruire di una buona scalabilità a fronte di una discreta decentralizzazione. Si tratta di un network molto giovane, che ha riscosso parecchio successo proprio per essere riuscito a proporre soluzioni innovative e fino ad ora funzionanti, ma soprattutto che non andassero a sbilanciare troppo uno dei 3 aspetti cardine (scalabilità, sicurezza, decentralizzaione) di una blockchain trovando un buon compromesso tra di essi.
+Avalanche grazie al suo algoritmo di consenso, il quale è una variazione del classico PoS, permette di usufruire di una buona scalabilità a fronte di una discreta decentralizzazione. Si tratta di un network molto giovane, che ha riscosso parecchio successo proprio per essere riuscito a proporre soluzioni innovative e fino ad ora funzionanti, ma soprattutto che non andassero a sbilanciare troppo uno dei 3 aspetti cardine (scalabilità, sicurezza, decentralizzazione) di una blockchain trovando un buon compromesso tra di essi.
 \newpage
 \subsection*{Fantom\footnote{Sources: docs.fantom.foundation, ftmscan.com/chart/blocktime, ftmscan.com/chart/blocksize}}
 La blockchain Fantom, uscita nel 2018 in testnet e successivamente rilasciata definitivamente nel Dicembre 2019, è un Layer-1 nato per fornire un'alternativa ad Ethereum.
@@ -314,7 +315,7 @@ La scalabilità è il punto forte di Fantom, infatti con un numero elevatissimo 
 L' algoritmo di consenso utilizzato si chiama Lachesis, si tratta di un PoS con BTF (Byzantine Fault Tolerance) secondo il quale la blockchain rimane stabile e in funzione fin tanto che i $\frac{2}{3}$ dei validatori non è malevolo.
 Da un lato questo algoritmo potrebbe facilitare un'ipotetico attacco alla blockchain, tuttavia essendo complesso e oneroso diventare validatore risulta alla fine molto costoso e controproducente attaccare la blockchain.
 Per poter diventare validatore sono necessari 1 milione di FTM (token nativo di Fantom), circa l’equivalente di 2 milioni di dollari.
-Pecca sotto l’aspetto della decentralizzazione poiché sono presenti solo 60 validatori momentaneamente (anche per le enormi risorse economiche richieste per diventare validatore) di cui 10 appartenenti alla Fantom Foundation.
+Pecca sotto l’aspetto della decentralizzazione poiché sono presenti attualmente solo 60 validatori (anche per le enormi risorse economiche richieste per diventare validatore) di cui 10 appartenenti alla Fantom Foundation.
 \subsubsection*{Considerazioni finali}
 Nonostante sia una delle migliori blockchain sotto il punto di vista della scalabilità, al fine di garantire una lunga prospettiva di vita al progetto riteniamo che sia fondamentale utilizzare una blockchain maggiormente decentralizzata (dunque con un numero maggiore di validatori).
 
@@ -324,7 +325,7 @@ La blockchain di Cardano è stata fondata nel 2015 e lanciata nel 2017 dal co-fo
 \subsubsection*{Scalabilità}
 Per quanto riguarda la scalabilità, Cardano ha dei discreti costi e velocità nelle transazioni. Se paragonata alle blockchain più recenti risulta meno performante, ma rimane comunque un passo più avanti rispetto alla scalabilità di Ethereum. Permette di effettuare transazioni per circa 50 centesimi in più o meno 20 secondi, inoltre i blocchi di grandezza ottimale vengono minati ogni 4 secondi. Per evitare congestione nella blockchain, quest'ultima è stata divisa in due strati per differenziare due diversi tipi di operazoni: CSL (Cardano Settlement Layer) ovvero lo strato per tutte le transazioni tra i vari wallet e CCL (Cardano Computational Layer) che riguarda Smart Contract e lo spostamento di fondi in maniera programmatica.
 \subsubsection*{Sicurezza \& Decentralizzazione}
-Cardano utilizza un algoritmo di consenso chiamato Ouroborus, si tratta di un PoS. Questo algoritmo si basa sul concetto di honest majority secondo il quale il nodo o l'insieme di nodi di maggioranza, dunque che possiede la maggiorparte dei token nativi, sia un nodo onesto poiché non è nei suoi interessi far crollare il valore della valuta. In Ouroborus il tempo viene suddiviso in epoche (intervalli temporali) e slot (incrementi di 20 secondi in un'epoca), ogni slot viene estratto un blocco e scelto il leader dello slot.
+Cardano utilizza un algoritmo di consenso chiamato Ouroborus (PoS). Questo algoritmo si basa sul concetto di honest majority secondo il quale il nodo o l'insieme di nodi di maggioranza, dunque che possiede la maggiorparte dei token nativi, sia un nodo onesto poiché non è nei suoi interessi far crollare il valore della valuta. In Ouroborus il tempo viene suddiviso in epoche (intervalli temporali) e slot (incrementi di 20 secondi in un'epoca), ogni slot viene estratto un blocco e scelto il leader dello slot.
 Per quanto riguarda la decentralizzazione, il network di Cardano è composto da circa 3mila nodi validatori, un buon numero che permettere di poter considerare questa blockchain sufficientemente decentralizzata.
 \subsubsection*{Considerazioni finali}
 Cardano viene chiamata blockchain di "terza generazione" perchè ha permesso parzialmente di risolvere il famoso trilemma delle blockchain portando innovazione e aumentando consistentemente la scalabilità, il tutto riuscendo a mantenere un buon livello di decentralizzazione (anche se non paragonabile a quello di Ethereum). Tuttavia, rispetto ad altre blockchain di terza generazione, non ha reso disponibile lo sviluppo di smart contract se non solo recentemente e per lo sviluppo di questo progetto è stato ritenuto rischioso approciarsi ad un Layer-1 troppo giovane sotto l'aspetto degli smart contract.
