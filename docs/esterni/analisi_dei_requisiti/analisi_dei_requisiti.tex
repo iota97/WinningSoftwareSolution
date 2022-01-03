@@ -14,12 +14,13 @@
 \setredattori{Alberto Nicoletti, Andrea Volpe}
 \setdestuso{esterno}
 \setdescrizione{
-Questo documento contiene..
+Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 }
 
 \addversione{0.0.0}{11/12/2021}{Alberto Nicoletti}{Redazione}{Struttura del documento, stesura sezioni 1 e 2}
 \addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
 \addversione{0.0.2}{03/01/2021}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
+\addversione{0.0.3}{03/01/2021}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
 
 \begin{document}
 
@@ -29,7 +30,7 @@ Questo documento contiene..
 
 \section{Introduzone}
 \subsection{Scopo del documento}
-Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. Casi d'uso e requisiti saranno tenunuti in considerazione nella fase di progettazione, assicurandosi la soddisfazione dei requisiti. 
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione e di verifica. 
 \subsection{Glossario}
 Di seguito un elenco di parole usate in questo documento, la cui definizione può essere trovata nel Glossario.
 parola, parola, parola.
@@ -51,7 +52,8 @@ Il prodotto software è composta dalle seguenti parti:
 \begin{itemize}
 \item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
 \item Piattaforma web per la gestione dei pagamenti da parte del venditore.
-\item App o web app per la scannerizzazione del Qr code .
+\item Piattaforma web per la gestione dei pagamenti da parte dell' acquirente.
+\item App o web app per la scannerizzazione del Qr code.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
@@ -60,7 +62,8 @@ Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
 \item Acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
 \end{itemize}
 Tutti gli utenti sono in possesso di un wallet per criptovalute. 
-Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti.
+Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
+
 \subsection{Vincoli e preferenze}
 La proponente non impone vincoli nella scelta della tipologia di tecnologie, va ci sono comunque delle scelte preferenziali da considerare:
 \begin{itemize}
@@ -78,7 +81,7 @@ Per il completamento del progetto la proponente richiede che siano realizzati i 
 
 \section{Casi d'uso}
 
-\includegraphics[width=0.9\textwidth]{uc01}
+\includegraphics[width=0.9\textwidth]{UseCase_venditore1.png}
 
 \paragraph{UC1 - Installazione ShopChain}
 \textbf{Attore primario}: Venditore\\
@@ -104,38 +107,41 @@ Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pag
 \item Il venditore è libero di consultare il manuale in ogni momento.
 \end{enumerate}
 
+\includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
 
-\paragraph{UC3 - Accesso al sistema}
-\textbf{Attore primario}: Utente non riconosciuto\\
-\textbf{Attore secondario}: Metamask\\
-\textbf{Precondizioni}:  Un utente non riconosciuto vuole accedere al sistema.\\
-\textbf{Postcondizioni}: L'utente viene riconosciuto come venditore nella webapp.\\
+\paragraph{UC3 - Riconoscimento wallet}
+\textbf{Attore primario}: Venditore privo di wallet riconosciuto.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: Il venditore ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: Il venditore ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Viene chiesto all'utente di accedere a Metamask.
-\item L'utente accede a Metamask.
-\item L'utente viene riconosciuto nella webapp.
+    \item Il venditore apre la webapp.
+    \item Il venditore fa riconoscere tramite Metamask il proprio wallet.
+    \item Il venditore ha un wallet associato e accede al sistema.
 \end{enumerate}
-Estensione:\\
-\textbf{UC3.1 Visualizzazione errore venditore}
-\textbf{Attore primario}: Utente non riconosciuto\\
-\textbf{Precondizioni}: Un utente non riconosciuto vuole accedere al sistema, non avendo eseguito correttamente l'accesso a Metamask.\\
-\textbf{Postcondizioni}: L'utente non riconosciuto viene informato del non avvenuto accesso al sistema.\\
-\textbf{Scenario principale}:
+\textbf{Estensioni}:
 \begin{enumerate}
-\item L'utente che non ha fatto l'accesso a Metamask in modo corretto prova ad accedere alla webapp venditore di ShopChain.
-\item All'utente compare un messaggio di errore nell'accesso.
+    \item UC3.1 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \begin{enumerate}
+        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
+        \item Il sistema mostra il messaggio riprovare.
+        \item Il sistema ripete UC3.
+    \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC3.2 - Accesso al sistema con autologin}
-\textbf{Attore primario}: Venditore\\
-\textbf{Precondizioni}: Un venditore già con accesso a Metamask vuole entrare nella webapp.\\
-\textbf{Postcondizioni}: Il venditore accede direttamente alla sua pagina nella webapp.\\
+\paragraph{UC3.2 - Accesso al sistema}
+\textbf{Attore primario}: Venditore con wallet associato.\\
+\textbf{Precondizioni}: Il venditore apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: Il venditore accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Un venditore già con accesso a Metamask prova accede alla webapp.
-\item Il sistema riconosce l'accesso già effettuato e porta il venditore alla propria pagina.
+    \item Il venditore fa riconoscere tramite Metamask il proprio wallet.
+    \item Il venditore apre la webapp.
+    \item Il venditore ha un wallet associato e accede al sistema.
 \end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_venditore3.png}
 
 \paragraph{UC4 visualizzazione lista transazioni}
 \textbf{Attore primario}: Venditore \\
@@ -157,6 +163,8 @@ Scenario principale.\\
 \item Il venditore seleziona una delle transizioni dall'elenco.
 \item Il venditore visualizza i dettagli della singola transizione.
 \end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
 
 \paragraph{UC5.1 - Visualizzazione stato transizione}
 \textbf{Attore primario}: Venditore\\
