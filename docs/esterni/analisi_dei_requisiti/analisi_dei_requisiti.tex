@@ -19,6 +19,7 @@ Questo documento contiene..
 
 \addversione{0.0.0}{11/12/2021}{Alberto Nicoletti}{Redazione}{Struttura del documento, stesura sezioni 1 e 2}
 \addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
+\addversione{0.0.2}{03/01/2021}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
 
 \begin{document}
 
@@ -184,13 +185,204 @@ Scenario principale.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale riceverà l'importo anche se non è stato scannerizzato il QR Code.\\
 
+\includegraphics[width=0.9\textwidth]{UseCase_landing_page1}
 
-%\paragraph{UCx - }
-%\textbf{Attore primario}: \\
-%\textbf{Precondizioni}: \\
-%\textbf{Postcondizioni}: \\
-%\textbf{Scenario principale}: \\
+\paragraph{UC6 - Riconoscimento wallet}
+\textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'utente ha aperto la landing page e non si è ancora fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: L'utente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L’utente apre la landing page.
+    \item L’utente fa riconoscere tramite Metamask il proprio wallet.
+    \item L’utente ha un wallet associato e accede al sistema.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC11 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \begin{enumerate}
+        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
+        \item Il sistema mostra il messaggio riprovare.
+        \item Il sistema ripete UC6.
+    \end{enumerate}
+\end{enumerate}
 
+\includegraphics[width=0.9\textwidth]{UseCase_landing_page2}
+
+\paragraph{UC7 - Accesso al sistema}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Precondizioni}: L'acquirente apre la landing page e si è già fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: L'acquirente accede al sistema.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L'acquirente fa riconoscere tramite Metamask il proprio wallet.
+    \item L'acquirente apre la landing page.
+    \item L'acquirente ha un wallet associato e accede al sistema.
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_landing_page3}
+
+\paragraph{UC8 - Visualizzazione riepilogo ordine}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Precondizioni}: L'acquirente è acceduto al sistema e ha un wallet associato.\\
+\textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L’utente accede al sistema con un wallet associato.
+    \item Il sistema mostra il riepilogo dell'ordine.
+\end{enumerate}
+
+\paragraph{UC8.1 - Visualizzazione costo in dollari}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Precondizioni}: L'acquirente è acceduto al sistema e ha un wallet associato.\\
+\textbf{Postcondizioni}: Il sistema mostra il costo in dollari.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L’utente accede al sistema con un wallet associato.
+    \item Il sistema mostra il costo in dollari.
+\end{enumerate}
+
+\paragraph{UC9 - Conferma ordine}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Precondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
+\textbf{Postcondizioni}: L'acquirente ha confermato l'ordine.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item Il sistema mostra il riepilogo dell'ordine.
+    \item L'acquirente conferma l'ordine.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC12 L'acquirente annulla l'ordine.
+    \begin{enumerate}
+        \item Visualizzazione messaggio procedura di pagamento annullata.
+        \item Cancellazione sessione di pagamento.
+    \end{enumerate}
+\end{enumerate}
+
+\paragraph{UC10 - Pagamento ordine}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'acquirente ha confermato l'ordine.\\
+\textbf{Postcondizioni}: L'acquirente ha pagato l'ordine.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L'acquirente avvia la procedura di pagamento.
+    \item L'acquirente effettua il pagamento tramite Metamask.
+    \item L'ordine è stato pagato.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC13 Metamask non è riuscito a completare la procedura di pagamento.
+    \begin{enumerate}
+        \item Visualizzazione errore pagamento non riuscito.
+        \item Cancellazione sessione di pagamento.
+    \end{enumerate}
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_webapp1}
+
+\paragraph{UC14 - Riconoscimento wallet}
+\textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'acquirente ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L’acquirente apre la webapp.
+    \item L’acquirente fa riconoscere tramite Metamask il proprio wallet.
+    \item L’acquirente ha un wallet associato e accede al sistema.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC18 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \begin{enumerate}
+        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
+        \item Il sistema mostra il messaggio riprovare.
+        \item Il sistema ripete UC14.
+    \end{enumerate}
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_webapp2}
+
+\paragraph{UC15 - Accesso al sistema}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Precondizioni}: L'acquirente apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: L'acquirente accede al sistema.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L'acquirente fa riconoscere tramite Metamask il proprio wallet.
+    \item L'acquirente apre la webapp.
+    \item L'acquirente ha un wallet associato e accede al sistema.
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UseCase_webapp3}
+
+\paragraph{UC16 - Scansione qr code}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Attore secondario}: Fotocamera.\\
+\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
+\textbf{Postcondizioni}: L'acquirente ha scansionato il qr code e il sistema possiede i dati dell'ordine.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L'acquirente accede al sistema con un wallet associato.
+    \item Il sistema avvia la fotocamera.
+    \item L'acquirente scansiona il qr-code.
+    \item Il sistema possiede i dati dell'ordine.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione qr code.
+    \begin{enumerate}
+        \item La fotocamera ha scansionato un qr code non valido.
+        \begin{enumerate}
+            \item Il sistema mette in pausa la fotocamera.
+            \item Il sistema mostra l'errore nessun qr code non valido.
+            \item L'acquirente chiude il messaggio di errore.
+            \item Il sistema avvia la fotocamera.
+        \end{enumerate}
+        \item La fotocamera ha scansionato un qr code valido ma inesistente.
+        \begin{enumerate}
+            \item Il sistema mette in pausa la fotocamera.
+            \item Il sistema mostra l'errore nessun qr code inesistente.
+            \item L'acquirente chiude il messaggio di errore.
+            \item Il sistema avvia la fotocamera.
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\paragraph{UC17 - Accettazione ordine}
+\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'acquirente ha scansionato un qr code valido.\\
+\textbf{Postcondizioni}: L'acquirente ha accettato l'ordine.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item L'acquirente scansiona un qr code valido.
+    \item L'acquirente accetta l'ordine tramite Metamask.
+    \item L'acquirente ha accettato l'ordine.
+    \item L'acquirente è in possesso dei prodotti dell'ordine.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC20 Metamask genera un errore durante la procedura di accettazione.
+    \begin{enumerate}
+        \item Il sistema mostra l'errore accettazione non riuscita.
+        \item Il sistema mostra il messaggio riprovare.
+        \begin{enumerate}
+            \item L'acquirente riprova.
+            \begin{enumerate}
+                \item Il sistema ripete UC17.
+            \end{enumerate}
+            \item L'acquirente non riprova.
+            \begin{enumerate}
+                \item Il sistema mostra il messaggio accettazione annullata.
+                \item Il sistema cancella la procedura di accettazione ordine.
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
 
 \section{Requisiti}
 elenco
