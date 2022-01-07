@@ -373,4 +373,11 @@ Nonostante dal punto di vista della scalabilità si tratti di un'ottima blockcha
 
 \end{itemize}
 
+\section{Analisi delle altre tecnologie}
+L'infrastruttura designata per questo progetto verte principalmente sulla comunicazione diretta tra attori (clienti/venditori) e blockchain: per rendere utilizzabile il servizio di pagamento non sarà necessario sviluppare solo un contratto digitale che si occupi dello smistamento dei fondi, ma anche una landing page per facilitare il pagamento al cliente ed un servizio di API per i venditori per interrogare la blockchain.
+Inoltre, sarà necessario sviluppare uno script per automatizzare la messa in vendita dei prodotti comunicando direttamente in blockchain.
+Necessiteremo di un server per fornire la landing page e le API precedentemente accennate, oltre che di un database per memorizzare gli ID delle transazioni in blockchain.
+Sarà anche necessario fornire un'applicazione mobile (o applicazione web) per il cliente finale e per il corriere al fine di, rispettivamente, sbloccare i fondi e controllare che i fondi siano stati sbloccati.
+Per richiamare funzioni nel contratto (quindi eseguire transazioni in blockchain) sarà necessario utilizzare una o più librerie che ci consentano di farlo sia lato server che lato client.
+
 \end{document}
