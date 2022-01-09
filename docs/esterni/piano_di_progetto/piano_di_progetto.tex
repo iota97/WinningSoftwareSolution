@@ -123,72 +123,11 @@ Raffaele Oliviero & Amministratore & 21 & TBD & TBD \\\hline
 Giovanni Cocco & Verificatore & 6 & TBD & TBD \\\hline
 \end{tabular}
 
-\begin{landscape}
 \paragraph{Grafico di Gannt}
-Aggiornato con i dati disponibili al: 22/12/2021\\
-\begin{ganttchart}[
-		expand chart = 0.8\paperheight,
-	    progress label text ={#1}\%,
-	    hgrid,
-	    x unit=0.6mm,
-	    time slot format=isodate,
-	    today label=OGGI,
-	    today={\the\year-\the\month-\the\day}
-	]{2021-12-01}{2022-04-30}
-  	\gantttitlecalendar{year, month=itname} \\
-	\ganttgroup[progress=5]{RTB}{2021-12-01}{2022-01-15} \\
-  	\ganttbar[progress=44]{Analisi dei Requisiti}{2021-12-01}{2021-12-23} \\
-  	\ganttbar[progress=30]{Analisi delle Tecnologie}{2021-12-01}{2021-12-23} \\
-  	\ganttbar[progress=0]{Sviluppo PoC}{2021-12-23}{2022-01-07} \\
-  	\ganttbar[progress=0]{Verifica PoC}{2022-01-01}{2022-01-15} \\
-  	\ganttbar[progress=52]{Amministrazione di Progetto}{2021-12-01}{2021-12-23} \\
-  	\ganttvrule{RTB}{2022-01-15}
-  	\ganttvrule{PB}{2022-03-15}
-  	\ganttvrule{CA}{2022-04-29}
-\end{ganttchart}
+Il grafico di Gannt può essere consultato al \underline{\href{https://docs.google.com/spreadsheets/d/e/2PACX-1vRd4970Fob6KlNwY1iV6bnHZXNl41F74utFkkc9ykuT1NUEGLnFcCd4rOHbXjW99ichDnkV3cEGCmWi/pubhtml?gid=1972921762}{seguente indirizzo}}.
+
 
 \subsection{Grafico dei costi}
-Aggiornato con i dati disponibili al: 22/12/2022\\
-\begin{tikzpicture}
-	\begin{axis}[
-		scale only axis,
-		width = 0.8\paperheight,
-		height = 15cm,
-		date coordinates in = x,
-		date ZERO = 2021-12-01,
-    	xticklabel = \day/\month,
-    	ymin = 0,
-    	ymax = 1000,
-       	xmin = 2021-12-01,
-       	xmax = 2022-05-31]
-	\addplot [green] coordinates {
-    	(2021-12-01, 0)
-	    (2022-04-29, 660)
-	};
-	\addplot [red] coordinates {
-		(2021-12-01, 0)
-		(2021-12-06, 4)
-		(2021-12-07, 10)
-		(2021-12-09, 17)
-		(2021-12-12, 44.5)
-		(2021-12-15, 60.5)
-		(2021-12-22, 64.5)
-	};
-	\addplot [yellow] coordinates {
-		(2021-12-01, 0)
-		(2021-12-06, 1)
-		(2021-12-07, 3)
-		(2021-12-09, 5)
-		(2021-12-12, 18.15)
-		(2021-12-15, 19.15)
-		(2021-12-22, 20.15)
-	};
-	\addplot [red, thick, dotted] coordinates {
-		(2021-12-22, 64.5)
-		(2022-05-15, 660)
-	};
-   \end{axis}
-\end{tikzpicture}
-\end{landscape}
+Il grafico dei costi può essere consultato al \underline{\href{https://docs.google.com/spreadsheets/d/e/2PACX-1vRd4970Fob6KlNwY1iV6bnHZXNl41F74utFkkc9ykuT1NUEGLnFcCd4rOHbXjW99ichDnkV3cEGCmWi/pubhtml?gid=263680959}{seguente indirizzo}}.
 
 \end{document}
