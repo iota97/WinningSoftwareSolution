@@ -379,17 +379,23 @@ Inoltre, sarà necessario sviluppare uno script per automatizzare la messa in ve
 Necessiteremo di un server per fornire la landing page e le API precedentemente accennate, oltre che di un database per memorizzare gli ID delle transazioni in blockchain.
 Sarà anche necessario fornire un'applicazione mobile (o applicazione web) per il cliente finale e per il corriere al fine di, rispettivamente, sbloccare i fondi e controllare che i fondi siano stati sbloccati.
 Per richiamare funzioni nel contratto (quindi eseguire transazioni in blockchain) sarà necessario utilizzare una o più librerie che ci consentano di farlo sia lato server che lato client.
-\subsection*{Server}
-Poiché l'architettura prevedere necessariamente l'utilizzo di un server sono state valutate diverse opzioni per quanto riguarda la scelta del linguaggio e del framework per lo sviluppo della parte di backend. Tra queste sono stati presi in considerazione Java e Javascript poiché hanno rispettivamente le librerie Web3j e Web3js che permettono direttamente l'interazione con un nodo della blockchain. La scelta è infine ricaduta su Java poichè, oltre ad essere stato consigliato dal proponente, si tratta di un linguaggio che prevede gia gli oggetti ed è fortemente tipizzato, al contrario JavaScript costringe all'utilizzo di TypeScript per l'integrazione degli oggetti.
-Per quanto riguarda invece la scelta del framework per lo sviluppo è stato confermato Java Spring, poiché si tratta di uno dei principali framework per lo sviluppo in Java: infatti offre diverse componenti con varie funzionalità, un'ampia  documentazione ed è inoltre il framework consigliato dal proponente.
-\subsection*{WebApp}
-Sarà necessaria la realizzazione lato frontend di una WebApp per permettere a venditori, e-commerce e acquirenti di interagire in modo facile ed intuitivo per le attività di vendita, acquisto, monitoraggio dei vari ordini e infine per il controllo alla ricezione del pacco con scansionamento del QR-code.
-\subsubsection*{Vendita, Acquisto, Monitoraggio ordini}
-Per quanto riguarda la realizzazione della WebApp per la vendita, l'acquisto e il monitoraggio ordini è stato scelto il consigliato framework Angular. E' stato scelto poiché rispetta le nostre esigenze ed è ottimo per la realizzazione di WebApp multipiattaforma. 
-\subsubsection*{Scansionamento QR code}
-Mentre per quanto riguarda la realizzazione della WebApp per lo scansionamento del QR code al momento della ricezione del pacco e per la verifica da parte del corriere è stato scelto il toolkit di Google Mobile Flutter. Oltre ad essere il framework consigliatoci dal proponente, è stato scelto anche per la possibilità di realizzare un'eventuale mobile app per i vari sistemi operativi senza necessità di adattare e riscrive il codice.
 
+\subsection*{Backend}
+Poiché l'architettura prevede necessariamente l'utilizzo di un server sono state valutate diverse opzioni per quanto riguarda la scelta del linguaggio e dell'eventuale framework per lo sviluppo della parte di backend. Tra questi sono stati presi in considerazione Java e Javascript poiché ci consentono di utilizzare rispettivamente le librerie Web3j e Web3js che permettono di emettere transazioni in blockchain nonchè gestire oggetti (transazione, contratto, ecc) comodamente. La scelta è infine ricaduta su Java poichè, oltre ad essere stato consigliato dal proponente, si tratta di un linguaggio nativamente ad oggetti ed è fortemente tipizzato, al contrario di JavaScript che costringe all'utilizzo di TypeScript per l'integrazione degli oggetti.
+Per quanto riguarda invece la scelta del framework per lo sviluppo è stato scelto Java Spring: offre infatti un'ampia documentazione ed è inoltre il framework consigliato dal proponente.
 
+\subsubsection{Pagamento automatizzato alla messa in vendita}
+Per rendere automatizzata la possibilità di pagare un oggetto con ShopChain, durante il normale iter di messa in vendita degli oggetti da parte dei venditori è necessario integrare uno script che dialoghi con la blockchain per creare un'istanza per il pagamento che genererà un ID univoco e conserverà il prezzo atteso per confrontarlo con il denaro inviato di un cliente quando acquisterà tale oggetto.
+Tale script verrà sviluppato in Javascript per alta compatibilità (ogni Ecommerce avrà backend diversi) e per la possibilità di utilizzare la libreria Web3js per firmare ed emettere transazioni da parte dei venditori in modo automatico (accedendo direttamente al wallet senza la necessità di approvare manualmente le transazioni con Metamask).
+Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Infura".
 
+\subsection*{Frontend}
+Sarà necessaria la realizzazione lato frontend di una WebApp per permettere a venditori, Ecommerce e acquirenti di interagire in modo facile ed intuitivo per le attività di acquisto, monitoraggio dei vari ordini e infine per lo sblocco dei fondi alla ricezione del pacco con scansione del QR-code.
+
+\subsubsection*{Acquisto e monitoraggio ordini}
+Per quanto riguarda la realizzazione della WebApp per l'acquisto e il monitoraggio ordini è stato scelto il framework Javascript Angular. È stato scelto poiché rispetta le nostre esigenze ed è ottimo per la realizzazione di WebApp multipiattaforma. Javascript ci consentirà inoltre di utilizzare la sopracitata libreria Web3js per gestire le transazioni in blockchain nonchè interfacciarsi comodamente con l'estensione di Metamask per la firma delle transazioni.
+
+\subsubsection*{Scansione QR code}
+Per quanto riguarda la realizzazione della WebApp per la scansione del QR code al momento della ricezione del pacco è stato scelto il toolkit di Google Mobile Flutter. Oltre ad essere il framework consigliatoci dalla proponente, è stato scelto anche per la possibilità di realizzare app mobile per più sistemi operativi senza necessità di adattare e/o riscrivere il codice.
 
 \end{document}
