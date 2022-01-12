@@ -389,6 +389,9 @@ Per rendere automatizzata la possibilità di pagare un oggetto con ShopChain, du
 Tale script verrà sviluppato in Javascript per alta compatibilità (ogni Ecommerce avrà backend diversi) e per la possibilità di utilizzare la libreria Web3js per firmare ed emettere transazioni da parte dei venditori in modo automatico (accedendo direttamente al wallet senza la necessità di approvare manualmente le transazioni con Metamask).
 Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Infura".
 
+\subsubsection{Database}
+Per la memorizzazione dei vari ID di ogni prodotto di ciascun venditore è necessario l'utilizzo di un database relazionale. Poiché non sono emerse necessità specifiche per le quali utilizzare un determinato database, è stato scelto PostgreSQL poiché suggerito dal proponente. 
+
 \subsection*{Frontend}
 Sarà necessaria la realizzazione lato frontend di una WebApp per permettere a venditori, Ecommerce e acquirenti di interagire in modo facile ed intuitivo per le attività di acquisto, monitoraggio dei vari ordini e infine per lo sblocco dei fondi alla ricezione del pacco con scansione del QR-code.
 
