@@ -1,0 +1,69 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 22/12/2021 con SyncLab}
+\setredattori{Raffaele Oliviero}
+\setrevisori{Giovanni Cocco}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 22/12/2021 con l'azienda SyncLab. 
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 22/12/2021\\
+\textbf{Durata}: 1 ora\\
+\textbf{Luogo}: Aula Virtuale Google Meet\\
+
+\textbf{Partecipanti}
+\begin{itemize}
+	\item Andrea Volpe
+	\item Giovanni Cocco
+	\item Alberto Nicoletti
+	\item Matteo Galvagni
+	\item Raffaele Oliviero
+	\item Fabio Pallaro
+\end{itemize}
+
+\section{Ordine del giorno}
+\begin{enumerate}
+	\item Varie ed eventuali;
+	\item Domande da parte del gruppo al proponente.
+\end{enumerate}
+
+
+\section{Svolgimento}
+\subsection{Utilizzo di Discord}
+Si è deciso di spostare le call sul server Discord dell'azienda e di pubblicare i verbali all'interno del canale testuale dedicato utilizzando la funzione thread di Discord
+
+\subsection{Validazione della transazione}
+Si è discusso su due possibili opzioni per validare e tenere traccia delle transazioni
+	\begin{itemize}
+		\item \textbf{Opzione 1}: L'intero processo viene gestito da Shopchain, quindi tutto dipende dal funzionamento dei suoi server, inoltre le operazioni non sono trasparenti finchè non vengono immesse in blockchain e questo potrebbe scoraggiare potenziali acquirenti;
+		\item \textbf{Opzione 2}: Il database è gestito dall'e-commerce che effettuerà delle chiamate alla blockchain, questo richiederà modificare il backend del venditore.
+	\end{itemize}
+Durante la discussione sono anche stati trattati i seguenti argomenti: 
+\subsubsection{Landing page}
+Quando l'utente raggiunge la landing page, Shopchain creerà lo smart contract inserendo l'id del prodotto e l'address del venditore nella blockchain, il cliente inserirà l'importo e firmerà il contratto con Metamask.  L'importo dovrà essere superiore a 5€, altrimenti la transazione non proseguirà.
+\subsubsection{Log transazioni}
+Il venditore deve essere in grado di visualizzare un resoconto di tutte le transazioni in corso e di annularle su richiesta
+\subsection{PoC}
+Il proponente ha richiesto una Proof of Concept che contenga:
+	\begin{itemize}
+		\item Una landing page in grado di ricevere i dati e creare uno smart contract;
+		\item Un simulatore dello sblocco dei contratti.
+	\end{itemize}  
+\subsection{Pagamenti in altre valute}
+La conversione in valuta stabile, anche se non strettamente obbligatorio, è un requisito ritenuto importante, inoltre si è deciso di non considerare l'utilizzo di ogni possibile criptovaluta.
+
+\section{Conclusioni}
+Sono state dettagliate delle soluzioni al problema della gestione delle transazioni e ad altri problemi sorti durante la discussione fornendo una visione più delineata del prodotto che si andrà a creare.
+
+\end{document}
