@@ -21,6 +21,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
 \addversione{0.0.2}{03/01/2021}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
 \addversione{0.0.3}{03/01/2021}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
+\addversione{0.0.4}{12/01/2021}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
 
 \begin{document}
 
@@ -81,23 +82,7 @@ Per il completamento del progetto la proponente richiede che siano realizzati i 
 
 \section{Casi d'uso}
 
-\includegraphics[width=0.9\textwidth]{UseCase_venditore1.png}
-
-\paragraph{UC1 - Installazione ShopChain}
-\textbf{Attore primario}: Venditore\\
-\textbf{Precondizioni}: Il venditore ha stipulato un accordo con WinningSoftwareSolution per aggiungere ShopChain come metodo di pagamento sul propiro e-commerce.\\
-\textbf{Postcondizioni}: ShopChain è inserito come metodo di pagamento sull'e-commerce del venditore.\\
-\textbf{Scenario principale}:
-Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pagamento.
-
-\paragraph{UC1.1 - Selezione Wallet}
-\textbf{Attore primario}: Venditore\\
-\textbf{Attore secondario}: Metamask\\
-\textbf{Precondizioni}: Il venditore sta aggiungendo ShopChain come metodo di pagamento al suo e-commerce.\\
-\textbf{Postcondizioni}: Il wallet del venditore è configurato come destinazione delle transazioni con ShopChain.\\
-\textbf{Scenario principale}: Il venditore collega il proprio wallet ai pagamenti che avvengono con ShopChain.
-
-\paragraph{UC2 - Consultazione manuale ShopChain}
+\paragraph{UC1 - Consultazione manuale ShopChain}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
@@ -109,7 +94,7 @@ Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pag
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
 
-\paragraph{UC3 - Riconoscimento wallet}
+\paragraph{UC2 - Riconoscimento wallet}
 \textbf{Attore primario}: Venditore privo di wallet riconosciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: Il venditore ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
@@ -122,15 +107,15 @@ Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pag
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC3.1 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \item UC2.1 Metamask genera un errore durante la procedura di riconoscimento del wallet.
     \begin{enumerate}
         \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
         \item Il sistema mostra il messaggio riprovare.
-        \item Il sistema ripete UC3.
+        \item Il sistema ripete UC2.
     \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC3.2 - Accesso al sistema}
+\paragraph{UC2.2 - Accesso al sistema}
 \textbf{Attore primario}: Venditore con wallet associato.\\
 \textbf{Precondizioni}: Il venditore apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
 \textbf{Postcondizioni}: Il venditore accede al sistema.\\
@@ -143,7 +128,7 @@ Il venditore proprietario di un e-commerce aggiunge ShopChain come metodo di pag
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore3.png}
 
-\paragraph{UC4 visualizzazione lista transazioni}
+\paragraph{UC3 visualizzazione lista transazioni}
 \textbf{Attore primario}: Venditore \\
 \textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
 \textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni
@@ -155,7 +140,7 @@ Scenario principale.\\
 \item Il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
 
-\paragraph{UC5 - visualizzazione dettaglio transazione}
+\paragraph{UC4 - visualizzazione dettaglio transazione}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
@@ -166,13 +151,13 @@ Scenario principale.\\
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
 
-\paragraph{UC5.1 - Visualizzazione stato transizione}
+\paragraph{4.1 - Visualizzazione stato transizione}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transizione.\\
 \textbf{Postcondizioni}: Il venditore visualizza lo stato di una transizione.\\
 \textbf{Scenario principale}: Il venditore vede se la transizione è in attesa, oppure è stata completata.\\
 
-\paragraph{UC5.2 - Generazione QR Code}
+\paragraph{UC4.2 - Generazione QR Code}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR code da applicare sul pacco del prodotto.\\
@@ -181,25 +166,46 @@ Scenario principale.\\
 \item Il venditore stampa il Qr code e lo appplica sul pacco del prodotto.
 \end{enumerate}
 
-\paragraph{UC5.3 - Visualizzazione importo transazione}
+\paragraph{UC4.3 - Visualizzazione importo transazione}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transizione.\\
 \textbf{Postcondizioni}: Il venditore visualizza l'importo di una transizione.\\
 \textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
 
-\paragraph{UC5.4 - Visualizzazione scadenza transazione}
+\paragraph{UC4.4 - Visualizzazione scadenza transazione}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale riceverà l'importo anche se non è stato scannerizzato il QR Code.\\
+
+\includegraphics[width=0.9\textwidth]{UseCase_script1}
+
+\paragraph{UC5 - Inserimento prodotto in blockchain}
+\textbf{Attore primario}: Venditore.\\
+\textbf{Precondizioni}: Il venditore ha integrato lo script nell'e-commerce e ha inserito un nuovo prodotto nell'e-commerce.\\
+\textbf{Postcondizioni}: Il venditore ha inserito il nuovo prodotto in blockchain.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item Il venditore integra nel backend del proprio e-commerce lo script fornito da noi.
+    \item Il venditore inserisce un nuovo prodotto nell'e-commerce.
+    \item Tramite lo script il prodotto viene inviato in blockchain.
+    \item Il prodotto è inserito in blockchain.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC21 L'invio del prodotto in blockchain fallisce.
+    \begin{enumerate}
+        \item Lo script salva in un file di log il messaggio di errore.
+    \end{enumerate}
+\end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page1}
 
 \paragraph{UC6 - Riconoscimento wallet}
 \textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'utente ha aperto la landing page e non si è ancora fatto riconoscere il wallet da Metamask.\\
-\textbf{Postcondizioni}: L'utente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\textbf{Precondizioni}: L'acquirente ha aperto la landing page e non si è ancora fatto riconoscere il wallet da Metamask.\\
+\textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item L’utente apre la landing page.
