@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import mysql from 'mysql';
 
 const app = express();
 const PORT = 8080;

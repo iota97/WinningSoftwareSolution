@@ -14,3 +14,4 @@
 !docs/interni/verbali/2021_11_12_E/*.pdf
 server/package-lock.json
 server/node_modules
+server/build
