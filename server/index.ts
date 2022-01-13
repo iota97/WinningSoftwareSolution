@@ -1,9 +1,10 @@
+import * as dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import {orderRouter} from "./routes/orderRouter";
 
 const app = express();
-const PORT = 8080;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
@@ -26,6 +27,8 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[server]: Server is running at https://localhost:${PORT}`);
+app.use("/orders", orderRouter);
+
+app.listen(process.env.PORT, () => {
+  console.log(`[server]: Server is running at https://localhost:${process.env.PORT}`);
 });
