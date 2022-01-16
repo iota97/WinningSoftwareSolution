@@ -1,0 +1,49 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{amsmath}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Piano di Qualifica}
+\setredattori{Raffaele Oliviero \\ Elia Scandaletti}
+\setdestuso{esterno}
+\setdescrizione{
+Questo documento serve a definire le metriche e i criteri di accettazione dei prodotti.
+}
+
+\addversione{0.0.0}{09/01/2021}{Raffaele Oliviero}{Redazione}{Stesura iniziale}
+\addversione{0.0.1}{16/01/2021}{Elia Scandaletti}{Redazione}{Correzione indice di Gulpease}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\section{Premessa}
+Il seguente documento definisce le metriche e i requisiti minimi per l'accettazione di una pull request sulla repository del progetto. 
+
+Ogni sezione definisce le metriche e i requisiti minimi di una categoria di prodotto.
+
+\section{Documenti}
+\subsection{Metriche}
+\subsubsection{Indice di Gulpease}
+Per il calcolo della leggibilità con:
+\[ \text{Indice di Gulpease} = 89 + \frac{300*\text{numero di frasi} - 10*\text{numero di lettere}}{\text{numero di parole}} \]
+
+
+\subsection{Requisiti minimi}
+\subsubsection{Indice di Gulpease}
+\begin{itemize}
+	\item \textbf{Documenti interni}: minimo 40
+	\item \textbf{Documenti esterni}: minimo 60
+\end{itemize}
+
+\section{Software}
+Per ogni metrica vengono definiti requisiti minimi per accettare un prodotto nella repository e i requisiti minimi per rilasciare una versione
+	
+
+
+\end{document}
