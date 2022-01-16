@@ -38,6 +38,10 @@ def latexTest():
 		if stat != 0:
 			print("Errore compilazione: " + tex)
 		else:
+			# Questi sono stati redatti prima della scelta di utilizzare questo indice, non ha senso modificarli
+			if tex.startswith("./docs/esterni/scelta_architettura") or tex.startswith("./docs/esterni/candidatura"):
+				continue
+
 			g = gulpease(tex[:-3]+"pdf")
 			if g < min_g:
 				print("Indice di Gulpease troppo basso per " + tex + ": " + str(float("{:.2f}".format(g))))
