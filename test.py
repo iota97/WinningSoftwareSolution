@@ -27,8 +27,11 @@ def compile(tex):
 
 def latexTest():
 	for tex in glob.glob("./**/*.tex", recursive = True):
+		min_g = 40
 		if tex.startswith("./docs/template"):
 			continue
+		if tex.startswith("./docs/esterni"):
+			min_g = 60
 
 		stat = compile(tex)
 
@@ -36,8 +39,8 @@ def latexTest():
 			print("Errore compilazione: " + tex)
 		else:
 			g = gulpease(tex[:-3]+"pdf")
-			if g < 40:
-				print("Indice di Gulpease troppo basso per " + tex + ": " + str(g))
+			if g < min_g:
+				print("Indice di Gulpease troppo basso per " + tex + ": " + str(float("{:.2f}".format(g))))
 
 
 def main():
