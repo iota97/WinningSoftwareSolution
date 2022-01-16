@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{article}
 
 \usepackage{graphicx}
+\usepackage{longtable}
 \graphicspath{ {images/} }
 
 \newcommand{\templates}{../../template}
@@ -19,9 +20,10 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 
 \addversione{0.0.0}{11/12/2021}{Alberto Nicoletti}{Redazione}{Struttura del documento, stesura sezioni 1 e 2}
 \addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
-\addversione{0.0.2}{03/01/2021}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
-\addversione{0.0.3}{03/01/2021}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
-\addversione{0.0.4}{12/01/2021}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
+\addversione{0.0.2}{03/01/2022}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
+\addversione{0.0.3}{03/01/2022}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
+\addversione{0.0.4}{12/01/2022}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
+\addversione{0.0.5}{16/01/2022}{Alberto Nicoletti}{Redazione}{Stesura primi requisiti}
 
 \begin{document}
 
@@ -399,8 +401,39 @@ Scenario principale.\\
 \end{enumerate}
 
 \section{Requisiti}
-elenco
+Ogni requisito è indentificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: funzionale, qualitativo, di vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco).
+\subsection{Requisiti funzionali}
+ 
+ \setlength\tabcolsep{4pt}
+\begin{longtable}{|c|p{5cm}|c|c|}
+\hline
+ \multicolumn{4}{| c |}{Requisiti funzionali}\\
+ \hline
+ Codice & Descrizione & rilevanza & fonti\\
+ \hline
+ \endfirsthead
 
+ \hline
+ \multicolumn{4}{| c |}{Requisiti funzionali}\\
+ \hline
+ Codice & Descrizione & rilevanza & fonti\\
+ \hline
+ \endhead
+RFO1 & Il venditore deve poter accedere a ShopChain tramite Metamask richiedendo l'accesso sul momento se non già riconosciuto su Metamask. & Obbligatorio & UC2 e UC2.1 \\
+\hline
+RFO2 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
+\hline
+RFO3 & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
+\hline
+RFO4 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza & Obbligatorio & UC4.1 e UC4.3 e UC4.4 \\ 
+\hline
+RFO5 & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
+\hline
+RFO6 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
+\hline
+
+\end{longtable}
+ 
 \section{Riferimenti}
 
 
