@@ -7,14 +7,15 @@
 \input{\templates/history}
 
 \settitolo{Piano di Qualifica}
-\setredattori{Raffaele Oliviero \\ Elia Scandaletti}
+\setredattori{Raffaele Oliviero \\ Elia Scandaletti \\ Giovanni Cocco}
 \setdestuso{esterno}
 \setdescrizione{
 Questo documento serve a definire le metriche e i criteri di accettazione dei prodotti.
 }
 
-\addversione{0.0.0}{09/01/2021}{Raffaele Oliviero}{Redazione}{Stesura iniziale}
-\addversione{0.0.1}{16/01/2021}{Elia Scandaletti}{Redazione}{Correzione indice di Gulpease}
+\addversione{0.0.0}{09/01/2021}{Raffaele Oliviero}{Redazione}{Stesura iniziale.}
+\addversione{0.0.1}{16/01/2021}{Elia Scandaletti}{Redazione}{Correzione indice di Gulpease.}
+\addversione{0.0.2}{16/01/2021}{Giovanni Cocco}{Redazione}{Migliorata la leggibilità.}
 
 \begin{document}
 
@@ -23,27 +24,39 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \makeversioni
 
 \section{Premessa}
-Il seguente documento definisce le metriche e i requisiti minimi per l'accettazione di una pull request sulla repository del progetto. 
-
-Ogni sezione definisce le metriche e i requisiti minimi di una categoria di prodotto.
-
+Il seguente documento definisce metriche e requisiti minimi per l'accettazione di una PR.\\
+Il documento è suddiviso per categoria di prodotti.\\\\
+Queste metriche dovranno essere calcolabili in maniera automatica.
 \section{Documenti}
 \subsection{Metriche}
 \subsubsection{Indice di Gulpease}
-Per il calcolo della leggibilità con:
+L'indice Gulpease è un indice di leggibilità di un testo tarato sulla lingua italiana.\\\\
+Ha il vantaggio di utilizzare la lunghezza delle parole in lettere anziché in sillabe.\\
+Questo semplifica il calcolo automatico.\\
+I risultati sono compresi tra 0 e 100. Il valore "100" indica la leggibilità più alta.\\\\
+In generale risulta che testi coi seguenti indici sono difficili da leggere.
+\begin{itemize}
+    \item < 80 per chi ha la licenza elementare;
+    \item < 60 per chi ha la licenza media;
+    \item < 40 per chi ha un diploma superiore.
+\end{itemize}
+
 \[ \text{Indice di Gulpease} = 89 + \frac{300*\text{numero di frasi} - 10*\text{numero di lettere}}{\text{numero di parole}} \]
 
+I parametri saranno calcolati:
+\begin{itemize}
+	\item frasi: i punti presenti nel testo;
+	\item lettere: i caratteri alfanumerici;
+	\item parole: le parole.
+\end{itemize}
 
 \subsection{Requisiti minimi}
 \subsubsection{Indice di Gulpease}
 \begin{itemize}
-	\item \textbf{Documenti interni}: minimo 40
-	\item \textbf{Documenti esterni}: minimo 60
+	\item \textbf{Documenti interni}: minimo 40;
+	\item \textbf{Documenti esterni}: minimo 60.
 \end{itemize}
 
 \section{Software}
-Per ogni metrica vengono definiti requisiti minimi per accettare un prodotto nella repository e i requisiti minimi per rilasciare una versione
-	
-
 
 \end{document}
