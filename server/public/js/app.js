@@ -2,8 +2,7 @@ const currentUrl = new URL(window.location.href)
 const forwarderOrigin = currentUrl.hostname === 'localhost' ? 'http://localhost:8080' : currentUrl;
 
 const connectButton = document.getElementById('connectButton');
-const addPaymentEntryButton = document.getElementById("addPaymentEntryButton");
-const getPaymentEntryButton = document.getElementById("getPaymentEntryButton");
+const settlePaymentButton = document.getElementById("settlePaymentButton");
 
 let chainId;
 let accounts;
@@ -83,35 +82,7 @@ function handleNewAccounts(newAccounts) {
 
 }
 
-const onClickAddPaymentEntry = () => {
-
-    let intId = parseInt(chainId, 16);
-
-    if(intId == 80001){ //the contract is deployed only in mumbai testnet
-
-        const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        const price = document.getElementById("priceInput").value;
-
-        shopContract.methods.addPaymentEntry(parseInt(price)).send({from: accounts[0]})
-            .on('transactionHash', function(hash){
-                //do smth
-            })
-            .on('confirmation', function(confirmationNumber, receipt){
-                //do smth
-            })
-            .on('receipt', function(receipt){
-                console.log(receipt);
-                alert("Il tuo ID di pagamento è " + receipt.events.addedPaymentEntry.returnValues.paymentEntryIndex);
-            })
-            .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-                console.log(error);
-            });
-
-    }
-
-}
-
-const onClickGetPaymentEntry = () => {
+const onClickSettlePayment = () => {
 
     let intId = parseInt(chainId, 16);
 
@@ -121,17 +92,33 @@ const onClickGetPaymentEntry = () => {
         const index = document.getElementById("idInput").value;
 
         shopContract.methods.getPaymentEntry(index).call()
-            .then(value => {
+            .then(paymentEntry => {
 
-                console.log(value);
+                alert("Venditore: " + paymentEntry.seller + "\nPrezzo: " + paymentEntry.price);
 
-                alert("Venditore: " + value.seller + "\nPrezzo: " + value.price);
+                shopContract.methods.settlePayment(index).send({from: accounts[0], value: paymentEntry.price * Math.pow(10, 18)}) //18 decimals
+                    .on('transactionHash', function(hash){
+                        //do smth
+                    })
+                    .on('confirmation', function(confirmationNumber, receipt){
+                        //do smth
+                    })
+                    .on('receipt', function(receipt){
+                        console.log(receipt);
+                        alert("ID transazione: " + receipt.events.paymentSettled.returnValues.settledPaymentIndex);
+                    })
+                    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+                        console.log(error);
+                    }
+
+                );
 
             }, reason => {
 
                 console.log("Error: " + reason);
 
-            });
+            }
+        );
 
     }
 
@@ -162,11 +149,8 @@ const onMetamaskConnected = async () => {
 
         connectButton.disabled = true;
 
-        addPaymentEntryButton.onclick = onClickAddPaymentEntry;
-        addPaymentEntryButton.disabled = false;
-
-        getPaymentEntryButton.onclick = onClickGetPaymentEntry;
-        getPaymentEntryButton.disabled = false;
+        settlePaymentButton.onclick = onClickSettlePayment;
+        settlePaymentButton.disabled = false;
 
         ethereum.on('chainChanged', handleNewChain);
         ethereum.on('accountsChanged', handleNewAccounts);
@@ -217,8 +201,6 @@ const isMetaMaskInstalled = () => {
 const initialize = async () => {
 
     if (!isMetaMaskInstalled()) {
-
-        console.log(isMetaMaskInstalled());
 
         connectButton.innerText = 'Install MetaMask now!';
         connectButton.onclick = onClickInstall;
