@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import {orderRouter} from "./routes/orderRouter";
+import {transazioniRouter} from "./routes/transazioniRouter";
 
 const app = express();
 
@@ -15,19 +15,7 @@ app.get("/", (req, res) => {
  res.render("index");
 });
 
-app.post("/login", (req, res) => {
-  const { name, password } = req.body;
-
-  if (name === "admin" && password === "admin") {
-    res.render("success", {
-      username: name,
-    });
-  } else {
-    res.render("failure");
-  }
-});
-
-app.use("/orders", orderRouter);
+app.use("/transazioni", transazioniRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`[server]: Server is running at https://localhost:${process.env.PORT}`);
