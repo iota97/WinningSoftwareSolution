@@ -24,6 +24,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.3}{03/01/2022}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
 \addversione{0.0.4}{12/01/2022}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
 \addversione{0.0.5}{16/01/2022}{Alberto Nicoletti}{Redazione}{Stesura primi requisiti}
+\addversione{0.0.6}{18/01/2022}{Andrea Volpe}{Redazione}{Stesura requisiti acquirente}
 
 \begin{document}
 
@@ -416,9 +417,11 @@ Ogni requisito è indentificato da un codice univoco composto da: R(per requisit
  \hline
  \multicolumn{4}{| c |}{Requisiti funzionali}\\
  \hline
- Codice & Descrizione & rilevanza & fonti\\
+ Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endhead
+
+\hline
 RFO1 & Il venditore deve poter accedere a ShopChain tramite Metamask richiedendo l'accesso sul momento se non già riconosciuto su Metamask. & Obbligatorio & UC2 e UC2.1 \\
 \hline
 RFO2 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
@@ -430,6 +433,34 @@ RFO4 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato,
 RFO5 & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
 \hline
 RFO6 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
+\hline
+RFOX & L'acquirente privo di wallet riconosciuto non può accedere al sistema & Obbligatorio & Capitolato \\
+\hline
+RFOX & L'acquirente privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask & Obbligatorio & UC6, UC14 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce & Obbligatorio & UC11, UC18 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter vedere il riepilogo del'ordine sulla landing page & Obbligatorio & UC8 \\
+\hline
+RFOX & Il costo nel riepilogo ordine sulla landing page deve essere visualizzato in dollari & Obbligatorio & UC8.1 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter confermare l'ordine sulla landing page & Obbligatorio & UC9 \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio se l'utente annulla l'ordine sulla landing page & Obbligatorio & UC12 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter pagare l'ordine sulla landing page tramite Metamask & Obbligatorio & UC10 \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di pagamento sulla landing page tramite Metamask fallisce & Obbligatorio & UC13 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter scansionare il qr-code sulla webapp & Obbligatorio & UC16 \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di scansione qr-code nella webapp fallisce & Obbligatorio & UC19 \\
+\hline
+RFOX & L'acquirente con wallet associato deve poter accettare sulla webapp tramite Metamask & Obbligatorio & UC17 \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di accettazione ordine nella webapp tramite Metamask fallisce & Obbligatorio & UC20 \\
 \hline
 
 \end{longtable}
