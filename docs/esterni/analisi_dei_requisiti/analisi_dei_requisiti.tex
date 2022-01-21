@@ -35,29 +35,26 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \section{Introduzone}
 \subsection{Scopo del documento}
 Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione e di verifica. 
-\subsection{Glossario}
-Di seguito un elenco di parole usate in questo documento, la cui definizione può essere trovata nel Glossario.
-parola, parola, parola.
 
 \section{Descrizione del prodotto}
 L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
-BlockChain}. Consiste nel realizzare un prototipo di una piattaforma in grado di ‘affiancare’ un crypto-e-commerce nella fasi di pagamento fino alla consegna.
+BlockChain}. L'obiettivo è sviluppare un sistema che permetta ad un qualsiasi e-commerce di usare criptovalute come metodo di pagamento. ciò consiste nella realizzazione su blockchain di una piattaforma che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
 \subsection{Scopo del prodotto}
-Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile e in sicurezza l'acquisto di prodotti tramite criptovalute. Il processo di trasferimento del denaro avviene seguendo queste fasi:
+Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile l'acquisto di prodotti tramite criptovalute in sicurezza. Il processo di trasferimento del denaro avviene seguendo queste fasi:
 \begin{enumerate}
 \item Caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract.
 \item Trasferimento del denaro dal wallet dell'acquirente in blockchain.
 \item Notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain.
-\item Conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un Qr Code nel prodotto acquistato.
+\item Conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un Qr Code sul pacco del prodotto acquistato.
 \item Sblocco del denaro e trasferimento nel wallet del venditore.
 \end{enumerate}
 \subsection{Parti del prodotto}
-Il prodotto software è composta dalle seguenti parti:
+Il prodotto software è composto dalle seguenti parti:
 \begin{itemize}
 \item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
 \item Piattaforma web per la gestione dei pagamenti da parte del venditore.
-\item Piattaforma web per la gestione dei pagamenti da parte dell' acquirente.
-\item App o web app per la scannerizzazione del Qr code.
+\item Piattaforma web per la gestione dei pagamenti da parte dell'acquirente.
+\item App o web app per la scannerizzazione del Qr Code.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
@@ -72,15 +69,15 @@ Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di u
 La proponente non impone vincoli nella scelta della tipologia di tecnologie, va ci sono comunque delle scelte preferenziali da considerare:
 \begin{itemize}
 \item Utilizzo di blockchain pubblica
-\item utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
-\item utilizzo di database Postgres
+\item Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
+\item Utilizzo di database Postgres
 \end{itemize}
 
-Per il completamento del progetto la proponente richiede che siano realizzati i seguenti risultati:
+Per il completamento del progetto il proponente richiede che siano realizzati i seguenti risultati:
 \begin{itemize}
 \item server, completo di UI
-\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell' 80\% correlata di report.
-\item documentazione su: scelte implementative e progettuali effettuate e relative motivazioni, problemi aperti e eventuali soluzioni proposte da esplorare.
+\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report.
+\item documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare.
 \end{itemize}
 
 \section{Casi d'uso}
@@ -138,7 +135,7 @@ Per il completamento del progetto la proponente richiede che siano realizzati i 
 Scenario principale.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Il venditore tramite un menu arriva alla lista delle transazioni.
+\item Il venditore tramite un menù arriva alla lista delle transazioni.
 \item Il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa).
 \item Il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
@@ -163,10 +160,10 @@ Scenario principale.\\
 \paragraph{UC4.2 - Generazione QR Code}
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
-\textbf{Postcondizioni}: Il venditore è in possesso del QR code da applicare sul pacco del prodotto.\\
+\textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \begin{enumerate}
-\item Il venditore visualizza il Qr code della transizione in attesa selezionata.
-\item Il venditore stampa il Qr code e lo appplica sul pacco del prodotto.
+\item Il venditore visualizza il Qr Code della transizione in attesa selezionata.
+\item Il venditore stampa il Qr Code e lo applica sul pacco del prodotto.
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}
@@ -242,7 +239,7 @@ Scenario principale.\\
 
 \paragraph{UC8 - Visualizzazione riepilogo ordine}
 \textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente è acceduto al sistema e ha un wallet associato.\\
+\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
 \textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
@@ -252,7 +249,7 @@ Scenario principale.\\
 
 \paragraph{UC8.1 - Visualizzazione costo in dollari}
 \textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente è acceduto al sistema e ha un wallet associato.\\
+\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
 \textbf{Postcondizioni}: Il sistema mostra il costo in dollari.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
@@ -336,33 +333,33 @@ Scenario principale.\\
 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp3}
 
-\paragraph{UC16 - Scansione qr code}
+\paragraph{UC16 - Scansione QR Code}
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Attore secondario}: Fotocamera.\\
 \textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
-\textbf{Postcondizioni}: L'acquirente ha scansionato il qr code e il sistema possiede i dati dell'ordine.\\
+\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e il sistema possiede i dati dell'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item L'acquirente accede al sistema con un wallet associato.
     \item Il sistema avvia la fotocamera.
-    \item L'acquirente scansiona il qr-code.
+    \item L'acquirente scansiona il QR Code.
     \item Il sistema possiede i dati dell'ordine.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione qr code.
+    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione QR Code.
     \begin{enumerate}
-        \item La fotocamera ha scansionato un qr code non valido.
+        \item La fotocamera ha scansionato un QR Code non valido.
         \begin{enumerate}
             \item Il sistema mette in pausa la fotocamera.
-            \item Il sistema mostra l'errore nessun qr code non valido.
+            \item Il sistema mostra l'errore "QR Code non valido".
             \item L'acquirente chiude il messaggio di errore.
             \item Il sistema avvia la fotocamera.
         \end{enumerate}
-        \item La fotocamera ha scansionato un qr code valido ma inesistente.
+        \item La fotocamera ha scansionato un QR Code valido ma inesistente.
         \begin{enumerate}
             \item Il sistema mette in pausa la fotocamera.
-            \item Il sistema mostra l'errore nessun qr code inesistente.
+            \item Il sistema mostra l'errore "QR Code inesistente".
             \item L'acquirente chiude il messaggio di errore.
             \item Il sistema avvia la fotocamera.
         \end{enumerate}
@@ -372,11 +369,11 @@ Scenario principale.\\
 \paragraph{UC17 - Accettazione ordine}
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha scansionato un qr code valido.\\
+\textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
 \textbf{Postcondizioni}: L'acquirente ha accettato l'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente scansiona un qr code valido.
+    \item L'acquirente scansiona un QR Code valido.
     \item L'acquirente accetta l'ordine tramite Metamask.
     \item L'acquirente ha accettato l'ordine.
     \item L'acquirente è in possesso dei prodotti dell'ordine.
@@ -422,25 +419,27 @@ Ogni requisito è indentificato da un codice univoco composto da: R(per requisit
  \endhead
 
 \hline
-RFO1 & Il venditore deve poter accedere a ShopChain tramite Metamask richiedendo l'accesso sul momento se non già riconosciuto su Metamask. & Obbligatorio & UC2 e UC2.1 \\
-\hline
-RFO2 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
-\hline
-RFO3 & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
-\hline
-RFO4 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza & Obbligatorio & UC4.1 e UC4.3 e UC4.4 \\ 
-\hline
-RFO5 & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
-\hline
-RFO6 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
-\hline
-RFOX & L'acquirente privo di wallet riconosciuto non può accedere al sistema & Obbligatorio & Capitolato \\
+RFOX & Il venditore privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
 \hline
 RFOX & L'acquirente privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask & Obbligatorio & UC6, UC14 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
+RFOX & Il venditore con wallet già associato tramite metamask deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce & Obbligatorio & UC11, UC18 \\
+RFOX & L'acquirente con wallet già associato tramite metamask deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
+\hline
+RFOX & Un utente privo di wallet riconosciuto non può accedere al sistema & Obbligatorio & Capitolato, decisione interna \\
+\hline
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce & Obbligatorio & UC3.2, UC11, UC18 \\
+\hline
+RFOX & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
+\hline
+RFOX & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
+\hline
+RFOX & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza & Obbligatorio & UC4.1, UC4.3 e UC4.4 \\ 
+\hline
+RFOX & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
+\hline
+RFOX & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
 \hline
 RFOX & L'acquirente con wallet associato deve poter vedere il riepilogo del'ordine sulla landing page & Obbligatorio & UC8 \\
 \hline
@@ -454,9 +453,9 @@ RFOX & L'acquirente con wallet associato deve poter pagare l'ordine sulla landin
 \hline
 RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di pagamento sulla landing page tramite Metamask fallisce & Obbligatorio & UC13 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter scansionare il qr-code sulla webapp & Obbligatorio & UC16 \\
+RFOX & L'acquirente con wallet associato deve poter scansionare il QR Code sulla webapp & Obbligatorio & UC16 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di scansione qr-code nella webapp fallisce & Obbligatorio & UC19 \\
+RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di scansione QR Code nella webapp fallisce & Obbligatorio & UC19 \\
 \hline
 RFOX & L'acquirente con wallet associato deve poter accettare sulla webapp tramite Metamask & Obbligatorio & UC17 \\
 \hline
@@ -464,8 +463,57 @@ RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di accett
 \hline
 
 \end{longtable}
- 
-\section{Riferimenti}
+
+\setlength\tabcolsep{4pt}
+\begin{longtable}{|c|p{5cm}|c|c|}
+\hline
+ \multicolumn{4}{| c |}{Requisiti di vincolo}\\
+ \hline
+ Codice & Descrizione & rilevanza & fonti\\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{4}{| c |}{Requisiti di vincolo}\\
+ \hline
+ Codice & Descrizione & Rilevanza & Fonti\\
+ \hline
+ \endhead
+
+\hline
+RVOX & Utilizzo di blockchain pubblica & Obbligatorio & Capitolato, decisione interna \\
+\hline
+RVDX & utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
+della componente web application del sistema & Desiderabile &  Capitolato\\
+\hline
+RVDX & utilizzo di database Postgres & Desiderabile & Capitolato \\
+\hline
+\end{longtable}
+
+\setlength\tabcolsep{4pt}
+\begin{longtable}{|c|p{5cm}|c|c|}
+\hline
+ \multicolumn{4}{| c |}{Requisiti di quaità}\\
+ \hline
+ Codice & Descrizione & rilevanza & fonti\\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{4}{| c |}{Requisiti di qualità}\\
+ \hline
+ Codice & Descrizione & Rilevanza & Fonti\\
+ \hline
+ \endhead
+
+\hline
+RQOX & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalit`a previste,
+con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato\\
+\hline
+RQOX & documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
+\hline
+
+\end{longtable}
 
 
 
