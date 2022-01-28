@@ -1,3 +1,45 @@
 <%- include('header.ejs') %>
-<%- include('contentPoC.ejs') %>
+
+        <button id="connectButton"> </button>
+        <p id="networkNameText"> </p>
+
+        <br>
+        <br>
+
+        <input id="idInput" placeholder="ID di pagamento (INT)">
+        <button disabled id="settlePaymentButton"> Paga </button>
+
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
+
+        <script type="text/javascript" src="js/app.js"> </script>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+	<h1> Inserisci transazione </h1>
+	<form method="post">
+		id: <input type="text" name="id"><br>
+		ecommerce: <input type="text" name="ecommerce"><br>
+		idProdotto: <input type="text" name="idProdotto"><br>
+		<input type="submit" value="Inserisci" name="add">
+	</form>
+
+	<br>
+        <br>
+
+	<h1> Rimuovi transazione </h1>
+	<form method="post">
+		id: <input type="text" name="id"><br>
+		<input type="submit" value="Rimuovi" name="del">
+	</form>
+
+	<br>
+        <br>
+
+	<h1> Lista transazioni </h1>
+	<%-transazioni%>
+
 <%- include('footer.ejs') %>

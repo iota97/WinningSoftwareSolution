@@ -1,5 +1,5 @@
 import {transazione} from "./types/transazione";
-import {db} from "../db";
+import {db} from "./connection";
 import { OkPacket, RowDataPacket } from "mysql2";
 
 export const create = (t: transazione, callback: Function) => {

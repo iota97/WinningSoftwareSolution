@@ -2,7 +2,6 @@ import * as dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import {transazioniRouter} from "./routes/transazioniRouter";
 import {PoCRounter} from "./routes/PoCRounter";
 
 const app = express();
@@ -14,8 +13,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
  res.render("index", {name:req.query.name});
 });
-
-app.use("/transazioni", transazioniRouter);
 
 app.use("/PoC", PoCRounter);
 

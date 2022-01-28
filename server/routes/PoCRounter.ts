@@ -1,9 +1,6 @@
 import express, {Request, Response} from "express";
 import * as transazioniModel from "../DB/transazioni";
 import {transazione} from "../DB/types/transazione";
-import bodyParser from 'body-parser';
-import * as dotenv from "dotenv";
-import path from 'path';
 
 const PoCRounter = express.Router();
 
@@ -33,7 +30,6 @@ PoCRounter.post("/", async (req: Request, res: Response) => {
         return res.status(500).json({"message": err.message});
       }
       
-      // Redirect to Get
       res.redirect('/PoC');
     });
   } else if (req.body.del) {
@@ -41,7 +37,7 @@ PoCRounter.post("/", async (req: Request, res: Response) => {
       if (err) {
         return res.status(500).json({"message": err.message})
       }
-      // Redirect to Get
+
       res.redirect('/PoC');
     });
   }
