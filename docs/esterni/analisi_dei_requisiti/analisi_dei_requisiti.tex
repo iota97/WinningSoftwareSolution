@@ -25,7 +25,8 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.4}{12/01/2022}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
 \addversione{0.0.5}{16/01/2022}{Alberto Nicoletti}{Redazione}{Stesura primi requisiti}
 \addversione{0.0.6}{18/01/2022}{Andrea Volpe}{Redazione}{Stesura requisiti acquirente}
-\addversione{0.0.7}{21/01/2022}{Alberto Nicoletti}{Redazione e correzzione}{Riorganizzazione requisiti, aggiunta requisiti di vincolo e di qualità}
+\addversione{0.0.7}{21/01/2022}{Alberto Nicoletti}{Redazione e correzione}{Riorganizzazione requisiti, aggiunta requisiti di vincolo e di qualità}
+\addversione{0.0.8}{28/01/2022}{Andrea Volpe}{Correzione}{Correzione UC19 estensioni}
 
 \begin{document}
 
@@ -350,17 +351,10 @@ Scenario principale.\\
 \begin{enumerate}
     \item UC19 La fotocamera ha generato un errore durante la procedura di scansione QR Code.
     \begin{enumerate}
-        \item La fotocamera ha scansionato un QR Code non valido.
+        \item La fotocamera ha scansionato un QR Code con id transazione non valido.
         \begin{enumerate}
             \item Il sistema mette in pausa la fotocamera.
             \item Il sistema mostra l'errore "QR Code non valido".
-            \item L'acquirente chiude il messaggio di errore.
-            \item Il sistema avvia la fotocamera.
-        \end{enumerate}
-        \item La fotocamera ha scansionato un QR Code valido ma inesistente.
-        \begin{enumerate}
-            \item Il sistema mette in pausa la fotocamera.
-            \item Il sistema mostra l'errore "QR Code inesistente".
             \item L'acquirente chiude il messaggio di errore.
             \item Il sistema avvia la fotocamera.
         \end{enumerate}
