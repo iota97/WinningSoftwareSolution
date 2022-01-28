@@ -1,4 +1,5 @@
 import express, {Request, Response} from "express";
+import qr from "qrcode";
 import * as transazioniModel from "../DB/transazioni";
 import {transazione} from "../DB/types/transazione";
 
@@ -17,8 +18,12 @@ PoCRounter.get("/", async (req: Request, res: Response) => {
       "E-Commerce: " + transazioni[i].ecommerce + "    " +
       "Prodotto: " + transazioni[i].idProdotto + "</a><br><br>";
     }
-    
-    res.render("PoC", {transazioni:transazioni_string});
+
+    const qr_str: any = req.query.qr || "Default";
+    qr.toDataURL(qr_str, (err, src) => {
+        if (err) res.send("Error occured in QR");
+            res.render("PoC", {transazioni:transazioni_string, qr_img:src});
+    });
   });
 });
 
