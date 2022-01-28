@@ -71,3 +71,15 @@ export const update = (t: transazione, callback: Function) => {
     }
   );
 }
+
+export const remove = (id: number, callback: Function) => {
+  const queryString = `DELETE FROM Transazioni WHERE id=?`;
+  db.query(
+    queryString,
+    [id],
+    (err, result) => {
+      if (err) {callback(err)}
+      callback(null);
+    }
+  );
+}
