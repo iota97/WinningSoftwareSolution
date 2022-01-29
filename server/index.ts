@@ -1,3 +1,3 @@
-import {createServer} from 'routes/index'
+import {createServer} from './routes/index'
 
 createServer();
