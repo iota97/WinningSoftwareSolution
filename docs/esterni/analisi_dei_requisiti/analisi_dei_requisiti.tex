@@ -40,7 +40,7 @@ Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei 
 
 \section{Descrizione del prodotto}
 L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
-BlockChain}. L'obiettivo è sviluppare un sistema che permetta ad un qualsiasi e-commerce di usare criptovalute come metodo di pagamento. ciò consiste nella realizzazione su blockchain di una piattaforma che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
+BlockChain}. L'obiettivo è sviluppare un sistema che permetta ad un qualsiasi e-commerce di usare criptovalute come metodo di pagamento. Ciò consiste nella realizzazione su blockchain di una piattaforma che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
 \subsection{Scopo del prodotto}
 Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile l'acquisto di prodotti tramite criptovalute in sicurezza. Il processo di trasferimento del denaro avviene seguendo queste fasi:
 \begin{enumerate}
@@ -68,7 +68,7 @@ Tutti gli utenti sono in possesso di un wallet per criptovalute.
 Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
 
 \subsection{Vincoli e preferenze}
-La proponente non impone vincoli nella scelta della tipologia di tecnologie, va ci sono comunque delle scelte preferenziali da considerare:
+Il proponente non impone vincoli nella scelta della tipologia di tecnologie, ma ci sono comunque delle scelte preferenziali da considerare:
 \begin{itemize}
 \item Utilizzo di blockchain pubblica
 \item Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
@@ -83,6 +83,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \end{itemize}
 
 \section{Casi d'uso}
+
+\includegraphics[width=0.7\textwidth]{UseCase_venditore1.png}
 
 \paragraph{UC1 - Consultazione manuale ShopChain}
 \textbf{Attore primario}: Venditore\\
@@ -133,8 +135,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \paragraph{UC3 visualizzazione lista transazioni}
 \textbf{Attore primario}: Venditore \\
 \textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
-\textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni
-Scenario principale.\\
+\textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
 \item Il venditore tramite un menù arriva alla lista delle transazioni.
@@ -146,6 +147,7 @@ Scenario principale.\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
+\textbf{Scenario principale}:
 \begin{enumerate}
 \item Il venditore seleziona una delle transizioni dall'elenco.
 \item Il venditore visualizza i dettagli della singola transizione.
@@ -163,6 +165,7 @@ Scenario principale.\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
+\textbf{Scenario principale}:
 \begin{enumerate}
 \item Il venditore visualizza il Qr Code della transizione in attesa selezionata.
 \item Il venditore stampa il Qr Code e lo applica sul pacco del prodotto.
@@ -394,7 +397,7 @@ Scenario principale.\\
 \end{enumerate}
 
 \section{Requisiti}
-Ogni requisito è indentificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: funzionale, qualitativo, di vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco).
+Ogni requisito è indentificato da un codice univoco composto da: R(per requisito)+F/N(per la tipologia: funzionale, non funzionale)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
 \subsection{Requisiti funzionali}
  
  \setlength\tabcolsep{4pt}
@@ -414,98 +417,85 @@ Ogni requisito è indentificato da un codice univoco composto da: R(per requisit
  \endhead
 
 \hline
-RFOX & Il venditore privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
+RFO01 & Il venditore privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
 \hline
-RFOX & L'acquirente privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask & Obbligatorio & UC6, UC14 \\
+RFO02 & L'acquirente privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC14 \\
 \hline
-RFOX & Il venditore con wallet già associato tramite metamask deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
+RFO03 & Il venditore con wallet già associato tramite metamask deve poter accedere automaticamente al sistema. & Obbligatorio & UC7, UC15 \\
 \hline
-RFOX & L'acquirente con wallet già associato tramite metamask deve poter accedere automaticamente al sistema & Obbligatorio & UC7, UC15 \\
+RFO04 & L'acquirente con wallet già associato tramite metamask deve poter accedere automaticamente al sistema. & Obbligatorio & UC7, UC15 \\
 \hline
-RFOX & Un utente privo di wallet riconosciuto non può accedere al sistema & Obbligatorio & Capitolato, decisione interna \\
+RFO05 & Un utente privo di wallet riconosciuto non può accedere al sistema. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce & Obbligatorio & UC3.2, UC11, UC18 \\
+RFO06 & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce. & Obbligatorio & UC3.2, UC11, UC18 \\
 \hline
-RFOX & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
+RFO07 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
 \hline
-RFOX & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
+RFO08 & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
 \hline
-RFOX & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza & Obbligatorio & UC4.1, UC4.3 e UC4.4 \\ 
+RFO09 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza. & Obbligatorio & UC4.1, UC4.3 e UC4.4 \\ 
 \hline
-RFOX & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
+RFO10 & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
 \hline
-RFOX & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
+RFO11 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
 \hline
-RFOX & L'acquirente con wallet associato deve poter vedere il riepilogo del'ordine sulla landing page & Obbligatorio & UC8 \\
+RFO12 & L'acquirente con wallet associato deve poter vedere il riepilogo del'ordine sulla landing page. & Obbligatorio & UC8 \\
 \hline
-RFOX & Il costo nel riepilogo ordine sulla landing page deve essere visualizzato in dollari & Obbligatorio & UC8.1 \\
+RFO13 & Il costo nel riepilogo ordine sulla landing page deve essere visualizzato in dollari. & Obbligatorio & UC8.1 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter confermare l'ordine sulla landing page & Obbligatorio & UC9 \\
+RFO14 & L'acquirente con wallet associato deve poter confermare l'ordine sulla landing page. & Obbligatorio & UC9 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio se l'utente annulla l'ordine sulla landing page & Obbligatorio & UC12 \\
+RFO15 & Il sistema deve mostrare un messaggio se l'utente annulla l'ordine sulla landing page. & Obbligatorio & UC12 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter pagare l'ordine sulla landing page tramite Metamask & Obbligatorio & UC10 \\
+RFO16 & L'acquirente con wallet associato deve poter pagare l'ordine sulla landing page tramite Metamask. & Obbligatorio & UC10 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di pagamento sulla landing page tramite Metamask fallisce & Obbligatorio & UC13 \\
+RFO17 & Il sistema deve mostrare un messaggio di errore se la procedura di pagamento sulla landing page tramite Metamask fallisce. & Obbligatorio & UC13 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter scansionare il QR Code sulla webapp & Obbligatorio & UC16 \\
+RFO18 & L'acquirente con wallet associato deve poter scansionare il QR Code sulla webapp. & Obbligatorio & UC16 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di scansione QR Code nella webapp fallisce & Obbligatorio & UC19 \\
+RFO19 & Il sistema deve mostrare un messaggio di errore se la procedura di scansione QR Code nella webapp fallisce. & Obbligatorio & UC19 \\
 \hline
-RFOX & L'acquirente con wallet associato deve poter accettare sulla webapp tramite Metamask & Obbligatorio & UC17 \\
+RFO20 & L'acquirente con wallet associato deve poter accettare sulla webapp tramite Metamask. & Obbligatorio & UC17 \\
 \hline
-RFOX & Il sistema deve mostrare un messaggio di errore se la procedura di accettazione ordine nella webapp tramite Metamask fallisce & Obbligatorio & UC20 \\
+RFO21 & Il sistema deve mostrare un messaggio di errore se la procedura di accettazione ordine nella webapp tramite Metamask fallisce. & Obbligatorio & UC20 \\
 \hline
 
 \end{longtable}
+\pagebreak
 
 \setlength\tabcolsep{4pt}
 \begin{longtable}{|c|p{5cm}|c|c|}
 \hline
- \multicolumn{4}{| c |}{Requisiti di vincolo}\\
+ \multicolumn{4}{| c |}{Requisiti non funzionali}\\
  \hline
  Codice & Descrizione & rilevanza & fonti\\
  \hline
  \endfirsthead
 
  \hline
- \multicolumn{4}{| c |}{Requisiti di vincolo}\\
+ \multicolumn{4}{| c |}{Requisiti non funzionali}\\
  \hline
  Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endhead
 
 \hline
-RVOX & Utilizzo di blockchain pubblica & Obbligatorio & Capitolato, decisione interna \\
+RNO22 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RVDX & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
-della componente web application del sistema & Desiderabile &  Capitolato\\
+RND23 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
+della componente web application del sistema. & Desiderabile &  Capitolato\\
 \hline
-RVDX & Utilizzo di database Postgres & Desiderabile & Capitolato \\
+RND24 & Utilizzo di database Postgres. & Desiderabile & Capitolato \\
 \hline
-\end{longtable}
-
-\setlength\tabcolsep{4pt}
-\begin{longtable}{|c|p{5cm}|c|c|}
+RND25 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
+della componente web application del sistema. & Desiderabile &  Capitolato\\
 \hline
- \multicolumn{4}{| c |}{Requisiti di quaità}\\
- \hline
- Codice & Descrizione & rilevanza & fonti\\
- \hline
- \endfirsthead
-
- \hline
- \multicolumn{4}{| c |}{Requisiti di qualità}\\
- \hline
- Codice & Descrizione & Rilevanza & Fonti\\
- \hline
- \endhead
-
+RNO26 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  Decisione interna\\
 \hline
-RQOX & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalit`a previste,
+RNO27 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalit`a previste,
 con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato\\
 \hline
-RQOX & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
+RNO28 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
 \hline
 
 \end{longtable}
