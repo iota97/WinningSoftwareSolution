@@ -27,6 +27,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.6}{18/01/2022}{Andrea Volpe}{Redazione}{Stesura requisiti acquirente}
 \addversione{0.0.7}{21/01/2022}{Alberto Nicoletti}{Redazione e correzione}{Riorganizzazione requisiti, aggiunta requisiti di vincolo e di qualità}
 \addversione{0.0.8}{28/01/2022}{Andrea Volpe}{Correzione}{Correzione UC19 estensioni}
+\addversione{0.0.9}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzzione errori grammaticali}
 
 \begin{document}
 
@@ -455,7 +456,7 @@ RFO18 & L'acquirente con wallet associato deve poter scansionare il QR Code sull
 \hline
 RFO19 & Il sistema deve mostrare un messaggio di errore se la procedura di scansione QR Code nella webapp fallisce. & Obbligatorio & UC19 \\
 \hline
-RFO20 & L'acquirente con wallet associato deve poter accettare sulla webapp tramite Metamask. & Obbligatorio & UC17 \\
+RFO20 & L'acquirente con wallet associato deve poter accettare l'ordine sulla webapp tramite Metamask. & Obbligatorio & UC17 \\
 \hline
 RFO21 & Il sistema deve mostrare un messaggio di errore se la procedura di accettazione ordine nella webapp tramite Metamask fallisce. & Obbligatorio & UC20 \\
 \hline
@@ -492,10 +493,12 @@ della componente web application del sistema. & Desiderabile &  Capitolato\\
 \hline
 RNO26 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna\\
 \hline
-RNO27 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalit`a previste,
+RNO27 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
 con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato\\
 \hline
 RNO28 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
+\hline
+RNO29 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per l'invio automatico dei nuovi prodotti in BlockChain. & Obbligatorio & UC5, decisione interna\\
 \hline
 
 \end{longtable}
