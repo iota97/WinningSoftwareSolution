@@ -16,6 +16,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \addversione{0.0.0}{09/01/2021}{Raffaele Oliviero}{Redazione}{Stesura iniziale.}
 \addversione{0.0.1}{16/01/2021}{Elia Scandaletti}{Redazione}{Correzione indice di Gulpease.}
 \addversione{0.0.2}{16/01/2021}{Giovanni Cocco}{Redazione}{Migliorata la leggibilità.}
+\addversione{0.0.3}{04/02/2021}{Giovanni Cocco}{Redazione}{Stesura iniziale sezione software.}
 
 \begin{document}
 
@@ -24,6 +25,12 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \makeversioni
 
 \section{Premessa}
+Al fine di garantire la qualità del prodotto saranno fatte due attività: verifica e validazione.
+\subsection{Verifica}
+Ogni PR verrà verificata con attenzione al rispetto delle metriche definite da questo documento.
+\subsection{Validazione}
+Il prodotto finale verrà validato confrontandolo con le specifiche definite dall'analisi dei requisiti.
+\subsection{Metriche}
 Il seguente documento definisce metriche e requisiti minimi per l'accettazione di una PR.\\
 Il documento è suddiviso per categoria di prodotti.\\\\
 Queste metriche dovranno essere calcolabili in maniera automatica.
@@ -58,5 +65,9 @@ I parametri saranno calcolati:
 \end{itemize}
 
 \section{Software}
+\subsection{Test}
+Il sofware dovrà essere coperto almeno per l'80\% da test come richiesto dal proponente.\\\\
+A questo scopo saranno creati appositi test automatici per verificare la correttezza del prodotto al momento della PR.\\
+L'insieme dei test verrà usato per assicurarsi di non introdurre regression durante lo sviluppo.
 
 \end{document}
