@@ -47,25 +47,25 @@ BlockChain}. L'obiettivo è sviluppare un sistema che permetta ad un qualsiasi e
 \subsection{Scopo del prodotto}
 Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile l'acquisto di prodotti tramite criptovalute in sicurezza. Il processo di trasferimento del denaro avviene seguendo queste fasi:
 \begin{enumerate}
-\item Caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract.
-\item Trasferimento del denaro dal wallet dell'acquirente in blockchain.
-\item Notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain.
-\item Conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un Qr Code sul pacco del prodotto acquistato.
-\item Sblocco del denaro e trasferimento nel wallet del venditore.
+\item caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract;
+\item trasferimento del denaro dal wallet dell'acquirente in blockchain;
+\item notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain;
+\item conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un QR Code sul pacco del prodotto acquistato;
+\item sblocco del denaro e trasferimento nel wallet del venditore.
 \end{enumerate}
 \subsection{Parti del prodotto}
 Il prodotto software è composto dalle seguenti parti:
 \begin{itemize}
-\item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
-\item Landing page per il pagamento da parte del acquirente.
-\item Piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente.
-\item Web app per la scannerizzazione del Qr Code e conferma ricezione pacco.
+\item smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro;
+\item landing page per il pagamento da parte del acquirente;
+\item piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente;
+\item webapp per la scannerizzazione del QR Code conferma ricezione pacco.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
 \begin{itemize}
-\item Venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere le criptovalute come metodo di pagamento.
-\item Acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
+\item venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere le criptovalute come metodo di pagamento;
+\item acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
 \end{itemize}
 Tutti gli utenti sono in possesso di un wallet per criptovalute. 
 Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono superflue. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
@@ -73,16 +73,16 @@ Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di u
 \subsection{Vincoli e preferenze}
 Il proponente non impone vincoli nella scelta della tipologia di tecnologie, ma ci sono comunque delle scelte preferenziali da considerare:
 \begin{itemize}
-\item Utilizzo di blockchain pubblica
-\item Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema
-\item Utilizzo di database Postgres
+\item utilizzo di blockchain pubblica;
+\item utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema;
+\item utilizzo di database PostgreSQL.
 \end{itemize}
 
 Per il completamento del progetto il proponente richiede che siano realizzati i seguenti risultati:
 \begin{itemize}
-\item Server, completo di UI
-\item Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report.
-\item Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare.
+\item server, completo di UI;
+\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report;
+\item documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare.
 \end{itemize}
 
 \section{Casi d'uso}
@@ -95,8 +95,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
 \textbf{Scenario principale}:\\
 \begin{enumerate}
-\item Al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
-\item Il venditore è libero di consultare il manuale in ogni momento.
+\item al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
+\item il venditore è libero di consultare il manuale in ogni momento.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
@@ -108,17 +108,17 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item Il venditore apre la webapp.
-    \item Il venditore fa riconoscere tramite Metamask il proprio wallet.
-    \item Il venditore ha un wallet associato e accede al sistema.
+    \item il venditore apre la webapp;
+    \item il venditore fa riconoscere tramite Metamask il proprio wallet;
+    \item il venditore ha un wallet associato e accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
     \item UC2.1 Metamask genera un errore durante la procedura di riconoscimento del wallet.
     \begin{enumerate}
-        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
-        \item Il sistema mostra il messaggio riprovare.
-        \item Il sistema ripete UC2.
+        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra il messaggio riprovare;
+        \item il sistema ripete UC2.
     \end{enumerate}
 \end{enumerate}
 
@@ -128,9 +128,9 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item Il venditore fa riconoscere tramite Metamask il proprio wallet.
-    \item Il venditore apre la webapp.
-    \item Il venditore ha un wallet associato e accede al sistema.
+    \item il venditore fa riconoscere tramite Metamask il proprio wallet;
+    \item il venditore apre la webapp;
+    \item il venditore ha un wallet associato e accede al sistema.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore3.png}
@@ -141,9 +141,9 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Il venditore tramite un menù arriva alla lista delle transazioni.
-\item Il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa).
-\item Il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
+\item il venditore tramite un menù arriva alla lista delle transazioni;
+\item il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
+\item il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
 
 \paragraph{UC4 - visualizzazione dettaglio transazione}\\
@@ -152,8 +152,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Il venditore seleziona una delle transizioni dall'elenco.
-\item Il venditore visualizza i dettagli della singola transizione.
+\item il venditore seleziona una delle transizioni dall'elenco;
+\item il venditore visualizza i dettagli della singola transizione.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
@@ -170,8 +170,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item Il venditore visualizza il Qr Code della transizione in attesa selezionata.
-\item Il venditore stampa il Qr Code e lo applica sul pacco del prodotto.
+\item il venditore visualizza il QR Code della transizione in attesa selezionata;
+\item il venditore stampa il QR Code lo applica sul pacco del prodotto.
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}\\
@@ -194,16 +194,16 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore ha inserito il nuovo prodotto in blockchain.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item Il venditore integra nel backend del proprio e-commerce lo script fornito da noi.
-    \item Il venditore inserisce un nuovo prodotto nell'e-commerce.
-    \item Tramite lo script il prodotto viene inviato in blockchain.
-    \item Il prodotto è inserito in blockchain.
+    \item il venditore integra nel backend del proprio e-commerce lo script fornito da noi;
+    \item il venditore inserisce un nuovo prodotto nell'e-commerce;
+    \item tramite lo script il prodotto viene inviato in blockchain;
+    \item il prodotto è inserito in blockchain.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC21 L'invio del prodotto in blockchain fallisce.
+    \item UC21 L'invio del prodotto in blockchain fallisce:
     \begin{enumerate}
-        \item Lo script salva in un file di log il messaggio di errore.
+        \item lo script salva in un file di log il messaggio di errore.
     \end{enumerate}
 \end{enumerate}
 
@@ -216,17 +216,17 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L’utente apre la landing page.
-    \item L’utente fa riconoscere tramite Metamask il proprio wallet.
-    \item L’utente ha un wallet associato e accede al sistema.
+    \item l’utente apre la landing page;
+    \item l’utente fa riconoscere tramite Metamask il proprio wallet;
+    \item l’utente ha un wallet associato e accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC11 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \item UC11 Metamask genera un errore durante la procedura di riconoscimento del wallet:
     \begin{enumerate}
-        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
-        \item Il sistema mostra il messaggio riprovare.
-        \item Il sistema ripete UC6.
+        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra il messaggio riprovare;
+        \item il sistema ripete UC6.
     \end{enumerate}
 \end{enumerate}
 
@@ -238,9 +238,9 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente fa riconoscere tramite Metamask il proprio wallet.
-    \item L'acquirente apre la landing page.
-    \item L'acquirente ha un wallet associato e accede al sistema.
+    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
+    \item l'acquirente apre la landing page;
+    \item l'acquirente ha un wallet associato e accede al sistema.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page3}
@@ -251,8 +251,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L’utente accede al sistema con un wallet associato.
-    \item Il sistema mostra il riepilogo dell'ordine.
+    \item l’utente accede al sistema con un wallet associato;
+    \item il sistema mostra il riepilogo dell'ordine.
 \end{enumerate}
 
 \paragraph{UC8.1 - Visualizzazione costo in dollari}\\
@@ -261,8 +261,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il sistema mostra il costo in dollari.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L’utente accede al sistema con un wallet associato.
-    \item Il sistema mostra il costo in dollari.
+    \item l’utente accede al sistema con un wallet associato;
+    \item il sistema mostra il costo in dollari.
 \end{enumerate}
 
 \paragraph{UC9 - Conferma ordine}\\
@@ -271,15 +271,15 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha confermato l'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item Il sistema mostra il riepilogo dell'ordine.
-    \item L'acquirente conferma l'ordine.
+    \item il sistema mostra il riepilogo dell'ordine;
+    \item l'acquirente conferma l'ordine.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC12 L'acquirente annulla l'ordine.
+    \item UC12 l'acquirente annulla l'ordine:
     \begin{enumerate}
-        \item Visualizzazione messaggio procedura di pagamento annullata.
-        \item Cancellazione sessione di pagamento.
+        \item visualizzazione messaggio procedura di pagamento annullata;
+        \item cancellazione sessione di pagamento.
     \end{enumerate}
 \end{enumerate}
 
@@ -290,16 +290,16 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha pagato l'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente avvia la procedura di pagamento.
-    \item L'acquirente effettua il pagamento tramite Metamask.
-    \item L'ordine è stato pagato.
+    \item l'acquirente avvia la procedura di pagamento;
+    \item l'acquirente effettua il pagamento tramite Metamask;
+    \item l'ordine è stato pagato.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC13 Metamask non è riuscito a completare la procedura di pagamento.
+    \item UC13 Metamask non è riuscito a completare la procedura di pagamento:
     \begin{enumerate}
-        \item Visualizzazione errore pagamento non riuscito.
-        \item Cancellazione sessione di pagamento.
+        \item visualizzazione errore pagamento non riuscito;
+        \item cancellazione sessione di pagamento.
     \end{enumerate}
 \end{enumerate}
 
@@ -312,17 +312,17 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L’acquirente apre la webapp.
-    \item L’acquirente fa riconoscere tramite Metamask il proprio wallet.
-    \item L’acquirente ha un wallet associato e accede al sistema.
+    \item l’acquirente apre la webapp;
+    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
+    \item l’acquirente ha un wallet associato e accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC18 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \item UC18 Metamask genera un errore durante la procedura di riconoscimento del wallet:
     \begin{enumerate}
-        \item Il sistema mostra l'errore riconoscimento wallet non riuscito.
-        \item Il sistema mostra il messaggio riprovare.
-        \item Il sistema ripete UC14.
+        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra il messaggio riprovare;
+        \item il sistema ripete UC14.
     \end{enumerate}
 \end{enumerate}
 
@@ -334,9 +334,9 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente fa riconoscere tramite Metamask il proprio wallet.
-    \item L'acquirente apre la webapp.
-    \item L'acquirente ha un wallet associato e accede al sistema.
+    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
+    \item l'acquirente apre la webapp;
+    \item l'acquirente ha un wallet associato e accede al sistema.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp3}
@@ -348,21 +348,21 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e il sistema possiede i dati dell'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente accede al sistema con un wallet associato.
-    \item Il sistema avvia la fotocamera.
-    \item L'acquirente scansiona il QR Code.
-    \item Il sistema possiede i dati dell'ordine.
+    \item l'acquirente accede al sistema con un wallet associato;
+    \item il sistema avvia la fotocamera;
+    \item l'acquirente scansiona il QR Code;
+    \item il sistema possiede i dati dell'ordine.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione QR Code.
+    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione QR Code:
     \begin{enumerate}
-        \item La fotocamera ha scansionato un QR Code con id transazione non valido.
+        \item la fotocamera ha scansionato un QR Code con id transazione non valido:
         \begin{enumerate}
-            \item Il sistema mette in pausa la fotocamera.
-            \item Il sistema mostra l'errore "QR Code non valido".
-            \item L'acquirente chiude il messaggio di errore.
-            \item Il sistema avvia la fotocamera.
+            \item il sistema mette in pausa la fotocamera;
+            \item il sistema mostra l'errore "QR Code non valido";
+            \item l'acquirente chiude il messaggio di errore;
+            \item il sistema avvia la fotocamera.
         \end{enumerate}
     \end{enumerate}
 \end{enumerate}
@@ -374,26 +374,26 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: L'acquirente ha accettato l'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item L'acquirente scansiona un QR Code valido.
-    \item L'acquirente accetta l'ordine tramite Metamask.
-    \item L'acquirente ha accettato l'ordine.
-    \item L'acquirente è in possesso dei prodotti dell'ordine.
+    \item l'acquirente scansiona un QR Code valido;
+    \item l'acquirente accetta l'ordine tramite Metamask;
+    \item l'acquirente ha accettato l'ordine;
+    \item l'acquirente è in possesso dei prodotti dell'ordine.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC20 Metamask genera un errore durante la procedura di accettazione.
+    \item UC20 Metamask genera un errore durante la procedura di accettazione:
     \begin{enumerate}
-        \item Il sistema mostra l'errore accettazione non riuscita.
-        \item Il sistema mostra il messaggio riprovare.
+        \item il sistema mostra l'errore accettazione non riuscita;
+        \item il sistema mostra il messaggio riprovare:
         \begin{enumerate}
-            \item L'acquirente riprova.
+            \item l'acquirente riprova:
             \begin{enumerate}
-                \item Il sistema ripete UC17.
+                \item il sistema ripete UC17;
             \end{enumerate}
-            \item L'acquirente non riprova.
+            \item l'acquirente non riprova:
             \begin{enumerate}
-                \item Il sistema mostra il messaggio accettazione annullata.
-                \item Il sistema cancella la procedura di accettazione ordine.
+                \item il sistema mostra il messaggio accettazione annullata;
+                \item il sistema cancella la procedura di accettazione ordine.
             \end{enumerate}
         \end{enumerate}
     \end{enumerate}
@@ -488,7 +488,7 @@ RNO22 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione 
 RND23 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
 della componente web application del sistema. & Desiderabile &  Capitolato\\
 \hline
-RND24 & Utilizzo di database Postgres. & Desiderabile & Capitolato \\
+RND24 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato \\
 \hline
 RND25 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
 della componente web application del sistema. & Desiderabile &  Capitolato\\
