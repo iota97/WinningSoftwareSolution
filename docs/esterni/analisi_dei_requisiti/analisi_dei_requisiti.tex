@@ -59,7 +59,7 @@ Il prodotto software è composto dalle seguenti parti:
 \item smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro;
 \item landing page per il pagamento da parte del acquirente;
 \item piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente;
-\item webapp per la scannerizzazione del QR Code conferma ricezione pacco.
+\item webapp per la scannerizzazione del QR Code per la conferma ricezione pacco.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
@@ -101,22 +101,22 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
 
-\paragraph{UC2 - Riconoscimento wallet (webapp venditore)}\\
-\textbf{Attore primario}: Venditore privo di wallet riconosciuto.\\
+\paragraph{UC2 - Connessione wallet (webapp venditore)}\\
+\textbf{Attore primario}: Venditore con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: Il venditore ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
-\textbf{Postcondizioni}: Il venditore ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\textbf{Precondizioni}: Il venditore ha aperto la webapp e non ha ancora connesso il wallet con Metamask.\\
+\textbf{Postcondizioni}: Il venditore ha connesso il wallet con Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item il venditore apre la webapp;
-    \item il venditore fa riconoscere tramite Metamask il proprio wallet;
-    \item il venditore ha un wallet associato e accede al sistema.
+    \item il venditore connette tramite Metamask il proprio wallet;
+    \item il venditore accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC2.1 Metamask genera un errore durante la procedura di riconoscimento del wallet.
+    \item UC2.1 Metamask genera un errore durante la procedura.
     \begin{enumerate}
-        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra l'errore connessione wallet non riuscita;
         \item il sistema mostra il messaggio riprovare;
         \item il sistema ripete UC2.
     \end{enumerate}
@@ -141,7 +141,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore tramite un menù arriva alla lista delle transazioni;
+\item il venditore vede la lista delle transazioni;
 \item il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
 \item il sistema mostra al venditore l'elenco delle transazioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
@@ -210,21 +210,21 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page1}
 
 \paragraph{UC6 - Riconoscimento wallet (landing page)}\\
-\textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
+\textbf{Attore primario}: Acquirente con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha aperto la landing page e non si è ancora fatto riconoscere il wallet da Metamask.\\
-\textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\textbf{Precondizioni}: L'acquirente ha aperto la landing page.\\
+\textbf{Postcondizioni}: L'acquirente connette il wallet tramite Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item l’utente apre la landing page;
-    \item l’utente fa riconoscere tramite Metamask il proprio wallet;
-    \item l’utente ha un wallet associato e accede al sistema.
+    \item l’utente connette tramite Metamask il proprio wallet;
+    \item l’utente accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC11 Metamask genera un errore durante la procedura di riconoscimento del wallet:
+    \item UC11 Metamask genera un errore durante la procedura di connesione del wallet:
     \begin{enumerate}
-        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra l'errore connesione wallet non riuscita;
         \item il sistema mostra il messaggio riprovare;
         \item il sistema ripete UC6.
     \end{enumerate}
@@ -246,12 +246,12 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page3}
 
 \paragraph{UC8 - Visualizzazione riepilogo ordine}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha connesso un wallet.\\
 \textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l’utente accede al sistema con un wallet associato;
+    \item l’utente accede al sistema con un wallet connesso;
     \item il sistema mostra il riepilogo dell'ordine.
 \end{enumerate}
 
@@ -306,21 +306,21 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp1}
 
 \paragraph{UC14 - Riconoscimento wallet (webapp acquirente)}\\
-\textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
+\textbf{Attore primario}: Acquirente senza wallet connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
+\textbf{Precondizioni}: L'acquirente ha aperto la webapp e non ha ancora connesso il wallet con Metamask.\\
 \textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item l’acquirente apre la webapp;
-    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
-    \item l’acquirente ha un wallet associato e accede al sistema.
+    \item l'acquirente connette tramite Metamask il proprio wallet;
+    \item l’acquirente ha connesso un wallet e accede al sistema.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC18 Metamask genera un errore durante la procedura di riconoscimento del wallet:
+    \item UC18 Metamask genera un errore durante la procedura di connessione del wallet:
     \begin{enumerate}
-        \item il sistema mostra l'errore riconoscimento wallet non riuscito;
+        \item il sistema mostra l'errore connessione wallet non riuscita;
         \item il sistema mostra il messaggio riprovare;
         \item il sistema ripete UC14.
     \end{enumerate}
@@ -368,7 +368,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \end{enumerate}
 
 \paragraph{UC17 - Accettazione ordine}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
 \textbf{Postcondizioni}: L'acquirente ha accettato l'ordine.\\
