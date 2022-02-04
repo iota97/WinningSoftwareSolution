@@ -90,7 +90,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \includegraphics[width=0.7\textwidth]{UseCase_venditore1.png}
 
 \paragraph{UC1 - Consultazione manuale ShopChain}\\
-\textbf{Attore primario}: Venditore\\
+\textbf{Attore primario}: Venditore.\\
 \textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
 \textbf{Scenario principale}:\\
@@ -143,45 +143,45 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \begin{enumerate}
 \item il venditore tramite un menù arriva alla lista delle transazioni;
 \item il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
-\item il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
+\item il sistema mostra al venditore l'elenco delle transazioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
 
 \paragraph{UC4 - visualizzazione dettaglio transazione}\\
-\textbf{Attore primario}: Venditore\\
+\textbf{Attore primario}: Venditore.\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
-\textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
+\textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transazione.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore seleziona una delle transizioni dall'elenco;
-\item il venditore visualizza i dettagli della singola transizione.
+\item il venditore seleziona una delle transazioni dall'elenco;
+\item il venditore visualizza i dettagli della singola transazione.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
 
-\paragraph{4.1 - Visualizzazione stato transizione}\\
-\textbf{Attore primario}: Venditore\\
-\textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transizione.\\
-\textbf{Postcondizioni}: Il venditore visualizza lo stato di una transizione.\\
-\textbf{Scenario principale}: Il venditore vede se la transizione è in attesa, oppure è stata completata.\\
+\paragraph{4.1 - Visualizzazione stato transazione}\\
+\textbf{Attore primario}: Venditore.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transazione.\\
+\textbf{Postcondizioni}: Il venditore visualizza lo stato di una transazione.\\
+\textbf{Scenario principale}: Il venditore vede se la transazione è in attesa, oppure è stata completata.\\
 
 \paragraph{UC4.2 - Generazione QR Code}\\
-\textbf{Attore primario}: Venditore\\
-\textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
+\textbf{Attore primario}: Venditore.\\
+\textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore visualizza il QR Code della transizione in attesa selezionata;
+\item il venditore visualizza il QR Code della transazione in attesa selezionata;
 \item il venditore stampa il QR Code lo applica sul pacco del prodotto.
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}\\
-\textbf{Attore primario}: Venditore\\
-\textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transizione.\\
-\textbf{Postcondizioni}: Il venditore visualizza l'importo di una transizione.\\
+\textbf{Attore primario}: Venditore.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transazione.\\
+\textbf{Postcondizioni}: Il venditore visualizza l'importo di una transazione.\\
 \textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
 
 \paragraph{UC4.4 - Visualizzazione scadenza transazione}\\
-\textbf{Attore primario}: Venditore\\
+\textbf{Attore primario}: Venditore.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
@@ -434,11 +434,11 @@ RFO06 & Il sistema deve mostrare un messaggio di errore se la procedura di ricon
 \hline
 RFO07 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
 \hline
-RFO08 & Il venditore deve poter visualizzare i dettagli di una singola transizione. & Obbligatorio & UC4 \\ 
+RFO08 & Il venditore deve poter visualizzare i dettagli di una singola transazione. & Obbligatorio & UC4 \\ 
 \hline
 RFO09 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza. & Obbligatorio & UC4.1, UC4.3 e UC4.4 \\ 
 \hline
-RFO10 & Il venditore deve poter generare il QR Code corrispondente ad una certa transizione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
+RFO10 & Il venditore deve poter generare il QR Code corrispondente ad una certa transazione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
 \hline
 RFO11 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
 \hline
