@@ -38,4 +38,4 @@ to verify.
 
 Networks are defined in `truffle-config.js`, the network included in this project by default is polygon_mumbai.
 
-Currently deployed at [0xAebDeeb1Fa736727d2cc24E46AC70C99Bb9Bc11A](https://mumbai.polygonscan.com/address/0xAebDeeb1Fa736727d2cc24E46AC70C99Bb9Bc11A).
+Currently deployed at [NOT_YET_DEPLOYED](https://mumbai.polygonscan.com/address/NOT_YET_DEPLOYED).
