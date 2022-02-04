@@ -1,0 +1,1 @@
+CREATE TABLE Transazioni (id int auto_increment, ecommerce_id varchar(255), prodotto_id int, primary key(id));
