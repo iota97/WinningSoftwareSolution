@@ -12,7 +12,7 @@
 \settitolo{Analisi dei requisiti}
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
-\setredattori{Alberto Nicoletti, Andrea Volpe}
+\setredattori{Alberto Nicoletti, Andrea Volpe, Giovanni Cocco}
 \setdestuso{esterno}
 \setdescrizione{
 Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
@@ -22,13 +22,14 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.1}{30/12/2021}{Alberto Nicoletti}{Redazione}{Stesura casi d'uso da UC1 a UC5.4}
 \addversione{0.0.2}{03/01/2022}{Andrea Volpe}{Redazione}{Stesura casi d'uso da UC6 a UC20}
 \addversione{0.0.3}{03/01/2022}{Alberto Nicoletti}{Redazione}{Aggiunta immagini}
-\addversione{0.0.4}{12/01/2022}{Andrea Volpe}{Redazione}{Rimozione/aggiunta casi d'uso}
+\addversione{0.0.4}{12/01/2022}{Andrea Volpe}{Redazione}{Modifica casi d'uso}
 \addversione{0.0.5}{16/01/2022}{Alberto Nicoletti}{Redazione}{Stesura primi requisiti}
 \addversione{0.0.6}{18/01/2022}{Andrea Volpe}{Redazione}{Stesura requisiti acquirente}
 \addversione{0.0.7}{21/01/2022}{Alberto Nicoletti}{Redazione e correzione}{Riorganizzazione requisiti, aggiunta requisiti di vincolo e di qualità}
 \addversione{0.0.8}{28/01/2022}{Andrea Volpe}{Correzione}{Correzione UC19 estensioni}
 \addversione{0.0.9}{1/02/2022}{Alberto Nicoletti}{Correzione}{Correzzione immagini casi d'uso e requisiti}
-\addversione{0.0.10}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzzione errori grammaticali}
+\addversione{0.0.10}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzione errori grammaticali}
+\addversione{0.0.11}{04/02/2022}{Giovanni Cocco}{Correzione}{Correzioni varie}
 
 \begin{document}
 
@@ -38,7 +39,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 
 \section{Introduzone}
 \subsection{Scopo del documento}
-Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative  nella soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione e di verifica. 
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione, di verifica e di validazione. 
 
 \section{Descrizione del prodotto}
 L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
@@ -56,9 +57,9 @@ Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scop
 Il prodotto software è composto dalle seguenti parti:
 \begin{itemize}
 \item Smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro.
-\item Piattaforma web per la gestione dei pagamenti da parte del venditore.
-\item Piattaforma web per la gestione dei pagamenti da parte dell'acquirente.
-\item App o web app per la scannerizzazione del Qr Code.
+\item Landing page per il pagamento da parte del acquirente.
+\item Piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente.
+\item Web app per la scannerizzazione del Qr Code e conferma ricezione pacco.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
@@ -67,7 +68,7 @@ Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
 \item Acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
 \end{itemize}
 Tutti gli utenti sono in possesso di un wallet per criptovalute. 
-Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono irrilevanti. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
+Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono superflue. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
 
 \subsection{Vincoli e preferenze}
 Il proponente non impone vincoli nella scelta della tipologia di tecnologie, ma ci sono comunque delle scelte preferenziali da considerare:
@@ -79,16 +80,16 @@ Il proponente non impone vincoli nella scelta della tipologia di tecnologie, ma 
 
 Per il completamento del progetto il proponente richiede che siano realizzati i seguenti risultati:
 \begin{itemize}
-\item server, completo di UI
-\item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report.
-\item documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare.
+\item Server, completo di UI
+\item Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report.
+\item Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare.
 \end{itemize}
 
 \section{Casi d'uso}
 
 \includegraphics[width=0.7\textwidth]{UseCase_venditore1.png}
 
-\paragraph{UC1 - Consultazione manuale ShopChain}
+\paragraph{UC1 - Consultazione manuale ShopChain}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
@@ -100,7 +101,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
 
-\paragraph{UC2 - Riconoscimento wallet}
+\paragraph{UC2 - Riconoscimento wallet (webapp venditore)}\\
 \textbf{Attore primario}: Venditore privo di wallet riconosciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: Il venditore ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
@@ -121,7 +122,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
     \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC2.2 - Accesso al sistema}
+\paragraph{UC2.2 - Accesso al sistema (webapp venditore)}\\
 \textbf{Attore primario}: Venditore con wallet associato.\\
 \textbf{Precondizioni}: Il venditore apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
 \textbf{Postcondizioni}: Il venditore accede al sistema.\\
@@ -134,7 +135,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore3.png}
 
-\paragraph{UC3 visualizzazione lista transazioni}
+\paragraph{UC3 visualizzazione lista transazioni}\\
 \textbf{Attore primario}: Venditore \\
 \textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
 \textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni.\\
@@ -145,7 +146,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \item Il sistema mostra al venditore l'elenco delle transizioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
 \end{enumerate}
 
-\paragraph{UC4 - visualizzazione dettaglio transazione}
+\paragraph{UC4 - visualizzazione dettaglio transazione}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transizione.\\
@@ -157,13 +158,13 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
 
-\paragraph{4.1 - Visualizzazione stato transizione}
+\paragraph{4.1 - Visualizzazione stato transizione}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transizione.\\
 \textbf{Postcondizioni}: Il venditore visualizza lo stato di una transizione.\\
 \textbf{Scenario principale}: Il venditore vede se la transizione è in attesa, oppure è stata completata.\\
 
-\paragraph{UC4.2 - Generazione QR Code}
+\paragraph{UC4.2 - Generazione QR Code}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transizione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
@@ -173,21 +174,21 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \item Il venditore stampa il Qr Code e lo applica sul pacco del prodotto.
 \end{enumerate}
 
-\paragraph{UC4.3 - Visualizzazione importo transazione}
+\paragraph{UC4.3 - Visualizzazione importo transazione}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transizione.\\
 \textbf{Postcondizioni}: Il venditore visualizza l'importo di una transizione.\\
 \textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
 
-\paragraph{UC4.4 - Visualizzazione scadenza transazione}
+\paragraph{UC4.4 - Visualizzazione scadenza transazione}\\
 \textbf{Attore primario}: Venditore\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
-\textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale riceverà l'importo anche se non è stato scannerizzato il QR Code.\\
+\textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 
 \includegraphics[width=0.9\textwidth]{UseCase_script1}
 
-\paragraph{UC5 - Inserimento prodotto in blockchain}
+\paragraph{UC5 - Inserimento prodotto in blockchain}\\
 \textbf{Attore primario}: Venditore.\\
 \textbf{Precondizioni}: Il venditore ha integrato lo script nell'e-commerce e ha inserito un nuovo prodotto nell'e-commerce.\\
 \textbf{Postcondizioni}: Il venditore ha inserito il nuovo prodotto in blockchain.\\
@@ -208,7 +209,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page1}
 
-\paragraph{UC6 - Riconoscimento wallet}
+\paragraph{UC6 - Riconoscimento wallet (landing page)}\\
 \textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha aperto la landing page e non si è ancora fatto riconoscere il wallet da Metamask.\\
@@ -231,7 +232,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page2}
 
-\paragraph{UC7 - Accesso al sistema}
+\paragraph{UC7 - Accesso al sistema (landing page)}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Precondizioni}: L'acquirente apre la landing page e si è già fatto riconoscere il wallet da Metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
@@ -244,7 +245,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_landing_page3}
 
-\paragraph{UC8 - Visualizzazione riepilogo ordine}
+\paragraph{UC8 - Visualizzazione riepilogo ordine}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
 \textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
@@ -254,7 +255,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
     \item Il sistema mostra il riepilogo dell'ordine.
 \end{enumerate}
 
-\paragraph{UC8.1 - Visualizzazione costo in dollari}
+\paragraph{UC8.1 - Visualizzazione costo in dollari}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
 \textbf{Postcondizioni}: Il sistema mostra il costo in dollari.\\
@@ -264,7 +265,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
     \item Il sistema mostra il costo in dollari.
 \end{enumerate}
 
-\paragraph{UC9 - Conferma ordine}
+\paragraph{UC9 - Conferma ordine}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Precondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
 \textbf{Postcondizioni}: L'acquirente ha confermato l'ordine.\\
@@ -282,7 +283,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
     \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC10 - Pagamento ordine}
+\paragraph{UC10 - Pagamento ordine}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha confermato l'ordine.\\
@@ -304,7 +305,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp1}
 
-\paragraph{UC14 - Riconoscimento wallet}
+\paragraph{UC14 - Riconoscimento wallet (webapp acquirente)}\\
 \textbf{Attore primario}: Acquirente privo di wallet riconosciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha aperto la webapp e non si è ancora fatto riconoscere il wallet da Metamask.\\
@@ -327,7 +328,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp2}
 
-\paragraph{UC15 - Accesso al sistema}
+\paragraph{UC15 - Accesso al sistema (webapp acquirente)}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Precondizioni}: L'acquirente apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
@@ -340,7 +341,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \includegraphics[width=0.9\textwidth]{UseCase_webapp3}
 
-\paragraph{UC16 - Scansione QR Code}
+\paragraph{UC16 - Scansione QR Code}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Attore secondario}: Fotocamera.\\
 \textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
@@ -366,7 +367,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
     \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC17 - Accettazione ordine}
+\paragraph{UC17 - Accettazione ordine}\\
 \textbf{Attore primario}: Acquirente con wallet associato.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
