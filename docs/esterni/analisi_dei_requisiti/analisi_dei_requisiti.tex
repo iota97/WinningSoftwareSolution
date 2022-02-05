@@ -106,7 +106,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Attore primario}: Venditore con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: Il venditore vuole accedere alla webapp.\\
-\textbf{Postcondizioni}: Il venditore si è connesso alla web-app con metamask.\\
+\textbf{Postcondizioni}: Il venditore si è connesso alla webapp con metamask.\\
 \textbf{Scenario principale}:
 Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
@@ -145,7 +145,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
 \paragraph{UC4.2 - Visualizzazione QR Code}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
-\textbf{Precondizioni}: Il venditore vuole visualizzare il QR Code di una transazione in attesa.\\
+\textbf{Precondizioni}: Il venditore vuole ottenere il QR Code di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
@@ -243,38 +243,19 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
 
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
 
-\paragraph{UC10 - Accesso al sistema (webapp acquirente)}\\
-\textbf{Attore primario}: Acquirente con wallet non connesso.\\
-\textbf{Precondizioni}: L'acquirente vuole accedere alla webapp.\\
-\textbf{Postcondizioni}: L'acquirente si è connesso alla webapp con Metamask.\\
-\textbf{Scenario principale}:
-L'acquirente usando Metamask si connette alla webapp con il proprio wallet.
-
-\includegraphics[width=0.9\textwidth]{UC_WAA2}
-
-\paragraph{UC11 - Scansione QR Code}\\
+\paragraph{UC10 - Scansione QR Code}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Attori secondari}: Fotocamera, Metamask.\\
 \textbf{Precondizioni}: L'acquirente è connesso alla webapp con Metamask.\\
-\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e viene mandato alla pagina di Metamask della relativa transazione.\\
+\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e visualizza la pagina della transazione attraverso Metamask.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l'acquirente apre la fotocamera per la scansione del QR Code dalla webapp o da Metamask;
-    \item l'acquirente scansiona il QR Code;
+    \item l'acquirente con la fotocamera o tramite Metamask scansiona il QR Code;
     \item viene riconosciuto il link dal QR Code;
-    \item viene mostrata la pagina di Metamask della transizione.
-\end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC11.1 Visualizzazione errore scansione qr code:
-        La fotocamera ha scansionato un QR Code con un link non valido:
-        \begin{enumerate}
-            \item il sistema mostra l'errore "QR Code non valido";
-            \item l'acquirente può ripetere la scansione.
-        \end{enumerate}
+    \item viene mostrata la pagina della transizione.
 \end{enumerate}
 
-\paragraph{UC12 - Conferma ricezione}\\
+\paragraph{UC11 - Conferma ricezione}\\
 \textbf{Attore primario}: Acquirente riconsciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
@@ -282,7 +263,7 @@ L'acquirente usando Metamask si connette alla webapp con il proprio wallet.
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item l'acquirente scansiona un QR Code valido;
-    \item viene mostrata la pagina di Metamask della transizione;
+    \item viene mostrata la pagina della transizione;
     \item l'acquirente controlla sia tutto corretto e conferma la ricezione del pacco;
     \item il denaro viene sbloccato e mandato nel wallet del venditore.
 \end{enumerate}
