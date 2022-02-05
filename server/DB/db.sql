@@ -1,1 +1,2 @@
-CREATE TABLE Transazioni (id int auto_increment, ecommerce_id varchar(255), prodotto_id int, primary key(id));
+CREATE TABLE PaymentEntry (id varchar(255), ecommerce varchar(255), primary key(id));
+CREATE TABLE SettledPayment (id varchar(255), acquirente varchar(255), primary key(id));

@@ -1,12 +1,12 @@
 import express, {Request, Response} from "express";
 import qr from "qrcode";
-import * as transazioniModel from "../DB/transazioni";
-import {transazione} from "../DB/types/transazione";
+import * as transazioniModel from "../DB/paymentEntries";
+import {paymentEntry} from "../DB/types/paymentEntry";
 
 const PoCRounter = express.Router();
 
 PoCRounter.get("/", async (req: Request, res: Response) => {
-  transazioniModel.findAll((err: Error, transazioni: transazione[]) => {
+  transazioniModel.findAll((err: Error, transazioni: paymentEntry[]) => {
     if (err) {
       return res.status(500).json({"errorMessage": err.message});
     }
@@ -16,7 +16,6 @@ PoCRounter.get("/", async (req: Request, res: Response) => {
       transazioni_string += 
       "<a href=\"PoC/transazione?id="+ transazioni[i].id +"\">ID: " + transazioni[i].id + "</a>    " + 
       "E-Commerce: " + transazioni[i].ecommerce + "    " +
-      "Prodotto: " + transazioni[i].idProdotto + "    " +
       "<a href=\"PoC/qr?id="+ transazioni[i].id +"\">QR</a><br><br>";
     }
 
@@ -43,33 +42,23 @@ PoCRounter.get("/qr", async (req: Request, res: Response) => {
 });
 
 PoCRounter.post("/", async (req: Request, res: Response) => {
-  const newTransazione: transazione = req.body;
-  if (req.body.add) {
-    transazioniModel.create(newTransazione, (err: Error, id: number) => {
-      if (err) {
-        return res.status(500).json({"message": err.message});
-      }
-      
-      res.redirect('/PoC');
-    });
-  } else if (req.body.del) {
-    transazioniModel.remove(req.body.id, (err: Error, id: number) => {
-      if (err) {
-        return res.status(500).json({"message": err.message})
-      }
-
-      res.redirect('/PoC');
-    });
-  }
-});
-
-PoCRounter.get("/transazione", async (req: Request, res: Response) => {
-  const orderId: number = Number(req.query.id);
-  transazioniModel.findOne(orderId, (err: Error, t: transazione) => {
+  const newTransazione: paymentEntry = req.body;
+  transazioniModel.create(newTransazione, (err: Error, id: string) => {
     if (err) {
       return res.status(500).json({"message": err.message});
     }
-    res.status(200).json({"data": t});
+      
+    res.redirect('/PoC');
+  });
+});
+
+PoCRounter.get("/transazione", async (req: Request, res: Response) => {
+  const orderId: any = req.query.id;
+  transazioniModel.findOne(orderId, (err: Error, pagamento: paymentEntry) => {
+    if (err) {
+      return res.status(500).json({"message": err.message});
+    }
+    res.status(200).json({"data": pagamento});
   })
 });
 
