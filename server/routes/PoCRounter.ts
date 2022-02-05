@@ -14,17 +14,23 @@ PoCRounter.get("/", async (req: Request, res: Response) => {
     let transazioni_string: string = "";
     for (let i = 0; i < transazioni.length; i++) {
       transazioni_string += 
-      "<a href=\"PoC/"+ transazioni[i].id +"\">ID: " + transazioni[i].id + "    " + 
+      "<a href=\"PoC/transazione?id="+ transazioni[i].id +"\">ID: " + transazioni[i].id + "</a>    " + 
       "E-Commerce: " + transazioni[i].ecommerce + "    " +
-      "Prodotto: " + transazioni[i].idProdotto + "</a><br><br>";
+      "Prodotto: " + transazioni[i].idProdotto + "    " +
+      "<a href=\"PoC/qr?id="+ transazioni[i].id +"\">QR</a><br><br>";
     }
 
-    const qr_str: any = req.query.qr || "Default";
+    res.render("PoC", {transazioni:transazioni_string});
+  });
+});
+
+PoCRounter.get("/qr", async (req: Request, res: Response) => {
+    // http://192.168.0.15.sslip.io:8080/PoC/transazione
+    const qr_str = "https://metamask.app.link/dapp/" + "tinyurl.com/2p9xf7wx" + "?id=" + req.query.id;
     qr.toDataURL(qr_str, (err, src) => {
         if (err) res.send("Error occured in QR");
-            res.render("PoC", {transazioni:transazioni_string, qr_img:src});
+            res.render("QR", {qr_img:src});
     });
-  });
 });
 
 PoCRounter.post("/", async (req: Request, res: Response) => {
@@ -48,8 +54,8 @@ PoCRounter.post("/", async (req: Request, res: Response) => {
   }
 });
 
-PoCRounter.get("/:id", async (req: Request, res: Response) => {
-  const orderId: number = Number(req.params.id);
+PoCRounter.get("/transazione", async (req: Request, res: Response) => {
+  const orderId: number = Number(req.query.id);
   transazioniModel.findOne(orderId, (err: Error, t: transazione) => {
     if (err) {
       return res.status(500).json({"message": err.message});

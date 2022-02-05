@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project ./",
-    "start": "nodemon index.ts",
+    "start": "nodemon main.ts",
     "test": "ENV_FILE=.env jest --coverage"
   },
   "keywords": [],
