@@ -30,6 +30,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.9}{1/02/2022}{Alberto Nicoletti}{Correzione}{Correzzione immagini casi d'uso e requisiti}
 \addversione{0.0.10}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzione errori grammaticali}
 \addversione{0.0.11}{04/02/2022}{Giovanni Cocco}{Correzione}{Correzioni varie}
+\addversione{0.0.12}{05/02/2022}{Alberto Nicoletti}{Riscrittura}{Riscrittura di alcuni casi d'uso a seguito di una discussione interna al gruppo}
 
 \begin{document}
 
@@ -87,10 +88,10 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 
 \section{Casi d'uso}
 
-\includegraphics[width=0.7\textwidth]{UseCase_venditore1.png}
+\includegraphics[width=0.7\textwidth]{UC_WAV1}
 
 \paragraph{UC1 - Consultazione manuale ShopChain}\\
-\textbf{Attore primario}: Venditore.\\
+\textbf{Attori primari}: Venditore.\\
 \textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
 \textbf{Scenario principale}:\\
@@ -99,55 +100,33 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \item il venditore è libero di consultare il manuale in ogni momento.
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UseCase_venditore2.png}
+\includegraphics[width=0.9\textwidth]{UC_WAV2}
 
-\paragraph{UC2 - Connessione wallet (webapp venditore)}\\
+\paragraph{UC2 - Accesso al sistema (webapp venditore)}\\
 \textbf{Attore primario}: Venditore con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: Il venditore ha aperto la webapp e non ha ancora connesso il wallet con Metamask.\\
-\textbf{Postcondizioni}: Il venditore ha connesso il wallet con Metamask e accede al sistema.\\
+\textbf{Precondizioni}: Il venditore vuole accedere alla webapp.\\
+\textbf{Postcondizioni}: Il venditore si è connesso alla web-app con metamask.\\
 \textbf{Scenario principale}:
-\begin{enumerate}
-    \item il venditore apre la webapp;
-    \item il venditore connette tramite Metamask il proprio wallet;
-    \item il venditore accede al sistema.
-\end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC2.1 Metamask genera un errore durante la procedura.
-    \begin{enumerate}
-        \item il sistema mostra l'errore connessione wallet non riuscita;
-        \item il sistema mostra il messaggio riprovare;
-        \item il sistema ripete UC2.
-    \end{enumerate}
-\end{enumerate}
+Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
-\paragraph{UC2.2 - Accesso al sistema (webapp venditore)}\\
-\textbf{Attore primario}: Venditore con wallet associato.\\
-\textbf{Precondizioni}: Il venditore apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
-\textbf{Postcondizioni}: Il venditore accede al sistema.\\
-\textbf{Scenario principale}:
-\begin{enumerate}
-    \item il venditore fa riconoscere tramite Metamask il proprio wallet;
-    \item il venditore apre la webapp;
-    \item il venditore ha un wallet associato e accede al sistema.
-\end{enumerate}
-
-\includegraphics[width=0.9\textwidth]{UseCase_venditore3.png}
+\includegraphics[width=0.9\textwidth]{UC_WAV3}
 
 \paragraph{UC3 visualizzazione lista transazioni}\\
-\textbf{Attore primario}: Venditore \\
+\textbf{Attore primario}: Venditore con wallet connesso. \\
+\textbf{Attore secondario}: Database. \\
 \textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
 \textbf{Postcondizioni}:  Il venditore vede la lista delle transazioni.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore vede la lista delle transazioni;
-\item il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
-\item il sistema mostra al venditore l'elenco delle transazioni richieste, ordinate per data e per ognuna vengono mostrati i dati più importanti.
+\item Il venditore vede la lista delle transazioni;
+\item Il venditore può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
+\item Il sistema mostra al venditore l'elenco delle transazioni richieste.
 \end{enumerate}
 
 \paragraph{UC4 - visualizzazione dettaglio transazione}\\
 \textbf{Attore primario}: Venditore.\\
+\textbf{Attore secondario}: Database.\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transazione.\\
 \textbf{Scenario principale}:
@@ -156,17 +135,17 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \item il venditore visualizza i dettagli della singola transazione.
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UseCase_venditore4.png}
+\includegraphics[width=0.9\textwidth]{UC_WAV4}
 
 \paragraph{4.1 - Visualizzazione stato transazione}\\
-\textbf{Attore primario}: Venditore.\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza lo stato di una transazione.\\
 \textbf{Scenario principale}: Il venditore vede se la transazione è in attesa, oppure è stata completata.\\
 
-\paragraph{UC4.2 - Generazione QR Code}\\
-\textbf{Attore primario}: Venditore.\\
-\textbf{Precondizioni}: Il venditore vuole generare il QR Code di una transazione in attesa.\\
+\paragraph{UC4.2 - Visualizzazione QR Code}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare il QR Code di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
@@ -175,119 +154,78 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}\\
-\textbf{Attore primario}: Venditore.\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza l'importo di una transazione.\\
 \textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
 
 \paragraph{UC4.4 - Visualizzazione scadenza transazione}\\
-\textbf{Attore primario}: Venditore.\\
+\textbf{Attore primario}: Venditore  con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 
-\includegraphics[width=0.9\textwidth]{UseCase_script1}
+\includegraphics[width=0.9\textwidth]{UC_script}
 
-\paragraph{UC5 - Inserimento prodotto in blockchain}\\
-\textbf{Attore primario}: Venditore.\\
+\paragraph{UC5 - Pubblicazione prodotto in blockchain}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore ha integrato lo script nell'e-commerce e ha inserito un nuovo prodotto nell'e-commerce.\\
-\textbf{Postcondizioni}: Il venditore ha inserito il nuovo prodotto in blockchain.\\
+\textbf{Postcondizioni}: Il venditore ha pubblicato il nuovo prodotto in blockchain.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item il venditore integra nel backend del proprio e-commerce lo script fornito da noi;
     \item il venditore inserisce un nuovo prodotto nell'e-commerce;
-    \item tramite lo script il prodotto viene inviato in blockchain;
-    \item il prodotto è inserito in blockchain.
+    \item tramite lo script il prodotto viene pubblicato in blockchain;
+    \item il prodotto è pubblico in blockchain e utilizzabile per fare nuove transazioni.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC21 L'invio del prodotto in blockchain fallisce:
+    \item UC5.1 errore fallimento pubblicazione prodotto in blockchain:
     \begin{enumerate}
         \item lo script salva in un file di log il messaggio di errore.
     \end{enumerate}
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UseCase_landing_page1}
+\includegraphics[width=0.9\textwidth]{UC_LP1}
 
-\paragraph{UC6 - Riconoscimento wallet (landing page)}\\
+\paragraph{UC6 - Accesso al sistema (landing page)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
-\textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha aperto la landing page.\\
-\textbf{Postcondizioni}: L'acquirente connette il wallet tramite Metamask e accede al sistema.\\
-\textbf{Scenario principale}:
-\begin{enumerate}
-    \item l’utente apre la landing page;
-    \item l’utente connette tramite Metamask il proprio wallet;
-    \item l’utente accede al sistema.
-\end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC11 Metamask genera un errore durante la procedura di connesione del wallet:
-    \begin{enumerate}
-        \item il sistema mostra l'errore connesione wallet non riuscita;
-        \item il sistema mostra il messaggio riprovare;
-        \item il sistema ripete UC6.
-    \end{enumerate}
-\end{enumerate}
-
-\includegraphics[width=0.9\textwidth]{UseCase_landing_page2}
-
-\paragraph{UC7 - Accesso al sistema (landing page)}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente apre la landing page e si è già fatto riconoscere il wallet da Metamask.\\
+\textbf{Precondizioni}: L'acquirente in landing page non è connesso con metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
-\begin{enumerate}
-    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
-    \item l'acquirente apre la landing page;
-    \item l'acquirente ha un wallet associato e accede al sistema.
-\end{enumerate}
+L'acquirente usando Metamask, si connette con il proprio wallet.
 
-\includegraphics[width=0.9\textwidth]{UseCase_landing_page3}
+\includegraphics[width=0.9\textwidth]{UC_LP2}
 
-\paragraph{UC8 - Visualizzazione riepilogo ordine}\\
+\paragraph{UC7 - Visualizzazione riepilogo transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
-\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha connesso un wallet.\\
-\textbf{Postcondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
+\textbf{Precondizioni}: L'acquirente con wallet connesso vuole effettuare un acquisto usando ShopChain.\\
+\textbf{Postcondizioni}: Il sistema mostra il riepilogo della transazione.\\
 \textbf{Scenario principale}:
-\begin{enumerate}
-    \item l’utente accede al sistema con un wallet connesso;
-    \item il sistema mostra il riepilogo dell'ordine.
-\end{enumerate}
+Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in dollari da pagare.
 
-\paragraph{UC8.1 - Visualizzazione costo in dollari}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
-\textbf{Postcondizioni}: Il sistema mostra il costo in dollari.\\
+\paragraph{UC8 - Conferma pagamento}\\
+\textbf{Attore primario}: Acquirente riconsocito.\\
+\textbf{Precondizioni}: L'acquirente sta effettuando un acquisto e il sistema mostra il riepilogo della transazione.\\
+\textbf{Postcondizioni}: L'acquirente ha confermato il pagamento.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l’utente accede al sistema con un wallet associato;
-    \item il sistema mostra il costo in dollari.
-\end{enumerate}
-
-\paragraph{UC9 - Conferma ordine}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: Il sistema mostra il riepilogo dell'ordine.\\
-\textbf{Postcondizioni}: L'acquirente ha confermato l'ordine.\\
-\textbf{Scenario principale}:
-\begin{enumerate}
-    \item il sistema mostra il riepilogo dell'ordine;
+    \item il sistema mostra il riepilogo della transazione;
     \item l'acquirente conferma l'ordine.
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC12 l'acquirente annulla l'ordine:
+    \item UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
     \begin{enumerate}
         \item visualizzazione messaggio procedura di pagamento annullata;
         \item cancellazione sessione di pagamento.
     \end{enumerate}
 \end{enumerate}
 
-\paragraph{UC10 - Pagamento ordine}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
+\paragraph{UC9 - Pagamento}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha confermato l'ordine.\\
-\textbf{Postcondizioni}: L'acquirente ha pagato l'ordine.\\
+\textbf{Precondizioni}: L'acquirente ha confermato il pagamento.\\
+\textbf{Postcondizioni}: Il pagamento è stato completato con successo.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item l'acquirente avvia la procedura di pagamento;
@@ -296,107 +234,75 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \end{enumerate}
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC13 Metamask non è riuscito a completare la procedura di pagamento:
+    \item UC9.1 visualizzazione errore pagamento non riuscito:
     \begin{enumerate}
-        \item visualizzazione errore pagamento non riuscito;
+        \item il pagamento non è stato completato con successo;
         \item cancellazione sessione di pagamento.
     \end{enumerate}
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UseCase_webapp1}
+\includegraphics[width=0.9\textwidth]{UC_WAA1}
 
-\paragraph{UC14 - Riconoscimento wallet (webapp acquirente)}\\
-\textbf{Attore primario}: Acquirente senza wallet connesso.\\
-\textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha aperto la webapp e non ha ancora connesso il wallet con Metamask.\\
-\textbf{Postcondizioni}: L'acquirente ha fatto riconoscere il wallet a Metamask e accede al sistema.\\
+\paragraph{UC10 - Accesso al sistema (webapp acquirente)}\\
+\textbf{Attore primario}: Acquirente con wallet non connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole accedere alla webapp.\\
+\textbf{Postcondizioni}: L'acquirente si è connesso alla webapp con Metamask.\\
 \textbf{Scenario principale}:
-\begin{enumerate}
-    \item l’acquirente apre la webapp;
-    \item l'acquirente connette tramite Metamask il proprio wallet;
-    \item l’acquirente ha connesso un wallet e accede al sistema.
-\end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC18 Metamask genera un errore durante la procedura di connessione del wallet:
-    \begin{enumerate}
-        \item il sistema mostra l'errore connessione wallet non riuscita;
-        \item il sistema mostra il messaggio riprovare;
-        \item il sistema ripete UC14.
-    \end{enumerate}
-\end{enumerate}
+L'acquirente usando Metamask si connette alla webapp con il proprio wallet.
 
-\includegraphics[width=0.9\textwidth]{UseCase_webapp2}
+\includegraphics[width=0.9\textwidth]{UC_WAA2}
 
-\paragraph{UC15 - Accesso al sistema (webapp acquirente)}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Precondizioni}: L'acquirente apre la webapp e si è già fatto riconoscere il wallet da Metamask.\\
-\textbf{Postcondizioni}: L'acquirente accede al sistema.\\
-\textbf{Scenario principale}:
-\begin{enumerate}
-    \item l'acquirente fa riconoscere tramite Metamask il proprio wallet;
-    \item l'acquirente apre la webapp;
-    \item l'acquirente ha un wallet associato e accede al sistema.
-\end{enumerate}
-
-\includegraphics[width=0.9\textwidth]{UseCase_webapp3}
-
-\paragraph{UC16 - Scansione QR Code}\\
-\textbf{Attore primario}: Acquirente con wallet associato.\\
-\textbf{Attore secondario}: Fotocamera.\\
-\textbf{Precondizioni}: L'acquirente ha acceduto al sistema e ha un wallet associato.\\
-\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e il sistema possiede i dati dell'ordine.\\
-\textbf{Scenario principale}:
-\begin{enumerate}
-    \item l'acquirente accede al sistema con un wallet associato;
-    \item il sistema avvia la fotocamera;
-    \item l'acquirente scansiona il QR Code;
-    \item il sistema possiede i dati dell'ordine.
-\end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC19 La fotocamera ha generato un errore durante la procedura di scansione QR Code:
-    \begin{enumerate}
-        \item la fotocamera ha scansionato un QR Code con id transazione non valido:
-        \begin{enumerate}
-            \item il sistema mette in pausa la fotocamera;
-            \item il sistema mostra l'errore "QR Code non valido";
-            \item l'acquirente chiude il messaggio di errore;
-            \item il sistema avvia la fotocamera.
-        \end{enumerate}
-    \end{enumerate}
-\end{enumerate}
-
-\paragraph{UC17 - Accettazione ordine}\\
+\paragraph{UC11 - Scansione QR Code}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Attori secondari}: Fotocamera, Metamask.\\
+\textbf{Precondizioni}: L'acquirente è connesso alla webapp con Metamask.\\
+\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e viene mandato alla pagina di Metamask della relativa transazione.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+    \item l'acquirente apre la fotocamera per la scansione del QR Code dalla webapp o da Metamask;
+    \item l'acquirente scansiona il QR Code;
+    \item viene riconosciuto il link dal QR Code;
+    \item viene mostrata la pagina di Metamask della transizione.
+\end{enumerate}
+\textbf{Estensioni}:
+\begin{enumerate}
+    \item UC11.1 Visualizzazione errore scansione qr code:
+        La fotocamera ha scansionato un QR Code con un link non valido:
+        \begin{enumerate}
+            \item il sistema mostra l'errore "QR Code non valido";
+            \item l'acquirente può ripetere la scansione.
+        \end{enumerate}
+\end{enumerate}
+
+\paragraph{UC12 - Conferma ricezione}\\
+\textbf{Attore primario}: Acquirente riconsciuto.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
-\textbf{Postcondizioni}: L'acquirente ha accettato l'ordine.\\
+\textbf{Postcondizioni}: L'acquirente ha confermato la ricezione del pacco.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item l'acquirente scansiona un QR Code valido;
-    \item l'acquirente accetta l'ordine tramite Metamask;
-    \item l'acquirente ha accettato l'ordine;
-    \item l'acquirente è in possesso dei prodotti dell'ordine.
+    \item viene mostrata la pagina di Metamask della transizione;
+    \item l'acquirente controlla sia tutto corretto e conferma la ricezione del pacco;
+    \item il denaro viene sbloccato e mandato nel wallet del venditore.
 \end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UC_controlli}
+
+\paragraph{UCa Controllo connessione}\\
+\textbf{Attori primari}: Venditore con wallet connesso, Acquirente con wallet connesso. \\
+\textbf{Precondizioni}: Il sistema vuole interagire con la blockchain.\\
+\textbf{Postcondizioni}:  Il sitema può interagire con la blockchain senza problemi.\\
+\textbf{Scenario principale}:
+Vengono fatti una serie di controlli per la corretta interazione con la blockchain.\\
 \textbf{Estensioni}:
 \begin{enumerate}
-    \item UC20 Metamask genera un errore durante la procedura di accettazione:
-    \begin{enumerate}
-        \item il sistema mostra l'errore accettazione non riuscita;
-        \item il sistema mostra il messaggio riprovare:
-        \begin{enumerate}
-            \item l'acquirente riprova:
-            \begin{enumerate}
-                \item il sistema ripete UC17;
-            \end{enumerate}
-            \item l'acquirente non riprova:
-            \begin{enumerate}
-                \item il sistema mostra il messaggio accettazione annullata;
-                \item il sistema cancella la procedura di accettazione ordine.
-            \end{enumerate}
-        \end{enumerate}
-    \end{enumerate}
+    \item UCa.1 Errore nella connessione alla rete:\\
+        Il venditore o l'acquirente è connesso alla rete sbagliata
+    \item UCa.2 Errore transazione non inviata:\\
+        La transazione non è stata inviata correttamente.
+    \item UCa.3 Errore nessun risultato ottenibile:\\
+        La transazione è stata correttamente inviata, ma non è stato ottenuto nessun risultato.
 \end{enumerate}
 
 \section{Requisiti}
