@@ -31,6 +31,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.10}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzione errori grammaticali}
 \addversione{0.0.11}{04/02/2022}{Giovanni Cocco}{Correzione}{Correzioni varie}
 \addversione{0.0.12}{05/02/2022}{Alberto Nicoletti}{Riscrittura}{Riscrittura di alcuni casi d'uso a seguito di una discussione interna al gruppo}
+\addversione{0.0.13}{06/02/2022}{Alberto Nicoletti}{Stesura e correzioni}{Stesura UC12 e UC13, correzioni varie}
 
 \begin{document}
 
@@ -125,7 +126,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \end{enumerate}
 
 \paragraph{UC4 - visualizzazione dettaglio transazione}\\
-\textbf{Attore primario}: Venditore.\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Attore secondario}: Database.\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transazione.\\
@@ -141,7 +142,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza lo stato di una transazione.\\
-\textbf{Scenario principale}: Il venditore vede se la transazione è in attesa, oppure è stata completata.\\
+\textbf{Scenario principale}: Viene visualizzato lo stato della transazione: in attesa oppure completata.\\
 
 \paragraph{UC4.2 - Visualizzazione QR Code}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
@@ -149,15 +150,15 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore visualizza il QR Code della transazione in attesa selezionata;
-\item il venditore stampa il QR Code lo applica sul pacco del prodotto.
+\item viene visualizzato il QR Code della transazione in attesa selezionata;
+\item il venditore può stampare il QR Code applicarlo sul pacco del prodotto.
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare l'importo di una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza l'importo di una transazione.\\
-\textbf{Scenario principale}: Il venditore vede l'importo della transazione.\\
+\textbf{Scenario principale}: Viene visualizzato l'importo della transazione in dollari.\\
 
 \paragraph{UC4.4 - Visualizzazione scadenza transazione}\\
 \textbf{Attore primario}: Venditore  con wallet connesso.\\
@@ -177,13 +178,10 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
     \item tramite lo script il prodotto viene pubblicato in blockchain;
     \item il prodotto è pubblico in blockchain e utilizzabile per fare nuove transazioni.
 \end{enumerate}
-\textbf{Estensioni}:
-\begin{enumerate}
-    \item UC5.1 errore fallimento pubblicazione prodotto in blockchain:
-    \begin{enumerate}
-        \item lo script salva in un file di log il messaggio di errore.
-    \end{enumerate}
-\end{enumerate}
+\textbf{Estensione}:
+UC5.1 errore fallimento pubblicazione prodotto in blockchain:\\
+lo script salva in un file di log il messaggio di errore.
+
 
 \includegraphics[width=0.9\textwidth]{UC_LP1}
 
@@ -212,13 +210,11 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
     \item il sistema mostra il riepilogo della transazione;
     \item l'acquirente conferma l'ordine.
 \end{enumerate}
-\textbf{Estensioni}:
+\textbf{Estensione}:
+UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
 \begin{enumerate}
-    \item UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
-    \begin{enumerate}
-        \item visualizzazione messaggio procedura di pagamento annullata;
-        \item cancellazione sessione di pagamento.
-    \end{enumerate}
+    \item visualizzazione messaggio procedura di pagamento annullata;
+    \item cancellazione sessione di pagamento.
 \end{enumerate}
 
 \paragraph{UC9 - Pagamento}\\
@@ -233,40 +229,81 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
     \item l'ordine è stato pagato.
 \end{enumerate}
 \textbf{Estensioni}:
+UC9.1 visualizzazione errore pagamento non riuscito:
 \begin{enumerate}
-    \item UC9.1 visualizzazione errore pagamento non riuscito:
-    \begin{enumerate}
-        \item il pagamento non è stato completato con successo;
-        \item cancellazione sessione di pagamento.
-    \end{enumerate}
+    \item il pagamento non è stato completato con successo;
+    \item cancellazione sessione di pagamento.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
 
-\paragraph{UC10 - Scansione QR Code}\\
+\paragraph{UC10 - Visualizzazione conferma ricezione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
-\textbf{Attori secondari}: Fotocamera, Metamask.\\
-\textbf{Precondizioni}: L'acquirente è connesso alla webapp con Metamask.\\
-\textbf{Postcondizioni}: L'acquirente ha scansionato il QR Code e visualizza la pagina della transazione attraverso Metamask.\\
+\textbf{Precondizioni}: L'acquirente è connesso con Metamask ed è arrivato alla pagina di conferma ricezione scansionando il QR Code sul pacco del prodotto.\\
+\textbf{Postcondizioni}: L'acquirente visualizza la pagina della transazione relativa al pacco appena ricevuto.\\
 \textbf{Scenario principale}:
-\begin{enumerate}
-    \item l'acquirente con la fotocamera o tramite Metamask scansiona il QR Code;
-    \item viene riconosciuto il link dal QR Code;
-    \item viene mostrata la pagina della transizione.
-\end{enumerate}
+Vengono mostrati i dati relativi alla transazione e un pulsante per confermare la ricezione del pacco.
 
 \paragraph{UC11 - Conferma ricezione}\\
-\textbf{Attore primario}: Acquirente riconsciuto.\\
-\textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente ha scansionato un QR Code valido.\\
-\textbf{Postcondizioni}: L'acquirente ha confermato la ricezione del pacco.\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente è connesso con Metamask alla pagina di conferma ricezione e conferma la ricezione del pacco.\\
+\textbf{Postcondizioni}: L'acquirente ha confermato la ricezione del pacco, i fondi sono stati sbloccati.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l'acquirente scansiona un QR Code valido;
-    \item viene mostrata la pagina della transizione;
     \item l'acquirente controlla sia tutto corretto e conferma la ricezione del pacco;
     \item il denaro viene sbloccato e mandato nel wallet del venditore.
 \end{enumerate}
+\textbf{Estensione}:
+UC11.1 Errore wallet non corretto:
+\begin{enumerate}
+    \item Viene mostrato un messaggio di errore spiegando che il wallet con cui è connesso l'acquirente non è corretto.
+    \item Si invita a cambiare wallet e riprovare.
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UC_ECA1}
+
+\paragraph{UC12 visualizzazione lista transazioni}\\
+\textbf{Attore primario}: Acquirente con wallet connesso. \\
+\textbf{Attore secondario}: Database. \\
+\textbf{Precondizioni}: L'acquirente ha effettuato l'accesso al sistema.\\
+\textbf{Postcondizioni}:  L'acquirente vede la lista delle transazioni.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item L'acquirente vede la lista delle transazioni;
+\item L'acquirente può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
+\item Il sistema mostra all'acquirente l'elenco delle transazioni richieste.
+\end{enumerate}
+
+\paragraph{UC13 - visualizzazione dettaglio transazione}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Attore secondario}: Database.\\
+\textbf{Precondizioni}: L'acquirente ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
+\textbf{Postcondizioni}: L'acquirente vede i dettagli di una singola transazione.\\
+\textbf{Scenario principale}:
+\begin{enumerate}
+\item L'acquirente seleziona una delle transazioni dall'elenco;
+\item L'acquirente visualizza i dettagli della singola transazione.
+\end{enumerate}
+
+\includegraphics[width=0.9\textwidth]{UC_ECA2}
+
+\paragraph{13.1 - Visualizzazione stato transazione}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare lo stato di una transazione.\\
+\textbf{Postcondizioni}: L'acquirente visualizza lo stato di una transazione.\\
+\textbf{Scenario principale}: Viene mostrato lo stato della transazione: in attesa o completata.\\
+
+\paragraph{UC13.2 - Visualizzazione importo transazione}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare l'importo di una transazione.\\
+\textbf{Postcondizioni}: L'acquirente visualizza l'importo di una transazione.\\
+\textbf{Scenario principale}: Viene mostrato l'importo della transazione in dollari.\\
+
+\paragraph{UC13.3 - Visualizzazione scadenza transazione}\\
+\textbf{Attore primario}: Acquirente  con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare la scadenza di una transazione in attesa.\\
+\textbf{Postcondizioni}: L'acquirente visualizza la scadenza di una transazione in attesa.\\
+\textbf{Scenario principale}: Viene visualizzata la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 
 \includegraphics[width=0.9\textwidth]{UC_controlli}
 
