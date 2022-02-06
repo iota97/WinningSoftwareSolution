@@ -4,9 +4,9 @@
         <p id="networkNameText"> </p>
 
         <br>
-        <br>
 
-        <input id="idInput" placeholder="ID di pagamento (INT)">
+        <label>ID Oggetto: </label><br>
+	<input id="idInput" placeholder="ID Oggetto">
         <button disabled id="settlePaymentButton"> Paga </button>
 
         <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
@@ -19,17 +19,12 @@
         <br>
         <br>
 
-	<h1> Inserisci transazione </h1>
-	<form method="post">
-		id: <input type="text" name="id"><br>
-		ecommerce: <input type="text" name="ecommerce"><br>
-		<input type="submit" value="Inserisci" name="add">
-	</form>
+	<a href="PoC/items"> Lista oggetti in vendita </a>
 
 	<br>
         <br>
 
-	<h1> Lista transazioni </h1>
-	<%-transazioni%>
+	<a href="PoC/transazioni"> Lista transazioni </a>
+	
 
 <%- include('footer.ejs') %>

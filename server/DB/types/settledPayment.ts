@@ -1,4 +1,4 @@
-export interface settledEntry {
+export interface settledPayment {
   id: string,
   acquirente: string,
 }

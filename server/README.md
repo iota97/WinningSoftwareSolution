@@ -1,5 +1,4 @@
-Configurazioni MariaDB: .env
-File SQL tabelle: DB/db.sql
+Configurazione: .env
 
 npm install
 npm start

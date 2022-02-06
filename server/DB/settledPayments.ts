@@ -1,9 +1,9 @@
-import {settledEntry} from "./types/settledEntry";
+import {settledPayment} from "./types/settledPayment";
 import {db} from "./connection";
 import { OkPacket, RowDataPacket } from "mysql2";
 
-export const create = (pagamento: settledEntry, callback: Function) => {
-  const queryString = "INSERT INTO settledEntry (id, acquirente) VALUES (?, ?)"
+export const create = (pagamento: settledPayment, callback: Function) => {
+  const queryString = "INSERT IGNORE INTO SettledPayment (id, acquirente) VALUES (?, ?)"
 
   db.query(
     queryString,
@@ -17,40 +17,21 @@ export const create = (pagamento: settledEntry, callback: Function) => {
   );
 };
 
-export const findOne = (id: string, callback: Function) => {
-  const queryString = `SELECT * FROM settledEntry WHERE id=?`
-  db.query(queryString, id, (err, result) => {
-    if (err) {callback(err)}
-
-    const rows = <RowDataPacket[]> result;
-    const pagamenti: settledEntry[] = [];
-
-    rows.forEach(row => {
-      const pagamento: settledEntry =  {
-	id: row.id,
-        ecommerce: row.acquirente,
-      }
-      pagamenti.push(pagamento);
-    });
-    callback(null, pagamenti);
-
-  });
-}
-
 export const findAll = (callback: Function) => {
-  const queryString = `SELECT * FROM settledEntry`
+  const queryString = `SELECT * FROM SettledPayment`
 
   db.query(queryString, (err, result) => {
     if (err) {callback(err)}
 
     const rows = <RowDataPacket[]> result;
-    const pagamenti: settledEntry[] = [];
+    const pagamenti: settledPayment[] = [];
 
     rows.forEach(row => {
-      const pagamento: settledEntry =  {
+      const pagamento: settledPayment =  {
 	id: row.id,
-        ecommerce: row.aquirente,
+        acquirente: row.acquirente,
       }
+
       pagamenti.push(pagamento);
     });
     callback(null, pagamenti);

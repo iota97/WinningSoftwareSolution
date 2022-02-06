@@ -4,7 +4,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import {PoCRounter} from "./PoCRounter";
 
-export function createServer() {
+export function createWebServer() {
 	const app = express();
 
 	app.use(bodyParser.urlencoded({ extended: false }));
