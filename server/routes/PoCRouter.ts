@@ -6,9 +6,9 @@ import * as paymentEntryModel from "../DB/paymentEntries";
 import * as settledPaymentModel from "../DB/settledPayments";
 import {shopContract} from "../contract/contract";
 
-const PoCRounter = express.Router();
+const PoCRouter = express.Router();
 
-PoCRounter.get("/items", async (req: Request, res: Response) => {
+PoCRouter.get("/items", async (req: Request, res: Response) => {
   paymentEntryModel.findAll((err: Error, item: paymentEntry[]) => {
     if (err) {
       return res.status(500).json({"errorMessage": err.message});
@@ -24,7 +24,7 @@ PoCRounter.get("/items", async (req: Request, res: Response) => {
   });
 });
 
-PoCRounter.get("/item", async (req: Request, res: Response) => {
+PoCRouter.get("/item", async (req: Request, res: Response) => {
   shopContract.methods.getPaymentEntry(req.query.id).call((err: Error, item: any) => {
     if (err) {
       console.log(err);
@@ -34,7 +34,7 @@ PoCRounter.get("/item", async (req: Request, res: Response) => {
   });
 });
 
-PoCRounter.get("/transazioni", async (req: Request, res: Response) => {
+PoCRouter.get("/transazioni", async (req: Request, res: Response) => {
   settledPaymentModel.findAll((err: Error, item: settledPayment[]) => {
     if (err) {
       return res.status(500).json({"errorMessage": err.message});
@@ -52,7 +52,7 @@ PoCRounter.get("/transazioni", async (req: Request, res: Response) => {
 });
 
 
-PoCRounter.get("/transazione", async (req: Request, res: Response) => {
+PoCRouter.get("/transazione", async (req: Request, res: Response) => {
   shopContract.methods.getSettledPayment(req.query.id).call((err: Error, item: any) => {
     if (err) {
       console.log(err);
@@ -63,14 +63,14 @@ PoCRounter.get("/transazione", async (req: Request, res: Response) => {
   });
 });
 
-PoCRounter.get("/qr", async (req: Request, res: Response) => {
+PoCRouter.get("/qr", async (req: Request, res: Response) => {
       /*
        TL;DR
        1) Metamask su android non permette di collegarsi direttamente a un server locale su Android in quanto l'HTTP non è permesso (CLEAR_TEXT_NOT_PERMITTED)
        2) Metamask ha un eccezione hardcoddata che lo permette per le connessioni provenienti da sslip.io (la documentazione dice di usare xip.io che non è sbagliato da agosto)
        3) PR per aggiornare la documentazione: https://github.com/MetaMask/metamask-docs/pull/396
        4) I deep link funzionano solo se in HTTPS, Android dalla versione 7 non permette di aggiungere certificati senza ricompilare l'app
-       5) Creiamo un link HTTPS a tinyurl, che punta a sslip.io con nostro server locale in HTTP, i.e: http://192.168.0.15.sslip.io:8080/PoC/transazione
+       5) Creiamo un link HTTPS a tinyurl, che punta a sslip.io con nostro server locale in HTTP, i.e: http://192.168.0.15.sslip.io:8080/transazione
        6) Notare come tinyurl è uno dei pochi shortener che permette parametri in GET
        7) Creiamo il nostro bel QR così finchè non avremo un server HTTPS in produzione con dei certificati veri
        8) TODO: investigare l'utilizzo di "ngrok" per un tunneling HTTPS, ma probabilemente non ne vale la pena
@@ -84,8 +84,8 @@ PoCRounter.get("/qr", async (req: Request, res: Response) => {
 });
 
 
-PoCRounter.get("/", async (req: Request, res: Response) => {
+PoCRouter.get("/", async (req: Request, res: Response) => {
   res.render("PoC");
 });
 
-export {PoCRounter};
+export {PoCRouter};
