@@ -10,21 +10,20 @@ PoCRounter.get("/", async (req: Request, res: Response) => {
     if (err) {
       return res.status(500).json({"errorMessage": err.message});
     }
-    
+
     let transazioni_string: string = "";
     for (let i = 0; i < transazioni.length; i++) {
-      transazioni_string += 
-      "<a href=\"PoC/transazione?id="+ transazioni[i].id +"\">ID: " + transazioni[i].id + "</a>    " + 
+      transazioni_string +=
+      "<a href=\"PoC/transazione?id="+ transazioni[i].id +"\">ID: " + transazioni[i].id + "</a>    " +
       "E-Commerce: " + transazioni[i].ecommerce + "    " +
       "<a href=\"PoC/qr?id="+ transazioni[i].id +"\">QR</a><br><br>";
     }
-
     res.render("PoC", {transazioni:transazioni_string});
   });
 });
 
 PoCRounter.get("/qr", async (req: Request, res: Response) => {
-    /* 
+    /*
        TL;DR
        1) Metamask su android non permette di collegarsi direttamente a un server locale senza passare per un DNS
        2) sslip.io (perchè quello indicato sulla loro documentazione ufficiale neanche esiste più da un bel po') ci fa da DNS
@@ -47,7 +46,6 @@ PoCRounter.post("/", async (req: Request, res: Response) => {
     if (err) {
       return res.status(500).json({"message": err.message});
     }
-      
     res.redirect('/PoC');
   });
 });

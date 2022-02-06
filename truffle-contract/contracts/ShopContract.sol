@@ -40,9 +40,6 @@ contract ShopContract is Ownable{
     event paymentSettled(uint256 settledPaymentId);
     event paymentCancelled(uint256 settledPaymentId);
 
-    event returnedPaymentEntry(PaymentEntry paymentEntry);
-    event returnedSettledPayment(SettledPayment settledPayment);
-
     function addPaymentEntry(string calldata objId, uint256 price) public{
 
         require(price > 0);
@@ -96,17 +93,17 @@ contract ShopContract is Ownable{
 
     }
 
-    function getPaymentEntry(uint256 paymentEntryId) public{
+    function getPaymentEntry(uint256 paymentEntryId) public view returns(PaymentEntry memory){
 
         require(paymentEntryId < freePaymentEntryId);
-        emit returnedPaymentEntry(paymentsEntries[paymentEntryId]);
+        return paymentsEntries[paymentEntryId];
 
     }
 
-    function getSettledPayment(uint256 settledPaymentId) public{
+    function getSettledPayment(uint256 settledPaymentId) public view returns(SettledPayment memory){
 
         require(settledPaymentId < freeSettledPaymentId);
-        emit returnedSettledPayment(settledPayments[settledPaymentId]);
+        return settledPayments[settledPaymentId];
 
     }
 
