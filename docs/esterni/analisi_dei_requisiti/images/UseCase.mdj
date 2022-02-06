@@ -42093,7 +42093,7 @@
 											"top": 355.5,
 											"width": 248,
 											"height": 13,
-											"text": "UCa.2 Errore nella connessione alla rete"
+											"text": "UCa.2 Errore transazione non inviata"
 										},
 										{
 											"_type": "LabelView",
@@ -42126,7 +42126,7 @@
 									"font": "Arial;13;0",
 									"left": 777.5,
 									"top": 348.5,
-									"width": 258.548828125,
+									"width": 258,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF+yu41DLHE4Oo="
@@ -42780,7 +42780,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF+ymeDJWfRt+0="
 					},
-					"name": "UCa.2 Errore nella connessione alla rete",
+					"name": "UCa.2 Errore transazione non inviata",
 					"ownedElements": [
 						{
 							"_type": "UMLExtend",
