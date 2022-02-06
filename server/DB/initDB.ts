@@ -13,8 +13,7 @@ export const initDB = () => {
 					return;
 				}
 				syncDB();
-				}
-			);
-		}
-	);
+			
+		});
+	});
 };
