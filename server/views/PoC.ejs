@@ -5,9 +5,16 @@
 
         <br>
 
-        <label>ID Oggetto: </label><br>
-	<input id="idInput" placeholder="ID Oggetto">
+        <label>ID istanza di pagamento: </label><br>
+	<input id="idInput" placeholder="ID Istanza">
         <button disabled id="settlePaymentButton"> Paga </button>
+
+        <br>
+        <br>
+
+        <label>ID pagamento completato: </label><br>
+	<input id="idPag" placeholder="ID pagamento">
+        <button disabled id="unlockFundsButton"> Sblocca fondi </button>
 
         <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
@@ -25,6 +32,6 @@
         <br>
 
 	<a href="transazioni"> Lista transazioni </a>
-	
+
 
 <%- include('footer.ejs') %>

@@ -3,6 +3,7 @@ const forwarderOrigin = currentUrl.hostname === 'localhost' ? 'http://localhost:
 
 const connectButton = document.getElementById('connectButton');
 const settlePaymentButton = document.getElementById("settlePaymentButton");
+const unlockFundsButton = document.getElementById("unlockFundsButton");
 
 let chainId;
 let accounts;
@@ -124,6 +125,49 @@ const onClickSettlePayment = () => {
 
 }
 
+const onClickUnlockFunds = () => {
+
+    let intId = parseInt(chainId, 16);
+
+    if(intId == 80001){ //the contract is deployed only in mumbai testnet
+
+        const shopContract = new web3.eth.Contract(contractABI, contractAddress);
+        const idSettledPayment = document.getElementById("idPag").value;
+
+        shopContract.methods.getSettledPayment(idSettledPayment).call()
+            .then(settledPayment => {
+
+                alert("Cliente: " + settledPayment.client + "\nStato: " + settledPayment.status);
+
+                shopContract.methods.unlockFunds(idSettledPayment).send({from: accounts[0]})
+                    .on('transactionHash', function(hash){
+                        //do smth
+                    })
+                    .on('confirmation', function(confirmationNumber, receipt){
+                        //do smth
+                    })
+                    .on('receipt', function(receipt){
+                        console.log(receipt);
+                        alert("ID pagamento fondi sbloccati: " + receipt.events.fundsUnlocked.returnValues.settledPaymentId);
+                    })
+                    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+                        console.log(error);
+                    }
+
+                );
+
+            }, reason => {
+
+                console.log("Error: " + reason);
+
+            }
+        );
+
+    }
+
+}
+
+
 const isMetamaskConnected = async () => {
 
     const accountsList = await ethereum.request({
@@ -151,6 +195,9 @@ const onMetamaskConnected = async () => {
 
         settlePaymentButton.onclick = onClickSettlePayment;
         settlePaymentButton.disabled = false;
+
+        unlockFundsButton.onclick = onClickUnlockFunds;
+        unlockFundsButton.disabled = false;
 
         ethereum.on('chainChanged', handleNewChain);
         ethereum.on('accountsChanged', handleNewAccounts);
