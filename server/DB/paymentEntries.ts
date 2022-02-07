@@ -3,7 +3,7 @@ import {db} from "./connection";
 import { OkPacket, RowDataPacket } from "mysql2";
 
 export const create = (pagamento: paymentEntry, callback: Function) => {
-  const queryString = "INSERT INTO PaymentEntry (id, ecommerce) VALUES (?, ?)"
+  const queryString = "INSERT IGNORE INTO PaymentEntry (id, ecommerce) VALUES (?, ?)"
   
   db.query(
     queryString,
