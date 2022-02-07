@@ -17,7 +17,7 @@ contract ShopContract is Ownable{
     struct PaymentEntry{
         address seller;
         string objId;
-        uint256 price;
+        uint256 price; //10^18 = 1 Matic
     }
 
     struct SettledPayment{

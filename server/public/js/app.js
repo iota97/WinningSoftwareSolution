@@ -94,9 +94,9 @@ const onClickSettlePayment = () => {
         shopContract.methods.getPaymentEntry(index).call()
             .then(paymentEntry => {
 
-                alert("Venditore: " + paymentEntry.seller + "\nPrezzo: " + paymentEntry.price);
+                alert("Venditore: " + paymentEntry.seller + "\nPrezzo: " + paymentEntry.price / Math.pow(10, 18) + " MATIC");
 
-                shopContract.methods.settlePayment(index).send({from: accounts[0], value: paymentEntry.price * Math.pow(10, 18)}) //18 decimals
+                shopContract.methods.settlePayment(index).send({from: accounts[0], value: paymentEntry.price}) //18 decimals
                     .on('transactionHash', function(hash){
                         //do smth
                     })
