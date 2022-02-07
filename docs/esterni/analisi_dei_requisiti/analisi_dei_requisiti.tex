@@ -32,6 +32,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.11}{04/02/2022}{Giovanni Cocco}{Correzione}{Correzioni varie}
 \addversione{0.0.12}{05/02/2022}{Alberto Nicoletti}{Riscrittura}{Riscrittura di alcuni casi d'uso a seguito di una discussione interna al gruppo}
 \addversione{0.0.13}{06/02/2022}{Alberto Nicoletti}{Stesura e correzioni}{Stesura UC12 e UC13, correzioni varie}
+\addversione{0.0.14}{06/02/2022}{Andrea Volpe}{Stesura e correzioni}{Modificato quasi tutti i requisiti e correzioni varie, in base all'incontro del verbale 2022_02_04_I}
 
 \begin{document}
 
@@ -187,6 +188,7 @@ lo script salva in un file di log il messaggio di errore.
 
 \paragraph{UC6 - Accesso al sistema (landing page)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
+\textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: L'acquirente in landing page non è connesso con metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
@@ -237,14 +239,24 @@ UC9.1 visualizzazione errore pagamento non riuscito:
 
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
 
-\paragraph{UC10 - Visualizzazione conferma ricezione}\\
+\paragraph{UC10 - Accesso al sistema (WebApp Acquirente)}\\
+\textbf{Attore primario}: Acquirente con wallet non connesso.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'acquirente nella webapp acquirente non è connesso con metamask.\\
+\textbf{Postcondizioni}: L'acquirente accede al sistema.\\
+\textbf{Scenario principale}:
+L'acquirente usando Metamask, si connette con il proprio wallet.
+
+\includegraphics[width=0.9\textwidth]{UC_WAA2}
+
+\paragraph{UC11 - Visualizzazione conferma ricezione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente è connesso con Metamask ed è arrivato alla pagina di conferma ricezione scansionando il QR Code sul pacco del prodotto.\\
 \textbf{Postcondizioni}: L'acquirente visualizza la pagina della transazione relativa al pacco appena ricevuto.\\
 \textbf{Scenario principale}:
 Vengono mostrati i dati relativi alla transazione e un pulsante per confermare la ricezione del pacco.
 
-\paragraph{UC11 - Conferma ricezione}\\
+\paragraph{UC12 - Conferma ricezione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente è connesso con Metamask alla pagina di conferma ricezione e conferma la ricezione del pacco.\\
 \textbf{Postcondizioni}: L'acquirente ha confermato la ricezione del pacco, i fondi sono stati sbloccati.\\
@@ -254,7 +266,7 @@ Vengono mostrati i dati relativi alla transazione e un pulsante per confermare l
     \item il denaro viene sbloccato e mandato nel wallet del venditore.
 \end{enumerate}
 \textbf{Estensione}:
-UC11.1 Errore wallet non corretto:
+UC12.1 Errore wallet non corretto:
 \begin{enumerate}
     \item Viene mostrato un messaggio di errore spiegando che il wallet con cui è connesso l'acquirente non è corretto.
     \item Si invita a cambiare wallet e riprovare.
@@ -262,7 +274,17 @@ UC11.1 Errore wallet non corretto:
 
 \includegraphics[width=0.9\textwidth]{UC_ECA1}
 
-\paragraph{UC12 visualizzazione lista transazioni}\\
+\paragraph{UC13 - Accesso al sistema (pagina lista transazioni acquirente in e-commerce)}\\
+\textbf{Attore primario}: Acquirente con wallet non connesso.\\
+\textbf{Attore secondario}: Metamask.\\
+\textbf{Precondizioni}: L'acquirente, nella pagina con la sua lista delle transazioni in e-commerce, non è connesso con metamask.\\
+\textbf{Postcondizioni}: L'acquirente accede alla pagina con la sua lista delle transazioni in e-commerce.\\
+\textbf{Scenario principale}:
+L'acquirente usando Metamask, si connette con il proprio wallet.
+
+\includegraphics[width=0.9\textwidth]{UC_ECA2}
+
+\paragraph{UC14 visualizzazione lista transazioni}\\
 \textbf{Attore primario}: Acquirente con wallet connesso. \\
 \textbf{Attore secondario}: Database. \\
 \textbf{Precondizioni}: L'acquirente ha effettuato l'accesso al sistema.\\
@@ -274,7 +296,7 @@ UC11.1 Errore wallet non corretto:
 \item Il sistema mostra all'acquirente l'elenco delle transazioni richieste.
 \end{enumerate}
 
-\paragraph{UC13 - visualizzazione dettaglio transazione}\\
+\paragraph{UC15 - visualizzazione dettaglio transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Attore secondario}: Database.\\
 \textbf{Precondizioni}: L'acquirente ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
@@ -285,21 +307,21 @@ UC11.1 Errore wallet non corretto:
 \item L'acquirente visualizza i dettagli della singola transazione.
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UC_ECA2}
+\includegraphics[width=0.9\textwidth]{UC_ECA3}
 
-\paragraph{13.1 - Visualizzazione stato transazione}\\
+\paragraph{UC15.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente vuole visualizzare lo stato di una transazione.\\
 \textbf{Postcondizioni}: L'acquirente visualizza lo stato di una transazione.\\
 \textbf{Scenario principale}: Viene mostrato lo stato della transazione: in attesa o completata.\\
 
-\paragraph{UC13.2 - Visualizzazione importo transazione}\\
+\paragraph{UC15.2 - Visualizzazione importo transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente vuole visualizzare l'importo di una transazione.\\
 \textbf{Postcondizioni}: L'acquirente visualizza l'importo di una transazione.\\
 \textbf{Scenario principale}: Viene mostrato l'importo della transazione in dollari.\\
 
-\paragraph{UC13.3 - Visualizzazione scadenza transazione}\\
+\paragraph{UC15.3 - Visualizzazione scadenza transazione}\\
 \textbf{Attore primario}: Acquirente  con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente vuole visualizzare la scadenza di una transazione in attesa.\\
 \textbf{Postcondizioni}: L'acquirente visualizza la scadenza di una transazione in attesa.\\
@@ -342,49 +364,78 @@ Ogni requisito è indentificato da un codice univoco composto da: R(per requisit
  Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endhead
-
+% WEBAPP VENDITORE
 \hline
-RFO01 & Il venditore privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
+RFO01 & Per accedere alla webapp venditore il venditore con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
 \hline
-RFO02 & L'acquirente privo di wallet riconosciuto deve poter far riconoscere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC14 \\
+RFO02 & Un venditore con wallet non connesso non può accedere alla webapp venditore. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO03 & Il venditore con wallet già associato tramite metamask deve poter accedere automaticamente al sistema. & Obbligatorio & UC7, UC15 \\
+RFO03 & Il venditore deve poter visualizzare la lista delle transazioni nella webapp venditore. & Obbligatorio & UC3 \\ 
 \hline
-RFO04 & L'acquirente con wallet già associato tramite metamask deve poter accedere automaticamente al sistema. & Obbligatorio & UC7, UC15 \\
+RFO04 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il suo stato (attesa o completata). & Obbligatorio & UC4.1 \\ 
 \hline
-RFO05 & Un utente privo di wallet riconosciuto non può accedere al sistema. & Obbligatorio & Capitolato, decisione interna \\
+RFO05 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il QR Code da applicare sul pacco. & Obbligatorio & UC4.2 \\ 
 \hline
-RFO06 & Il sistema deve mostrare un messaggio di errore se la procedura di riconoscimento wallet tramite Metamask fallisce. & Obbligatorio & UC3.2, UC11, UC18 \\
+RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, l'importo in dollari. & Obbligatorio & UC4.3 \\ 
 \hline
-RFO07 & Il venditore deve poter visualizzare la lista delle transazioni. & Obbligatorio & UC3 \\ 
+RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\ 
 \hline
-RFO08 & Il venditore deve poter visualizzare i dettagli di una singola transazione. & Obbligatorio & UC4 \\ 
+RFO08 & L'acquirente deve ricevere indietro la valuta bloccata con cui ha pagato per la transazione, quando la transazione scade. & Obbligatorio & Decisione interna, UC4.4 \\ 
 \hline
-RFO09 & Il venditore deve poter visualizzare, per ogni transazione, il suo stato, l'importo, e la scadenza. & Obbligatorio & UC4.1, UC4.3 e UC4.4 \\ 
+% SCRIPT
+RFO09 & Il prodotto deve essere pubblicato automaticamente in blockchain, quando il venditore inserisce un nuovo prodotto nell'e-commerce, grazie al nostro script incluso dal venditore nel suo e-commerce. & Obbligatorio & UC5 \\ 
 \hline
-RFO10 & Il venditore deve poter generare il QR Code corrispondente ad una certa transazione, direttamente dalla pagina di visualizzazione dei dettagli della stessa. & Obbligatorio & UC4.2 \\ 
+RFO10 & Il nostro script deve salvare un messaggio di errore in un file di log, se la pubblicazione del prodotto in blockchain dall'e-commerce (grazie allo script) fallisce. & Obbligatorio & UC5.1 \\ 
 \hline
-RFO11 & Ad ogni inserimento di un nuovo prodotto nel sito di e-commerce del venditore, in automatico viene inserito lo stesso prodotto in blockchain. & Obbligatorio & UC5 \\ 
+% LANDING PAGE
+RFO11 & Per accedere alla landing page l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC15 \\
 \hline
-RFO12 & L'acquirente con wallet associato deve poter vedere il riepilogo del'ordine sulla landing page. & Obbligatorio & UC8 \\
+RFO12 & Un acquirente con wallet non connesso non può accedere alla landing page. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO13 & Il costo nel riepilogo ordine sulla landing page deve essere visualizzato in dollari. & Obbligatorio & UC8.1 \\
+RFO13 & L'acquirente con wallet connesso deve vedere il prezzo da pagare in dollari nella landing page. & Obbligatorio & UC7 \\
 \hline
-RFO14 & L'acquirente con wallet associato deve poter confermare l'ordine sulla landing page. & Obbligatorio & UC9 \\
+RFO14 & L'acquirente con wallet connesso poter confermare il pagamento nella landing page. & Obbligatorio & UC8 \\
 \hline
-RFO15 & Il sistema deve mostrare un messaggio se l'utente annulla l'ordine sulla landing page. & Obbligatorio & UC12 \\
+RFO15 & Il sistema deve mostrare un messaggio "ordine annullato" se l'acquirente con wallet connesso annulla il pagamento sulla landing page. & Obbligatorio & UC8.1 \\
 \hline
-RFO16 & L'acquirente con wallet associato deve poter pagare l'ordine sulla landing page tramite Metamask. & Obbligatorio & UC10 \\
+RFO16 & Il sistema deve cancellare la sessione di pagamento se l'acquirente con wallet connesso annulla il pagamento sulla landing page. & Obbligatorio & UC8.1 \\
 \hline
-RFO17 & Il sistema deve mostrare un messaggio di errore se la procedura di pagamento sulla landing page tramite Metamask fallisce. & Obbligatorio & UC13 \\
+RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente su metamask per completare il pagamento, quando conferma il pagamento sulla landing page. & Obbligatorio & UC9 \\
 \hline
-RFO18 & L'acquirente con wallet associato deve poter scansionare il QR Code sulla webapp. & Obbligatorio & UC16 \\
+RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non va a buon fine quando l'acquirente con wallet connesso effettua il pagamento tramite metamask. & Obbligatorio & UC9.1 \\
 \hline
-RFO19 & Il sistema deve mostrare un messaggio di errore se la procedura di scansione QR Code nella webapp fallisce. & Obbligatorio & UC19 \\
+% WEBAPP ACQUIRENTE
+RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC10 \\
 \hline
-RFO20 & L'acquirente con wallet associato deve poter accettare l'ordine sulla webapp tramite Metamask. & Obbligatorio & UC17 \\
+RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO21 & Il sistema deve mostrare un messaggio di errore se la procedura di accettazione ordine nella webapp tramite Metamask fallisce. & Obbligatorio & UC20 \\
+RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in cryptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il qr-code sul pacco. & Obbligatorio & UC11 \\
+\hline
+RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il qr-code sul pacco. & Obbligatorio & UC12 \\
+\hline
+RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transizione. & Obbligatorio & UC12.1 \\
+\hline
+% ECOMMERCE
+RFO24 & Per accedere alla pagina con la sua lista delle transazioni in e-commerce, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC13 \\
+\hline
+RFO25 & Un acquirente con wallet non connesso non può accedere alla pagina con la sua lista delle transazioni in e-commerce. & Obbligatorio & Capitolato, decisione interna \\
+\hline
+RFO26 & L'acquirente con wallet connesso deve poter visualizzare la lista delle sue transazioni in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC14 \\
+\hline
+RFO27 & L'acquirente con wallet connesso deve poter visualizzare lo stato di ogni sua transazione (attesa o completata) in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.1 \\
+\hline
+RFO28 & L'acquirente con wallet connesso deve poter visualizzare l'importo di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.2 \\
+\hline
+RFO29 & L'acquirente con wallet connesso deve poter visualizzare l'importo in dollari di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.2 \\
+\hline
+RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.3 \\
+\hline
+% CONTROLLI
+RFO31 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente(acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
+\hline
+RFO32 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
+\hline
+RFO33 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore nessun risultato ottenibile" se la transazione è stata inviata in maniera corretta ma non è stata ottenuto alcun risultato di risposta. & Obbligatorio & UCa.3 \\
 \hline
 
 \end{longtable}
@@ -407,24 +458,18 @@ RFO21 & Il sistema deve mostrare un messaggio di errore se la procedura di accet
  \endhead
 
 \hline
-RNO22 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna \\
+RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RND23 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
-della componente web application del sistema. & Desiderabile &  Capitolato\\
+RND02 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato \\
 \hline
-RND24 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato \\
+RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna\\
 \hline
-RND25 & Utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end
-della componente web application del sistema. & Desiderabile &  Capitolato\\
-\hline
-RNO26 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna\\
-\hline
-RNO27 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
+RNO04 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
 con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato\\
 \hline
-RNO28 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
+RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
 \hline
-RNO29 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per l'invio automatico dei nuovi prodotti in BlockChain. & Obbligatorio & UC5, decisione interna\\
+RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in BlockChain. & Obbligatorio & UC5, decisione interna\\
 \hline
 
 \end{longtable}
