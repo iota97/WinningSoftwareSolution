@@ -22,7 +22,7 @@ PoCRouter.get("/items", async (req: Request, res: Response) => {
       "<tr><td>ID: " + item[i].id + "</td>" +
       "<td>E-Commerce: " + item[i].ecommerce + "</td>" +
       "<td>ID Oggetto: ###OBJID"+item[i].id+"###</td>" +
-      "<td>Prezzo: ###PREZZO"+item[i].id+"### Wei</td></tr>";
+      "<td>Prezzo: ###PREZZO"+item[i].id+"### Matic</td></tr>";
       
       
       promises.push(shopContract.methods.getPaymentEntry(item[i].id).call());
@@ -32,7 +32,7 @@ PoCRouter.get("/items", async (req: Request, res: Response) => {
     
     Promise.all(promises).then(function(result) {
       for (let i = 0; i < ids.length; i++) {
-        item_string = item_string.replace("###PREZZO"+ids[i]+"###", result[i]!['price'] );
+        item_string = item_string.replace("###PREZZO"+ids[i]+"###", String(Number(result[i]!['price']) / Math.pow(10, 18)));
         item_string = item_string.replace("###OBJID"+ids[i]+"###", result[i]!['objId'] );
       }
       res.render("items", {item: item_string});
