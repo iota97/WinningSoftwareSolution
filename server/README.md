@@ -19,3 +19,9 @@ Crea un report dei test, ancora pochi test dato che è un PoC e sarà modificato
 
 # In caso di modifica contratto
 Se il contratto viene modificato potrebbe diventare incosistente con DB SQL, eliminate tutte le tabelle e il server effettuerà un sync completo
+
+# Selezione rete di test da Metamask
+Andare su https://chainlist.org/ ricercare "mumbai" e cliccare "Connect Wallet" e "Add to Metamask" (in alto metamask dovrebbe mostrare questa rete, oppure selezionarla dalla lista)
+
+# Aggiungere valuta al wallet (rete di test)
+Andare su https://faucet.polygon.technology/ inserire il proprio wallet e cliccare "Submit"
