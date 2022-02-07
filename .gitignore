@@ -21,3 +21,5 @@ build
 node_modules
 test
 *.sh
+__pycache__
+/script/.env
