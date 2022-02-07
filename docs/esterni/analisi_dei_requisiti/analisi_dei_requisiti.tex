@@ -108,7 +108,7 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Attore primario}: Venditore con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
 \textbf{Precondizioni}: Il venditore vuole accedere alla webapp.\\
-\textbf{Postcondizioni}: Il venditore si è connesso alla webapp con metamask.\\
+\textbf{Postcondizioni}: Il venditore si è connesso alla webapp con Metamask.\\
 \textbf{Scenario principale}:
 Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
@@ -189,7 +189,7 @@ lo script salva in un file di log il messaggio di errore.
 \paragraph{UC6 - Accesso al sistema (landing page)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente in landing page non è connesso con metamask.\\
+\textbf{Precondizioni}: L'acquirente in landing page non è connesso con Metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
 L'acquirente usando Metamask, si connette con il proprio wallet.
@@ -204,7 +204,7 @@ L'acquirente usando Metamask, si connette con il proprio wallet.
 Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in dollari da pagare.
 
 \paragraph{UC8 - Conferma pagamento}\\
-\textbf{Attore primario}: Acquirente riconsocito.\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'acquirente sta effettuando un acquisto e il sistema mostra il riepilogo della transazione.\\
 \textbf{Postcondizioni}: L'acquirente ha confermato il pagamento.\\
 \textbf{Scenario principale}:
@@ -242,7 +242,7 @@ UC9.1 visualizzazione errore pagamento non riuscito:
 \paragraph{UC10 - Accesso al sistema (WebApp Acquirente)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente nella webapp acquirente non è connesso con metamask.\\
+\textbf{Precondizioni}: L'acquirente nella webapp acquirente non è connesso con Metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede al sistema.\\
 \textbf{Scenario principale}:
 L'acquirente usando Metamask, si connette con il proprio wallet.
@@ -277,7 +277,7 @@ UC12.1 Errore wallet non corretto:
 \paragraph{UC13 - Accesso al sistema (pagina lista transazioni acquirente in e-commerce)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
 \textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente, nella pagina con la sua lista delle transazioni in e-commerce, non è connesso con metamask.\\
+\textbf{Precondizioni}: L'acquirente, nella pagina con la sua lista delle transazioni in e-commerce, non è connesso con Metamask.\\
 \textbf{Postcondizioni}: L'acquirente accede alla pagina con la sua lista delle transazioni in e-commerce.\\
 \textbf{Scenario principale}:
 L'acquirente usando Metamask, si connette con il proprio wallet.
@@ -400,18 +400,18 @@ RFO15 & Il sistema deve mostrare un messaggio "ordine annullato" se l'acquirente
 \hline
 RFO16 & Il sistema deve cancellare la sessione di pagamento se l'acquirente con wallet connesso annulla il pagamento sulla landing page. & Obbligatorio & UC8.1 \\
 \hline
-RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente su metamask per completare il pagamento, quando conferma il pagamento sulla landing page. & Obbligatorio & UC9 \\
+RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente su Metamask per completare il pagamento, quando conferma il pagamento sulla landing page. & Obbligatorio & UC9 \\
 \hline
-RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non va a buon fine quando l'acquirente con wallet connesso effettua il pagamento tramite metamask. & Obbligatorio & UC9.1 \\
+RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non va a buon fine quando l'acquirente con wallet connesso effettua il pagamento tramite Metamask. & Obbligatorio & UC9.1 \\
 \hline
 % WEBAPP ACQUIRENTE
 RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC10 \\
 \hline
 RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in cryptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il qr-code sul pacco. & Obbligatorio & UC11 \\
+RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in cryptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
 \hline
-RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il qr-code sul pacco. & Obbligatorio & UC12 \\
+RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC12 \\
 \hline
 RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transizione. & Obbligatorio & UC12.1 \\
 \hline
@@ -431,11 +431,11 @@ RFO29 & L'acquirente con wallet connesso deve poter visualizzare l'importo in do
 RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.3 \\
 \hline
 % CONTROLLI
-RFO31 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente(acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
+RFO31 & Il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente(acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
 \hline
-RFO32 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
+RFO32 & Il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
 \hline
-RFO33 & Per RFOX, il sistema deve mostrare un messaggio di errore "Errore nessun risultato ottenibile" se la transazione è stata inviata in maniera corretta ma non è stata ottenuto alcun risultato di risposta. & Obbligatorio & UCa.3 \\
+RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato ottenibile" se la transazione è stata inviata in maniera corretta ma non è stata ottenuto alcun risultato di risposta. & Obbligatorio & UCa.3 \\
 \hline
 
 \end{longtable}
