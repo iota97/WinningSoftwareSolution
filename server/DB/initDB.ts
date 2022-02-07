@@ -12,7 +12,19 @@ export const initDB = () => {
 				console.log(err);
 				return;
 			}
-			syncDB();
+			db.query("CREATE TABLE IF NOT EXISTS LastBlockSync (id int(1), value int(255), primary key(id));", (err) => {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				db.query("INSERT IGNORE INTO LastBlockSync (id, value) VALUES (0, 0);", (err) => {
+					if (err) {
+						console.log(err);
+						return;
+					}
+					syncDB();
+				});
+			});
 		});
 	});
 };
