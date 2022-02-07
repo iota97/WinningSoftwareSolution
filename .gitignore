@@ -9,9 +9,6 @@
 *.fls
 *.fdb_latexmk
 .DS_Store
-!docs/esterni/candidatura/*.pdf
-!docs/interni/verbali/2021_10_28_E/*.pdf
-!docs/interni/verbali/2021_11_12_E/*.pdf
 server/package-lock.json
 server/node_modules
 server/build
