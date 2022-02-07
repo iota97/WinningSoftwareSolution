@@ -84,7 +84,7 @@ PoCRouter.get("/qr", async (req: Request, res: Response) => {
   8) TODO: investigare l'utilizzo di "ngrok" per un tunneling HTTPS, ma probabilemente non ne vale la pena
   9) In produzione sarà compito dei sistemisti configurare il traffico HTTP in uscita dal server per essere in HTTPS
   */
-  const qr_str = "https://metamask.app.link/dapp/" + "tinyurl.com/" + process.env.TINYURL + "?id=" + req.query.id;
+  const qr_str = "https://metamask.app.link/dapp/" +  process.env.QR_URL + "?id=" + req.query.id;
   qr.toDataURL(qr_str, (err, src) => {
     if (err) res.send("Error occured in QR");
     res.render("QR", {qr_img:src});
