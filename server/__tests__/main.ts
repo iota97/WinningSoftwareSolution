@@ -1,12 +1,12 @@
 import request from 'supertest'
 import {Express} from 'express-serve-static-core'
 
-import {createServer} from '../routes/index'
+import {createWebServer} from '../routes/index'
 
 describe('Server', function () {
   let server : Express
   beforeEach(function () {
-    server = createServer();
+    server = createWebServer();
   });
 
   it('Connect to /', function testSlash(done) {
