@@ -22,7 +22,7 @@ PoCRouter.get("/items", async (req: Request, res: Response) => {
       "<tr><td>ID: " + item[i].id + "</td>" +
       "<td>E-Commerce: " + item[i].ecommerce + "</td>" +
       "<td>ID Oggetto: ###OBJID"+item[i].id+"###</td>" +
-      "<td>Prezzo: ###PREZZO"+item[i].id+"### Matic</td></tr>";
+      "<td>Prezzo: ###PREZZO"+item[i].id+"### Wei</td></tr>";
       
       
       promises.push(shopContract.methods.getPaymentEntry(item[i].id).call());

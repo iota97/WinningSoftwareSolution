@@ -193,11 +193,15 @@ const onMetamaskConnected = async () => {
 
         connectButton.disabled = true;
 
-        settlePaymentButton.onclick = onClickSettlePayment;
-        settlePaymentButton.disabled = false;
+        if (settlePaymentButton) {
+		settlePaymentButton.onclick = onClickSettlePayment;
+		settlePaymentButton.disabled = false;
+	}
 
-        unlockFundsButton.onclick = onClickUnlockFunds;
-        unlockFundsButton.disabled = false;
+	if (unlockFundsButton) {
+		unlockFundsButton.onclick = onClickUnlockFunds;
+		unlockFundsButton.disabled = false;
+	}
 
         ethereum.on('chainChanged', handleNewChain);
         ethereum.on('accountsChanged', handleNewAccounts);
