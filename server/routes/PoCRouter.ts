@@ -66,7 +66,7 @@ PoCRouter.get("/transazione", async (req: Request, res: Response) => {
       console.log(err);
     } else {
       const stato = item.status == 0 ? "Cancellato" : item.status == 1 ? "In attesa" : "Sbloccato";
-      res.render("transazione", {idTransazione: req.query.id, acquirente: item.client, paymentEntryId: item.paymentEntryId, status: stato});        
+      res.render("transazione", {serverURL: process.env.SERVER_URL, idTransazione: req.query.id, acquirente: item.client, paymentEntryId: item.paymentEntryId, status: stato});        
     }
   });
 });
@@ -78,13 +78,13 @@ PoCRouter.get("/qr", async (req: Request, res: Response) => {
   2) Metamask ha un eccezione hardcoddata che lo permette per le connessioni provenienti da sslip.io (la documentazione dice di usare xip.io che non è sbagliato da agosto)
   3) PR per aggiornare la documentazione: https://github.com/MetaMask/metamask-docs/pull/396
   4) I deep link funzionano solo se in HTTPS, Android dalla versione 7 non permette di aggiungere certificati senza ricompilare l'app
-  5) Creiamo un link HTTPS a tinyurl, che punta a sslip.io con nostro server locale in HTTP, i.e: http://192.168.0.15.sslip.io:8080/transazione
+  5) Creiamo un link HTTPS a tinyurl, che punta a sslip.io con nostro server locale in HTTP, i.e: http://192.168.0.15.sslip.io:8080/
   6) Notare come tinyurl è uno dei pochi shortener che permette parametri in GET
   7) Creiamo il nostro bel QR così finchè non avremo un server HTTPS in produzione con dei certificati veri
   8) TODO: investigare l'utilizzo di "ngrok" per un tunneling HTTPS, ma probabilemente non ne vale la pena
   9) In produzione sarà compito dei sistemisti configurare il traffico HTTP in uscita dal server per essere in HTTPS
   */
-  const qr_str = "https://metamask.app.link/dapp/" +  process.env.QR_URL + "?id=" + req.query.id;
+  const qr_str = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/transazione?id=" + req.query.id;
   qr.toDataURL(qr_str, (err, src) => {
     if (err) res.send("Error occured in QR");
     res.render("QR", {qr_img:src});
@@ -93,7 +93,7 @@ PoCRouter.get("/qr", async (req: Request, res: Response) => {
 
 
 PoCRouter.get("/", async (req: Request, res: Response) => {
-  res.render("PoC");
+  res.render("PoC", {serverURL: process.env.SERVER_URL});
 });
 
 export {PoCRouter};
