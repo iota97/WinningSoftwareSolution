@@ -22,7 +22,7 @@ contract ShopContract is Ownable{
 
     struct SettledPayment{
         uint256 paymentEntryId;
-        uint256 status; //0 cancelled, 1 paid, 2 money unlocked and sent to seller
+        uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 money sent to seller
         address client;
     }
 
@@ -39,6 +39,7 @@ contract ShopContract is Ownable{
     event addedPaymentEntry(uint256 paymentEntryId);
     event paymentSettled(uint256 settledPaymentId);
     event paymentCancelled(uint256 settledPaymentId);
+    event fundsUnlocked(uint256 settledPaymentId);
 
     function addPaymentEntry(string calldata objId, uint256 price) public{
 
@@ -90,6 +91,18 @@ contract ShopContract is Ownable{
         settledPayments[settledPaymentId].status = 0;
 
         emit paymentCancelled(settledPaymentId);
+
+    }
+
+    function unlockFunds(uint256 settledPaymentId) public{
+
+        require(settledPayments[settledPaymentId].client == msg.sender);
+        require(settledPayments[settledPaymentId].status == 1);
+
+        settledPayments[settledPaymentId].status = 2;
+        //qui deve andare il timer/inviare i soldi al venditore/logica e controlli
+
+        emit fundsUnlocked(settledPaymentId);
 
     }
 
