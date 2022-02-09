@@ -42,46 +42,47 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 
 \section{Introduzone}
 \subsection{Scopo del documento}
-Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione, di verifica e di validazione. 
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione, di verifica e di validazione.
 
 \section{Descrizione del prodotto}
 L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
-BlockChain}. L'obiettivo è sviluppare un sistema che permetta ad un qualsiasi e-commerce di usare criptovalute come metodo di pagamento. Ciò consiste nella realizzazione su blockchain di una piattaforma che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
+BlockChain}. L'obiettivo è sviluppare un sistema di pagamento sicuro e \textit{super partes} per Ecommerce che trattenga i fondi durante la spedizione e che li sblocchi all'arrivo del pacco. Ciò consiste nella realizzazione su blockchain di un contratto digitale che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
 \subsection{Scopo del prodotto}
-Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere possibile l'acquisto di prodotti tramite criptovalute in sicurezza. Il processo di trasferimento del denaro avviene seguendo queste fasi:
+Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere automatizzato e sicuro lo smistamento dei fondi da clienti a Ecommerce. Il processo di trasferimento del denaro avviene seguendo queste fasi:
 \begin{enumerate}
-\item caricamento dei dati dell'ordine di acquisto nella blockchain e generazione dello smart contract;
-\item trasferimento del denaro dal wallet dell'acquirente in blockchain;
-\item notifica al venditore dell'avvenuto pagamento e blocco del denaro in blockchain;
+\item caricamento dei dati dell'ordine di acquisto su contratto digitale;
+\item trasferimento del denaro dal wallet dell'acquirente al contratto;
+\item notifica al venditore dell'avvenuto pagamento;
 \item conferma di ricezione del pacco da parte dell'acquirente tramite scannerizzazione di un QR Code sul pacco del prodotto acquistato;
-\item sblocco del denaro e trasferimento nel wallet del venditore.
+\item invio del denaro dal contratto al wallet del venditore.
 \end{enumerate}
 \subsection{Parti del prodotto}
 Il prodotto software è composto dalle seguenti parti:
 \begin{itemize}
-\item smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro;
-\item landing page per il pagamento da parte del acquirente;
-\item piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente;
-\item webapp per la scannerizzazione del QR Code per la conferma ricezione pacco.
+\item smart contract nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro;
+\item script per la messa in vendita automatizzata su contratto da integrare nel backend del venditore;
+\item landing page per il pagamento da parte dell'acquirente;
+\item piattaforma web per la visualizzazione e gestione delle transazioni da parte di sia venditore sia acquirente;
+\item webapp che consente lo sblocco dei fondi dal contratto.
 \end{itemize}
 \subsection{Caratteristiche utenti}
 Gli utenti di \textit{ShopChain} possono essere suddivisi in due categorie:
 \begin{itemize}
-\item venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere le criptovalute come metodo di pagamento;
-\item acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare le criptovalute come pagamento per i prodotti da acquistare.
+\item venditore: gli amministratori di un sito di e-commerce che vogliono aggiungere \textit{ShopChain} come metodo di pagamento;
+\item acquirente: I clienti di un sito di e-commerce che scelgono di utilizzare \textit{ShopChain} come metodo di pagamento per i prodotti da acquistare.
 \end{itemize}
-Tutti gli utenti sono in possesso di un wallet per criptovalute. 
-Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono superflue. Il prodotto deve essere facilmente integrabile in più tipologie di e-commerce possibili.
+Tutti gli utenti devono essere in possesso di un wallet compatibile con la blockchain scelta per questo Progetto.
+Non potendo prevedere con accuratezza quanti e quali e-commerce decideranno di utilizzare \textit{ShopChain} altre considerazioni sulle caratteristiche di utenza sono superflue. Il prodotto deve essere facilmente integrabile in quante più tipologie di e-commerce possibili.
 
 \subsection{Vincoli e preferenze}
-Il proponente non impone vincoli nella scelta della tipologia di tecnologie, ma ci sono comunque delle scelte preferenziali da considerare:
+Il proponente non impone vincoli nella scelta delle tecnologie, ma ci sono comunque dei suggerimenti da considerare:
 \begin{itemize}
 \item utilizzo di blockchain pubblica;
 \item utilizzo di Java e Angular per lo sviluppo delle parti di Back-end e di Front-end della componente web application del sistema;
 \item utilizzo di database PostgreSQL.
 \end{itemize}
 
-Per il completamento del progetto il proponente richiede che siano realizzati i seguenti risultati:
+Per il completamento del progetto il proponente richiede che siano ottenuti i seguenti risultati:
 \begin{itemize}
 \item server, completo di UI;
 \item test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste, con una copertura minima dell'80\% correlata di report;
@@ -348,7 +349,7 @@ Vengono fatti una serie di controlli per la corretta interazione con la blockcha
 \section{Requisiti}
 Ogni requisito è indentificato da un codice univoco composto da: R(per requisito)+F/N(per la tipologia: funzionale, non funzionale)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
 \subsection{Requisiti funzionali}
- 
+
  \setlength\tabcolsep{4pt}
 \begin{longtable}{|c|p{5cm}|c|c|}
 \hline
@@ -370,22 +371,22 @@ RFO01 & Per accedere alla webapp venditore il venditore con wallet non connesso 
 \hline
 RFO02 & Un venditore con wallet non connesso non può accedere alla webapp venditore. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO03 & Il venditore deve poter visualizzare la lista delle transazioni nella webapp venditore. & Obbligatorio & UC3 \\ 
+RFO03 & Il venditore deve poter visualizzare la lista delle transazioni nella webapp venditore. & Obbligatorio & UC3 \\
 \hline
-RFO04 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il suo stato (attesa o completata). & Obbligatorio & UC4.1 \\ 
+RFO04 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il suo stato (attesa o completata). & Obbligatorio & UC4.1 \\
 \hline
-RFO05 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il QR Code da applicare sul pacco. & Obbligatorio & UC4.2 \\ 
+RFO05 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il QR Code da applicare sul pacco. & Obbligatorio & UC4.2 \\
 \hline
-RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, l'importo in dollari. & Obbligatorio & UC4.3 \\ 
+RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, l'importo in dollari. & Obbligatorio & UC4.3 \\
 \hline
-RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\ 
+RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\
 \hline
-RFO08 & L'acquirente deve ricevere indietro la valuta bloccata con cui ha pagato per la transazione, quando la transazione scade. & Obbligatorio & Decisione interna, UC4.4 \\ 
+RFO08 & L'acquirente deve ricevere indietro la valuta bloccata con cui ha pagato per la transazione, quando la transazione scade. & Obbligatorio & Decisione interna, UC4.4 \\
 \hline
 % SCRIPT
-RFO09 & Il prodotto deve essere pubblicato automaticamente in blockchain, quando il venditore inserisce un nuovo prodotto nell'e-commerce, grazie al nostro script incluso dal venditore nel suo e-commerce. & Obbligatorio & UC5 \\ 
+RFO09 & Il prodotto deve essere pubblicato automaticamente in blockchain, quando il venditore inserisce un nuovo prodotto nell'e-commerce, grazie al nostro script incluso dal venditore nel suo e-commerce. & Obbligatorio & UC5 \\
 \hline
-RFO10 & Il nostro script deve salvare un messaggio di errore in un file di log, se la pubblicazione del prodotto in blockchain dall'e-commerce (grazie allo script) fallisce. & Obbligatorio & UC5.1 \\ 
+RFO10 & Il nostro script deve salvare un messaggio di errore in un file di log, se la pubblicazione del prodotto in blockchain dall'e-commerce (grazie allo script) fallisce. & Obbligatorio & UC5.1 \\
 \hline
 % LANDING PAGE
 RFO11 & Per accedere alla landing page l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC15 \\
