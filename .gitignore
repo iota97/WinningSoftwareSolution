@@ -9,3 +9,17 @@
 *.fls
 *.fdb_latexmk
 .DS_Store
+server/package-lock.json
+server/node_modules
+server/build
+server/coverage
+
+build
+*.secret
+*.json
+!package.json
+node_modules
+test
+*.sh
+__pycache__
+/script/.env
