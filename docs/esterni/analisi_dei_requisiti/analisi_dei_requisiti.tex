@@ -27,7 +27,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.0.6}{18/01/2022}{Andrea Volpe}{Redazione}{Stesura requisiti acquirente}
 \addversione{0.0.7}{21/01/2022}{Alberto Nicoletti}{Redazione e correzione}{Riorganizzazione requisiti, aggiunta requisiti di vincolo e di qualità}
 \addversione{0.0.8}{28/01/2022}{Andrea Volpe}{Correzione}{Correzione UC19 estensioni}
-\addversione{0.0.9}{1/02/2022}{Alberto Nicoletti}{Correzione}{Correzzione immagini casi d'uso e requisiti}
+\addversione{0.0.9}{1/02/2022}{Alberto Nicoletti}{Correzione}{Correzione immagini casi d'uso e requisiti}
 \addversione{0.0.10}{03/02/2022}{Andrea Volpe}{Redazione e correzione}{Stesura RNO29 e correzione errori grammaticali}
 \addversione{0.0.11}{04/02/2022}{Giovanni Cocco}{Correzione}{Correzioni varie}
 \addversione{0.0.12}{05/02/2022}{Alberto Nicoletti}{Riscrittura}{Riscrittura di alcuni casi d'uso a seguito di una discussione interna al gruppo}
@@ -42,7 +42,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 
 \section{Introduzone}
 \subsection{Scopo del documento}
-Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione, di verifica e di validazione. 
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattutto i requisiti saranno tenuti in considerazione nelle fasi di progettazione, di verifica e di validazione. 
 
 \section{Descrizione del prodotto}
 L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
@@ -60,7 +60,7 @@ Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scop
 Il prodotto software è composto dalle seguenti parti:
 \begin{itemize}
 \item smart contracts nella blockchain per la gestione di tutte le fasi del processo di trasferimento del denaro;
-\item landing page per il pagamento da parte del acquirente;
+\item landing page per il pagamento da parte dell'acquirente;
 \item piattaforma web per la visualizzazione e gestione delle transazioni sia da parte sia dell venditore che dell'acquirente;
 \item webapp per la scannerizzazione del QR Code per la conferma ricezione pacco.
 \end{itemize}
@@ -98,8 +98,8 @@ Per il completamento del progetto il proponente richiede che siano realizzati i 
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
 \textbf{Scenario principale}:\\
 \begin{enumerate}
-\item al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
-\item il venditore è libero di consultare il manuale in ogni momento.
+\item Al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
+\item Il venditore è libero di consultare il manuale in ogni momento.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_WAV2}
@@ -133,8 +133,8 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transazione.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item il venditore seleziona una delle transazioni dall'elenco;
-\item il venditore visualizza i dettagli della singola transazione.
+\item Il venditore seleziona una delle transazioni dall'elenco;
+\item Il venditore visualizza i dettagli della singola transazione.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_WAV4}
@@ -151,8 +151,8 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Postcondizioni}: Il venditore è in possesso del QR Code da applicare sul pacco del prodotto.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-\item viene visualizzato il QR Code della transazione in attesa selezionata;
-\item il venditore può stampare il QR Code applicarlo sul pacco del prodotto.
+\item Viene visualizzato il QR Code della transazione in attesa selezionata;
+\item Il venditore può stampare il QR Code applicarlo sul pacco del prodotto.
 \end{enumerate}
 
 \paragraph{UC4.3 - Visualizzazione importo transazione}\\
@@ -175,12 +175,12 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Postcondizioni}: Il venditore ha pubblicato il nuovo prodotto in blockchain.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item il venditore inserisce un nuovo prodotto nell'e-commerce;
-    \item tramite lo script il prodotto viene pubblicato in blockchain;
-    \item il prodotto è pubblico in blockchain e utilizzabile per fare nuove transazioni.
+    \item Il venditore inserisce un nuovo prodotto nell'e-commerce;
+    \item Tramite lo script il prodotto viene pubblicato in blockchain;
+    \item Il prodotto è pubblico in blockchain e utilizzabile per fare nuove transazioni.
 \end{enumerate}
 \textbf{Estensione}:
-UC5.1 errore fallimento pubblicazione prodotto in blockchain:\\
+UC5.1 Errore fallimento pubblicazione prodotto in blockchain:\\
 lo script salva in un file di log il messaggio di errore.
 
 
@@ -209,8 +209,8 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
 \textbf{Postcondizioni}: L'acquirente ha confermato il pagamento.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item il sistema mostra il riepilogo della transazione;
-    \item l'acquirente conferma l'ordine.
+    \item Il sistema mostra il riepilogo della transazione;
+    \item L'acquirente conferma l'ordine.
 \end{enumerate}
 \textbf{Estensione}:
 UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
@@ -226,15 +226,15 @@ UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
 \textbf{Postcondizioni}: Il pagamento è stato completato con successo.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l'acquirente avvia la procedura di pagamento;
-    \item l'acquirente effettua il pagamento tramite Metamask;
-    \item l'ordine è stato pagato.
+    \item L'acquirente avvia la procedura di pagamento;
+    \item L'acquirente effettua il pagamento tramite Metamask;
+    \item L'ordine è stato pagato.
 \end{enumerate}
 \textbf{Estensioni}:
-UC9.1 visualizzazione errore pagamento non riuscito:
+UC9.1 Visualizzazione errore pagamento non riuscito:
 \begin{enumerate}
-    \item il pagamento non è stato completato con successo;
-    \item cancellazione sessione di pagamento.
+    \item Il pagamento non è stato completato con successo;
+    \item Cancellazione sessione di pagamento.
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
@@ -262,8 +262,8 @@ Vengono mostrati i dati relativi alla transazione e un pulsante per confermare l
 \textbf{Postcondizioni}: L'acquirente ha confermato la ricezione del pacco, i fondi sono stati sbloccati.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
-    \item l'acquirente controlla sia tutto corretto e conferma la ricezione del pacco;
-    \item il denaro viene sbloccato e mandato nel wallet del venditore.
+    \item L'acquirente controlla sia tutto corretto e conferma la ricezione del pacco;
+    \item Il denaro viene sbloccato e mandato nel wallet del venditore.
 \end{enumerate}
 \textbf{Estensione}:
 UC12.1 Errore wallet non corretto:
@@ -332,7 +332,7 @@ L'acquirente usando Metamask, si connette con il proprio wallet.
 \paragraph{UCa Controllo connessione}\\
 \textbf{Attori primari}: Venditore con wallet connesso, Acquirente con wallet connesso. \\
 \textbf{Precondizioni}: Il sistema vuole interagire con la blockchain.\\
-\textbf{Postcondizioni}:  Il sitema può interagire con la blockchain senza problemi.\\
+\textbf{Postcondizioni}:  Il sistema può interagire con la blockchain senza problemi.\\
 \textbf{Scenario principale}:
 Vengono fatti una serie di controlli per la corretta interazione con la blockchain.\\
 \textbf{Estensioni}:
@@ -346,7 +346,7 @@ Vengono fatti una serie di controlli per la corretta interazione con la blockcha
 \end{enumerate}
 
 \section{Requisiti}
-Ogni requisito è indentificato da un codice univoco composto da: R(per requisito)+F/N(per la tipologia: funzionale, non funzionale)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
+Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/N(per la tipologia: funzionale, non funzionale)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
 \subsection{Requisiti funzionali}
  
  \setlength\tabcolsep{4pt}
@@ -354,7 +354,7 @@ Ogni requisito è indentificato da un codice univoco composto da: R(per requisit
 \hline
  \multicolumn{4}{| c |}{Requisiti funzionali}\\
  \hline
- Codice & Descrizione & rilevanza & fonti\\
+ Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endfirsthead
 
@@ -409,11 +409,11 @@ RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non conness
 \hline
 RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in cryptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
+RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in criptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
 \hline
 RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC12 \\
 \hline
-RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transizione. & Obbligatorio & UC12.1 \\
+RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transazione. & Obbligatorio & UC12.1 \\
 \hline
 % ECOMMERCE
 RFO24 & Per accedere alla pagina con la sua lista delle transazioni in e-commerce, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC13 \\
@@ -431,7 +431,7 @@ RFO29 & L'acquirente con wallet connesso deve poter visualizzare l'importo in do
 RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.3 \\
 \hline
 % CONTROLLI
-RFO31 & Il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente(acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
+RFO31 & Il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente (acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
 \hline
 RFO32 & Il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
 \hline
@@ -446,7 +446,7 @@ RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato
 \hline
  \multicolumn{4}{| c |}{Requisiti non funzionali}\\
  \hline
- Codice & Descrizione & rilevanza & fonti\\
+ Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endfirsthead
 
@@ -469,7 +469,7 @@ con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capi
 \hline
 RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
 \hline
-RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in BlockChain. & Obbligatorio & UC5, decisione interna\\
+RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, decisione interna\\
 \hline
 
 \end{longtable}
