@@ -9,6 +9,7 @@
 \settitolo{Analisi delle tecnologie}
 \setredattori{Federico Marchi \\ Matteo Galvagni}
 \setrevisori{Giovanni Cocco}
+\setresponsabili{Elia Scandaletti}
 \setdestuso{Esterno}
 \setdescrizione{
 Analisi delle tecnologie.
@@ -19,6 +20,7 @@ Analisi delle tecnologie.
 \addversione{0.0.2}{05/01/2022}{Matteo Galvagni}{Redazione}{Stesura iniziale sezione Scansione QR code.}
 \addversione{0.0.3}{10/02/2022}{Matteo Galvagni}{Redazione}{Aggiornamento di alcune tecnologie.}
 \addversione{0.0.4}{11/02/2022}{Marchi Federico}{Redazione}{Correzione indice di Gulpease.}
+\addversione{1.0.0}{11/02/2022}{Elia Scandaletti}{Approvazione}{Approvazione per RTB.}
 \begin{document}
 
 \makefrontpage
@@ -57,11 +59,11 @@ Polygon è compatibile con la Ethereum Virtual Machine. Il suo linguaggio nativo
 
 \section*{Backend}
 Sono state valutate diverse opzioni per la scelta del framework e del linguaggio per lo sviluppo lato backend. Tra questi sono stati considerati Java e Javascript; infatti ci consentono di utilizzare le librerie Web3j e Web3js. Queste librerie permettono di emettere transazioni in blockchain; inoltre permettono la comoda gestione di oggetti (transazione, contratto, ecc).
-La scelta del framework è ricaduta su NodeJS e sul linguaggio Typescript; infatti ci consente di usufruire della comodità di Javascript integrando la tipizzazione; Per l'ascolto degli eventi emessi lato contratto sarà necessario un nodo presso il quale "ascoltare". La scelta è ricaduta sul servizio di API per Polygon "Moralis.io"; infatti è uno dei pochi nodi che offre un punto di accesso WebSocket e non solamente in HTTPS. Questo sarà necessario per la "sottoscrizione" ad eventi in JS.
+La scelta del framework è ricaduta su NodeJS e sul linguaggio Typescript; infatti ci consente di usufruire della comodità di Javascript integrando la tipizzazione; Per l'ascolto degli eventi emessi lato contratto sarà necessario un nodo presso il quale "ascoltare". La scelta è ricaduta sul servizio di API per Polygon "Moralis.io"; infatti è uno dei pochi nodi che offre un punto di accesso WebSocket e non solo in HTTPS. Questo sarà necessario per la "sottoscrizione" ad eventi in JS.
 
 \section*{Pagamento automatizzato alla messa in vendita}
 Per automatizzare il pagamento di un oggetto con ShopChain sarà necessario integrare uno script. In particolare durante la fase di vendita. Questo script dovrà dialogare con la blockchain per creare un'istanza per il pagamento; verrà poi generato un ID univoco. Inoltre dovrà essere conservato il prezzo; infatti dovrà essere poi confrontato con il denaro inviato dal cliente all'acquisto.
-Tale script verrà sviluppato in Python; permette infatti comodità di sviluppo e facilità di integrazione. Sarà necessario utilizzare la libreria "Web3py". Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Moralis.io".
+Tale script verrà sviluppato in Python; per comodità di sviluppo e facilità di integrazione. Sarà necessario utilizzare la libreria "Web3py". Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Moralis.io".
 
 \section*{Database}
 Per la memorizzazione dei dati sulle transazioni è necessario l'utilizzo di un database. La scelta è ricaduta su MariaDB; infatti:
