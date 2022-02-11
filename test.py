@@ -39,7 +39,7 @@ def latexTest():
 			print("Errore compilazione: " + tex)
 		else:
 			# Questi sono stati redatti prima della scelta di utilizzare questo indice, non ha senso modificarli
-			if tex.startswith("./docs/esterni/scelta_architettura") or tex.startswith("./docs/esterni/candidatura"):
+			if tex.startswith("./docs/esterni/scelta_architettura") or tex.startswith("./docs/esterni/candidatura") or tex.startswith("./docs/esterni/ricerca_blockchain"):
 				continue
 
 			g = gulpease(tex[:-3]+"pdf")
