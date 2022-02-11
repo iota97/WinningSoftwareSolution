@@ -1,11 +1,9 @@
 \documentclass[a4paper, 12pt]{article}
-
 \newcommand{\templates}{../../template}
 \input{\templates/style}
 \input{\templates/front_page}
 \input{\templates/history}
 
-%package
 \usepackage[table,xcdraw]{xcolor}
 
 \settitolo{Analisi delle tecnologie}
@@ -16,8 +14,11 @@
 Analisi delle tecnologie.
 }
 
-\addversione{0.0.0}{data}{chi}{Redazione}{descrizione}
-
+\addversione{0.0.0}{24/12/2021}{Matteo Galvagni}{Redazione}{Stesura iniziale sezione Introduzione e Blockchain.}
+\addversione{0.0.1}{28/12/2021}{Federico Marchi}{Redazione}{Stesura iniziale sezione Backend, Pagamento e Database.}
+\addversione{0.0.2}{05/01/2022}{Matteo Galvagni}{Redazione}{Stesura iniziale sezione Scansione QR code.}
+\addversione{0.0.3}{10/02/2022}{Matteo Galvagni}{Redazione}{Aggiornamento di alcune tecnologie.}
+\addversione{0.0.4}{11/02/2022}{Marchi Federico}{Redazione}{Correzione indice di Gulpease.}
 \begin{document}
 
 \makefrontpage
@@ -25,32 +26,52 @@ Analisi delle tecnologie.
 \makeversioni
 
 \section*{Introduzione}
-L'infrastruttura designata per questo progetto verte principalmente sulla comunicazione diretta tra attori (clienti/venditori) e blockchain: per rendere utilizzabile il servizio di pagamento non sarà necessario sviluppare solo un contratto digitale che si occupi dello smistamento dei fondi, ma anche una landing page per facilitare il pagamento al cliente ed un servizio di visualizzazione transazioni per entrambi venditori e clienti.
-Inoltre, sarà necessario sviluppare uno script per automatizzare la messa in vendita dei prodotti comunicando direttamente in blockchain.
-Necessiteremo di un server per fornire la landing page e le pagine di consultazione transazioni, oltre che di un database per memorizzare ID delle transazioni ed altri eventuali dati d'interesse.
-Sarà anche necessario fornire un'applicazione mobile (o applicazione web) per il cliente finale e per il corriere al fine di, rispettivamente, sbloccare i fondi e controllare che i fondi siano stati sbloccati.
-Per richiamare funzioni nel contratto (quindi eseguire transazioni in blockchain) sarà necessario utilizzare una o più librerie che ci consentano di farlo sia lato server che lato client.
+L'infrastruttura designata per il progetto verte sulla comunicazione diretta tra attori e blockchain. Bisognerà dunque sviluppare:
+\begin{itemize}
+\item un contratto digitale per lo smistamento dei fondi;
+\item una landing page per facilitare il pagamento;
+\item un servizio di visualizzazione di transazioni per venditori e clienti;
+\item uno script per automatizzare la messa in vendita;
+\item un server per fornire le pagine di consultazione e landing page;
+\item un database per memorizzare gli ID delle transazioni;
+\item una web app per il cliente finale per lo sblocco dei fondi e relativo controllo.
+\end{itemize}
+Per richiamare funzioni nel contratto sarà necessario utilizzare più librerie. Grazie a queste sarà possibile richiamare le funzioni sia lato server che lato client.
 
 \section*{Blockchain}
-La blockchain sulla quale sviluppare il contratto digitale dovrà garantire una velocità di transazione nell'ordine dei secondi e un costo per transazione quanto più basso possibile per garantire una buona usabilità da parte di tutti gli attori coinvolti. In particolar modo, sarà cruciale che lo sblocco dei fondi tramite scannerizzazione del QR sia veloce e poco costoso.
-Diverse blockchain sono state prese in esame, ma in conclusione la scelta è ricaduta su Polygon.
-Grazie ai suoi costi per transazione molto bassi e la sua finalità di transazione di pochi secondi, la blockchain di Polygon è l'ideale per il tipo di contratto che ci è chiesto di sviluppare.
-Inoltre, grazie al suo meccanismo di salvataggio del proprio stato a "checkpoint" su Ethereum, Polygon ne eredita parte della sicurezza.
-Polygon è compatibile con la Ethereum Virtual Machine e il suo linguaggio nativo è Solidity. La documentazione esistente per questo linguaggio è esaustiva e facilmente reperibile.
-Verrà utilizzata la testnet di Polygon "Mumbai" per lo sviluppo del contratto, in quanto il suo utilizzo è particolarmente comodo e gratuito.
+La blockchain sulla quale sviluppare il contratto digitale dovrà garantire alcuni requisiti; tra questi:
+\begin{itemize}
+\item una elevata velocità di transazione;
+\item un costo di transazione quanto più basso possibile;
+\item un buon livello di sicurezza.
+\end{itemize}
+Questi requisiti sono richiesti al fine di garantire un buona usabilità per tutti gli attori.
+Sarà inoltre cruciale la velocità e il costo ridotto per lo sblocco dei fondi.
+Diverse blockchain sono state prese in esame, ma la scelta è ricaduta su Polygon; infatti:
+\begin{itemize}
+\item i costi di transazione sono molto bassi;
+\item la velocità di transazione è ottima;
+\item eredita parte delle sicurezza di Ethereum grazie al meccanismo di salvataggio a "checkpoint".
+\end{itemize}
+Polygon è compatibile con la Ethereum Virtual Machine. Il suo linguaggio nativo è Solidity. La documentazione esistente per questo linguaggio è esaustiva e facilmente reperibile. Verrà utilizzata la comoda e gratuita testnet di Polygon "Mumbai" per lo sviluppo del contratto.
 
 \section*{Backend}
-Poiché l'architettura scelta prevede necessariamente l'utilizzo di un server sono state valutate diverse opzioni per quanto riguarda la scelta del linguaggio e dell'eventuale framework per lo sviluppo della parte di backend. Tra questi sono stati presi in considerazione Java e Javascript poiché ci consentono di utilizzare rispettivamente le librerie Web3j e Web3js che permettono di emettere transazioni in blockchain nonchè gestire oggetti (transazione, contratto, ecc) comodamente. La scelta è infine ricaduta sull'utilizzo di TypeScript (NodeJS) poichè ci consente di usufruire della comodità di Javascript (e delle sue librerie che ci interessano) con l'integrazione della tipizzazione. Per l'ascolto di eventi emessi a lato contratto il nodo presso la quale ascoltare sarà fornito dal servizio di API per Polygon "Moralis.io", essendo uno dei pochi nodi che tra l'altro offre un punto di accesso WebSocket e non solamente in HTTPS necessario per la "sottoscrizione" ad eventi in JS.
+Sono state valutate diverse opzioni per la scelta del framework e del linguaggio per lo sviluppo lato backend. Tra questi sono stati considerati Java e Javascript; infatti ci consentono di utilizzare le librerie Web3j e Web3js. Queste librerie permettono di emettere transazioni in blockchain; inoltre permettono la comoda gestione di oggetti (transazione, contratto, ecc).
+La scelta del framework è ricaduta su NodeJS e sul linguaggio Typescript; infatti ci consente di usufruire della comodità di Javascript integrando la tipizzazione; Per l'ascolto degli eventi emessi lato contratto sarà necessario un nodo presso il quale "ascoltare". La scelta è ricaduta sul servizio di API per Polygon "Moralis.io"; infatti è uno dei pochi nodi che offre un punto di accesso WebSocket e non solamente in HTTPS. Questo sarà necessario per la "sottoscrizione" ad eventi in JS.
 
 \section*{Pagamento automatizzato alla messa in vendita}
-Per rendere automatizzata la possibilità di pagare un oggetto con ShopChain, durante il normale iter di messa in vendita degli oggetti da parte dei venditori è necessario integrare uno script che dialoghi con la blockchain per creare un'istanza per il pagamento che genererà un ID univoco e conserverà il prezzo atteso per confrontarlo con il denaro inviato di un cliente quando acquisterà tale oggetto.
-Tale script verrà sviluppato in Python per comodità di sviluppo e facilità di integrazione. Sarà necessario utilizzare la libreria "Web3py".
-Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Moralis.io".
+Per automatizzare il pagamento di un oggetto con ShopChain sarà necessario integrare uno script. In particolare durante la fase di vendita. Questo script dovrà dialogare con la blockchain per creare un'istanza per il pagamento; verrà poi generato un ID univoco. Inoltre dovrà essere conservato il prezzo; infatti dovrà essere poi confrontato con il denaro inviato dal cliente all'acquisto.
+Tale script verrà sviluppato in Python; permette infatti comodità di sviluppo e facilità di integrazione. Sarà necessario utilizzare la libreria "Web3py". Non utilizzando Metamask, il nodo presso la quale emettere le transazioni sarà fornito dal servizio di API per Polygon "Moralis.io".
 
 \section*{Database}
-Per la memorizzazione dei dati di nostro interesse circa le transazioni è necessario l'utilizzo di un database. Poiché non sono emerse necessità specifiche per le quali utilizzare un determinato database piuttosto che un altro è stato scelto MariaDB.
+Per la memorizzazione dei dati sulle transazioni è necessario l'utilizzo di un database. La scelta è ricaduta su MariaDB; infatti:
+\begin{itemize}
+\item il gruppo lo ha già utilizzato;
+\item Postgres è stato escluso poiché richiede un downgrade di alcuni pacchetti Python;
+\item non sono emerse necessità particolari per l'utilizzo di un database specifico.
+\end{itemize}
 
 \section*{Scansione QR code}
-Per quanto riguarda la realizzazione della App/Webapp per lo scansionamento del QR code da parte dei clienti degli Ecommerce, considerando che Metamask su dispositivi mobili non è disponibile sottoforma di estensione per browser ma come intera applicazione con un browser interno dedicato, è stato scelto di sviluppare una Webapp in modo tale che sia comodamente raggiungibile da tale browser interno.
+Il wallet Metamask su mobile non fornisce un'estensione per browser; infatti si tratta di un' applicazione con relativo browser integrato. Verrà dunque sviluppata una webapp per lo scansionamento del QR code; tale webapp dovrà permettere un comodo accesso dal browser di Metamask.
 
 \end{document}
