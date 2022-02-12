@@ -31,7 +31,7 @@ def latexTest():
 		if tex.startswith("./docs/template"):
 			continue
 		if tex.startswith("./docs/esterni"):
-			min_g = 60
+			min_g = 50
 
 		stat = compile(tex)
 
