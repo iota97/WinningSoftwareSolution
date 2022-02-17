@@ -23,3 +23,5 @@ test
 *.sh
 __pycache__
 /script/.env
+
+!docs/esterni/*/*.pdf

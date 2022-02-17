@@ -1,5 +1,5 @@
 import {db} from "./connection";
-import {syncDB} from "../contract/syncDB";
+import {Presistence} from "../Persistence/Persistence";
 
 export const initDB = () => {
 	db.query("CREATE TABLE IF NOT EXISTS PaymentEntry (id varchar(255), ecommerce varchar(255), primary key(id));", (err) => {
@@ -22,7 +22,7 @@ export const initDB = () => {
 						console.log(err);
 						return;
 					}
-					syncDB();
+					Presistence.get();
 				});
 			});
 		});
