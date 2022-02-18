@@ -1,4 +1,6 @@
 export interface settledPayment {
-  id: string,
-  acquirente: string,
+  id: bigint,
+  item_id: bigint,
+  buyer: string,
+  status: number
 }

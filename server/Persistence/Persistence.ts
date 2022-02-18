@@ -12,20 +12,20 @@ class Presistence {
 		if (!Presistence.instance) {
 			Presistence.instance = new Presistence();
 		}
-		
+
 		return Presistence.instance;
 	}
 
-	public getSettlePaymentByBuyer() {
-
+	public getPaymentByBuyer(buyer: string) {
+		return this.DB.getPaymentByBuyer(buyer)
 	}
 
-	public getSettlePaymentBySeller() {
-
+	public getPaymentBySeller(seller: string) {
+		return this.DB.getPaymentBySeller(seller)
 	}
-	
-	public getPaymentEntryPrice() {
 
+	public getPaymentEntryPrice(id: bigint) {
+		return this.DB.getPaymentEntryPrice(id)
 	}
 }
 

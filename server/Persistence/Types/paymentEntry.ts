@@ -1,4 +1,5 @@
 export interface paymentEntry {
-  id: string,
+  id: bigint,
   ecommerce: string,
+  price: bigint // Dollar cents
 }

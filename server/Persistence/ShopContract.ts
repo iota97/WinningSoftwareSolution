@@ -1,6 +1,3 @@
-import * as paymentEntryModel from "../DB/paymentEntries";
-import * as settledPaymentModel from "../DB/settledPayments";
-
 import Web3 from 'web3';
 import { Contract } from "web3-eth-contract"
 import { SQL } from "./SQL"
@@ -15,7 +12,7 @@ class ShopContract {
 		const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/' + process.env.API_KEY  + '/polygon/mumbai/ws'))
 		this.shopContract = new web3.eth.Contract(contractABI, process.env.CONTRACT_ADDRESS)
 	}
-
+	
 	public static get(): ShopContract {
 		if (!ShopContract.instance) {
 			ShopContract.instance = new ShopContract();
@@ -23,7 +20,7 @@ class ShopContract {
 		
 		return ShopContract.instance;
 	}
-
+	
 	public hookEvent() {
 		SQL.get().getLastSyncBlock()
 		.then((last: any) => {
@@ -35,11 +32,11 @@ class ShopContract {
 			}
 			console.log("Last block synced was: " + last)
 			
-			ShopContract.get().shopContract.events.addedPaymentEntry(options)
+			this.shopContract.events.addedPaymentEntry(options)
 			.on('error', (err: Error) => console.error(err))
 			.on('data', this.OnAddedPaymentEntry)
 			
-			ShopContract.get().shopContract.events.paymentSettled(options)
+			this.shopContract.events.paymentSettled(options)
 			.on('error', (err: Error) => console.error(err))
 			.on('data', this.OnPaymentSettled)
 		})
@@ -47,17 +44,16 @@ class ShopContract {
 			console.error(err)
 		})
 	}
-
+	
 	private OnAddedPaymentEntry(event: any) {
 		ShopContract.get().shopContract.methods.getPaymentEntry(event.returnValues.paymentEntryId).call()
 		.then((res: any) => {
-			paymentEntryModel.create({id: event.returnValues.paymentEntryId, ecommerce: res.seller}, (err: Error, id: string) => {
-				if (err) {
-					console.log(err);
-				}
-				SQL.get().setLastSyncBlock(event.blockNumber);
-			})	
-		}).catch((err: Error) => {
+			SQL.get().insertPaymentEntry({id: event.returnValues.paymentEntryId, ecommerce: res.seller, price: res.price})
+		})
+		.then(() => {
+			SQL.get().setLastSyncBlock(event.blockNumber);
+		})
+		.catch((err: Error) => {
 			console.error(err)
 		})
 	}
@@ -65,13 +61,12 @@ class ShopContract {
 	private OnPaymentSettled(event: any) {
 		ShopContract.get().shopContract.methods.getSettledPayment(event.returnValues.settledPaymentId).call()
 		.then((res: any) => {
-			settledPaymentModel.create({id: event.returnValues.settledPaymentId, acquirente: res.client}, (err: Error, id: string) => {
-				if (err) {
-					console.log(err);
-				}
-				SQL.get().setLastSyncBlock(event.blockNumber);
-			})			
-		}).catch((err: Error) => {
+			SQL.get().insertSettledPayment({id: event.returnValues.settledPaymentId, item_id: res.paymentEntryId, buyer: res.client, status: res.status})
+		})
+		.then(() => {
+			SQL.get().setLastSyncBlock(event.blockNumber);
+		})
+		.catch((err: Error) => {
 			console.error(err)
 		})
 	}
