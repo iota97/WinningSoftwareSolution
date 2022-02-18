@@ -34,6 +34,6 @@ describe('ShopContract', () => {
         shopContract.getPaymentEntry(BigInt(0))
 
         provider.disconnect(0, "");
-        await delay(1000);
+        await delay(500);
     })
 })

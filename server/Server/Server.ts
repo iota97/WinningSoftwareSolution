@@ -3,9 +3,11 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import qr from "qrcode";
 import { Persistence } from "../Persistence/Persistence"
+import { timeStamp } from "console";
 
 class Server {
     private app: Express;
+    private listener: any;
     private db: Persistence;
     
     public constructor(db: Persistence) {
@@ -17,6 +19,10 @@ class Server {
         this.app.set("view engine", "ejs");
         
         this.initRoutes();
+    }
+
+    public close() {
+        this.listener.close();
     }
     
     private initRoutes() {
@@ -50,7 +56,7 @@ class Server {
     }
     
     public listen() {
-        this.app.listen(process.env.PORT, () => {
+        this.listener = this.app.listen(process.env.PORT, () => {
             console.log(`[server]: Server is running at https://localhost:${process.env.PORT}`);
         });
     }  
