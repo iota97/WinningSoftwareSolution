@@ -158,8 +158,8 @@ class SQL {
 				if (err) {
 					return reject(err)
 				}
-				
-				console.log("Synced to block (if newer): " + block)
+
+				console.log("[sql]: Synced to block (if newer): " + block)
 				resolve(null)
 			})
 		})
