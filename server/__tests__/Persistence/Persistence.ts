@@ -46,86 +46,11 @@ class SQL_Mock implements SQL_Interface {
     };
     setLastSyncBlock(block: bigint) {}
     getLastSyncBlock() { 
-        return new Promise<bigint>((resolve) => {
-            resolve(BigInt(0));
+        return new Promise<number>((resolve) => {
+            resolve(0);
         })
     };
 }
-
-import { ShopContract, Web3_Contract_Interface } from "../../Persistence/ShopContract"
-
-import { EventEmitter } from 'events'
-import { setTimeout } from 'timers'
-
-export default class Timer extends EventEmitter {
-    constructor() {
-        super()
-    }
-    
-    public start(): void {
-     
-        
-        setTimeout(() => {
-            this.emit('error', { error: "Error" })
-        }, 0)
-    }
-}
-
-
-class Web3_Contract_Mock implements Web3_Contract_Interface {
-    private e1: EventEmitter;
-    private e2: EventEmitter;
-
-    constructor() {
-        this.e1 = new EventEmitter;
-        this.e2 = new EventEmitter;
-    }
-
-    public addedPaymentEntry(options: any) {
-        setTimeout(() => {
-            this.e1.emit('data', { returnValues: {paymentEntryId: 0} })
-        }, 500)
-        return this.e1
-    }
-    
-    public paymentSettled(options: any) {
-        setTimeout(() => {
-            this.e2.emit('data', { returnValues: {paymentEntryId: 0} })
-        }, 500)
-        return this.e2
-    }
-    
-    public getSettledPayment(id: bigint) {
-        return new Promise<any>(() => {
-            let obj: any  = {
-                client: "asdf",
-                status: 10,
-                paymentEntryId: 10,
-            }
-            return obj
-        })  
-    }
-    
-    public getPaymentEntry(id: bigint) {
-        return new Promise<any>(() => {
-            let obj: any  = {
-                seller: "asdf",
-                price: 10,
-            }
-            return obj
-        })
-    }
-}
-
-
-describe('ShopContract', () => {      
-    it('getPaymentByBuyer - Valid', async () => {
-        let shopContract = new ShopContract(new SQL_Mock(), new Web3_Contract_Mock());
-        
-    })
-})
-
-
 
 describe('Persistence', () => {    
     let persistance = new Persistence(new SQL_Mock());

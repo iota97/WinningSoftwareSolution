@@ -21,7 +21,7 @@ export interface SQL_Interface {
 	getPaymentBySeller: (seller: string) => Promise<payment[]>;
 	getPaymentEntryPrice: (id: bigint) => Promise<bigint>;
 	setLastSyncBlock: (block: bigint) => void;
-	getLastSyncBlock: () => Promise<bigint>;
+	getLastSyncBlock: () => Promise<number>;
 }
 
 export class SQL implements SQL_Interface {
@@ -36,6 +36,10 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
+	public closeConnection() {
+		this.db.end()
+	}
+
 	public insertPaymentEntry(entry: paymentEntry) {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
@@ -137,7 +141,7 @@ export class SQL implements SQL_Interface {
 	}
 	
 	public getLastSyncBlock() {
-		return new Promise<bigint>((resolve, reject) => {
+		return new Promise<number>((resolve, reject) => {
 			const queryString = `SELECT value FROM LastBlockSynced WHERE id=0`
 			
 			this.db.query(queryString, (err, result) => {
