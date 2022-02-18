@@ -1,31 +1,22 @@
-import { SQL } from "./SQL"
-import { ShopContract } from "./ShopContract"
+import { SQL_Interface } from "./SQL"
 
 class Persistence {
-	private static instance: Persistence;
+	private sql: SQL_Interface;
 
-	private constructor() {	
-		ShopContract.get().hookEvent()
-	}
-
-	public static get(): Persistence {
-		if (!Persistence.instance) {
-			Persistence.instance = new Persistence()
-		}
-
-		return Persistence.instance
+	public constructor(sql: SQL_Interface) {	
+		this.sql = sql;
 	}
 
 	public getPaymentByBuyer(buyer: string) {
-		return SQL.get().getPaymentByBuyer(buyer)
+		return this.sql.getPaymentByBuyer(buyer)
 	}
 
 	public getPaymentBySeller(seller: string) {
-		return SQL.get().getPaymentBySeller(seller)
+		return this.sql.getPaymentBySeller(seller)
 	}
 
 	public getPaymentEntryPrice(id: bigint) {
-		return SQL.get().getPaymentEntryPrice(id)
+		return this.sql.getPaymentEntryPrice(id)
 	}
 }
 

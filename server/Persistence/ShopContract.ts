@@ -1,69 +1,91 @@
-import Web3 from 'web3';
 import { Contract } from "web3-eth-contract"
-import { SQL } from "./SQL"
+import { SQL_Interface } from "./SQL"
 
-const contractABI = JSON.parse('[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"paymentEntryId\",\"type\":\"uint256\"}],\"name\":\"addedPaymentEntry\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"fundsUnlocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"paymentCancelled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"paymentSettled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"objId\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"addPaymentEntry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"cancelSettledPayment\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"paymentEntryId\",\"type\":\"uint256\"}],\"name\":\"getPaymentEntry\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"objId\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"internalType\":\"struct ShopContract.PaymentEntry\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"getSettledPayment\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"paymentEntryId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"status\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"}],\"internalType\":\"struct ShopContract.SettledPayment\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"paymentEntryId\",\"type\":\"uint256\"}],\"name\":\"settlePayment\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"settledPaymentId\",\"type\":\"uint256\"}],\"name\":\"unlockFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]');
+export interface Web3_Contract_Interface {
+	addedPaymentEntry: (options: any) => any;
+	paymentSettled: (options: any) => any;
+	getSettledPayment: (id: bigint) => any;
+	getPaymentEntry: (id: bigint) => any;
+}
+
+class Web3_Contract implements Web3_Contract_Interface {
+	private contract: Contract;
+
+	public constructor(contract: Contract) {
+		this.contract = contract;
+	}
+
+	public addedPaymentEntry(options: any) {
+		return this.contract.events.addedPaymentEntry(options)
+	}
+
+	public paymentSettled(options: any) {
+		return this.contract.events.paymentSettled(options)
+	}
+
+	public getSettledPayment(id: bigint) {
+		return this.contract.methods.getSettledPayment(id).call()
+	}
+
+	public getPaymentEntry(id: bigint) {
+		return this.contract.methods.getPaymentEntry(id).call()
+	}
+}
 
 class ShopContract {
-	private static instance: ShopContract;
-	private shopContract: Contract;
+	private shopContract: Web3_Contract_Interface;
+	private sql: SQL_Interface;
 	
-	private constructor() {
-		const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/' + process.env.API_KEY  + '/polygon/mumbai/ws'))
-		this.shopContract = new web3.eth.Contract(contractABI, process.env.CONTRACT_ADDRESS)
+	public constructor(sql: SQL_Interface, shopContract: Web3_Contract_Interface) {
+		this.sql = sql
+		this.shopContract = shopContract
+
+		this.hookEvent()
 	}
 	
-	public static get(): ShopContract {
-		if (!ShopContract.instance) {
-			ShopContract.instance = new ShopContract();
-		}
-		
-		return ShopContract.instance;
-	}
-	
-	public hookEvent() {
-		SQL.get().getLastSyncBlock()
+	private hookEvent() {
+		this.sql.getLastSyncBlock()
 		.then((last: any) => {
 			let options = {
 				filter: {
 					value: [],
 				},
-				fromBlock: last+1 // Don't sync last twice
+				fromBlock: last+BigInt(1) // Don't sync last twice
 			}
 			
-			this.shopContract.events.addedPaymentEntry(options)
+			this.shopContract.addedPaymentEntry(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', this.OnAddedPaymentEntry)
+			.on('data', (event: any) => { this.OnAddedPaymentEntry(event, this.shopContract, this.sql) })
 			
-			this.shopContract.events.paymentSettled(options)
+			this.shopContract.paymentSettled(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', this.OnPaymentSettled)
+			.on('data', (event: any) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
 		})
 		.catch((err: Error) => {
 			console.error(err)
 		})
 	}
 	
-	private OnAddedPaymentEntry(event: any) {
-		ShopContract.get().shopContract.methods.getPaymentEntry(event.returnValues.paymentEntryId).call()
+	private OnAddedPaymentEntry(event: any, shopContract: Web3_Contract_Interface, sql: SQL_Interface) {
+		shopContract.getPaymentEntry(event.returnValues.paymentEntryId)
 		.then((res: any) => {
-			SQL.get().insertPaymentEntry({id: event.returnValues.paymentEntryId, ecommerce: res.seller, price: res.price})
+			sql.insertPaymentEntry({id: event.returnValues.paymentEntryId, ecommerce: res.seller, price: res.price})
 		})
 		.then(() => {
-			SQL.get().setLastSyncBlock(event.blockNumber);
+			sql.setLastSyncBlock(event.blockNumber);
 		})
 		.catch((err: Error) => {
 			console.error(err)
 		})
 	}
 	
-	private OnPaymentSettled(event: any) {
-		ShopContract.get().shopContract.methods.getSettledPayment(event.returnValues.settledPaymentId).call()
+	private OnPaymentSettled(event: any, shopContract: Web3_Contract_Interface, sql: SQL_Interface) {
+		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
 		.then((res: any) => {
-			SQL.get().insertSettledPayment({id: event.returnValues.settledPaymentId, item_id: res.paymentEntryId, buyer: res.client, status: res.status})
+			sql.insertSettledPayment({id: event.returnValues.settledPaymentId, item_id: res.paymentEntryId, buyer: res.client, status: res.status})
 		})
 		.then(() => {
-			SQL.get().setLastSyncBlock(event.blockNumber);
+			sql.setLastSyncBlock(event.blockNumber);
 		})
 		.catch((err: Error) => {
 			console.error(err)
@@ -71,4 +93,4 @@ class ShopContract {
 	}
 }
 
-export { ShopContract }
+export { ShopContract, Web3_Contract }

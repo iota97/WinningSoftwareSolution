@@ -5,10 +5,12 @@ import qr from "qrcode";
 import { Persistence } from "../Persistence/Persistence"
 
 class Server {
-    private static instance: Server;
     private app: Express;
+    private db: Persistence;
     
-    private constructor() {	
+    public constructor(db: Persistence) {
+        this.db = db
+
         this.app = express();
         
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +23,7 @@ class Server {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
         this.app.get("/qr", this.QRPage);
-        this.app.get("/", this.paymentByBuyerPage);
+        this.app.get("/", (req: Request, res: Response) => { this.paymentByBuyerPage(req, res, this.db) });
     }
     
     private QRPage(req: Request, res: Response) {
@@ -31,8 +33,8 @@ class Server {
         })
     }
     
-    private paymentByBuyerPage(req: Request, res: Response) {
-        Persistence.get().getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
+    private paymentByBuyerPage(req: Request, res: Response, db: Persistence) {
+        db.getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
         .then((items: any) => {
             let item_string: string = "<table>";
             for (let i = 0; i < items.length; i++) {
@@ -45,14 +47,6 @@ class Server {
             item_string += "</table>";
             res.render("transazioni", {item: item_string});
         })
-    }
-    
-    public static get(): Server {
-        if (!Server.instance) {
-            Server.instance = new Server()
-        }
-        
-        return Server.instance
     }
     
     public listen() {
