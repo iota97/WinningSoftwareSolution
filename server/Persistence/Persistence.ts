@@ -1,32 +1,32 @@
 import { SQL } from "./SQL"
+import { ShopContract } from "./ShopContract"
 
-class Presistence {
-	private static instance: Presistence;
-	private DB: SQL;
+class Persistence {
+	private static instance: Persistence;
 
 	private constructor() {	
-		this.DB = SQL.get();
+		ShopContract.get().hookEvent()
 	}
 
-	public static get(): Presistence {
-		if (!Presistence.instance) {
-			Presistence.instance = new Presistence();
+	public static get(): Persistence {
+		if (!Persistence.instance) {
+			Persistence.instance = new Persistence()
 		}
 
-		return Presistence.instance;
+		return Persistence.instance
 	}
 
 	public getPaymentByBuyer(buyer: string) {
-		return this.DB.getPaymentByBuyer(buyer)
+		return SQL.get().getPaymentByBuyer(buyer)
 	}
 
 	public getPaymentBySeller(seller: string) {
-		return this.DB.getPaymentBySeller(seller)
+		return SQL.get().getPaymentBySeller(seller)
 	}
 
 	public getPaymentEntryPrice(id: bigint) {
-		return this.DB.getPaymentEntryPrice(id)
+		return SQL.get().getPaymentEntryPrice(id)
 	}
 }
 
-export { Presistence }
+export { Persistence }

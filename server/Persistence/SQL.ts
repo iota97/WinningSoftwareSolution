@@ -1,10 +1,18 @@
 import { Connection } from "mysql2";
 import mysql from "mysql2";
-import { ShopContract } from "./ShopContract"
 import { payment } from "./Types/payment";
 import { paymentEntry } from "./Types/paymentEntry";
 import { settledPayment } from "./Types/settledPayment";
 
+/*
+DROP TABLE PaymentEntries;
+DROP TABLE SettledPayments;
+DROP TABLE LastBlockSynced;
+CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, primary key(id));
+CREATE TABLE LastBlockSynced (id int(1), value bigint, primary key(id));
+INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
+*/
 
 class SQL {
 	private static instance: SQL;
@@ -19,40 +27,21 @@ class SQL {
 		})
 	}
 	
-	public init() {
-		return new Promise((resolve, reject) => {			
-			this.noResultQuery("CREATE TABLE IF NOT EXISTS PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));")
-			.then(() => {
-				this.noResultQuery("CREATE TABLE IF NOT EXISTS SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, primary key(id));")
-			}).then(() => {
-				this.noResultQuery("CREATE TABLE IF NOT EXISTS LastBlockSynced (id int(1), value bigint, primary key(id));")
-			}).then(() => {
-				this.noResultQuery("INSERT IGNORE INTO LastBlockSynced (id, value) VALUES (0, 0);")
-			}).then(() => {
-				ShopContract.get().hookEvent()
-				resolve(null)
-			}).catch((err: Error) => {
-				reject(err)
-			})
-		})
-	}
-	
 	public static get(): SQL {
 		if (!SQL.instance) {
 			SQL.instance = new SQL();
 		}
-
-		await SQL.instance.init()
+		
 		return SQL.instance
 	}
 	
 	public insertPaymentEntry(entry: paymentEntry) {
 		return new Promise((resolve, reject) => {
-			const queryString = "INSERT IGNORE INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
+			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
 			
 			this.db.query(queryString, [entry.id, entry.ecommerce, entry.price], (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				resolve(null)
@@ -62,11 +51,11 @@ class SQL {
 	
 	public insertSettledPayment(entry: settledPayment) {
 		return new Promise((resolve, reject) => {
-			const queryString = "INSERT IGNORE INTO SettledPayments (id, item_id, buyer, status) VALUES (?, ?, ?, ?)"
+			const queryString = "INSERT INTO SettledPayments (id, item_id, buyer, status) VALUES (?, ?, ?, ?)"
 			
 			this.db.query(queryString, [entry.id, entry.item_id, entry.buyer, entry.status], (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				resolve(null)
@@ -80,7 +69,7 @@ class SQL {
 			
 			this.db.query(queryString, buyer, (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				const rows = <mysql.RowDataPacket[]> result;
@@ -107,7 +96,7 @@ class SQL {
 			
 			this.db.query(queryString, seller, (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				const rows = <mysql.RowDataPacket[]> result;
@@ -134,23 +123,14 @@ class SQL {
 			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				const rows = <mysql.RowDataPacket[]> result;
-				resolve(rows[0].price)
-			})
-		})
-	}
-	
-	private noResultQuery(query: string) {
-		return new Promise((resolve, reject) => {
-			this.db.query(query, (err, result) => {
-				if (err) {
-					reject(err)
+				if (rows.length == 0) {
+					return reject("No entry found")
 				}
-				
-				resolve(null)
+				resolve(rows[0].price)
 			})
 		})
 	}
@@ -161,7 +141,7 @@ class SQL {
 			
 			this.db.query(queryString, (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				const rows = <mysql.RowDataPacket[]> result;
@@ -176,7 +156,7 @@ class SQL {
 			
 			this.db.query(queryString, [block, block], (err, result) => {
 				if (err) {
-					reject(err)
+					return reject(err)
 				}
 				
 				console.log("Synced to block (if newer): " + block)

@@ -28,9 +28,8 @@ class ShopContract {
 				filter: {
 					value: [],
 				},
-				fromBlock: last
+				fromBlock: last+1 // Don't sync last twice
 			}
-			console.log("Last block synced was: " + last)
 			
 			this.shopContract.events.addedPaymentEntry(options)
 			.on('error', (err: Error) => console.error(err))

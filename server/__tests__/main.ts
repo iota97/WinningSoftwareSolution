@@ -6,6 +6,8 @@ import * as settledPaymentModel from "../DB/settledPayments";
 import {createWebServer} from '../routes/index'
 import {initDB} from "../DB/initDB";
 
+
+
 initDB();
 
 describe('Server', function () {
