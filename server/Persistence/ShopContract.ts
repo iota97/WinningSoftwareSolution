@@ -3,6 +3,8 @@ import { Contract } from "web3-eth-contract"
 export interface ShopContract_Interface {
 	addedPaymentEntry: (options: any) => any;
 	paymentSettled: (options: any) => any;
+	fundsUnlocked: (options: any) => any;
+
 	getSettledPayment: (id: bigint) => any;
 	getPaymentEntry: (id: bigint) => any;
 }
@@ -20,6 +22,10 @@ export class ShopContract implements ShopContract_Interface {
 
 	public paymentSettled(options: any) {
 		return this.contract.events.paymentSettled(options)
+	}
+
+	public fundsUnlocked(options: any) {
+		return this.contract.events.fundsUnlocked(options)
 	}
 
 	public getSettledPayment(id: bigint) {

@@ -15,8 +15,12 @@ class Persistence {
 		return this.sql.getPaymentBySeller(seller)
 	}
 
-	public getPaymentEntryPrice(id: bigint) {
-		return this.sql.getPaymentEntryPrice(id)
+	public getPaymentByID(id: bigint) {
+		return this.sql.getPaymentByID(id)
+	}
+
+	public getPaymentEntryByID(id: bigint) {
+		return this.sql.getPaymentEntryByID(id)
 	}
 }
 

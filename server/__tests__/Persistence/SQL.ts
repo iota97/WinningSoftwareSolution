@@ -128,6 +128,10 @@ describe('SQL', function () {
             status: 0
         })
     })
+
+    it('updateSettledPayment - Dummy', async () => {
+        return sql.updateSettledPayment(BigInt(12312321), 0)
+    })
     
     it('closeConnection - Close', async () => {
         db.end()
@@ -176,6 +180,13 @@ describe('SQL', function () {
             ecommerce: "asdf",
             price: BigInt(9123123123) // Dollar cents
         })
+        .catch(async (e: any) => {
+            expect(e[0] == "E") 
+        })    
+    })
+
+    it('updateSettledPayment - Closed', async () => {
+        return sql.updateSettledPayment(BigInt(12312321), 0)
         .catch(async (e: any) => {
             expect(e[0] == "E") 
         })    

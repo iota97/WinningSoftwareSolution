@@ -20,7 +20,8 @@ class SQL_Mock implements SQL_Interface {
     
     insertPaymentEntry(entry: paymentEntry) { SQL_Mock.paymentEntries.push(entry.id) }
     insertSettledPayment(entry: settledPayment) { SQL_Mock.paymentEntries.push(entry.id) }
-    
+    updateSettledPayment(id: bigint, status: number) {}
+
     getPaymentByBuyer(buyer: string)  { 
         return new Promise<payment[]>(() => {
             let obj: any  ={
@@ -64,10 +65,12 @@ class SQL_Mock implements SQL_Interface {
 class Web3_Contract_Mock1 implements ShopContract_Interface {
     private e1: EventEmitter;
     private e2: EventEmitter;
+    private e3: EventEmitter;
     
     constructor() {
         this.e1 = new EventEmitter;
         this.e2 = new EventEmitter;
+        this.e3 = new EventEmitter;
     }
     
     public addedPaymentEntry(options: any) {
@@ -89,6 +92,17 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         }, 150)
         return this.e2
     }
+
+    public fundsUnlocked(options: any) {
+        setTimeout(() => {
+            this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
+        }, 50)
+        setTimeout(() => {
+            this.e3.emit('error', "Fake Error")
+        }, 150)
+        return this.e3
+    }
+
     
     public getSettledPayment(id: bigint) {
         return new Promise<any>((resolve)  => {
@@ -120,7 +134,10 @@ class Web3_Contract_Mock2 implements ShopContract_Interface {
     
     public paymentSettled(options: any) {
         throw "error"
-        
+    }
+
+    public fundsUnlocked(options: any) {
+        throw "error"
     }
     
     public getSettledPayment(id: bigint) {
@@ -136,10 +153,12 @@ class Web3_Contract_Mock2 implements ShopContract_Interface {
 class Web3_Contract_Mock3 implements ShopContract_Interface {
     private e1: EventEmitter;
     private e2: EventEmitter;
+    private e3: EventEmitter;
     
     constructor() {
         this.e1 = new EventEmitter;
         this.e2 = new EventEmitter;
+        this.e3 = new EventEmitter;
     }
     
     public addedPaymentEntry(options: any) {
@@ -160,6 +179,16 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
             this.e2.emit('error', "Fake Error")
         }, 150)
         return this.e2
+    }
+
+    public fundsUnlocked(options: any) {
+        setTimeout(() => {
+            this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
+        }, 50)
+        setTimeout(() => {
+            this.e3.emit('error', "Fake Error")
+        }, 150)
+        return this.e3
     }
     
     public getSettledPayment(id: bigint) {

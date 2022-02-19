@@ -29,6 +29,10 @@ class ShopContractEventManager {
 			this.shopContract.paymentSettled(options)
 			.on('error', (err: Error) => console.error(err))
 			.on('data', (event: any) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
+
+			this.shopContract.fundsUnlocked(options)
+			.on('error', (err: Error) => console.error(err))
+			.on('data', (event: any) => { this.OnFundsUnlocked(event, this.shopContract, this.sql) })
 		})
 		.catch((err: Error) => {
 			console.error(err)
@@ -52,6 +56,19 @@ class ShopContractEventManager {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
 		.then((res: any) => {
 			sql.insertSettledPayment({id: event.returnValues.settledPaymentId, item_id: res.paymentEntryId, buyer: res.client, status: res.status})
+		})
+		.then(() => {
+			sql.setLastSyncBlock(event.blockNumber);
+		})
+		.catch((err: Error) => {
+			console.error(err)
+		})
+	}
+
+	private OnFundsUnlocked(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
+		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
+		.then((res: any) => {
+			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status)
 		})
 		.then(() => {
 			sql.setLastSyncBlock(event.blockNumber);

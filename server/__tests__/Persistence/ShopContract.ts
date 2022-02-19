@@ -30,6 +30,7 @@ describe('ShopContract', () => {
         }
         shopContract.addedPaymentEntry(options)
         shopContract.paymentSettled(options)
+        shopContract.fundsUnlocked(options)
         shopContract.getSettledPayment(BigInt(0))
         shopContract.getPaymentEntry(BigInt(0))
 

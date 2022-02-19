@@ -17,9 +17,11 @@ INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 export interface SQL_Interface {
 	insertPaymentEntry: (entry: paymentEntry) => void;
 	insertSettledPayment: (entry: settledPayment) => void;
+	updateSettledPayment: (id: bigint, status: number) => void;
 	getPaymentByBuyer: (buyer: string) => Promise<payment[]>;
 	getPaymentBySeller: (seller: string) => Promise<payment[]>;
-	getPaymentEntryPrice: (id: bigint) => Promise<bigint>;
+	getPaymentByID: (id: bigint) => Promise<payment>;
+	getPaymentEntryByID: (id: bigint) => Promise<{seller: string, price: bigint}>;
 	setLastSyncBlock: (block: bigint) => void;
 	getLastSyncBlock: () => Promise<number>;
 }
@@ -39,7 +41,7 @@ export class SQL implements SQL_Interface {
 	public closeConnection() {
 		this.db.end()
 	}
-
+	
 	public insertPaymentEntry(entry: paymentEntry) {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
@@ -68,9 +70,23 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
+	public updateSettledPayment(id: bigint, status: number) {
+		return new Promise((resolve, reject) => {
+			const queryString = "UPDATE SettledPayments set status=? WHERE id=?"
+			
+			this.db.query(queryString, [status, id], (err, result) => {
+				if (err) {
+					return reject(err)
+				}
+				
+				resolve(null)
+			})
+		})
+	}
+	
 	public getPaymentByBuyer(buyer: string) {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
 			
 			this.db.query(queryString, buyer, (err, result) => {
 				if (err) {
@@ -82,6 +98,7 @@ export class SQL implements SQL_Interface {
 				
 				rows.forEach(row => {
 					const payment: payment =  {
+						id: row.id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: row.price,
@@ -97,7 +114,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentBySeller(seller: string) {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
 			
 			this.db.query(queryString, seller, (err, result) => {
 				if (err) {
@@ -109,6 +126,7 @@ export class SQL implements SQL_Interface {
 				
 				rows.forEach(row => {
 					const payment: payment =  {
+						id: row.id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: row.price,
@@ -122,9 +140,9 @@ export class SQL implements SQL_Interface {
 		})	
 	}
 	
-	public getPaymentEntryPrice(id: bigint) {
-		return new Promise<bigint>((resolve, reject) => {
-			const queryString = `SELECT price FROM PaymentEntries WHERE id=?`
+	public getPaymentEntryByID(id: bigint) {
+		return new Promise<{seller: string, price: bigint}>((resolve, reject) => {
+			const queryString = `SELECT price, ecommerce FROM PaymentEntries WHERE id=?`
 			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
@@ -135,7 +153,32 @@ export class SQL implements SQL_Interface {
 				if (rows.length == 0) {
 					return reject("No entry found")
 				}
-				resolve(rows[0].price)
+				
+				resolve({seller: rows[0].ecommerce, price: rows[0].price})
+			})
+		})
+	}
+
+	public getPaymentByID(id: bigint) {
+		return new Promise<payment>((resolve, reject) => {
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON S.id=?`
+			
+			this.db.query(queryString, id.toString(), (err, result) => {
+				if (err) {
+					return reject(err)
+				}
+				
+				const rows = <mysql.RowDataPacket[]> result;
+				if (rows.length == 0) {
+					return reject("No entry found")
+				}
+				resolve({
+					id: rows[0].id,
+					buyer: rows[0].buyer,
+					seller: rows[0].ecommerce,
+					price: rows[0].price,
+					status: rows[0].status
+				})
 			})
 		})
 	}
@@ -163,7 +206,7 @@ export class SQL implements SQL_Interface {
 				if (err) {
 					return reject(err)
 				}
-
+				
 				console.log("[sql]: Synced to block (if newer): " + block)
 				resolve()
 			})

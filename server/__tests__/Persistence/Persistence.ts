@@ -12,6 +12,8 @@ dotenv.config()
 class SQL_Mock implements SQL_Interface {    
     insertPaymentEntry(entry: paymentEntry) {}
     insertSettledPayment(entry: settledPayment) {}
+    updateSettledPayment(id: bigint, status: number) {}
+
     
     getPaymentByBuyer(buyer: string)  { 
         return new Promise<payment[]>(() => {

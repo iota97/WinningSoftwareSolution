@@ -3,7 +3,6 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import qr from "qrcode";
 import { Persistence } from "../Persistence/Persistence"
-import { timeStamp } from "console";
 
 class Server {
     private app: Express;
@@ -12,7 +11,7 @@ class Server {
     
     public constructor(db: Persistence) {
         this.db = db
-
+        
         this.app = express();
         
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +19,7 @@ class Server {
         
         this.initRoutes();
     }
-
+    
     public close() {
         this.listener.close();
     }
@@ -28,30 +27,100 @@ class Server {
     private initRoutes() {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
+        this.app.get("/", this.MainPage);
         this.app.get("/qr", this.QRPage);
-        this.app.get("/", (req: Request, res: Response) => { this.paymentByBuyerPage(req, res, this.db) });
+        this.app.get("/confirm", (req: Request, res: Response) => { this.confirmPage(req, res, this.db) });
+        this.app.get("/buyer", (req: Request, res: Response) => { this.paymentByBuyerPage(req, res, this.db) });
+        this.app.get("/seller", (req: Request, res: Response) => { this.paymentBySellerPage(req, res, this.db) });
+        this.app.get("/land", (req: Request, res: Response) => { this.landPage(req, res, this.db) });
     }
     
-    private QRPage(req: Request, res: Response) {
-        const qr_str = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/transazione?id=" + req.query.id;
-        qr.toDataURL(qr_str, (src) => {
-            res.render("QR", {qr_img:src});
+    public landPage(req: any, res: any, db: Persistence) {
+        db.getPaymentEntryByID(req.query.id)
+        .then((item: any) => {
+            res.render("land", {
+                serverURL: process.env.SERVER_URL + "land?id=" + req.query.id,
+                seller: item.seller,
+                price: item.price,
+                id: req.query.id
+            });
+        })
+        .catch(() => {
+            res.redirect('/')
         })
     }
     
-    private paymentByBuyerPage(req: Request, res: Response, db: Persistence) {
-        db.getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
+    public MainPage(req: any, res: any) {
+        res.render("main", {serverURL: process.env.SERVER_URL});
+    }
+    
+    public QRPage(req: any, res: any) {
+        const qr_str = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
+        qr.toDataURL(qr_str)
+        .then((src) => {
+            res.render("QR", {serverURL: process.env.SERVER_URL, qr_img: src});
+        })
+    }
+    
+    public confirmPage(req: any, res: any, db: Persistence) {
+        db.getPaymentByID(req.query.id)
+        .then((item: any) => {
+            res.render("confirm", {
+                serverURL: process.env.SERVER_URL,
+                id: item.id,
+                seller: item.seller,
+                price: item.price,
+                status: item.status,
+                buyer: item.buyer
+            });
+        })    
+        .catch(() => {
+            res.redirect('/')
+        })
+    }
+    
+    public paymentByBuyerPage(req: any, res: any, db: Persistence) {
+        db.getPaymentByBuyer(req.query.id)
         .then((items: any) => {
             let item_string: string = "<table>";
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<tr><td>Compratore: " + items[i].buyer + "</td>" +
-                "<td>Venditore: " + items[i].seller + "</td>" +
+                "<tr><td>Venditore: " + items[i].seller + "</td>" +
                 "<td>Prezzo: " + items[i].price + "</td>" +
                 "<td>Stato: " + items[i].status + "</td></tr>"
             }
             item_string += "</table>";
-            res.render("transazioni", {item: item_string});
+            
+            if (items.length == 0) {
+                item_string = "<div>Nessuna transazione trovata</div>"
+            }
+            res.render("buyer", {items: item_string});
+        })
+        .catch(() => {
+            res.redirect('/')
+        })
+    }
+    
+    public paymentBySellerPage(req: any, res: any, db: Persistence) {
+        db.getPaymentBySeller(req.query.id)
+        .then((items: any) => {
+            let item_string: string = "<table>";
+            for (let i = 0; i < items.length; i++) {
+                item_string +=
+                "<tr><td>Acquirente: " + items[i].seller + "</td>" +
+                "<td>Prezzo: " + items[i].price + "</td>" +
+                "<td><a href=\"confirm?id="+items[i].id+"\">Stato: " + items[i].status + "</a></td>" +
+                "<td><a href=\"qr?id="+items[i].id+"\">Genera QR</a></td></tr>"
+            }
+            item_string += "</table>";
+            
+            if (items.length == 0) {
+                item_string = "<div>Nessuna transazione trovata</div>"
+            }
+            res.render("buyer", {items: item_string});
+        })
+        .catch(() => {
+            res.redirect('/')
         })
     }
     
