@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", "Helvetica", Helvetica, sans-serif;
+  font-size: 1.8rem;
+  padding: 1.2rem;
+}
+
+table, th, td {
+  padding: 0.5em;
+  border: 1px solid black;
+}
+
+.nascosto {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.transactions {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactions li {
+  text-align: center;
+  position: relative;
+  max-width: 15em;
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.transactions a {
+  text-decoration: none;
+  margin: 1em;
+}
+
+.info {
+  text-align: center;
+  position: relative;
+  max-width: 30em;
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.price {
+  font-size: 1.2em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.info a.qr {
+  text-decoration: underline;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.addr {
+  font-size: 0.8em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+
+.date {
+  display: block;
+  font-size: 0.8em;
+  margin: 1.5em;
+}
+
+.status {
+  display: block;
+  font-size: 1em;
+  margin: 1.5em;
+}
+
+.transactions li.stato1 {
+  background-color: yellow;
+}
+.transactions li.stato1 .price {
+  color: black;
+}
+.transactions li.stato1 .date {
+  color: #333;
+}
+
+.transactions li.stato2 {
+  background-color: darkgreen;
+}
+.transactions li.stato2 .price {
+  color: white;
+}
+.transactions li.stato2 .date {
+  color: #ddd;
+}
+
+.transactions li.stato3 {
+  background-color: darkred;
+}
+.transactions li.stato3 .price {
+  color: white;
+}
+.transactions li.stato3 .date {
+  color: #ddd;
+}
+
+
+

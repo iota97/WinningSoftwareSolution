@@ -3,6 +3,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import qr from "qrcode";
 import { Persistence } from "../Persistence/Persistence"
+import internal from "stream";
 
 class Server {
     private app: Express;
@@ -28,10 +29,10 @@ class Server {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
         this.app.get("/", this.MainPage);
-        this.app.get("/qr", this.QRPage);
         this.app.get("/confirm", (req: Request, res: Response) => { this.confirmPage(req, res, this.db) });
         this.app.get("/buyer", (req: Request, res: Response) => { this.paymentByBuyerPage(req, res, this.db) });
         this.app.get("/seller", (req: Request, res: Response) => { this.paymentBySellerPage(req, res, this.db) });
+        this.app.get("/detail", (req: Request, res: Response) => { this.detailPage(req, res, this.db) });
         this.app.get("/land", (req: Request, res: Response) => { this.landPage(req, res, this.db) });
     }
     
@@ -52,14 +53,6 @@ class Server {
     
     public MainPage(req: any, res: any) {
         res.render("main", {serverURL: process.env.SERVER_URL});
-    }
-    
-    public QRPage(req: any, res: any) {
-        const qr_str = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
-        qr.toDataURL(qr_str)
-        .then((src) => {
-            res.render("QR", {serverURL: process.env.SERVER_URL, qr_img: src});
-        })
     }
     
     public confirmPage(req: any, res: any, db: Persistence) {
@@ -94,20 +87,21 @@ class Server {
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
     }
-
+    
     public paymentByBuyerPage(req: any, res: any, db: Persistence) {
         db.getPaymentByBuyer(req.query.id)
         .then((items: any) => {
-            let item_string: string = "<table>";
+            let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<tr><td>Venditore: " + items[i].seller + "</td>" +
-                "<td>Prezzo: " + items[i].price + "</td>" +
-                "<td>Data creazione: " + this.timeConverter(items[i].created) + "</td>" +
-                "<td>Data conferma/annullamento: " + this.timeConverter(items[i].confirmed) + "</td>" +
-                "<td>Stato: " + items[i].status + "</td></tr>"
+                "<a href=\"detail?id="+items[i].id+"\">" +
+                "<li class=\"stato"+items[i].status+"\">"+
+                "<strong class=\"price\">" + items[i].price / Math.pow(10, 18) + " Matic</strong>" +
+                "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
+                "</li>" +
+                "</a>"
             }
-            item_string += "</table>";
+            item_string += "</ul>";
             
             if (items.length == 0) {
                 item_string = "<div>Nessuna transazione trovata</div>"
@@ -119,18 +113,60 @@ class Server {
         })
     }
     
+    public detailPage(req: any, res: any, db: Persistence) {
+        db.getPaymentByID(req.query.id)
+        .then((item: any) => {
+            let status = "In transit";
+            if (item.status == 2) {
+                status = "Confirmed"
+            } else if (item.status == 3) {
+                status = "Cancelled"
+            }
+            let item_string: string =
+            "<div class=\"info\">" +
+            "<strong class=\"price\">Price " + item.price / Math.pow(10, 18) + " Matic</strong>" +
+            "<span class=\"addr\">From: " + item.buyer + "</span>" +
+            "<span class=\"addr\">To: " + item.seller + "</span>" +
+            "<span class=\"date\">Opened " + this.timeConverter(item.created) + "</span>" +
+            "<span class=\"date\">Closed " + this.timeConverter(item.confirmed) + "</span>" +
+            "<span class=\"status\">" + status + "</span>" +
+            "###QR###" +
+            "<div>"
+            
+            if (req.query.s && item.status == 1) {
+                const qr_url = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
+                qr.toDataURL(qr_url)
+                .then((img_data) => {
+                    const qr_str = "<a class=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
+                    
+                    item_string = item_string.replace("###QR###", qr_str);
+                    res.render("detail", {item: item_string});
+                })
+            } else {
+                item_string = item_string.replace("###QR###", "");
+                res.render("detail", {item: item_string});
+            }
+        })
+        
+        .catch(() => {
+            res.redirect('/')
+        })
+    }
+    
     public paymentBySellerPage(req: any, res: any, db: Persistence) {
         db.getPaymentBySeller(req.query.id)
         .then((items: any) => {
-            let item_string: string = "<table>";
+            let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<tr><td>Acquirente: " + items[i].seller + "</td>" +
-                "<td>Prezzo: " + items[i].price + "</td>" +
-                "<td><a href=\"confirm?id="+items[i].id+"\">Stato: " + items[i].status + "</a></td>" +
-                "<td><a href=\"qr?id="+items[i].id+"\">Genera QR</a></td></tr>"
+                "<a href=\"detail?s=1&id="+items[i].id+"\">" +
+                "<li class=\"stato"+items[i].status+"\">"+
+                "<strong class=\"price\">" + items[i].price / Math.pow(10, 18) + " Matic</strong>" +
+                "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
+                "</li>" +
+                "</a>"
             }
-            item_string += "</table>";
+            item_string += "</ul>";
             
             if (items.length == 0) {
                 item_string = "<div>Nessuna transazione trovata</div>"
