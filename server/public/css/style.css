@@ -7,7 +7,6 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
-  background-color: #888;
 }
 
 html body{
@@ -140,7 +139,12 @@ table, th, td {
   color: #ddd;
 }
 
+#con {
+  display: none;
+}
+
 #connect {
+  z-index: 999;
   display: none;
   position: fixed;
   justify-content: center;
@@ -216,27 +220,5 @@ header {
   border-radius: 0 0 30px 30px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   background-color: #333;
-  color: white;
-}
-
-footer {
-  text-align: center;
-  padding: 1.2em;
-  border-radius: 30px 30px 0px 0px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-  background-color: #333;
-  color: white;
-  height: 5em;
-}
-
-footer strong {
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
-footer a {
-  padding-top: 0.8em;
-  display: block;
-  font-size: 0.9em;
   color: white;
 }

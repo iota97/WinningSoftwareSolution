@@ -41,7 +41,7 @@ class PageCreator {
     }
     
     public paymentByBuyerPage(req: any, res: any, db: Persistence) {
-        db.getPaymentByBuyer(req.query.id)
+        db.getPaymentByBuyer(req.query.id || "")
         .then((items: any) => {
             let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
@@ -58,7 +58,11 @@ class PageCreator {
             if (items.length == 0) {
                 item_string = "<div>Nessuna transazione trovata</div>"
             }
-            res.render("buyer", {items: item_string});
+            res.render("buyer", {
+                items: item_string,
+                id: req.query.id,
+                serverURL: process.env.SERVER_URL + "/buyer?id=" + req.query.id,
+            });
         })
         .catch(() => {
             res.redirect('/')
@@ -74,6 +78,7 @@ class PageCreator {
                 .then((img_data) => {
                     const qr_str = "<a class=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
                     res.render("detail", {
+                        serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
                         price: item.price / Math.pow(10, 18),
                         buyer: item.buyer,
                         seller: item.seller,
@@ -85,6 +90,7 @@ class PageCreator {
                 })
             } else {
                 res.render("detail", {
+                    serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
                     price: item.price / Math.pow(10, 18),
                     buyer: item.buyer,
                     seller: item.seller,
@@ -102,7 +108,7 @@ class PageCreator {
     }
     
     public paymentBySellerPage(req: any, res: any, db: Persistence) {
-        db.getPaymentBySeller(req.query.id)
+        db.getPaymentBySeller(req.query.id || "")
         .then((items: any) => {
             let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
@@ -119,7 +125,11 @@ class PageCreator {
             if (items.length == 0) {
                 item_string = "<div>Nessuna transazione trovata</div>"
             }
-            res.render("buyer", {items: item_string});
+            res.render("seller", {
+                items: item_string,
+                id: req.query.id,
+                serverURL: process.env.SERVER_URL + "/seller?id=" + req.query.id,
+            });       
         })
         .catch(() => {
             res.redirect('/')

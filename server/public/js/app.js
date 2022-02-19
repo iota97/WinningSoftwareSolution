@@ -41,6 +41,25 @@ const isMetamaskConnected = async () => {
     return accountsList > 0;    
 }
 
+function setGetParameter(paramName, paramValue) {
+    var url = window.location.href;
+    var hash = location.hash;
+    url = url.replace(hash, '');
+    if (url.indexOf(paramName + "=") >= 0) {
+        var prefix = url.substring(0, url.indexOf(paramName + "=")); 
+        var suffix = url.substring(url.indexOf(paramName + "="));
+        suffix = suffix.substring(suffix.indexOf("=") + 1);
+        suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
+        url = prefix + paramName + "=" + paramValue + suffix;
+    } else {
+    if (url.indexOf("?") < 0)
+        url += "?" + paramName + "=" + paramValue;
+    else
+        url += "&" + paramName + "=" + paramValue;
+    }
+    window.location.href = url + hash;
+}
+
 const onMetamaskConnected = async () => {
     try { 
         handleNewChain(await ethereum.request({
@@ -63,6 +82,16 @@ const onMetamaskConnected = async () => {
         }   
         
         connectPopup.style = "display: none;"
+
+        document.getElementById("con").style = "display: block;"
+
+        const wallet = document.getElementById("idWallet")
+        if (wallet && accounts[0]) {
+            if (wallet.value != accounts[0]) {
+                setGetParameter("id", accounts[0])
+            }
+        }
+
         const listBuyer = document.getElementById("listBuyer")
         if (listBuyer && accounts[0]) {
             listBuyer.classList.remove("rimosso")
