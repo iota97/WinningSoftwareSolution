@@ -1,5 +1,13 @@
 <%- include('header.ejs') %>
 
-<%-item%>
+<div class="info">
+    <strong class="price">Price <%-price%> Matic</strong>
+    <span class="addr">From: <%-buyer%></span>
+    <span class="addr">To: <%-seller%></span>
+    <span class="date">Opened <%-created%></span>
+    <span class="date">Closed <%-confirmed%></span>
+    <span class="status"><%-status%></span>
+    <%-qr%>
+</div>
 
 <%- include('footer.ejs') %>
