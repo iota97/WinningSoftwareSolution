@@ -3,5 +3,7 @@ export interface payment {
 	buyer: string,
 	seller: string,
 	price: bigint, // Dollar cents
-	status: number
+	status: number,
+	created: string,
+	confirmed: string // Also cancelled
 }

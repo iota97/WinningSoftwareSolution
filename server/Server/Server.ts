@@ -79,6 +79,22 @@ class Server {
         })
     }
     
+    private timeConverter(timestamp: string){
+        if (timestamp == "") {
+            return "N/A"
+        }
+        var a = new Date(Number(timestamp)*1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        return time;
+    }
+
     public paymentByBuyerPage(req: any, res: any, db: Persistence) {
         db.getPaymentByBuyer(req.query.id)
         .then((items: any) => {
@@ -87,6 +103,8 @@ class Server {
                 item_string +=
                 "<tr><td>Venditore: " + items[i].seller + "</td>" +
                 "<td>Prezzo: " + items[i].price + "</td>" +
+                "<td>Data creazione: " + this.timeConverter(items[i].created) + "</td>" +
+                "<td>Data conferma/annullamento: " + this.timeConverter(items[i].confirmed) + "</td>" +
                 "<td>Stato: " + items[i].status + "</td></tr>"
             }
             item_string += "</table>";

@@ -9,7 +9,7 @@ DROP TABLE PaymentEntries;
 DROP TABLE SettledPayments;
 DROP TABLE LastBlockSynced;
 CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));
-CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, created varchar(32), confirmed varchar(32), primary key(id));
 CREATE TABLE LastBlockSynced (id int(1), value bigint, primary key(id));
 INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 */
@@ -17,7 +17,7 @@ INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 export interface SQL_Interface {
 	insertPaymentEntry: (entry: paymentEntry) => void;
 	insertSettledPayment: (entry: settledPayment) => void;
-	updateSettledPayment: (id: bigint, status: number) => void;
+	updateSettledPayment: (id: bigint, status: number, timestamp: string) => void;
 	getPaymentByBuyer: (buyer: string) => Promise<payment[]>;
 	getPaymentBySeller: (seller: string) => Promise<payment[]>;
 	getPaymentByID: (id: bigint) => Promise<payment>;
@@ -58,9 +58,8 @@ export class SQL implements SQL_Interface {
 	
 	public insertSettledPayment(entry: settledPayment) {
 		return new Promise((resolve, reject) => {
-			const queryString = "INSERT INTO SettledPayments (id, item_id, buyer, status) VALUES (?, ?, ?, ?)"
-			
-			this.db.query(queryString, [entry.id, entry.item_id, entry.buyer, entry.status], (err, result) => {
+			const queryString = "INSERT INTO SettledPayments (id, item_id, buyer, status, created, confirmed) VALUES (?, ?, ?, ?, ?, ?)"
+			this.db.query(queryString, [entry.id, entry.item_id, entry.buyer, entry.status, entry.created, entry.confirmed], (err, result) => {
 				if (err) {
 					return reject(err)
 				}
@@ -70,11 +69,11 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public updateSettledPayment(id: bigint, status: number) {
+	public updateSettledPayment(id: bigint, status: number, timestamp: string) {
 		return new Promise((resolve, reject) => {
-			const queryString = "UPDATE SettledPayments set status=? WHERE id=?"
+			const queryString = "UPDATE SettledPayments set status=?, confirmed=? WHERE id=?"
 			
-			this.db.query(queryString, [status, id], (err, result) => {
+			this.db.query(queryString, [status, timestamp, id], (err, result) => {
 				if (err) {
 					return reject(err)
 				}
@@ -86,7 +85,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentByBuyer(buyer: string) {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
 			
 			this.db.query(queryString, buyer, (err, result) => {
 				if (err) {
@@ -102,7 +101,9 @@ export class SQL implements SQL_Interface {
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: row.price,
-						status: row.status
+						status: row.status,
+						created: row.created,
+						confirmed: row.confirmed
 					}
 					payments.push(payment)
 				});
@@ -114,7 +115,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentBySeller(seller: string) {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
 			
 			this.db.query(queryString, seller, (err, result) => {
 				if (err) {
@@ -130,7 +131,9 @@ export class SQL implements SQL_Interface {
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: row.price,
-						status: row.status
+						status: row.status,
+						created: row.created,
+						confirmed: row.confirmed
 					}
 					payments.push(payment)
 				});
@@ -177,7 +180,9 @@ export class SQL implements SQL_Interface {
 					buyer: rows[0].buyer,
 					seller: rows[0].ecommerce,
 					price: rows[0].price,
-					status: rows[0].status
+					status: rows[0].status,
+					created: rows[0].created,
+					confirmed: rows[0].confirmed
 				})
 			})
 		})
@@ -207,7 +212,7 @@ export class SQL implements SQL_Interface {
 					return reject(err)
 				}
 				
-				console.log("[sql]: Synced to block (if newer): " + block)
+				console.log("[sql]: Synced to block: " + block)
 				resolve()
 			})
 		})

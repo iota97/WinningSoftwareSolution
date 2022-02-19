@@ -30,9 +30,9 @@ class ShopContractEventManager {
 			.on('error', (err: Error) => console.error(err))
 			.on('data', (event: any) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
 
-			this.shopContract.fundsUnlocked(options)
+			this.shopContract.statusChange(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', (event: any) => { this.OnFundsUnlocked(event, this.shopContract, this.sql) })
+			.on('data', (event: any) => { this.OnStatusChange(event, this.shopContract, this.sql) })
 		})
 		.catch((err: Error) => {
 			console.error(err)
@@ -53,9 +53,20 @@ class ShopContractEventManager {
 	}
 	
 	private OnPaymentSettled(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
+		let res: any;
+
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
-		.then((res: any) => {
-			sql.insertSettledPayment({id: event.returnValues.settledPaymentId, item_id: res.paymentEntryId, buyer: res.client, status: res.status})
+		.then(async (res: any)  => {
+			let time = await this.shopContract.getBlockTime(event.blockNumber);
+	
+			sql.insertSettledPayment({
+				id: event.returnValues.settledPaymentId,
+				item_id: res.paymentEntryId,
+				buyer: res.client,
+				status: res.status,
+				created: time,
+				confirmed: ""
+			})
 		})
 		.then(() => {
 			sql.setLastSyncBlock(event.blockNumber);
@@ -65,10 +76,12 @@ class ShopContractEventManager {
 		})
 	}
 
-	private OnFundsUnlocked(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
+	private OnStatusChange(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
-		.then((res: any) => {
-			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status)
+		.then(async (res: any) => {
+			let time = await this.shopContract.getBlockTime(event.blockNumber);
+
+			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status, time)
 		})
 		.then(() => {
 			sql.setLastSyncBlock(event.blockNumber);
