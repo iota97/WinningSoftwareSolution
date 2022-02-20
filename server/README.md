@@ -47,3 +47,7 @@ Andare su https://chainlist.org/ ricercare "mumbai" e cliccare "Connect Wallet" 
 
 # Aggiungere valuta al wallet (rete di test)
 Andare su https://faucet.polygon.technology/ inserire il proprio wallet e cliccare "Submit"
+Andare su https://faucets.chain.link/mumbai per i Chain Link
+
+# Collegare il chain link al contratto per il timer
+Registrarsi su https://keepers.chain.link/new
