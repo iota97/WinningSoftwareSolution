@@ -35,6 +35,9 @@ class Server {
         this.app.get("/seller", this.seller.bind(this));
         this.app.get("/detail", this.detail.bind(this));
         this.app.get("/land", this.land.bind(this));
+
+        // Last route, none matched
+        this.app.get('*', this.page.mainPage);
     }
 
     private confirm(req: Request, res: Response) {

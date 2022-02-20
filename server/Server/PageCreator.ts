@@ -16,7 +16,7 @@ class PageCreator {
             res.redirect('/')
         })
     }
-    
+
     public mainPage(req: any, res: any) {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }

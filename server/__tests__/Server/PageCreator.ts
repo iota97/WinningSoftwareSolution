@@ -82,13 +82,13 @@ describe('PageCreator', () => {
     const db = new Persistence(new SQL_Mock());
     const page = new PageCreator()
     
-    it('PageCreator - Main Page', async () => {
+    it('Main Page - Ok', async () => {
         const req = {}
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
                 toBe("main")
-
+                
                 const obj = {
                     serverURL: process.env.SERVER_URL
                 }
@@ -98,8 +98,8 @@ describe('PageCreator', () => {
         }
         page.mainPage(req, res);
     })
-
-    it('PageCreator - Landing Page', async () => {
+    
+    it('Landing Page - Ok', async () => {
         const req = {
             query: {id: 0}
         }
@@ -107,7 +107,7 @@ describe('PageCreator', () => {
             render: (view: any, data: any) => {
                 expect(view).
                 toBe("land")
-
+                
                 const obj = {
                     serverURL: process.env.SERVER_URL+"/land?id=0",
                     seller: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0",
@@ -122,5 +122,26 @@ describe('PageCreator', () => {
             }
         }
         page.landPage(req, res, db);
+    })
+
+    it('Landing Page - Redirect', async () => {
+        const o = db.getPaymentEntryByID;
+        db.getPaymentByID = (s: any) => {
+            return new Promise<payment>(() => {
+                throw "err"
+            })
+        }
+
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(false).toBe(true)
+
+            },
+            redirect: (path: any) => {
+                expect(path).toBe("/")
+            }
+        }
+        page.landPage({query: {}}, res, db);
+        db.getPaymentEntryByID = o;
     })
 })
