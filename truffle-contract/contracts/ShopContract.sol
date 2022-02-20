@@ -5,22 +5,22 @@ pragma solidity 0.8.10;
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract ShopContract is Ownable{
-
     using Address for address;
     using SafeMath for uint256;
 
     uint256 freePaymentEntryId;
     uint256 freeSettledPaymentId;
+    AggregatorV3Interface internal priceFeed;
 
-    struct PaymentEntry{
+    struct PaymentEntry {
         address seller;
-        string objId;
-        uint256 price; //10^18 = 1 Matic
+        uint256 price; // Dollars cent
     }
 
-    struct SettledPayment{
+    struct SettledPayment {
         uint256 paymentEntryId;
         uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 money sent to seller
         address client;
@@ -29,95 +29,60 @@ contract ShopContract is Ownable{
     mapping(uint256 => PaymentEntry) private paymentsEntries;
     mapping(uint256 => SettledPayment) private settledPayments;
 
+    /**
+     * https://docs.chain.link/docs/matic-addresses/
+     * Network: Mumbai Testnet 
+     * Aggregator: MATIC/USD Dec: 8
+     * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
+     */
     constructor(){
+        priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
 
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
-
     }
 
     event addedPaymentEntry(uint256 paymentEntryId);
     event paymentSettled(uint256 settledPaymentId);
-    event paymentCancelled(uint256 settledPaymentId);
-    event fundsUnlocked(uint256 settledPaymentId);
+    event statusChanged(uint256 settledPaymentId);
 
-    function addPaymentEntry(string calldata objId, uint256 price) public{
+    function getLatestPrice() public view returns (uint256) {
+        (,int price,,,) = priceFeed.latestRoundData();
+        return uint256(price)*(10**8);
+    }
 
+    function addPaymentEntry(uint256 price) public{
         require(price > 0);
-
-        paymentsEntries[freePaymentEntryId] = PaymentEntry(msg.sender, objId, price);
-
+        paymentsEntries[freePaymentEntryId] = PaymentEntry(msg.sender, price);
         freePaymentEntryId = freePaymentEntryId + 1;
-
         emit addedPaymentEntry(freePaymentEntryId - 1); //event is emitted after everything else is done
-
     }
 
     function settlePayment(uint256 paymentEntryId) payable public{
-
         require(paymentEntryId < freePaymentEntryId);
-
-        //require(paymentsEntries[paymentEntryId].price == msg.value); <-- controllo che il denaro inviato corrisponda a quello atteso && altra logica
-
+        require(paymentsEntries[paymentEntryId].price*getLatestPrice() == msg.value); // <-- controllo che il denaro inviato corrisponda a quello atteso && altra logica
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender);
-
         freeSettledPaymentId = freeSettledPaymentId + 1;
-
         emit paymentSettled(freeSettledPaymentId - 1);
-
-    }
-
-    function cancelSettledPayment(uint256 settledPaymentId) payable public{
-
-        SettledPayment memory pSettled = settledPayments[settledPaymentId];
-        PaymentEntry memory pEntry = paymentsEntries[pSettled.paymentEntryId];
-
-        require(msg.sender == pEntry.seller); //only the original seller can cancel a settled payment
-        require(pSettled.status != 0);
-
-        if(pSettled.status == 1){ //if the money is still in the contracts balance
-
-            require(msg.value == 0); //don't pay if you don't have to!
-
-        }else{ //if the money is not anymore in the contracts balance seller needs to pay back the obj value to cancel a payment
-
-            require(msg.value == pEntry.price); //seller has sent to this contract the money to send back to the client
-
-        }
-
-        //bool ok = transfer(pEntry.price, pSettled.client); //we send back the money to the client
-        //require(ok);
-
-        settledPayments[settledPaymentId].status = 0;
-
-        emit paymentCancelled(settledPaymentId);
-
     }
 
     function unlockFunds(uint256 settledPaymentId) public{
-
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 
         settledPayments[settledPaymentId].status = 2;
         //qui deve andare il timer/inviare i soldi al venditore/logica e controlli
 
-        emit fundsUnlocked(settledPaymentId);
-
+        emit statusChanged(settledPaymentId);
     }
 
     function getPaymentEntry(uint256 paymentEntryId) public view returns(PaymentEntry memory){
-
         require(paymentEntryId < freePaymentEntryId);
         return paymentsEntries[paymentEntryId];
-
     }
 
     function getSettledPayment(uint256 settledPaymentId) public view returns(SettledPayment memory){
-
         require(settledPaymentId < freeSettledPaymentId);
         return settledPayments[settledPaymentId];
-
     }
-
 }

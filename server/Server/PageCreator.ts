@@ -8,7 +8,7 @@ class PageCreator {
             res.render("land", {
                 serverURL: process.env.SERVER_URL + "/land?id=" + req.query.id,
                 seller: item.seller,
-                price: item.price / Math.pow(10, 18),
+                price: item.price / 100,
                 id: req.query.id
             });
         })
@@ -25,7 +25,7 @@ class PageCreator {
         db.getPaymentByID(req.query.id)
         .then((item: any) => {
             res.render("confirm", {
-                price: item.price / Math.pow(10, 18),
+                price: item.price / 100,
                 buyer: item.buyer,
                 seller: item.seller,
                 created: this.timeConverter(item.created),
@@ -48,7 +48,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + items[i].price / Math.pow(10, 18) + " Matic</strong>" +
+                "<strong class=\"price\">" + items[i].price / 100 + "$</strong>" +
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
@@ -79,7 +79,7 @@ class PageCreator {
                     const qr_str = "<a class=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
                     res.render("detail", {
                         serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
-                        price: item.price / Math.pow(10, 18),
+                        price: item.price / 100,
                         buyer: item.buyer,
                         seller: item.seller,
                         created: this.timeConverter(item.created),
@@ -91,7 +91,7 @@ class PageCreator {
             } else {
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
-                    price: item.price / Math.pow(10, 18),
+                    price: item.price / 100,
                     buyer: item.buyer,
                     seller: item.seller,
                     created: this.timeConverter(item.created),
@@ -115,7 +115,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?s=1&id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + items[i].price / Math.pow(10, 18) + " Matic</strong>" +
+                "<strong class=\"price\">" + items[i].price / 100 + "$</strong>" +
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
