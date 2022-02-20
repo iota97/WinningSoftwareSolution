@@ -7,7 +7,6 @@ import { setTimeout } from 'timers'
 
 dotenv.config()
 
-
 process.env.DB_NAME = "OnlineStoreTest"
 
 let db = mysql.createConnection({
@@ -18,10 +17,10 @@ let db = mysql.createConnection({
 })
 
 db.query(`
-    DELETE FROM PaymentEntries WHERE id=12312319;`
+    DELETE FROM PaymentEntries WHERE id=13;`
 )
 db.query(`
-    DELETE FROM SettledPayments WHERE id=12312321;`
+    DELETE FROM SettledPayments WHERE id=12;`
 )
 
 function delay(ms: number) {
@@ -39,20 +38,6 @@ describe('SQL', function () {
     
     let sql = new SQL()
     
-    it('getPaymentByBuyer - Valid', async () => {
-        return sql.getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
-        .then(async (res: any) => {
-            let obj: any  ={
-                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
-                price: 20000000000000000,
-                status: 2
-            }
-            expect(res[0]).
-            toMatchObject(obj)
-        })
-    })
-    
     it('getPaymentByBuyer - Empty', async () => {
         return sql.getPaymentByBuyer("asdasdasdasdd")
         .then(async (res: any) => {
@@ -60,43 +45,12 @@ describe('SQL', function () {
             toBe(0)
         })
     })
-    
-    it('getPaymentBySeller - Valid', async () => {
-        return sql.getPaymentBySeller("0x4645895DE6761C3c221Da5f6D75e4393a868B4a0")
-        .then(async (res: any) => {
-            let obj: any = {
-                buyer: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
-                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
-                price: 20000000000000000,
-                status: 1
-            }
-            expect(res[0]).
-            toMatchObject(obj)
-        })
-    })
-    
+     
     it('getPaymentBySeller - Empty', async () => {
         return sql.getPaymentBySeller("asdasdasdasdd")
         .then(async (res: any) => {
             expect(res.length).
             toBe(0)
-        })
-    })
-    
-    it('getPaymentEntryPrice - Valid', async () => {
-        return sql.getPaymentEntryPrice(BigInt(0))
-        .then(async (res: any) => {
-            expect(res).
-            toBe(20000000000000000)
-        })
-    })
-    
-    it('getPaymentEntryPrice - Invalid', async () => {
-        expect.assertions(1);
-        
-        return sql.getPaymentEntryPrice(BigInt(12312312))
-        .catch(async (e: any) => {
-            expect(e).toMatch('No entry found') 
         })
     })
     
@@ -114,23 +68,94 @@ describe('SQL', function () {
     
     it('insertPaymentEntry - Dummy', async () => {
         return sql.insertPaymentEntry({
-            id: BigInt(12312319),
-            ecommerce: "asdf",
-            price: BigInt(9123123123) // Dollar cents
+            id: BigInt(13),
+            seller: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0",
+            price: BigInt(20000000000000000) // Dollar cents
         }) 
     })
     
     it('insertSettledPayment - Dummy', async () => {
         return sql.insertSettledPayment({
-            id: BigInt(12312321),
-            item_id: BigInt(12312321),
-            buyer: "asdf",
-            status: 0
+            id: BigInt(12),
+            item_id: BigInt(13),
+            buyer: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
+            status: 1,
+            created: "123",
+            confirmed: ""
+        })
+    })
+
+    it('getPaymentBySeller - Valid', async () => {
+        return sql.getPaymentBySeller("0x4645895DE6761C3c221Da5f6D75e4393a868B4a0")
+        .then(async (res: any) => {
+            let obj: any = {
+                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000,
+                status: 1
+            }
+            expect(res[0]).
+            toMatchObject(obj)
+        })
+    })
+
+    it('getPaymentByID - Valid', async () => {
+        return sql.getPaymentByID(BigInt(12))
+        .then(async (res: any) => {
+            let obj: any = {
+                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000,
+                status: 1
+            }
+            expect(res).
+            toMatchObject(obj)
+        })
+    })
+
+    it('getPaymentEntryByID - Valid', async () => {
+        return sql.getPaymentEntryByID(BigInt(13))
+        .then(async (res: any) => {
+            let obj: any = {
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000,
+            }
+            expect(res).
+            toMatchObject(obj)
+        })
+    })
+
+    it('getPaymentEntryByID - Empty', async () => {
+        return sql.getPaymentEntryByID(BigInt(6662321))
+        .catch((e: any) => {
+            expect(e).toMatch('No entry found')   
+        })
+    })
+
+
+    it('getPaymentByID - Empty', async () => {
+        return sql.getPaymentByID(BigInt(6662321))
+        .catch((e: any) => {
+            expect(e).toMatch('No entry found')   
+        })
+    })
+
+    it('getPaymentByBuyer - Valid', async () => {
+        return sql.getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
+        .then(async (res: any) => {
+            let obj: any  ={
+                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000,
+                status: 1
+            }
+            expect(res[0]).
+            toMatchObject(obj)
         })
     })
 
     it('updateSettledPayment - Dummy', async () => {
-        return sql.updateSettledPayment(BigInt(12312321), 0)
+        return sql.updateSettledPayment(BigInt(12312321), 0, "12345")
     })
     
     it('closeConnection - Close', async () => {
@@ -153,13 +178,6 @@ describe('SQL', function () {
         })    
     })
     
-    it('getPaymentEntryPrice - Closed', async () => {
-        return sql.getPaymentEntryPrice(BigInt(9))
-        .catch(async (e: any) => {
-            expect(e[0] == "E") 
-        })    
-    })
-    
     it('getPaymentBySeller - Closed', async () => {
         return sql.getPaymentBySeller("asd")
         .catch(async (e: any) => {
@@ -173,11 +191,25 @@ describe('SQL', function () {
             expect(e[0] == "E") 
         })    
     })
+
+    it('getPaymentByID - Closed', async () => {
+        return sql.getPaymentByID(BigInt(1))
+        .catch(async (e: any) => {
+            expect(e[0] == "E") 
+        })    
+    })
+
+    it('getPaymentEntryByID - Closed', async () => {
+        return sql.getPaymentEntryByID(BigInt(1))
+        .catch(async (e: any) => {
+            expect(e[0] == "E") 
+        })    
+    })
     
     it('insertPaymentEntry - Closed', async () => {
         return sql.insertPaymentEntry({
             id: BigInt(12312319),
-            ecommerce: "asdf",
+            seller: "asdf",
             price: BigInt(9123123123) // Dollar cents
         })
         .catch(async (e: any) => {
@@ -186,7 +218,7 @@ describe('SQL', function () {
     })
 
     it('updateSettledPayment - Closed', async () => {
-        return sql.updateSettledPayment(BigInt(12312321), 0)
+        return sql.updateSettledPayment(BigInt(12312321), 0, "1234")
         .catch(async (e: any) => {
             expect(e[0] == "E") 
         })    
@@ -197,7 +229,9 @@ describe('SQL', function () {
             id: BigInt(12312321),
             item_id: BigInt(12312321),
             buyer: "asdf",
-            status: 0
+            status: 0,
+            created: "123",
+            confirmed: ""
         })
         .catch(async (e: any) => {
             expect(e[0] == "E") 

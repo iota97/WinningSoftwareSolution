@@ -21,7 +21,7 @@ export interface SQL_Interface {
 	getPaymentByBuyer: (buyer: string) => Promise<payment[]>;
 	getPaymentBySeller: (seller: string) => Promise<payment[]>;
 	getPaymentByID: (id: bigint) => Promise<payment>;
-	getPaymentEntryByID: (id: bigint) => Promise<{seller: string, price: bigint}>;
+	getPaymentEntryByID: (id: bigint) => Promise<paymentEntry>;
 	setLastSyncBlock: (block: bigint) => void;
 	getLastSyncBlock: () => Promise<number>;
 }
@@ -46,7 +46,7 @@ export class SQL implements SQL_Interface {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
 			
-			this.db.query(queryString, [entry.id, entry.ecommerce, entry.price], (err, result) => {
+			this.db.query(queryString, [entry.id, entry.seller, entry.price], (err, result) => {
 				if (err) {
 					return reject(err)
 				}
@@ -144,8 +144,8 @@ export class SQL implements SQL_Interface {
 	}
 	
 	public getPaymentEntryByID(id: bigint) {
-		return new Promise<{seller: string, price: bigint}>((resolve, reject) => {
-			const queryString = `SELECT price, ecommerce FROM PaymentEntries WHERE id=?`
+		return new Promise<paymentEntry>((resolve, reject) => {
+			const queryString = `SELECT * FROM PaymentEntries WHERE id=?`
 			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
@@ -157,7 +157,13 @@ export class SQL implements SQL_Interface {
 					return reject("No entry found")
 				}
 				
-				resolve({seller: rows[0].ecommerce, price: rows[0].price})
+				const payment: paymentEntry = {
+					id: rows[0].id,
+					seller: rows[0].ecommerce,
+					price: rows[0].price
+				}
+				
+				resolve(payment)
 			})
 		})
 	}
@@ -165,7 +171,7 @@ export class SQL implements SQL_Interface {
 	public getPaymentByID(id: bigint) {
 		return new Promise<payment>((resolve, reject) => {
 			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.id=?`
-			
+
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
 					return reject(err)
@@ -175,7 +181,8 @@ export class SQL implements SQL_Interface {
 				if (rows.length == 0) {
 					return reject("No entry found")
 				}
-				resolve({
+
+				const payment: payment =  {
 					id: rows[0].id,
 					buyer: rows[0].buyer,
 					seller: rows[0].ecommerce,
@@ -183,7 +190,9 @@ export class SQL implements SQL_Interface {
 					status: rows[0].status,
 					created: rows[0].created,
 					confirmed: rows[0].confirmed
-				})
+				}
+
+				resolve(payment)
 			})
 		})
 	}

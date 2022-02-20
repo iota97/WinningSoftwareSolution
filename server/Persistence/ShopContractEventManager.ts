@@ -42,7 +42,7 @@ class ShopContractEventManager {
 	private OnAddedPaymentEntry(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
 		shopContract.getPaymentEntry(event.returnValues.paymentEntryId)
 		.then((res: any) => {
-			sql.insertPaymentEntry({id: event.returnValues.paymentEntryId, ecommerce: res.seller, price: res.price})
+			sql.insertPaymentEntry({id: event.returnValues.paymentEntryId, seller: res.seller, price: res.price})
 		})
 		.then(() => {
 			sql.setLastSyncBlock(event.blockNumber);

@@ -1,53 +1,72 @@
 import * as dotenv from "dotenv";
 
-import { SQL_Interface } from "../../Persistence/SQL";
-import { payment } from "../../Persistence/Types/payment";
-import { paymentEntry } from "../../Persistence/Types/paymentEntry";
-import { settledPayment } from "../../Persistence/Types/settledPayment"
-
 import { ShopContractEventManager } from "../../Persistence/ShopContractEventManager"
 
 import { EventEmitter } from 'events'
 import { setTimeout } from 'timers'
 import { ShopContract_Interface } from "../../Persistence/ShopContract";
 
-jest.useFakeTimers()
-dotenv.config()
+import { SQL_Interface } from "../../Persistence/SQL";
+import { payment } from "../../Persistence/Types/payment";
+import { paymentEntry } from "../../Persistence/Types/paymentEntry";
+import { settledPayment } from "../../Persistence/Types/settledPayment";
 
-class SQL_Mock implements SQL_Interface {   
-    static paymentEntries: bigint[] = []
-    static settledPayments: bigint[] = []
-    
-    insertPaymentEntry(entry: paymentEntry) { SQL_Mock.paymentEntries.push(entry.id) }
-    insertSettledPayment(entry: settledPayment) { SQL_Mock.paymentEntries.push(entry.id) }
+export class SQL_Mock implements SQL_Interface {    
+    insertPaymentEntry(entry: paymentEntry) {}
+    insertSettledPayment(entry: settledPayment) {}
     updateSettledPayment(id: bigint, status: number) {}
-
+    
+    
     getPaymentByBuyer(buyer: string)  { 
-        return new Promise<payment[]>(() => {
+        return new Promise<payment[]>((resolve) => {
+            if (buyer == "asdasdasdasdd") return resolve([])
+
             let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: 20000000000000000,
                 status: 2
             }
-            return [obj]
+            resolve([obj])
         })
     };
     getPaymentBySeller(seller: string)  { 
-        return new Promise<payment[]>(() => {
+        return new Promise<payment[]>((resolve) => {
+            if (seller == "asdasdasdasdd") return resolve([])
+
             let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: 20000000000000000,
                 status: 2
             }
-            return [obj]
+            resolve([obj])
         })
     };
-    getPaymentEntryPrice(id: bigint) { 
-        return new Promise<bigint>((resolve, reject) => {
+    getPaymentByID(id: bigint) { 
+        return new Promise<payment>((resolve, reject) => {
             if (id == BigInt(0)) {
-                resolve(BigInt(20))
+                let obj: any  ={
+                    buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                    seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                    price: 20000000000000000,
+                    status: 2
+                }
+                resolve(obj)
+            } else {
+                reject("No entry found")
+            }
+        })
+    };
+    getPaymentEntryByID(id: bigint) { 
+        return new Promise<paymentEntry>((resolve, reject) => {
+            if (id == BigInt(0)) {
+                let obj: any = {
+                    id: id,
+                    seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                    price: 20000000000000000
+                }
+                resolve(obj)
             } else {
                 reject("No entry found")
             }
@@ -61,6 +80,13 @@ class SQL_Mock implements SQL_Interface {
     };
 }
 
+jest.useFakeTimers()
+dotenv.config()
+
+function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
 
 class Web3_Contract_Mock1 implements ShopContract_Interface {
     private e1: EventEmitter;
@@ -72,6 +98,12 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         this.e2 = new EventEmitter;
         this.e3 = new EventEmitter;
     }
+    
+    public getBlockTime(block: number) {
+        return new Promise<string>((resolve) => {
+            resolve("123")
+        })
+    }    
     
     public addedPaymentEntry(options: any) {
         setTimeout(() => {
@@ -92,8 +124,8 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         }, 150)
         return this.e2
     }
-
-    public fundsUnlocked(options: any) {
+    
+    public statusChange(options: any) {
         setTimeout(() => {
             this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
@@ -102,7 +134,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         }, 150)
         return this.e3
     }
-
+    
     
     public getSettledPayment(id: bigint) {
         return new Promise<any>((resolve)  => {
@@ -128,6 +160,12 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
 
 class Web3_Contract_Mock2 implements ShopContract_Interface {
     
+    public getBlockTime(block: number) {
+        return new Promise<string>((resolve) => {
+            resolve("123")
+        })
+    } 
+    
     public addedPaymentEntry(options: any) {
         throw "error"
     }
@@ -135,8 +173,8 @@ class Web3_Contract_Mock2 implements ShopContract_Interface {
     public paymentSettled(options: any) {
         throw "error"
     }
-
-    public fundsUnlocked(options: any) {
+    
+    public statusChange(options: any) {
         throw "error"
     }
     
@@ -155,11 +193,18 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
     private e2: EventEmitter;
     private e3: EventEmitter;
     
+    
     constructor() {
         this.e1 = new EventEmitter;
         this.e2 = new EventEmitter;
         this.e3 = new EventEmitter;
     }
+    
+    public getBlockTime(block: number) {
+        return new Promise<string>((resolve) => {
+            resolve("123")
+        })
+    } 
     
     public addedPaymentEntry(options: any) {
         setTimeout(() => {
@@ -180,8 +225,8 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
         }, 150)
         return this.e2
     }
-
-    public fundsUnlocked(options: any) {
+    
+    public statusChange(options: any) {
         setTimeout(() => {
             this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
@@ -211,10 +256,6 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
             throw "error";
         })
     }
-}
-
-function delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
 class ErrorCounter {

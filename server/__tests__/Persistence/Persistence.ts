@@ -6,41 +6,62 @@ import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 
-jest.useFakeTimers()
-dotenv.config()
-
-class SQL_Mock implements SQL_Interface {    
+export class SQL_Mock implements SQL_Interface {    
     insertPaymentEntry(entry: paymentEntry) {}
     insertSettledPayment(entry: settledPayment) {}
     updateSettledPayment(id: bigint, status: number) {}
-
+    
     
     getPaymentByBuyer(buyer: string)  { 
-        return new Promise<payment[]>(() => {
+        return new Promise<payment[]>((resolve) => {
+            if (buyer == "asdasdasdasdd") return resolve([])
+
             let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: 20000000000000000,
                 status: 2
             }
-            return [obj]
+            resolve([obj])
         })
     };
     getPaymentBySeller(seller: string)  { 
-        return new Promise<payment[]>(() => {
+        return new Promise<payment[]>((resolve) => {
+            if (seller == "asdasdasdasdd") return resolve([])
+
             let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: 20000000000000000,
                 status: 2
             }
-            return [obj]
+            resolve([obj])
         })
     };
-    getPaymentEntryPrice(id: bigint) { 
-        return new Promise<bigint>((resolve, reject) => {
+    getPaymentByID(id: bigint) { 
+        return new Promise<payment>((resolve, reject) => {
             if (id == BigInt(0)) {
-                resolve(BigInt(20))
+                let obj: any  ={
+                    buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                    seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                    price: 20000000000000000,
+                    status: 2
+                }
+                resolve(obj)
+            } else {
+                reject("No entry found")
+            }
+        })
+    };
+    getPaymentEntryByID(id: bigint) { 
+        return new Promise<paymentEntry>((resolve, reject) => {
+            if (id == BigInt(0)) {
+                let obj: any = {
+                    id: id,
+                    seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                    price: 20000000000000000
+                }
+                resolve(obj)
             } else {
                 reject("No entry found")
             }
@@ -53,6 +74,9 @@ class SQL_Mock implements SQL_Interface {
         })
     };
 }
+
+jest.useFakeTimers()
+dotenv.config()
 
 describe('Persistence', () => {    
     let persistance = new Persistence(new SQL_Mock());
@@ -83,10 +107,10 @@ describe('Persistence', () => {
         persistance.getPaymentBySeller("0x4645895DE6761C3c221Da5f6D75e4393a868B4a0")
         .then((res: any) => {
             let obj: any = {
-                buyer: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: 20000000000000000,
-                status: 1
+                status: 2
             }
             expect(res[0]).
             toMatchObject(obj)
@@ -101,18 +125,46 @@ describe('Persistence', () => {
         })
     })
     
-    it('getPaymentEntryPrice - Valid', async () => {
-        persistance.getPaymentEntryPrice(BigInt(0))
+    it('getPaymentEntryByID - Valid', async () => {
+        persistance.getPaymentEntryByID(BigInt(0))
         .then((res: any) => {
+            let obj: any = {
+                id: BigInt(0),
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000
+            }
             expect(res).
-            toBe(BigInt(20))
+            toMatchObject(obj)
         })
     })
     
-    it('getPaymentEntryPrice - Invalid', async () => {
+    it('getPaymentEntryByID - Invalid', async () => {
         expect.assertions(1);
         
-        persistance.getPaymentEntryPrice(BigInt(12312312))
+        persistance.getPaymentEntryByID(BigInt(12312312))
+        .catch((e: any) => {
+            expect(e).toMatch('No entry found')   
+        })
+    })
+    
+    it('getPaymentByID - Valid', async () => {
+        persistance.getPaymentByID(BigInt(0))
+        .then((res: any) => {
+            let obj: any = {
+                buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: 20000000000000000,
+                status: 2
+            }
+            expect(res).
+            toMatchObject(obj)
+        })
+    })
+    
+    it('getPaymentByID - Invalid', async () => {
+        expect.assertions(1);
+        
+        persistance.getPaymentByID(BigInt(12312312))
         .catch((e: any) => {
             expect(e).toMatch('No entry found')   
         })
