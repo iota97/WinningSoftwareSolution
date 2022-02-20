@@ -17,6 +17,11 @@ class PageCreator {
         })
     }
 
+    public helpPage(req: any, res: any) {
+        res.render("help", {serverURL: process.env.SERVER_URL + "/help"});
+
+    }
+
     public mainPage(req: any, res: any) {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }
@@ -141,7 +146,7 @@ class PageCreator {
             return "Closed"
         }
         if (status == 3) {
-            return "Cancelled"
+            return "Expired"
         } 
         return "Open"    
     }

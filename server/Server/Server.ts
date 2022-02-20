@@ -30,6 +30,7 @@ class Server {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
         this.app.get("/", this.page.mainPage);
+        this.app.get("/help", this.page.helpPage);
         this.app.get("/confirm", this.confirm.bind(this));
         this.app.get("/buyer", this.buyer.bind(this));
         this.app.get("/seller", this.seller.bind(this));

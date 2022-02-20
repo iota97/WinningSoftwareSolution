@@ -232,8 +232,8 @@ const onClickSettlePayment = () => {
 function closePop(e) {
     var caller = e.target || e.srcElement;
     caller.parentElement.parentElement.style = "display: none;"
-    if (findGetParameter("rel")) {
-        location.href = "https://"+findGetParameter("rel")
+    if (findGetParameter("r")) {
+        location.href = "https://"+findGetParameter("r")
     }
 }
 

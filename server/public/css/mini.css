@@ -1,0 +1,246 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+}
+
+html body{
+  padding: 0;
+  margin: auto;
+  max-width: 1024px;
+  position: relative;
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Lato", "Helvetica", Helvetica, sans-serif;
+  font-size: 1.8rem;
+  padding: 1.2rem;
+}
+
+table, th, td {
+  padding: 0.5em;
+  border: 1px solid black;
+}
+
+.nascosto {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.transactions {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactions li {
+  text-align: center;
+  position: relative;
+  max-width: 15em;
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.transactions a {
+  text-decoration: none;
+  margin: 1em;
+}
+
+.info {
+  margin: auto;
+  margin-top: 3em;
+  background-color: #555;
+  color: white;
+  text-align: center;
+  position: relative;
+  max-width: 30em;
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.price {
+  font-size: 1.2em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.info a.qr {
+  text-decoration: underline;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.addr {
+  font-size: 0.8em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.date {
+  display: block;
+  font-size: 0.8em;
+  margin: 1.5em;
+}
+
+.status {
+  display: block;
+  font-size: 1em;
+  margin: 1.5em;
+}
+
+.transactions li.stato1 {
+  background-color: yellow;
+}
+.transactions li.stato1 .price {
+  color: black;
+}
+.transactions li.stato1 .date {
+  color: #333;
+}
+
+.transactions li.stato2 {
+  background-color: darkgreen;
+}
+.transactions li.stato2 .price {
+  color: white;
+}
+.transactions li.stato2 .date {
+  color: #ddd;
+}
+
+.transactions li.stato3 {
+  background-color: darkred;
+}
+.transactions li.stato3 .price {
+  color: white;
+}
+.transactions li.stato3 .date {
+  color: #ddd;
+}
+
+#con {
+  display: none;
+}
+
+.pop {
+  z-index: 999;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000000d0;
+}
+
+.pop>div>p {
+  margin-top: 2.5em;
+  font-size: 1.2em;
+}
+
+#confirm img, #success img, #sending img, #error img {
+  margin-top: -1.7em;
+  margin-bottom: -2.2em;
+  height: 40%;
+  width: auto;
+  
+}
+
+#sending img {
+  margin-top: 1.2em;
+  margin-bottom: -0.5em;
+}
+
+#confirm button, #success button, #sending button, #error button {
+  top: 3.5em;
+}
+
+.pop>div {
+  width: 40em;
+  height: 24em;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  max-width: 30em;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.pop>div>h1 {
+  margin-top: 1.2em;
+  margin-bottom: 0.9em;
+}
+
+.pop>div>img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 9em;
+  height: auto;
+}
+
+.pop>div>button, .info>button {
+  cursor: pointer;
+  border-style: solid;
+  border-color: #333;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  font-weight: bold;
+  color: white;
+  background-color: #333;
+  padding: 1em;
+  position: relative;
+  width: 25em;
+  top: 4em;
+}
+
+.info>button {
+  top: 0em;
+  margin-bottom: 2em;
+}
+
+.info>button:hover, #connect>div>button:hover {
+  color: #333;
+  background-color: white;
+  border-style: solid;
+  border-color: #333;
+}
+
+.extraspace {
+  margin-bottom: 7em;
+}
+
+header {
+  text-align: center;
+  font-size: 1.4em;
+  padding: 1.2em;
+  border-radius: 0 0 30px 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  background-color: #333;
+  color: white;
+}
