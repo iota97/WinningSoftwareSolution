@@ -4,16 +4,6 @@ import { payment } from "./Types/payment";
 import { paymentEntry } from "./Types/paymentEntry";
 import { settledPayment } from "./Types/settledPayment";
 
-/*
-DROP TABLE PaymentEntries;
-DROP TABLE SettledPayments;
-DROP TABLE LastBlockSynced;
-CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));
-CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, created varchar(32), confirmed varchar(32), primary key(id));
-CREATE TABLE LastBlockSynced (id int(1), value bigint, primary key(id));
-INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
-*/
-
 export interface SQL_Interface {
 	insertPaymentEntry: (entry: paymentEntry) => void;
 	insertSettledPayment: (entry: settledPayment) => void;
@@ -167,11 +157,11 @@ export class SQL implements SQL_Interface {
 			})
 		})
 	}
-
+	
 	public getPaymentByID(id: bigint) {
 		return new Promise<payment>((resolve, reject) => {
 			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.id=?`
-
+			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
 					return reject(err)
@@ -181,7 +171,7 @@ export class SQL implements SQL_Interface {
 				if (rows.length == 0) {
 					return reject("No entry found")
 				}
-
+				
 				const payment: payment =  {
 					id: rows[0].id,
 					buyer: rows[0].buyer,
@@ -191,7 +181,7 @@ export class SQL implements SQL_Interface {
 					created: rows[0].created,
 					confirmed: rows[0].confirmed
 				}
-
+				
 				resolve(payment)
 			})
 		})

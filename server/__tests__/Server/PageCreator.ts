@@ -4,7 +4,6 @@ import { SQL_Interface } from "../../Persistence/SQL";
 import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
-import { setTimeout } from 'timers'
 import { Persistence } from "../../Persistence/Persistence";
 import { PageCreator } from "../../Server/PageCreator"
 
