@@ -204,7 +204,7 @@ export class SQL implements SQL_Interface {
 	
 	public setLastSyncBlock(block: bigint) {
 		return new Promise<void>((resolve, reject) => {
-			const queryString = `UPDATE LastBlockSynced SET value=? WHERE id=0 AND value<?`
+			const queryString = `UPDATE LastBlockSynced SET value=? WHERE id=0`
 			
 			this.db.query(queryString, [block, block], (err, result) => {
 				if (err) {
