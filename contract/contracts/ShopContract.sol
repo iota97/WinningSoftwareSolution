@@ -70,11 +70,13 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     function performUpkeep(bytes calldata) external override {
         if ((block.timestamp - lastTimeStamp) > interval) {
              uint256 i = lastTimeIndex;
-             while (i < freePaymentEntryId) {
+             while (i < freeSettledPaymentId) {
                 if ((block.timestamp - settledPayments[i].time) > expireDuration) {
                     if (settledPayments[i].status == 1) {
                        payable(settledPayments[i].client).transfer(settledPayments[i].payed);
                        settledPayments[i].status = 3;
+
+                       emit statusChanged(i);
                     }
                     i++;
                 } else {
