@@ -6,7 +6,7 @@ import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 
-export class SQL_Mock implements SQL_Interface {    
+class SQL_Mock implements SQL_Interface {    
     insertPaymentEntry(entry: paymentEntry) {}
     insertSettledPayment(entry: settledPayment) {}
     updateSettledPayment(id: bigint, status: number) {}

@@ -17,7 +17,7 @@ class PageCreator {
         })
     }
     
-    public MainPage(req: any, res: any) {
+    public mainPage(req: any, res: any) {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }
     

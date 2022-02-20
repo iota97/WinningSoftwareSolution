@@ -29,12 +29,32 @@ class Server {
     private initRoutes() {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
-        this.app.get("/", this.page.MainPage);
-        this.app.get("/confirm", (req: Request, res: Response) => { this.page.confirmPage(req, res, this.db) });
-        this.app.get("/buyer", (req: Request, res: Response) => { this.page.paymentByBuyerPage(req, res, this.db) });
-        this.app.get("/seller", (req: Request, res: Response) => { this.page.paymentBySellerPage(req, res, this.db) });
-        this.app.get("/detail", (req: Request, res: Response) => { this.page.detailPage(req, res, this.db) });
-        this.app.get("/land", (req: Request, res: Response) => { this.page.landPage(req, res, this.db) });
+        this.app.get("/", this.page.mainPage);
+        this.app.get("/confirm", this.confirm);
+        this.app.get("/buyer", this.buyer);
+        this.app.get("/seller", this.seller);
+        this.app.get("/detail", this.detail);
+        this.app.get("/land", this.land);
+    }
+
+    private confirm(req: Request, res: Response) {
+        this.page.confirmPage(req, res, this.db)
+    }
+
+    private buyer(req: Request, res: Response) {
+        this.page.paymentByBuyerPage(req, res, this.db)
+    }
+    
+    private seller(req: Request, res: Response) {
+        this.page.paymentBySellerPage(req, res, this.db)
+    }
+
+    private detail(req: Request, res: Response) {
+        this.page.detailPage(req, res, this.db)
+    }
+
+    private land(req: Request, res: Response) {
+        this.page.landPage(req, res, this.db)
     }
     
     public listen() {
