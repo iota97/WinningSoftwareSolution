@@ -13,7 +13,7 @@
   <header>
     <h1>Shop Chain</h1>
   </header>
-  <div id="connect">
+  <div id="connect" class="pop">
     <div>
       <h1>Connect with MetaMask</h1>
       <img src="img/meta.png" witdh="1200" height="1200" />
@@ -21,5 +21,41 @@
     </div>
     <input id="serverURL" type="hidden" value="<%=serverURL%>" />
   </div>
+
+  <div id="confirm" class="pop">
+    <div>
+      <h1>Awaiting confirmation</h1>
+      <img src="img/meta.png" witdh="260" height="256" />
+      <p>Please confirm the transaction in MetaMask</p>
+      <button onclick="closePop(event)">Cancel</button>
+    </div>
+  </div>
+
+  <div id="success" class="pop">
+    <div>
+      <h1>Transaction completed</h1>
+      <img src="img/success.png" witdh="260" height="256" />
+      <p>The transaction was successfully sent</p>
+      <button onclick="closePop(event)" id="relocButton">Done</button>
+    </div>
+  </div>
+
+  <div id="error" class="pop">
+    <div>
+      <h1>Transaction failed</h1>
+      <img src="img/error.png" witdh="260" height="256" />
+      <p>An error occurred processing the transaction</p>
+      <button onclick="closePop(event)">Close</button>
+    </div>
+  </div>
+
+  <div id="sending" class="pop">
+    <div>
+      <h1>Awaiting receipt</h1>
+      <img src="img/wait.gif" witdh="200" height="200" />
+      <p>Hold on, this might take a bit...</p>
+    </div>
+  </div>
+
   <div id="con">
     

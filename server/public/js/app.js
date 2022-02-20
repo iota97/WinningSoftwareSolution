@@ -51,12 +51,25 @@ function setGetParameter(paramName, paramValue) {
         suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
         url = prefix + paramName + "=" + paramValue + suffix;
     } else {
-    if (url.indexOf("?") < 0)
+        if (url.indexOf("?") < 0)
         url += "?" + paramName + "=" + paramValue;
-    else
+        else
         url += "&" + paramName + "=" + paramValue;
     }
     window.location.href = url + hash;
+}
+
+function findGetParameter(parameterName) {
+    var result = null,
+    tmp = [];
+    location.search
+    .substr(1)
+    .split("&")
+    .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
 }
 
 const onMetamaskConnected = async () => {
@@ -81,16 +94,16 @@ const onMetamaskConnected = async () => {
         }   
         
         connectPopup.style = "display: none;"
-
+        
         document.getElementById("con").style = "display: block;"
-
+        
         const wallet = document.getElementById("idWallet")
         if (wallet && accounts[0]) {
             if (wallet.value != accounts[0]) {
                 setGetParameter("id", accounts[0])
             }
         }
-
+        
         const listBuyer = document.getElementById("listBuyer")
         if (listBuyer && accounts[0]) {
             listBuyer.classList.remove("rimosso")
@@ -174,7 +187,6 @@ const onClickSettlePayment = () => {
         const index = document.getElementById("idPag").value;
         
         let conversion;
-
         shopContract.methods.getLatestPrice().call()
         .then(p => {
             conversion = p;
@@ -182,23 +194,47 @@ const onClickSettlePayment = () => {
         })
         .then(paymentEntry => { 
             shopContract.methods.settlePayment(index).send({from: accounts[0], value: paymentEntry.price*conversion}) //18 decimals
-            .on('transactionHash', function(hash){
-                //do smth
+            .once('sending', function() {
+                document.getElementById("confirm").style = "display: flex;"
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                document.getElementById("error").style = "display: none;"
             })
-            .on('confirmation', function(confirmationNumber, receipt){
-                //do smth
+            .once('transactionHash', function() {
+                document.getElementById("sending").style = "display: flex;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                document.getElementById("error").style = "display: none;" 
             })
-            .on('receipt', function(receipt){
-                console.log(receipt);
+            .once('confirmation', function(){
+                document.getElementById("success").style = "display: flex;"
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("error").style = "display: none;"
             })
-            .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+            .once('error', function(error) {
+                // This happen on metamask popup close
+                if (!error || error.code != 4001) {
+                    document.getElementById("error").style = "display: flex;"
+                }
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                
                 console.log(error);
-            });
+            });    
         }, reason => {    
             console.log("Error: " + reason);
-            
         });  
     } 
+}
+
+function closePop(e) {
+    var caller = e.target || e.srcElement;
+    caller.parentElement.parentElement.style = "display: none;"
+    if (findGetParameter("rel")) {
+        location.href = "https://"+findGetParameter("rel")
+    }
 }
 
 const onClickUnlockFunds = () => {   
@@ -211,19 +247,35 @@ const onClickUnlockFunds = () => {
         shopContract.methods.getSettledPayment(idSettledPayment).call()
         .then(settledPayment => {            
             shopContract.methods.unlockFunds(idSettledPayment).send({from: accounts[0]})
-            .on('transactionHash', function(hash){
-                //do smth
+            .once('sending', function() {
+                document.getElementById("confirm").style = "display: flex;"
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                document.getElementById("error").style = "display: none;"
             })
-            .on('confirmation', function(confirmationNumber, receipt){
-                unlockFundsButton.style = "display: none;"
-                document.getElementsByClassName("status")[0].innerText = "Closed"
+            .once('transactionHash', function() {
+                document.getElementById("sending").style = "display: flex;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                document.getElementById("error").style = "display: none;" 
             })
-            .on('receipt', function(receipt){
-                console.log(receipt);
+            .once('confirmation', function(){
+                document.getElementById("success").style = "display: flex;"
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("error").style = "display: none;"
             })
-            .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+            .once('error', function(error) {
+                // This happen on metamask popup close
+                if (!error || error.code != 4001) {
+                    document.getElementById("error").style = "display: flex;"
+                }
+                document.getElementById("sending").style = "display: none;"
+                document.getElementById("confirm").style = "display: none;"
+                document.getElementById("success").style = "display: none;"
+                
                 console.log(error);
-            });        
+            });    
         }, reason => {        
             console.log("Error: " + reason);
             
