@@ -30,11 +30,11 @@ class Server {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
         this.app.get("/", this.page.mainPage);
-        this.app.get("/confirm", this.confirm);
-        this.app.get("/buyer", this.buyer);
-        this.app.get("/seller", this.seller);
-        this.app.get("/detail", this.detail);
-        this.app.get("/land", this.land);
+        this.app.get("/confirm", this.confirm.bind(this));
+        this.app.get("/buyer", this.buyer.bind(this));
+        this.app.get("/seller", this.seller.bind(this));
+        this.app.get("/detail", this.detail.bind(this));
+        this.app.get("/land", this.land.bind(this));
     }
 
     private confirm(req: Request, res: Response) {
