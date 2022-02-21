@@ -60,7 +60,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     function getLatestPrice() public view returns (uint256 p) {
         (,int price,,,) = priceFeed.latestRoundData();
-        return uint256(price)*(10**8);
+        return (10**24)/uint256(price);
     }
 
     function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
@@ -86,7 +86,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
             lastTimeIndex = i;
             lastTimeStamp = block.timestamp;
         }
-    } 
+    }
 
     function addPaymentEntry(uint256 price) public {
         require(price > 0);
@@ -97,7 +97,8 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     function settlePayment(uint256 paymentEntryId) payable public{
         require(paymentEntryId < freePaymentEntryId);
-        require(paymentsEntries[paymentEntryId].price*getLatestPrice() == msg.value); // <-- controllo che il denaro inviato corrisponda a quello atteso && altra logica
+        require(paymentsEntries[paymentEntryId].price*getLatestPrice() <= msg.value); // <-- controllo che il denaro inviato corrisponda a quello atteso && altra logica
+        require(msg.value - paymentsEntries[paymentEntryId].price*getLatestPrice() < 1000);
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, msg.value);
         freeSettledPaymentId = freeSettledPaymentId + 1;
         emit paymentSettled(freeSettledPaymentId - 1);
