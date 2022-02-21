@@ -163,7 +163,7 @@ describe('PageCreator', () => {
                 const obj = {
                     serverURL: process.env.SERVER_URL+"/land?id=0",
                     seller: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0",
-                    price: BigInt(2),
+                    price: 2,
                     id: 0
                 }
                 expect(data).
