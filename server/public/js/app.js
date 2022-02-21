@@ -281,6 +281,7 @@ const onClickUnlockFunds = () => {
                 document.getElementById("error").style = "display: none;" 
             })
             .once('confirmation', function(){
+                document.getElementById("relocButton").onclick = location.reload();
                 document.getElementById("success").style = "display: flex;"
                 document.getElementById("sending").style = "display: none;"
                 document.getElementById("confirm").style = "display: none;"

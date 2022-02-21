@@ -10,7 +10,7 @@ class PageCreator {
             res.render("land", {
                 serverURL: process.env.SERVER_URL + "/land?id=" + req.query.id,
                 seller: item.seller,
-                price: item.price / BigInt(100),
+                price: Number(item.price) / 100,
                 id: req.query.id
             });
         })
@@ -31,7 +31,7 @@ class PageCreator {
         db.getPaymentByID(req.query.id)
         .then((item: payment) => {
             res.render("confirm", {
-                price: item.price / BigInt(100),
+                price: Number(item.price) / 100,
                 buyer: item.buyer,
                 seller: item.seller,
                 created: this.timeConverter(item.created),
@@ -54,7 +54,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + items[i].price / BigInt(100) + "$</strong>" +
+                "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
@@ -90,7 +90,7 @@ class PageCreator {
                 }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
-                    price: item.price / BigInt(100),
+                    price: Number(item.price) / 100,
                     buyer: item.buyer,
                     seller: item.seller,
                     created: this.timeConverter(item.created),
@@ -113,7 +113,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + items[i].price / BigInt(100) + "$</strong>" +
+                "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
