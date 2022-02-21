@@ -89,7 +89,7 @@ const onMetamaskConnected = async () => {
         
         if (seller && qr && statusTrans) {
             if (accounts[0].toUpperCase() == seller.innerText.toUpperCase()
-                && statusTrans.innerText == "Open") {
+            && statusTrans.innerText == "Open") {
                 qr.style = "display: block;"
             }
         }
@@ -100,8 +100,12 @@ const onMetamaskConnected = async () => {
         }
         
         if (unlockFundsButton) {
-            unlockFundsButton.onclick = onClickUnlockFunds;
-            unlockFundsButton.disabled = false;
+            if (statusTrans && statusTrans.innerText != "Open") {
+                unlockFundsButton.style.display = "none";
+            } else {
+                unlockFundsButton.onclick = onClickUnlockFunds;
+                unlockFundsButton.disabled = false;
+            }
         }   
         
         connectPopup.style = "display: none;"

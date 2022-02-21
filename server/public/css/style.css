@@ -27,6 +27,10 @@ html body {
   margin: 2em;
 }
 
+#none-found {
+  padding: 2em 0em;
+}
+
 .nascosto {
   height: 1px;
   overflow: hidden;
@@ -88,6 +92,7 @@ html body {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   padding: .5rem;
+  margin-bottom: 3em;
 }
 
 .price {
@@ -162,6 +167,10 @@ html body {
 
 #confirm button, #success button, #sending button, #error button, #wrongChain button {
   top: 3.5em,;
+}
+
+#unlockFundsButton {
+  margin-top: 0em;
 }
 
 #qr {

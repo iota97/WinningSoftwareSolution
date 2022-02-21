@@ -90,7 +90,7 @@ export class SQL implements SQL_Interface {
 						id: row.id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
-						price: row.price,
+						price: BigInt(row.price),
 						status: row.status,
 						created: row.created,
 						confirmed: row.confirmed
@@ -120,7 +120,7 @@ export class SQL implements SQL_Interface {
 						id: row.id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
-						price: row.price,
+						price: BigInt(row.price),
 						status: row.status,
 						created: row.created,
 						confirmed: row.confirmed
@@ -150,7 +150,7 @@ export class SQL implements SQL_Interface {
 				const payment: paymentEntry = {
 					id: rows[0].id,
 					seller: rows[0].ecommerce,
-					price: rows[0].price
+					price: BigInt(rows[0].price)
 				}
 				
 				resolve(payment)
@@ -176,7 +176,7 @@ export class SQL implements SQL_Interface {
 					id: rows[0].id,
 					buyer: rows[0].buyer,
 					seller: rows[0].ecommerce,
-					price: rows[0].price,
+					price: BigInt(rows[0].price),
 					status: rows[0].status,
 					created: rows[0].created,
 					confirmed: rows[0].confirmed
