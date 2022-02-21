@@ -1,7 +1,8 @@
 # Configurazione
 La configurazione è nel file: .env
 
-Configurare con la login del proprio server MariaDB, le tabelle verranno create in automatico se non presenti all'avvio
+Configurare con la login del proprio server MariaDB
+
 Configurare SERVER_URL con un URL a tinyurl che punto al proprio IP locale che passa per sslip.io ad esempio "http://192.168.0.15.sslip.io:8080/"
 
 Esempio:
