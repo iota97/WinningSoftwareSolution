@@ -11,7 +11,13 @@
 
 <body>
   <header>
-    <h1>Shop Chain</h1>
+    <a href="/" class="logo">Shop&nbsp;Chain</a>
+    <button id="hamb" onclick="toggleMenu()">Menù</button>
+    <div id="header-right">
+      <a id="listBuyer" href="buyer">Incoming</a>
+      <a id="listSeller" href="seller">Outcoming</a>
+      <a href="help">Help</a>
+    </div>
   </header>
   <div id="connect" class="pop">
     <div>
@@ -21,7 +27,7 @@
     </div>
     <input id="serverURL" type="hidden" value="<%=serverURL%>" />
   </div>
-
+  
   <div id="confirm" class="pop">
     <div>
       <h1>Awaiting confirmation</h1>
@@ -30,7 +36,7 @@
       <button onclick="closePop(event)">Cancel</button>
     </div>
   </div>
-
+  
   <div id="success" class="pop">
     <div>
       <h1>Transaction completed</h1>
@@ -39,7 +45,7 @@
       <button onclick="closePop(event)" id="relocButton">Done</button>
     </div>
   </div>
-
+  
   <div id="error" class="pop">
     <div>
       <h1>Transaction failed</h1>
@@ -48,7 +54,7 @@
       <button onclick="closePop(event)">Close</button>
     </div>
   </div>
-
+  
   <div id="wrongChain" class="pop">
     <div>
       <h1>Wrong chain</h1>
@@ -57,7 +63,7 @@
       <button onclick="location.reload()">Retry</button>
     </div>
   </div>
-
+  
   <div id="sending" class="pop">
     <div>
       <h1>Awaiting receipt</h1>
@@ -65,6 +71,6 @@
       <p>Hold on, this might take a bit...</p>
     </div>
   </div>
-
-  <div id="con">
+  
+  <div id="con" class="notfooter">
     

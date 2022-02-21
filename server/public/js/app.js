@@ -303,4 +303,13 @@ const onClickUnlockFunds = () => {
     }
 }
 
+function toggleMenu() {
+    let menu = document.getElementById("header-right");
+    if (menu.style.display == "none") {
+        menu.style.display = "block"
+    } else {
+        menu.style.display = "none"
+    }
+}
+
 window.addEventListener('DOMContentLoaded', initialize);
