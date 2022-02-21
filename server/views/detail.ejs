@@ -2,11 +2,17 @@
 
 <div class="info">
     <strong class="price">Price <%-price%>$</strong>
-    <span class="addr">From: <%-buyer%></span>
-    <span class="addr">To: <%-seller%></span>
-    <span class="date">Opened <%-created%></span>
-    <span class="date">Closed <%-confirmed%></span>
-    <span class="status"><%-status%></span>
+    <div class="addr">
+        From: <span id="buyer"><%-buyer%></span>
+    </div>
+    
+    <div class="addr">
+        To: <span id="seller"><%-seller%></span>
+    </div>
+    
+    <div class="date">Opened <%-created%></div>
+    <div class="date"><%-confirmed%></div>
+    <div class="status" id="status"><%-status%></div>
     <%-qr%>
 </div>
 

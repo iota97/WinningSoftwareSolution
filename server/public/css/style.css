@@ -23,11 +23,6 @@ body {
   padding: 1.2rem;
 }
 
-table, th, td {
-  padding: 0.5em;
-  border: 1px solid black;
-}
-
 .nascosto {
   height: 1px;
   overflow: hidden;
@@ -81,20 +76,15 @@ table, th, td {
   font-weight: bold;
 }
 
-.info a.qr {
-  text-decoration: underline;
-  margin: 1.7em;
-  margin-bottom: 0.8em;
-  display: block;
-  font-weight: bold;
-}
-
 .addr {
+  white-space: nowrap; 
+  overflow: hidden;
   font-size: 0.8em;
   margin: 1.7em;
   margin-bottom: 0.8em;
   display: block;
   font-weight: bold;
+  text-overflow: ellipsis;
 }
 
 .date {
@@ -162,12 +152,15 @@ table, th, td {
   font-size: 1.2em;
 }
 
-#confirm img, #success img, #sending img, #error img {
+#sending p {
+  margin-bottom: 2.7em;
+}
+
+#confirm img, #success img, #sending img, #error img, #wrongChain img {
   margin-top: -1.7em;
   margin-bottom: -2.2em;
   height: 40%;
-  width: auto;
-  
+  width: 40%;  
 }
 
 #sending img {
@@ -175,13 +168,16 @@ table, th, td {
   margin-bottom: -0.5em;
 }
 
-#confirm button, #success button, #sending button, #error button {
-  top: 3.5em;
+#confirm button, #success button, #sending button, #error button, #wrongChain button {
+  top: 3.5em,;
+}
+
+#qr {
+  display: none;
 }
 
 .pop>div {
   width: 40em;
-  height: 24em;
   background-color: white;
   text-align: center;
   position: relative;
@@ -204,7 +200,7 @@ table, th, td {
   height: auto;
 }
 
-.pop>div>button, .info>button {
+.pop>div>button, .info>button, #qr {
   cursor: pointer;
   border-style: solid;
   border-color: #333;
@@ -214,17 +210,23 @@ table, th, td {
   color: white;
   background-color: #333;
   padding: 1em;
-  position: relative;
-  width: 25em;
-  top: 4em;
+  min-width: 12em;
+  margin-top: 4em;
+  margin-bottom: 3em;
 }
 
-.info>button {
+.info>button, #qr {
   top: 0em;
   margin-bottom: 2em;
 }
 
-.info>button:hover, #connect>div>button:hover {
+#qr {
+  text-decoration: none;
+  margin: 1.7em;
+  font-weight: bold;
+}
+
+.info>button:hover, #connect>div>button:hover, #qr:hover {
   color: #333;
   background-color: white;
   border-style: solid;

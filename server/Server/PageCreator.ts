@@ -16,12 +16,12 @@ class PageCreator {
             res.redirect('/')
         })
     }
-
+    
     public helpPage(req: any, res: any) {
         res.render("help", {serverURL: process.env.SERVER_URL + "/help"});
-
+        
     }
-
+    
     public mainPage(req: any, res: any) {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }
@@ -77,36 +77,28 @@ class PageCreator {
     public detailPage(req: any, res: any, db: Persistence) {
         db.getPaymentByID(req.query.id)
         .then((item: any) => {
-            if (req.query.s && item.status == 1) {
-                const qr_url = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
-                qr.toDataURL(qr_url)
-                .then((img_data) => {
-                    const qr_str = "<a class=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
-                    res.render("detail", {
-                        serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
-                        price: item.price / 100,
-                        buyer: item.buyer,
-                        seller: item.seller,
-                        created: this.timeConverter(item.created),
-                        confirmed: this.timeConverter(item.confirmed),
-                        status:  this.statusConverter(item.status),
-                        qr: qr_str
-                    });
-                })
-            } else {
+            const qr_url = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
+            qr.toDataURL(qr_url)
+            .then((img_data) => {
+                const qr_str = "<a id=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
+                let conf: string = "Confirmed on: " + this.timeConverter(item.confirmed);
+                if (item.status == 1) {
+                    conf = "Expire on: " + this.timeConverter(String(BigInt(item.created) + BigInt(60*60*24*14)));
+                } else if (item.status == 3) {
+                    conf = "Expired on: " + this.timeConverter(item.confirmed);
+                }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
                     price: item.price / 100,
                     buyer: item.buyer,
                     seller: item.seller,
                     created: this.timeConverter(item.created),
-                    confirmed: this.timeConverter(item.confirmed),
-                    status: this.statusConverter(item.status),
-                    qr: ""
+                    confirmed: conf,
+                    status:  this.statusConverter(item.status),
+                    qr: qr_str
                 });
-            }
+            })
         })
-        
         .catch(() => {
             res.redirect('/')
         })
@@ -118,7 +110,7 @@ class PageCreator {
             let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<a href=\"detail?s=1&id="+items[i].id+"\">" +
+                "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price\">" + items[i].price / 100 + "$</strong>" +
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +

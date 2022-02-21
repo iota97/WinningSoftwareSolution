@@ -4,6 +4,10 @@ const forwarderOrigin = currentUrl.hostname === 'localhost' ? 'http://localhost:
 const connectButton = document.getElementById('connectButton');
 const connectPopup = document.getElementById("connect");
 
+const seller = document.getElementById("seller");
+const qr = document.getElementById("qr");
+const statusTrans = document.getElementById("status");
+
 const unlockFundsButton = document.getElementById("unlockFundsButton");
 const settlePaymentButton = document.getElementById("settlePaymentButton");
 
@@ -82,6 +86,13 @@ const onMetamaskConnected = async () => {
         }));
         
         web3 = new Web3(window.ethereum);
+        
+        if (seller && qr && statusTrans) {
+            if (accounts[0].toUpperCase() == seller.innerText.toUpperCase()
+                && statusTrans.innerText == "Open") {
+                qr.style = "display: block;"
+            }
+        }
         
         if (settlePaymentButton) {
             settlePaymentButton.onclick = onClickSettlePayment;
@@ -171,7 +182,7 @@ const initialize = async () => {
         if (await isMetamaskConnected()) {
             onMetamaskConnected();         
         } else {
-            connectPopup.style = "display: flex;"
+            connectPopup.style = "display: block;"
             
             connectButton.innerText = 'Connect with MetaMask';
             connectButton.onclick = onClickConnect;         
@@ -179,7 +190,8 @@ const initialize = async () => {
     }    
 };
 
-const onClickSettlePayment = () => {  
+const onClickSettlePayment = () => {
+    settlePaymentButton.disabled = true;
     let intId = parseInt(chainId, 16);
     
     if(intId == 80001){ //the contract is deployed only in mumbai testnet        
@@ -220,13 +232,16 @@ const onClickSettlePayment = () => {
                 document.getElementById("sending").style = "display: none;"
                 document.getElementById("confirm").style = "display: none;"
                 document.getElementById("success").style = "display: none;"
+                settlePaymentButton.disabled = false;
                 
                 console.log(error);
             });    
         }, reason => {    
             console.log("Error: " + reason);
         });  
-    } 
+    } else {
+        document.getElementById("wrongChain").style = "display: flex;"
+    }
 }
 
 function closePop(e) {
@@ -238,6 +253,8 @@ function closePop(e) {
 }
 
 const onClickUnlockFunds = () => {   
+    unlockFundsButton.disabled = true;
+    
     let intId = parseInt(chainId, 16);
     
     if (intId == 80001) { //the contract is deployed only in mumbai testnet       
@@ -273,6 +290,7 @@ const onClickUnlockFunds = () => {
                 document.getElementById("sending").style = "display: none;"
                 document.getElementById("confirm").style = "display: none;"
                 document.getElementById("success").style = "display: none;"
+                unlockFundsButton.disabled = false;
                 
                 console.log(error);
             });    
@@ -280,7 +298,9 @@ const onClickUnlockFunds = () => {
             console.log("Error: " + reason);
             
         });   
-    }   
+    } else {
+        document.getElementById("wrongChain").style = "display: flex;"
+    }
 }
 
 window.addEventListener('DOMContentLoaded', initialize);
