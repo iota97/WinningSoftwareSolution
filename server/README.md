@@ -4,6 +4,19 @@ La configurazione è nel file: .env
 Configurare con la login del proprio server MariaDB, le tabelle verranno create in automatico se non presenti all'avvio
 Configurare SERVER_URL con un URL a tinyurl che punto al proprio IP locale che passa per sslip.io ad esempio "http://192.168.0.15.sslip.io:8080/"
 
+Esempio:
+
+PORT=8080
+DB_HOST="localhost"
+DB_USER="username"
+DB_PWD="password"
+DB_NAME="OnlineStore"
+API_KEY=5c29520422f9528344aa64a1
+SERVER_URL="tinyurl.com/2p8vu62x"
+
+# Contratto
+ABI e indirizzo del contratto sono in "public/contract/contract.json"
+
 # Database
 Collegarsi a MariaDB con:
 
