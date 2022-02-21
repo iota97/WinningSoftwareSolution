@@ -182,7 +182,7 @@ const initialize = async () => {
         if (await isMetamaskConnected()) {
             onMetamaskConnected();         
         } else {
-            connectPopup.style = "display: block;"
+            connectPopup.style = "display: flex;"
             
             connectButton.innerText = 'Connect with MetaMask';
             connectButton.onclick = onClickConnect;         
