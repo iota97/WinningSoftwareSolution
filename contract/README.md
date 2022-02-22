@@ -8,9 +8,10 @@ npm install @truffle/hdwallet-provider
 npm install truffle-plugin-verify
 ```
 
-Openzeppelin libraries are also required.
+Openzeppelin and Chainlink libraries are also required.
 ```
 npm install @openzeppelin/contracts
+npm install @chainlink/contracts
 ```
 
 Some files are not included for privacy, they need to be manually created:
