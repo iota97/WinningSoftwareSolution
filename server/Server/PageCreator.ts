@@ -2,10 +2,18 @@ import qr from "qrcode";
 import { Persistence } from "../Persistence/Persistence"
 import { paymentEntry } from "../Persistence/Types/paymentEntry";
 import { payment } from "../Persistence/Types/payment";
+import { Request, Response } from "express"
 
 class PageCreator {
-    public landPage(req: any, res: any, db: Persistence) {
-        db.getPaymentEntryByID(req.query.id)
+    public landPage(req: Request, res: Response, db: Persistence) {
+        let id: bigint
+        try {
+            id = BigInt(req.query.id as string)
+        } catch {
+            res.redirect('/')
+            return;
+        }
+        db.getPaymentEntryByID(id)
         .then((item: paymentEntry) => {
             res.render("land", {
                 serverURL: process.env.SERVER_URL + "/land?id=" + req.query.id,
@@ -19,16 +27,23 @@ class PageCreator {
         })
     }
     
-    public helpPage(req: any, res: any) {
+    public helpPage(req: Request, res: Response) {
         res.render("help", {serverURL: process.env.SERVER_URL + "/help"});   
     }
     
-    public mainPage(req: any, res: any) {
+    public mainPage(req: Request, res: Response) {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }
     
-    public confirmPage(req: any, res: any, db: Persistence) {
-        db.getPaymentByID(req.query.id)
+    public confirmPage(req: Request, res: Response, db: Persistence) {
+        let id: bigint
+        try {
+            id = BigInt(req.query.id as string)
+        } catch {
+            res.redirect('/')
+            return;
+        }
+        db.getPaymentByID(id)
         .then((item: payment) => {
             let confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
             if (item.confirmed == "") {
@@ -50,8 +65,8 @@ class PageCreator {
         })
     }
     
-    public paymentByBuyerPage(req: any, res: any, db: Persistence) {
-        db.getPaymentByBuyer(req.query.id || "")
+    public paymentByBuyerPage(req: Request, res: Response, db: Persistence) {    
+        db.getPaymentByBuyer(req.query.id as string || "")
         .then((items: payment[]) => {
             let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
@@ -79,8 +94,15 @@ class PageCreator {
         })
     }
     
-    public detailPage(req: any, res: any, db: Persistence) {
-        db.getPaymentByID(req.query.id)
+    public detailPage(req: Request, res: Response, db: Persistence) {
+        let id: bigint
+        try {
+            id = BigInt(req.query.id as string)
+        } catch {
+            res.redirect('/')
+            return;
+        }
+        db.getPaymentByID(id)
         .then((item: payment) => {
             const qr_url = "https://metamask.app.link/dapp/" +  process.env.SERVER_URL + "/confirm?id=" + req.query.id;
             qr.toDataURL(qr_url)
@@ -112,8 +134,8 @@ class PageCreator {
         })
     }
     
-    public paymentBySellerPage(req: any, res: any, db: Persistence) {
-        db.getPaymentBySeller(req.query.id || "")
+    public paymentBySellerPage(req: Request, res: Response, db: Persistence) {
+        db.getPaymentBySeller(req.query.id as string || "")
         .then((items: payment[]) => {
             let item_string: string = "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {

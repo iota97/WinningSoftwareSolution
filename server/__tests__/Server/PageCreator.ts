@@ -124,12 +124,14 @@ class SQL_Mock implements SQL_Interface {
     };
 }
 
+import {Request, Response} from "express"
+
 describe('PageCreator', () => { 
     const db = new Persistence(new SQL_Mock());
     const page = new PageCreator()
     
     it('Main Page - Ok', async () => {
-        const req = {}
+        const req: Request = {} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -141,12 +143,12 @@ describe('PageCreator', () => {
                 expect(data).
                 toMatchObject(obj)
             }
-        }
+        } as Response
         page.mainPage(req, res);
     })
     
     it('Help Page - Ok', async () => {
-        const req = {}
+        const req: Request = {} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -158,14 +160,14 @@ describe('PageCreator', () => {
                 expect(data).
                 toMatchObject(obj)
             }
-        }
+        } as Response
         page.helpPage(req, res);
     })
     
     it('Landing Page - Ok', async () => {
-        const req = {
-            query: {id: 0}
-        }
+        const req: Request = {
+            query: { id: 0 } as any
+        } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -183,12 +185,12 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(false).toBe(true)
             }
-        }
+        } as Response
         page.landPage(req, res, db);
     })
     
     it('Confirm Page - Ok', async () => {
-        const req = { query: { id: 0 } }
+        const req = { query: { id: 0 } as any} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -197,12 +199,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.confirmPage(req, res, db);
     }) 
 
     it('Confirm Page - Confirmed', async () => {
-        const req = { query: { id: 11 } }
+        const req = { query: { id: 11 } as any} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -211,13 +213,13 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.confirmPage(req, res, db);
     }) 
     
     
     it('Buyer Page - Ok', async () => {
-        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } }
+        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -226,12 +228,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.paymentByBuyerPage(req, res, db);
     })
     
     it('Buyer Page - Empty', async () => {
-        const req = { query: { id: "asdasdasdasdd" } }
+        const req = { query: { id: "asdasdasdasdd" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -240,12 +242,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.paymentByBuyerPage(req, res, db);
     })
     
     it('Seller Page - Ok', async () => {
-        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } }
+        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -254,12 +256,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.paymentBySellerPage(req, res, db);
     })
     
     it('Seller Page - Empty', async () => {
-        const req = { query: { id: "asdasdasdasdd" } }
+        const req = { query: { id: "asdasdasdasdd" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -268,12 +270,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.paymentBySellerPage(req, res, db);
     })
     
     it('Detail Page - Expired', async () => {
-        const req = { query: { id: 1 } }
+        const req = { query: { id: 1 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -282,12 +284,12 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.detailPage(req, res, db);
     })
 
     it('Detail Page - Cancelled', async () => {
-        const req = { query: { id: 12 } }
+        const req = { query: { id: 12 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -296,13 +298,13 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.detailPage(req, res, db);
     })
     
     
     it('Detail Page - Ok', async () => {
-        const req = { query: { id: 0 } }
+        const req = { query: { id: 0 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -311,7 +313,7 @@ describe('PageCreator', () => {
             redirect: (view: any, data: any) => {
                 expect(false).toBe(true)
             },
-        }
+        } as Response
         page.detailPage(req, res, db);
     })
     
@@ -330,8 +332,34 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.landPage({query: {}}, res, db);
+        } as Response
+        page.landPage({} as Request, res, db);
+    })
+
+    it('Landing Page - Redirect 2', async () => {
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(false).toBe(true)
+                
+            },
+            redirect: (path: any) => {
+                expect(path).toBe("/")
+            }
+        } as Response
+        page.landPage({ query: {id: "asd"} as any } as Request, res, db);
+    })
+
+    it('Landing Page - Redirect 3', async () => {
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(false).toBe(true)
+                
+            },
+            redirect: (path: any) => {
+                expect(path).toBe("/")
+            }
+        } as Response
+        page.landPage({ query: {id: 123} as any } as Request, res, db);
     })
     
     it('Confirm Page - Redirect', async () => { 
@@ -342,8 +370,8 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.confirmPage({query: {}}, res, db);
+        } as Response
+        page.confirmPage({query: {id: 123123} as any} as Request, res, db);
     })
     
     it('Seller Page - Redirect', async () => { 
@@ -354,8 +382,8 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.paymentBySellerPage({query: {}}, res, db);
+        } as Response
+        page.paymentBySellerPage({query: {}} as Request, res, db);
     })
     
     it('Buyer Page - Redirect', async () => { 
@@ -366,8 +394,8 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.paymentByBuyerPage({query: {}}, res, db);
+        } as Response
+        page.paymentByBuyerPage({query: {}} as Request, res, db);
     })
     
     it('Detail Page - Redirect', async () => { 
@@ -378,8 +406,20 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.detailPage({query: {}}, res, db);
+        } as Response
+        page.detailPage({query: {}} as Request, res, db);
+    })
+
+    it('Detail Page - Redirect', async () => { 
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(false).toBe(true)
+            },
+            redirect: (path: any) => {
+                expect(path).toBe("/")
+            }
+        } as Response
+        page.detailPage({query: {id: 12312} as any} as Request, res, db);
     })
     
     it('Confirm Page - Redirect', async () => { 
@@ -390,8 +430,8 @@ describe('PageCreator', () => {
             redirect: (path: any) => {
                 expect(path).toBe("/")
             }
-        }
-        page.confirmPage({query: {}}, res, db);
+        } as Response
+        page.confirmPage({query: {}} as Request, res, db);
         await delay(1000)
     })
 })
