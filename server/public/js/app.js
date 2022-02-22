@@ -21,12 +21,15 @@ let web3;
 
 let contractABI;
 let contractAddress;
+let deployedChainID;
 
 fetch("contract/contract.json")
 .then(res => res.json())
 .then(res => {
     contractABI = JSON.parse(res.ABI)
     contractAddress = res.ADDRESS
+    deployedChainID = res.CHAIN_ID
+    document.getElementById("chainName").innerText = res.CHAIN_NAME
 })
 
 window.mobileCheck = function() {
@@ -210,7 +213,7 @@ const onClickSettlePayment = () => {
     settlePaymentButton.disabled = true;
     let intId = parseInt(chainId, 16);
     
-    if(intId == 80001){ //the contract is deployed only in mumbai testnet        
+    if(intId == deployedChainID) {  
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
         const index = document.getElementById("idPag").value;
         
@@ -266,7 +269,7 @@ const onCancelPayment = () => {
     cancelPaymentButton.disabled = true;
     let intId = parseInt(chainId, 16);
     
-    if(intId == 80001){ //the contract is deployed only in mumbai testnet        
+    if(intId == deployedChainID) {       
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
         const index = document.getElementById("idPag").value;
         
@@ -319,7 +322,7 @@ const onClickUnlockFunds = () => {
     
     let intId = parseInt(chainId, 16);
     
-    if (intId == 80001) { //the contract is deployed only in mumbai testnet       
+    if (intId == deployedChainID) {    
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
         const idSettledPayment = document.getElementById("idPag").value;
         
