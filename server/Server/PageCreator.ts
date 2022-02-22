@@ -5,7 +5,7 @@ import { payment } from "../Persistence/Types/payment";
 import { Request, Response } from "express"
 
 class PageCreator {
-    public landPage(req: Request, res: Response, db: Persistence) {
+    public landPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
             id = BigInt(req.query.id as string)
@@ -27,15 +27,15 @@ class PageCreator {
         })
     }
     
-    public helpPage(req: Request, res: Response) {
+    public helpPage(req: Request, res: Response): void {
         res.render("help", {serverURL: process.env.SERVER_URL + "/help"});   
     }
     
-    public mainPage(req: Request, res: Response) {
+    public mainPage(req: Request, res: Response): void {
         res.render("main", {serverURL: process.env.SERVER_URL});
     }
     
-    public confirmPage(req: Request, res: Response, db: Persistence) {
+    public confirmPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
             id = BigInt(req.query.id as string)
@@ -65,7 +65,7 @@ class PageCreator {
         })
     }
     
-    public paymentByBuyerPage(req: Request, res: Response, db: Persistence) {    
+    public paymentByBuyerPage(req: Request, res: Response, db: Persistence): void {    
         db.getPaymentByBuyer(req.query.id as string || "")
         .then((items: payment[]) => {
             let item_string: string = "<ul class=\"transactions\">"
@@ -94,7 +94,7 @@ class PageCreator {
         })
     }
     
-    public detailPage(req: Request, res: Response, db: Persistence) {
+    public detailPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
             id = BigInt(req.query.id as string)
@@ -134,7 +134,7 @@ class PageCreator {
         })
     }
     
-    public paymentBySellerPage(req: Request, res: Response, db: Persistence) {
+    public paymentBySellerPage(req: Request, res: Response, db: Persistence): void {
         db.getPaymentBySeller(req.query.id as string || "")
         .then((items: payment[]) => {
             let item_string: string = "<ul class=\"transactions\">"
@@ -163,7 +163,7 @@ class PageCreator {
         })
     }
     
-    private statusConverter(status: number) {
+    private statusConverter(status: number): string {
         if (status == 0) {
             return "Cancelled"
         }
@@ -176,7 +176,7 @@ class PageCreator {
         return "Open"    
     }
     
-    private timeConverter(timestamp: string){
+    private timeConverter(timestamp: string): string {
         var a = new Date(Number(timestamp)*1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var year = a.getFullYear();
