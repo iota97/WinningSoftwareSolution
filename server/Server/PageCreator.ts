@@ -30,12 +30,16 @@ class PageCreator {
     public confirmPage(req: any, res: any, db: Persistence) {
         db.getPaymentByID(req.query.id)
         .then((item: payment) => {
+            let confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
+            if (item.confirmed == "") {
+                confirmed = ""
+            }
             res.render("confirm", {
                 price: Number(item.price) / 100,
                 buyer: item.buyer,
                 seller: item.seller,
                 created: this.timeConverter(item.created),
-                confirmed: this.timeConverter(item.confirmed),
+                confirmed: confirmed,
                 status:  this.statusConverter(item.status),
                 serverURL: process.env.SERVER_URL + "/confirm?id=" + req.query.id,
                 id: req.query.id

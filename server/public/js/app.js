@@ -205,6 +205,7 @@ const initialize = async () => {
     }    
 };
 
+var transactionID;
 const onClickSettlePayment = () => {
     settlePaymentButton.disabled = true;
     let intId = parseInt(chainId, 16);
@@ -233,7 +234,9 @@ const onClickSettlePayment = () => {
                 document.getElementById("success").style = "display: none;"
                 document.getElementById("error").style = "display: none;" 
             })
-            .once('confirmation', function(){
+            .once('confirmation', function(confirmationNumber, receipt) {
+                transactionID = receipt.events.paymentSettled.returnValues.settledPaymentId;
+                settlePaymentButton.style.display = "none"
                 document.getElementById("success").style = "display: flex;"
                 document.getElementById("sending").style = "display: none;"
                 document.getElementById("confirm").style = "display: none;"
@@ -307,7 +310,7 @@ function closePop(e) {
     var caller = e.target || e.srcElement;
     caller.parentElement.parentElement.style = "display: none;"
     if (findGetParameter("r")) {
-        location.href = "https://"+findGetParameter("r")
+        location.href = "https://"+findGetParameter("r")+"?transaction_id="+transactionID
     }
 }
 

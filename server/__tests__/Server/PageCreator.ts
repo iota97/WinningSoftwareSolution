@@ -61,7 +61,7 @@ class SQL_Mock implements SQL_Interface {
                     price: BigInt(200),
                     status: 3,
                     created: "123",
-                    confirmed: "123",
+                    confirmed: "",
                 }
                 resolve(obj)
             } else if (id == BigInt(1)) {
