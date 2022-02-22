@@ -4,17 +4,7 @@ import Web3 from 'web3';
 import { paymentEntry } from "./Types/paymentEntry";
 import { settledPayment } from "./Types/settledPayment";
 import { EventEmitter } from 'events'
-
-export interface ShopContract_Interface {
-	addedPaymentEntry: (options: PastEventOptions) => EventEmitter;
-	paymentSettled: (options: PastEventOptions) => EventEmitter;
-	statusChange: (options: PastEventOptions) => EventEmitter;
-	
-	getBlockTime: (block: number) => Promise<string>
-
-	getSettledPayment: (id: bigint) => Promise<settledPayment>;
-	getPaymentEntry: (id: bigint) => Promise<paymentEntry>;
-}
+import { ShopContract_Interface } from "./ShopContract_Interface"
 
 export class ShopContract implements ShopContract_Interface {
 	private contract: Contract;

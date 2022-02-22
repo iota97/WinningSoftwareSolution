@@ -1,4 +1,4 @@
-import { SQL_Interface } from "./SQL"
+import { SQL_Interface } from "./SQL_Interface"
 import { payment } from "./Types/payment"
 import { paymentEntry } from "./Types/paymentEntry"
 

@@ -1,5 +1,5 @@
-import { SQL_Interface } from "./SQL"
-import { ShopContract_Interface } from "./ShopContract"
+import { SQL_Interface } from "./SQL_Interface"
+import { ShopContract_Interface } from "./ShopContract_Interface"
 import { EventData } from "web3-eth-contract"
 import { settledPayment } from "./Types/settledPayment"
 import { paymentEntry } from "./Types/paymentEntry";

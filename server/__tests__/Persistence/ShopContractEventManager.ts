@@ -4,9 +4,9 @@ import { ShopContractEventManager } from "../../Persistence/ShopContractEventMan
 
 import { EventEmitter } from 'events'
 import { setTimeout } from 'timers'
-import { ShopContract_Interface } from "../../Persistence/ShopContract";
+import { ShopContract_Interface } from "../../Persistence/ShopContract_Interface";
 
-import { SQL_Interface } from "../../Persistence/SQL";
+import { SQL_Interface } from "../../Persistence/SQL_Interface";
 import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";

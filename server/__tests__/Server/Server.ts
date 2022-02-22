@@ -1,11 +1,10 @@
 import * as dotenv from "dotenv";
 
-import { SQL_Interface } from "../../Persistence/SQL";
+import { SQL_Interface } from "../../Persistence/SQL_Interface";
 import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 import { Server } from "../../Server/Server"
-import express, { Express } from "express";
 import { Persistence } from "../../Persistence/Persistence";
 import { PageCreator } from "../../Server/PageCreator"
 
