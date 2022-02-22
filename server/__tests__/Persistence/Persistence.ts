@@ -7,9 +7,9 @@ import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 
 class SQL_Mock implements SQL_Interface {    
-    insertPaymentEntry(entry: paymentEntry) {}
-    insertSettledPayment(entry: settledPayment) {}
-    updateSettledPayment(id: bigint, status: number) {}
+    insertPaymentEntry(entry: paymentEntry) {return new Promise<void>((resolve) => {resolve})}
+    insertSettledPayment(entry: settledPayment) {return new Promise<void>((resolve) => {resolve})}
+    updateSettledPayment(id: bigint, status: number) {return new Promise<void>((resolve) => {resolve})}
     
     
     getPaymentByBuyer(buyer: string)  { 
@@ -67,7 +67,7 @@ class SQL_Mock implements SQL_Interface {
             }
         })
     };
-    setLastSyncBlock(block: bigint) {}
+    setLastSyncBlock(block: number) {return new Promise<void>((resolve) => {resolve})}
     getLastSyncBlock() { 
         return new Promise<number>((resolve) => {
             resolve(0);

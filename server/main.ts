@@ -19,4 +19,4 @@ const persistance: Persistence = new Persistence(sql);
 const page: PageCreator = new PageCreator();
 
 new ShopContractEventManager(sql, shopContract);
-new Server(persistance, page).listen();
+new Server(persistance, page);

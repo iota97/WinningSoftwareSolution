@@ -12,9 +12,9 @@ import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 
 class SQL_Mock implements SQL_Interface {    
-    insertPaymentEntry(entry: paymentEntry) {}
-    insertSettledPayment(entry: settledPayment) {}
-    updateSettledPayment(id: bigint, status: number) {}
+    insertPaymentEntry(entry: paymentEntry) { return new Promise<void>((resolve) => {resolve}) }
+    insertSettledPayment(entry: settledPayment) { return new Promise<void>((resolve) => {resolve}) }
+    updateSettledPayment(id: bigint, status: number) { return new Promise<void>((resolve) => {resolve}) }
     
     
     getPaymentByBuyer(buyer: string)  { 
@@ -72,7 +72,7 @@ class SQL_Mock implements SQL_Interface {
             }
         })
     };
-    setLastSyncBlock(block: bigint) {}
+    setLastSyncBlock(block: number) { return new Promise<void>((resolve) => {resolve}) }
     getLastSyncBlock() { 
         return new Promise<number>((resolve) => {
             resolve(0);
@@ -166,24 +166,24 @@ class Web3_Contract_Mock2 implements ShopContract_Interface {
         })
     } 
     
-    public addedPaymentEntry(options: any) {
+    public addedPaymentEntry(options: any): EventEmitter {
         throw "error"
     }
     
-    public paymentSettled(options: any) {
+    public paymentSettled(options: any): EventEmitter {
         throw "error"
     }
     
-    public statusChange(options: any) {
+    public statusChange(options: any): EventEmitter {
         throw "error"
     }
     
-    public getSettledPayment(id: bigint) {
+    public getSettledPayment(id: bigint): Promise<settledPayment> {
         throw "error"
         
     }
     
-    public getPaymentEntry(id: bigint) {
+    public getPaymentEntry(id: bigint): Promise<paymentEntry> {
         throw "error"
     }
 }

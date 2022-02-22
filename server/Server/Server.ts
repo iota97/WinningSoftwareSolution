@@ -1,4 +1,5 @@
-import express, {Request, Response, Express} from "express";
+import express, { Request, Response, Express } from "express";
+import http from "http"
 import path from 'path';
 import bodyParser from 'body-parser';
 import { PageCreator } from "./PageCreator";
@@ -6,7 +7,7 @@ import { Persistence } from "../Persistence/Persistence"
 
 class Server {
     private app: Express;
-    private listener: any;
+    private listener: http.Server;
     private db: Persistence;
     private page: PageCreator;
     
@@ -20,13 +21,19 @@ class Server {
         this.app.set("view engine", "ejs");
         
         this.initRoutes();
+
+        this.listener = this.app.listen(process.env.PORT, this.successCallback);
     }
     
-    public close() {
+    public close(): void {
         this.listener.close();
     }
-    
-    private initRoutes() {
+
+    private successCallback(): void {
+        console.log(`[server]: Server is running at https://localhost:${process.env.PORT}`);
+    }
+
+    private initRoutes(): void {
         this.app.use(express.static(path.join(__dirname, "../public")));
         
         this.app.get("/", this.page.mainPage);
@@ -41,31 +48,25 @@ class Server {
         this.app.get('*', this.page.mainPage);
     }
 
-    private confirm(req: Request, res: Response) {
+    private confirm(req: Request, res: Response): void {
         this.page.confirmPage(req, res, this.db)
     }
 
-    private buyer(req: Request, res: Response) {
+    private buyer(req: Request, res: Response): void {
         this.page.paymentByBuyerPage(req, res, this.db)
     }
     
-    private seller(req: Request, res: Response) {
+    private seller(req: Request, res: Response): void {
         this.page.paymentBySellerPage(req, res, this.db)
     }
 
-    private detail(req: Request, res: Response) {
+    private detail(req: Request, res: Response): void {
         this.page.detailPage(req, res, this.db)
     }
 
-    private land(req: Request, res: Response) {
+    private land(req: Request, res: Response): void {
         this.page.landPage(req, res, this.db)
     }
-    
-    public listen() {
-        this.listener = this.app.listen(process.env.PORT, () => {
-            console.log(`[server]: Server is running at https://localhost:${process.env.PORT}`);
-        });
-    }  
 }
 
 export { Server }

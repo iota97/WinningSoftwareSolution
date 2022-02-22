@@ -1,7 +1,7 @@
 export interface settledPayment {
   id: bigint,
-  item_id: bigint,
-  buyer: string,
+  paymentEntryId: bigint,
+  client: string,
   status: number,
   created: string,
   confirmed: string // Also cancelled

@@ -5,14 +5,14 @@ import { paymentEntry } from "./Types/paymentEntry";
 import { settledPayment } from "./Types/settledPayment";
 
 export interface SQL_Interface {
-	insertPaymentEntry: (entry: paymentEntry) => void;
-	insertSettledPayment: (entry: settledPayment) => void;
-	updateSettledPayment: (id: bigint, status: number, timestamp: string) => void;
+	insertPaymentEntry: (entry: paymentEntry) => Promise<void>;
+	insertSettledPayment: (entry: settledPayment) => Promise<void>;
+	updateSettledPayment: (id: bigint, status: number, timestamp: string) => Promise<void>;
 	getPaymentByBuyer: (buyer: string) => Promise<payment[]>;
 	getPaymentBySeller: (seller: string) => Promise<payment[]>;
 	getPaymentByID: (id: bigint) => Promise<payment>;
 	getPaymentEntryByID: (id: bigint) => Promise<paymentEntry>;
-	setLastSyncBlock: (block: bigint) => void;
+	setLastSyncBlock: (block: number) => Promise<void>;
 	getLastSyncBlock: () => Promise<number>;
 }
 
@@ -28,11 +28,11 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public closeConnection() {
+	public closeConnection(): void {
 		this.db.end()
 	}
 	
-	public insertPaymentEntry(entry: paymentEntry) {
+	public insertPaymentEntry(entry: paymentEntry): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
 			
@@ -41,25 +41,25 @@ export class SQL implements SQL_Interface {
 					return reject(err)
 				}
 				
-				resolve(null)
+				resolve()
 			})
 		})
 	}
 	
-	public insertSettledPayment(entry: settledPayment) {
+	public insertSettledPayment(entry: settledPayment): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT INTO SettledPayments (id, item_id, buyer, status, created, confirmed) VALUES (?, ?, ?, ?, ?, ?)"
-			this.db.query(queryString, [entry.id, entry.item_id, entry.buyer, entry.status, entry.created, entry.confirmed], (err, result) => {
+			this.db.query(queryString, [entry.id, entry.paymentEntryId, entry.client, entry.status, entry.created, entry.confirmed], (err, result) => {
 				if (err) {
 					return reject(err)
 				}
 				
-				resolve(null)
+				resolve()
 			})
 		})
 	}
 	
-	public updateSettledPayment(id: bigint, status: number, timestamp: string) {
+	public updateSettledPayment(id: bigint, status: number, timestamp: string): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const queryString = "UPDATE SettledPayments set status=?, confirmed=? WHERE id=?"
 			
@@ -68,12 +68,12 @@ export class SQL implements SQL_Interface {
 					return reject(err)
 				}
 				
-				resolve(null)
+				resolve()
 			})
 		})
 	}
 	
-	public getPaymentByBuyer(buyer: string) {
+	public getPaymentByBuyer(buyer: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
 			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
 			
@@ -103,7 +103,7 @@ export class SQL implements SQL_Interface {
 		})	
 	}
 	
-	public getPaymentBySeller(seller: string) {
+	public getPaymentBySeller(seller: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
 			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
 			
@@ -133,7 +133,7 @@ export class SQL implements SQL_Interface {
 		})	
 	}
 	
-	public getPaymentEntryByID(id: bigint) {
+	public getPaymentEntryByID(id: bigint): Promise<paymentEntry> {
 		return new Promise<paymentEntry>((resolve, reject) => {
 			const queryString = `SELECT * FROM PaymentEntries WHERE id=?`
 			
@@ -158,7 +158,7 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public getPaymentByID(id: bigint) {
+	public getPaymentByID(id: bigint): Promise<payment> {
 		return new Promise<payment>((resolve, reject) => {
 			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.item_id=E.id WHERE S.id=?`
 			
@@ -187,7 +187,7 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public getLastSyncBlock() {
+	public getLastSyncBlock(): Promise<number> {
 		return new Promise<number>((resolve, reject) => {
 			const queryString = `SELECT value FROM LastBlockSynced WHERE id=0`
 			
@@ -202,8 +202,8 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public setLastSyncBlock(block: bigint) {
-		return new Promise<void>((resolve, reject) => {
+	public setLastSyncBlock(block: number): Promise<void> {
+		return new Promise((resolve, reject) => {
 			const queryString = `UPDATE LastBlockSynced SET value=? WHERE id=0`
 			
 			this.db.query(queryString, [block, block], (err, result) => {

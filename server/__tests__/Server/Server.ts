@@ -5,20 +5,16 @@ import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 import { Server } from "../../Server/Server"
-import { setTimeout } from 'timers'
+import express, { Express } from "express";
 import { Persistence } from "../../Persistence/Persistence";
 import { PageCreator } from "../../Server/PageCreator"
 
 dotenv.config()
 
-function delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
-
 class SQL_Mock implements SQL_Interface {    
-    insertPaymentEntry(entry: paymentEntry) {}
-    insertSettledPayment(entry: settledPayment) {}
-    updateSettledPayment(id: bigint, status: number) {}
+    insertPaymentEntry(entry: paymentEntry) {return new Promise<void>((resolve) => {resolve})}
+    insertSettledPayment(entry: settledPayment) {return new Promise<void>((resolve) => {resolve})}
+    updateSettledPayment(id: bigint, status: number) {return new Promise<void>((resolve) => {resolve})}
     
     
     getPaymentByBuyer(buyer: string)  { 
@@ -76,7 +72,7 @@ class SQL_Mock implements SQL_Interface {
             }
         })
     };
-    setLastSyncBlock(block: bigint) {}
+    setLastSyncBlock(block: number) {return new Promise<void>((resolve) => {resolve})}
     getLastSyncBlock() { 
         return new Promise<number>((resolve) => {
             resolve(0);
@@ -107,6 +103,10 @@ describe('Server', () => {
         server.confirm();
     })
 
+    it('Server - success', async () => {
+        server.successCallback();
+    })
+
     it('Server - buyer', async () => {
         server.buyer();
     })
@@ -121,11 +121,6 @@ describe('Server', () => {
 
     it('Server - land', async () => {
         server.land();
-    })
-    
-    it('Server - Listen', async () => {
-        server.listen()  
-        await delay(500)      
     })
     
     it('Server - Close', async () => {

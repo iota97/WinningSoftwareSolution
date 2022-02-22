@@ -55,7 +55,7 @@ describe('SQL', function () {
     })
     
     it('setLastSyncBlock - Less', async () => {
-        return sql.setLastSyncBlock(BigInt(0))
+        return sql.setLastSyncBlock(0)
         .then()
     })
     
@@ -77,8 +77,8 @@ describe('SQL', function () {
     it('insertSettledPayment - Dummy', async () => {
         return sql.insertSettledPayment({
             id: BigInt(12),
-            item_id: BigInt(13),
-            buyer: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
+            paymentEntryId: BigInt(13),
+            client: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
             status: 1,
             created: "123",
             confirmed: ""
@@ -165,7 +165,7 @@ describe('SQL', function () {
     })    
     
     it('setLastSyncBlock - Closed', async () => {
-        return sql.setLastSyncBlock(BigInt(0))
+        return sql.setLastSyncBlock(0)
         .catch(async (e: any) => {
             expect(e[0] == "E") 
         })    
@@ -227,8 +227,8 @@ describe('SQL', function () {
     it('insertSettledPayment - Closed', async () => {
         return sql.insertSettledPayment({
             id: BigInt(12312321),
-            item_id: BigInt(12312321),
-            buyer: "asdf",
+            paymentEntryId: BigInt(12312321),
+            client: "asdf",
             status: 0,
             created: "123",
             confirmed: ""
