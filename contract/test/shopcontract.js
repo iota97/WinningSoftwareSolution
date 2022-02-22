@@ -19,18 +19,21 @@ contract("ShopContract", accounts => {
                 return paymentEntryId;
             })
             .once('error', function(error) {
-                return -1;
+                assert.fail("Error adding a payment entry.");
             });
 
         })
         .then(entryId => {
 
-            return contract.getPaymentEntry(entryId, {from: accounts[0]});
+            contract.getPaymentEntry(entryId, {from: accounts[0]})
+
+            .once('confirmation', function(confirmationNumber, receipt) {
+                assert.fail("AAA");
+            })
 
         })
-        .then(paymentEntry => {
-
-            assert.equal(paymentEntry.seller, accounts[0], "error");
+        .then(recpt => {
+            console.log(recpt);
 
         });
 
