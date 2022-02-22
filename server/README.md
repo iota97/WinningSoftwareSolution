@@ -23,7 +23,7 @@ Collegarsi a MariaDB con:
 
 sudo mysql -u root -p
 
-Esequire le seguenti query:
+Eseguire le seguenti query:
 
 USE OnlineStoreTest;
 DROP TABLE PaymentEntries;
@@ -54,7 +54,7 @@ Un demone riavvia il server ogni volta che un file typescript viene modificato p
 Eseguire npm test
 
 # In caso di modifica contratto
-Se il contratto viene modificato potrebbe diventare incosistente con DB SQL, eliminate tutte le tabelle e il server effettuerà un sync completo
+Se il contratto viene modificato potrebbe diventare inconsistente con DB SQL, eliminate tutte le tabelle e il server effettuerà un sync completo
 
 # Selezione rete di test da Metamask
 Andare su https://chainlist.org/ ricercare "mumbai" e cliccare "Connect Wallet" e "Add to Metamask" (in alto metamask dovrebbe mostrare questa rete, oppure selezionarla dalla lista)
