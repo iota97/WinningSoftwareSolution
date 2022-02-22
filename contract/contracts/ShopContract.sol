@@ -46,12 +46,12 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     constructor(){
         priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
 
-        interval = 60; // Check every 60 sec, change to 1 day
+        interval = 60; // Check every 60 sec, change to 1 hour
         lastTimeStamp = block.timestamp;
         lastTimeIndex = 0;
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
-        expireDuration = 60*2; // expire after 2 min, change to 14 days
+        expireDuration = 60*10; // expire after 10 min, change to 14 days
     }
 
     event addedPaymentEntry(uint256 paymentEntryId);
@@ -92,25 +92,35 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         require(price > 0);
         paymentsEntries[freePaymentEntryId] = PaymentEntry(msg.sender, price);
         freePaymentEntryId = freePaymentEntryId + 1;
-        emit addedPaymentEntry(freePaymentEntryId - 1); //event is emitted after everything else is done
+        emit addedPaymentEntry(freePaymentEntryId - 1);
     }
 
     function settlePayment(uint256 paymentEntryId) payable public{
         require(paymentEntryId < freePaymentEntryId);
-        require(paymentsEntries[paymentEntryId].price*getLatestPrice() <= msg.value); // <-- controllo che il denaro inviato corrisponda a quello atteso && altra logica
-        require(msg.value - paymentsEntries[paymentEntryId].price*getLatestPrice() < 1000);
+        require(paymentsEntries[paymentEntryId].price*getLatestPrice() <= msg.value);
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, msg.value);
         freeSettledPaymentId = freeSettledPaymentId + 1;
         emit paymentSettled(freeSettledPaymentId - 1);
     }
 
-    function unlockFunds(uint256 settledPaymentId) public{
+    function unlockFunds(uint256 settledPaymentId) public {
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 
         address payable addr = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
         addr.transfer(settledPayments[settledPaymentId].payed);
         settledPayments[settledPaymentId].status = 2;
+
+        emit statusChanged(settledPaymentId);
+    }
+
+    function cancelPayment(uint256 settledPaymentId) public {
+        require(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller == msg.sender);
+        require(settledPayments[settledPaymentId].status == 1);
+
+        address payable addr = payable(settledPayments[settledPaymentId].client);
+        addr.transfer(settledPayments[settledPaymentId].payed);
+        settledPayments[settledPaymentId].status = 0;
 
         emit statusChanged(settledPaymentId);
     }

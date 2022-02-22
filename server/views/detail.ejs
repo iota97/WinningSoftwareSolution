@@ -14,6 +14,8 @@
     <div class="date"><%-confirmed%></div>
     <div class="status" id="status"><%-status%></div>
     <%-qr%>
+    <input id="idPag" type="hidden" value="<%=id%>">
+    <a id="cancelPaymentButton">Cancel transaction</a>
 </div>
 
 <%- include('footer.ejs') %>

@@ -24,5 +24,6 @@ test
 __pycache__
 /script/.env
 /server/.env
+!contract.json
 
 !docs/esterni/*/*.pdf

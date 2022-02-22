@@ -104,8 +104,8 @@ describe('SQL', function () {
         .then(async (res: any) => {
             let obj: any = {
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                seller: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                price: BigInt(5),
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: BigInt(20000000000000000),
                 status: 1
             }
             expect(res).

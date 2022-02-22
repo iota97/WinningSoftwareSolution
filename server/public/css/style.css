@@ -63,6 +63,10 @@ html body {
   background-size: 2.9em;
 }
 
+.transactions li.stato0 {
+  background-image: url("../img/grey.png");
+}
+
 .transactions li.stato1 {
   background-image: url("../img/yellow.png");
 }
@@ -173,7 +177,7 @@ html body {
   margin-top: 0em;
 }
 
-#qr {
+#qr, #cancelPaymentButton {
   display: none;
 }
 
@@ -201,7 +205,7 @@ html body {
   height: auto;
 }
 
-.pop>div>button, .info>button, #qr {
+.pop>div>button, .info>button, #qr, #cancelPaymentButton {
   cursor: pointer;
   border-style: solid;
   border-color: #0c162c;
@@ -216,12 +220,12 @@ html body {
   margin-bottom: 3em;
 }
 
-.info>button, #qr {
+.info>button, #qr, #cancelPaymentButton {
   top: 0em;
   margin-bottom: 2em;
 }
 
-#qr {
+#qr, #cancelPaymentButton {
   text-decoration: none;
   margin: 1.7em;
   font-weight: bold;

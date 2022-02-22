@@ -84,9 +84,11 @@ class PageCreator {
                 const qr_str = "<a id=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
                 let conf: string = "Confirmed " + this.timeConverter(item.confirmed);
                 if (item.status == 1) {
-                    conf = "Expire on: " + this.timeConverter(String(BigInt(item.created) + BigInt(60*60*24*14)));
+                    conf = "Expire " + this.timeConverter(String(BigInt(item.created) + BigInt(60*60*24*14)));
                 } else if (item.status == 3) {
-                    conf = "Expired on: " + this.timeConverter(item.confirmed);
+                    conf = "Expired " + this.timeConverter(item.confirmed);
+                } else if (item.status == 0) {
+                    conf = "Cancelled " + this.timeConverter(item.confirmed);
                 }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
@@ -96,7 +98,8 @@ class PageCreator {
                     created: this.timeConverter(item.created),
                     confirmed: conf,
                     status:  this.statusConverter(item.status),
-                    qr: qr_str
+                    qr: qr_str,
+                    id: req.query.id,
                 });
             })
         })
@@ -135,8 +138,11 @@ class PageCreator {
     }
     
     private statusConverter(status: number) {
+        if (status == 0) {
+            return "Cancelled"
+        }
         if (status == 2) {
-            return "Closed"
+            return "Confirmed"
         }
         if (status == 3) {
             return "Expired"

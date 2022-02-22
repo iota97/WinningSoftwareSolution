@@ -127,7 +127,7 @@ export class SQL implements SQL_Interface {
 					}
 					payments.push(payment)
 				});
-				
+
 				resolve(payments)
 			})
 		})	
@@ -160,7 +160,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentByID(id: bigint) {
 		return new Promise<payment>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.id=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.item_id=E.id WHERE S.id=?`
 			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
@@ -181,7 +181,7 @@ export class SQL implements SQL_Interface {
 					created: rows[0].created,
 					confirmed: rows[0].confirmed
 				}
-				
+
 				resolve(payment)
 			})
 		})

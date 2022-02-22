@@ -61,7 +61,7 @@ class SQL_Mock implements SQL_Interface {
                     price: BigInt(200),
                     status: 3,
                     created: "123",
-                    confirmed: "",
+                    confirmed: "123",
                 }
                 resolve(obj)
             } else if (id == BigInt(1)) {
@@ -83,7 +83,18 @@ class SQL_Mock implements SQL_Interface {
                     price: BigInt(200),
                     status: 2,
                     created: "123",
-                    confirmed: "",
+                    confirmed: "2",
+                }
+                resolve(obj)
+            } else if (id == BigInt(12)) {
+                let obj: payment  = {
+                    id: BigInt(11),
+                    buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
+                    seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                    price: BigInt(200),
+                    status: 0,
+                    created: "123",
+                    confirmed: "123",
                 }
                 resolve(obj)
             } else {
@@ -274,6 +285,21 @@ describe('PageCreator', () => {
         }
         page.detailPage(req, res, db);
     })
+
+    it('Detail Page - Cancelled', async () => {
+        const req = { query: { id: 12 } }
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(view).
+                toBe("detail")
+            },
+            redirect: (view: any, data: any) => {
+                expect(false).toBe(true)
+            },
+        }
+        page.detailPage(req, res, db);
+    })
+    
     
     it('Detail Page - Ok', async () => {
         const req = { query: { id: 0 } }
