@@ -28,7 +28,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     struct SettledPayment {
         uint256 paymentEntryId;
-        uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 money sent back
+        uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 timed out
         address client;
         uint256 time;
         uint256 payed; // In Wei

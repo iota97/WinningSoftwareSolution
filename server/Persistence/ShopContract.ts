@@ -36,7 +36,6 @@ export class ShopContract implements ShopContract_Interface {
 	}
 	
 	public statusChange(options: any) {
-		// TODO change this
 		return this.contract.events.statusChanged(options)
 	}
 	
