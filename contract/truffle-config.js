@@ -18,6 +18,11 @@ module.exports = {
         gasPrice: 30000000000,
         timeoutBlocks: 250,
         networkCheckTimeout: 3000000
+    },
+    ganache: {
+      host: "localhost",
+      port: 7545,
+      network_id: "5777"
     }
   },
 

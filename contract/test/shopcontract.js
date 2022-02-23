@@ -1,41 +1,16 @@
 const ShopContract = artifacts.require("ShopContract");
 
-contract("ShopContract", accounts => {
+contract("ShopContract", async accounts => {
 
-    it("Adding payment entry", () => {
+    it("Adding payment entry", async () => {
 
-        let contract;
+        const contract = await ShopContract.deployed();
 
-        return ShopContract.deployed()
+        const result = await contract.addPaymentEntry(1000000);
 
-        .then(instance => {
+        const paymentEntryId = result.logs[0].args.paymentEntryId.toNumber();
 
-            contract = instance;
-
-            contract.addPaymentEntry(1000000, {from: accounts[0]})
-
-            .once('confirmation', function(confirmationNumber, receipt) {
-                paymentEntryId = receipt.events.addedPaymentEntry.returnValues.paymentEntryId;
-                return paymentEntryId;
-            })
-            .once('error', function(error) {
-                assert.fail("Error adding a payment entry.");
-            });
-
-        })
-        .then(entryId => {
-
-            contract.getPaymentEntry(entryId, {from: accounts[0]})
-
-            .once('confirmation', function(confirmationNumber, receipt) {
-                assert.fail("AAA");
-            })
-
-        })
-        .then(recpt => {
-            console.log(recpt);
-
-        });
+        assert.equal(paymentEntryId, 0, "Error on adding payment entry");
 
     });
 

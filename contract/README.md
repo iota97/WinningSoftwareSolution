@@ -39,4 +39,8 @@ to verify.
 
 Networks are defined in `truffle-config.js`, the network included in this project by default is polygon_mumbai.
 
-Currently deployed at [0xC3FDE503A89a36529fdDEbbcb1C4a4dE970d2731](https://mumbai.polygonscan.com/address/0xC3FDE503A89a36529fdDEbbcb1C4a4dE970d2731).
+## Testing
+```
+truffle test --network <YOUR-NETWORK> ./test/shopcontract.js
+```
+to test. Using [Ganache](https://trufflesuite.com/ganache/index.html) is recommended for faster testing (network "ganache" is defined in `truffle-config.js`).
