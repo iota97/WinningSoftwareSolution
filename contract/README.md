@@ -31,7 +31,7 @@ to compile.
 ```
 truffle deploy --network <YOUR-NETWORK>
 ```
-to deploy. Add ```--reset --compile-none``` if any timeout errors show up while deploying.
+to deploy. Add ```--reset --compile-none``` or change ```providerlink.secret``` from https to wss if any timeout errors show up while deploying.
 ```
 truffle run verify ShopContract --network <YOUR-NETWORK>
 ```
@@ -43,4 +43,4 @@ Networks are defined in `truffle-config.js`, the network included in this projec
 ```
 truffle test --network <YOUR-NETWORK> ./test/shopcontract.js
 ```
-to test. Using [Ganache](https://trufflesuite.com/ganache/index.html) is recommended for faster testing (network "ganache" is defined in `truffle-config.js`).
+to test.
