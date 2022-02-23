@@ -4951,30 +4951,13 @@
 											"height": 13,
 											"text": "+payed: uint256",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF/IscT5Syt7sU=",
-											"_parent": {
-												"$ref": "AAAAAAF/IscT5Syn9OM="
-											},
-											"model": {
-												"$ref": "AAAAAAF/Ir2YaZUApx4="
-											},
-											"font": "Arial;13;0",
-											"left": 2077,
-											"top": 681,
-											"width": 207,
-											"height": 13,
-											"text": "+Attribute1",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 2072,
 									"top": 601,
 									"width": 217,
-									"height": 98
+									"height": 83
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -4987,7 +4970,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 2072,
-									"top": 699,
+									"top": 684,
 									"width": 217,
 									"height": 10
 								},
@@ -5029,7 +5012,7 @@
 							"left": 2072,
 							"top": 576,
 							"width": 217,
-							"height": 133,
+							"height": 118,
 							"nameCompartment": {
 								"$ref": "AAAAAAF/IscT5CyiTd8="
 							},
@@ -6151,8 +6134,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 2023,
-									"top": 588,
+									"left": 2030,
+									"top": 585,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -6172,8 +6155,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 2026,
-									"top": 573,
+									"left": 2033,
+									"top": 570,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -6193,8 +6176,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 2016,
-									"top": 617,
+									"left": 2025,
+									"top": 614,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -6212,7 +6195,7 @@
 								"$ref": "AAAAAAF/IscT4yu+fns="
 							},
 							"lineStyle": 1,
-							"points": "1969:599;2071:620",
+							"points": "1985:598;2071:614",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF/Iv3hTCE16ms="
@@ -11724,15 +11707,6 @@
 							},
 							"name": "payed",
 							"type": "uint256"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF/Ir2YaZUApx4=",
-							"_parent": {
-								"$ref": "AAAAAAF/IryzCZFaHwQ="
-							},
-							"name": "Attribute1",
-							"type": ""
 						}
 					]
 				},
