@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">44.44% </span>
+        <span class="strong">62.22% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>20/45</span>
+        <span class='fraction'>28/45</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">16.67% </span>
+        <span class="strong">29.17% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/24</span>
+        <span class='fraction'>7/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">70% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/10</span>
+        <span class='fraction'>7/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.55% </span>
+        <span class="strong">59.57% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>20/47</span>
+        <span class='fraction'>28/47</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -285,14 +285,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,8 +312,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//SPDX-License-Identifier: none
 &nbsp;
@@ -420,15 +420,15 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         emit paymentSettled(freeSettledPaymentId - 1);
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function unlockFunds(uint256 settledPaymentId) public {</span>
-<span class="cstat-no" title="statement not covered" >        require(settledPayments[settledPaymentId].client == msg.sender)</span>;
-<span class="cstat-no" title="statement not covered" >        require(settledPayments[settledPaymentId].status == 1)</span>;
+    function unlockFunds(uint256 settledPaymentId) public {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(settledPayments[settledPaymentId].client == msg.sender);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(settledPayments[settledPaymentId].status == 1);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        address payable addr = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);</span>
-<span class="cstat-no" title="statement not covered" >        addr.transfer(settledPayments[settledPaymentId].payed)</span>;
-<span class="cstat-no" title="statement not covered" >        settledPayments[settledPaymentId].status = 2</span>;
+        address payable addr = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
+        addr.transfer(settledPayments[settledPaymentId].payed);
+        settledPayments[settledPaymentId].status = 2;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        emit statusChanged(settledPaymentId);</span>
+        emit statusChanged(settledPaymentId);
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    function cancelPayment(uint256 settledPaymentId) public {</span>
@@ -447,9 +447,9 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         return paymentsEntries[paymentEntryId];
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    function getSettledPayment(uint256 settledPaymentId) public view returns(SettledPayment memory){</span>
-<span class="cstat-no" title="statement not covered" >        require(settledPaymentId &lt; freeSettledPaymentId)</span>;
-<span class="cstat-no" title="statement not covered" >        return settledPayments[settledPaymentId];</span>
+    function getSettledPayment(uint256 settledPaymentId) public view returns(SettledPayment memory){
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(settledPaymentId &lt; freeSettledPaymentId);
+        return settledPayments[settledPaymentId];
     }
 }</pre></td></tr>
 </table></pre>
@@ -457,7 +457,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 24 2022 17:47:35 GMT+0100 (Ora standard dell’Europa centrale)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 24 2022 18:13:20 GMT+0100 (Ora standard dell’Europa centrale)
 </div>
 </div>
 <script src="../prettify.js"></script>

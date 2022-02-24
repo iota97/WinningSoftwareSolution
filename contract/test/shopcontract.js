@@ -49,4 +49,30 @@ contract("ShopContract", async accounts => {
 
     });
 
+    it("Getting settled payment", async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const jsonGetPayment = await contract.getSettledPayment(0);
+        const resultPaymentEntryId = jsonGetPayment.paymentEntryId;
+        const resultStatus = jsonGetPayment.status;
+        const resultClient = jsonGetPayment.client;
+
+        const isCorrect = resultPaymentEntryId == 0 && resultClient == accounts[0] && resultStatus == 1;
+
+        assert.equal(isCorrect, true, "Error on getting settled payment.")
+
+    });
+
+    it("Unlocking funds", async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const jsonUnlockedPayment = await contract.unlockFunds(0);
+        const unlockedPaymentId = jsonUnlockedPayment.logs[0].args.settledPaymentId.toNumber();
+
+        assert.equal(unlockedPaymentId, 0, "Error on unlocking funds.");
+
+    });
+
 });
