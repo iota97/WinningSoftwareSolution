@@ -16,6 +16,8 @@ const conn = document.getElementById("con");
 const listBuyer = document.getElementById("listBuyer")
 const listSeller = document.getElementById("listSeller")
 const idWallet = document.getElementById("idWallet")
+const wrongChain = document.getElementById("wrongChain")
+const idPag = document.getElementById("idPag")
 
 // Global gariables
 let chainId;
@@ -183,7 +185,7 @@ function isMetaMaskInstalled() {
 
 function askForInstall() {
     connectPopup.style.display = "flex";
-
+    
     if (mobileCheck()) {
         connectButton.innerText = 'Open in MetaMask!';
         connectButton.onclick = onClickOpenMetaMask;
@@ -214,149 +216,108 @@ function closePop(e) {
     }
 }
 
-function onClickSettlePayment() {
-    settlePaymentButton.disabled = true;
-    let intId = parseInt(chainId, 16);
-    
-    if(intId == deployedChainID) {  
+function checkChainID() {    
+    if(parseInt(chainId, 16) != deployedChainID) {  
+        wrongChain.style.display = "flex"
+        return false;
+    }
+    return true;
+}
+
+function showStatus(id) {
+    arr = [
+        document.getElementById("confirm"),
+        document.getElementById("sending"),
+        document.getElementById("success"),
+        document.getElementById("error"),
+    ]
+    arr.forEach(item => item.style.display = "none")
+    arr[id].style.display = "flex"
+}
+
+function onClickSettlePayment() {    
+    if (checkChainID()) {
+        settlePaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        const index = document.getElementById("idPag").value;
         
         let conversion;
         shopContract.methods.getLatestPrice().call()
         .then(p => {
             conversion = p;
-            return shopContract.methods.getPaymentEntry(index).call()
+            return shopContract.methods.getPaymentEntry(idPag.value).call()
         })
         .then(paymentEntry => { 
-            shopContract.methods.settlePayment(index).send({from: accounts[0], value: paymentEntry.price*conversion + 500})
+            shopContract.methods.settlePayment(idPag.value).send({from: accounts[0], value: paymentEntry.price*conversion + 500})
             .once('sending', function() {
-                document.getElementById("confirm").style = "display: flex;"
-                document.getElementById("sending").style = "display: none;"
-                document.getElementById("success").style = "display: none;"
-                document.getElementById("error").style = "display: none;"
+                showStatus(0)
             })
             .once('transactionHash', function() {
-                document.getElementById("sending").style = "display: flex;"
-                document.getElementById("confirm").style = "display: none;"
-                document.getElementById("success").style = "display: none;"
-                document.getElementById("error").style = "display: none;" 
+                showStatus(1)
             })
             .once('confirmation', function(confirmationNumber, receipt) {
                 transactionID = receipt.events.paymentSettled.returnValues.settledPaymentId;
                 settlePaymentButton.style.display = "none"
-                document.getElementById("success").style = "display: flex;"
-                document.getElementById("sending").style = "display: none;"
-                document.getElementById("confirm").style = "display: none;"
-                document.getElementById("error").style = "display: none;"
+                showStatus(2)
             })
             .once('error', function(error) {
                 // This happen on metamask popup close
                 if (!error || error.code != 4001) {
-                    document.getElementById("error").style = "display: flex;"
+                    showStatus(3)
                 }
-                document.getElementById("sending").style = "display: none;"
-                document.getElementById("confirm").style = "display: none;"
-                document.getElementById("success").style = "display: none;"
                 settlePaymentButton.disabled = false;
-                
-                console.log(error);
             });    
-        }, reason => {    
-            console.log("Error: " + reason);
-        });  
-    } else {
-        document.getElementById("wrongChain").style = "display: flex;"
+        });
     }
 }
 
-const onCancelPayment = () => {
-    cancelPaymentButton.disabled = true;
-    let intId = parseInt(chainId, 16);
-    
-    if(intId == deployedChainID) {       
+function onCancelPayment() {    
+    if(checkChainID()) {     
+        cancelPaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        const index = document.getElementById("idPag").value;
         
-        shopContract.methods.cancelPayment(index).send({from: accounts[0]})
+        shopContract.methods.cancelPayment(idPag.value).send({from: accounts[0]})
         .once('sending', function() {
-            document.getElementById("confirm").style = "display: flex;"
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
-            document.getElementById("error").style = "display: none;"
+            showStatus(0)
         })
         .once('transactionHash', function() {
-            document.getElementById("sending").style = "display: flex;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
-            document.getElementById("error").style = "display: none;" 
+            showStatus(1)
         })
-        .once('confirmation', function(){
-            document.getElementById("success").style = "display: flex;"
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("error").style = "display: none;"
+        .once('confirmation', function() {
+            showStatus(2)
         })
         .once('error', function(error) {
             // This happen on metamask popup close
             if (!error || error.code != 4001) {
-                document.getElementById("error").style = "display: flex;"
+                showStatus(3)
             }
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
             cancelPaymentButton.disabled = false;
-            
-            console.log(error);
         });    
-    } else {
-        document.getElementById("wrongChain").style = "display: flex;"
     }
 }
 
-const onClickUnlockFunds = () => {   
-    unlockFundsButton.disabled = true;
-    
-    let intId = parseInt(chainId, 16);
-    
-    if (intId == deployedChainID) {    
+function onClickUnlockFunds() {    
+    if(checkChainID()) {     
+        unlockFundsButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        const idSettledPayment = document.getElementById("idPag").value;
         
-        shopContract.methods.unlockFunds(idSettledPayment).send({from: accounts[0]})
+        shopContract.methods.unlockFunds(idPag.value).send({from: accounts[0]})
         .once('sending', function() {
-            document.getElementById("confirm").style = "display: flex;"
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
-            document.getElementById("error").style = "display: none;"
+            showStatus(0)
         })
         .once('transactionHash', function() {
-            document.getElementById("sending").style = "display: flex;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
-            document.getElementById("error").style = "display: none;" 
+            showStatus(1)
         })
-        .once('confirmation', function(){
+        .once('confirmation', function() {
             document.getElementById("relocButton").onclick = location.reload();
-            document.getElementById("success").style = "display: flex;"
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("error").style = "display: none;"
+            showStatus(2)
         })
         .once('error', function(error) {
             // This happen on metamask popup close
             if (!error || error.code != 4001) {
-                document.getElementById("error").style = "display: flex;"
+                showStatus(3)
             }
-            document.getElementById("sending").style = "display: none;"
-            document.getElementById("confirm").style = "display: none;"
-            document.getElementById("success").style = "display: none;"
             unlockFundsButton.disabled = false;
-            
-            console.log(error);
         });    
-    } else {
-        document.getElementById("wrongChain").style = "display: flex;"
     }
 }
 
