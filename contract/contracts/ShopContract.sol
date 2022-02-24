@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: none
 
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
