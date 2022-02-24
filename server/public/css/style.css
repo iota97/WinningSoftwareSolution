@@ -206,7 +206,7 @@ html body {
   height: auto;
 }
 
-.pop>div>button, .info>button, #qr, #cancelPaymentButton {
+.pop>div>button, .info>button, #qr, #cancelPaymentButton, #unlockFundsButton {
   cursor: pointer;
   border-style: solid;
   border-color: #0c162c;
@@ -226,7 +226,7 @@ html body {
   margin-bottom: 2em;
 }
 
-#qr, #cancelPaymentButton {
+#qr, #cancelPaymentButton, #unlockFundsButton {
   text-decoration: none;
   margin: 1.7em;
   font-weight: bold;
