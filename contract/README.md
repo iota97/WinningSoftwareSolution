@@ -1,11 +1,12 @@
 ## Requirements
 
-Truffle (and some plugins) are required to compile, deploy and verify the contract.
+Truffle (and some plugins) are required to compile, deploy, verify and testing the contract.
 ```
 npm install
 npm install -g truffle
 npm install @truffle/hdwallet-provider
 npm install truffle-plugin-verify
+npm install solidity-coverage
 ```
 
 Openzeppelin and Chainlink libraries are also required.
@@ -43,4 +44,9 @@ Networks are defined in `truffle-config.js`, the network included in this projec
 ```
 truffle test --network <YOUR-NETWORK> ./test/shopcontract.js
 ```
-to test.
+to test (without coverage).
+```
+truffle run coverage --file="./test/shopcontract.js" --solcoverjs ./.solcover.js
+```
+to test (with coverage).
+
