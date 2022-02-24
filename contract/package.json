@@ -14,6 +14,7 @@
     "@truffle/hdwallet-provider": "^1.7.0"
   },
   "devDependencies": {
+    "solidity-coverage": "^0.7.20",
     "truffle-plugin-verify": "^0.5.21"
   }
 }
