@@ -15,6 +15,7 @@ const chainName = document.getElementById("chainName");
 const conn = document.getElementById("con");
 const listBuyer = document.getElementById("listBuyer")
 const listSeller = document.getElementById("listSeller")
+const idWallet = document.getElementById("idWallet")
 
 // Global gariables
 let chainId;
@@ -130,7 +131,7 @@ async function onMetamaskConnected() {
             method: 'eth_accounts'
         }));
         
-        if (findGetParameter("id") != accounts[0]) {
+        if (idWallet && idWallet.value != accounts[0]) {
             setGetParameter("id", accounts[0])
         }
         
