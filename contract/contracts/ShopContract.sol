@@ -38,6 +38,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 timed out
         address client;
         uint256 time;
+        uint256 amountInDAI;
     }
 
     mapping(uint256 => PaymentEntry) private paymentsEntries;
@@ -110,30 +111,41 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     }
 
     function settlePayment(uint256 paymentEntryId) payable public{
-        require(paymentEntryId < freePaymentEntryId);
-        require(paymentsEntries[paymentEntryId].price * getLatestPrice() <= msg.value);
-        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp);
-        freeSettledPaymentId = freeSettledPaymentId + 1;
 
-        require(DAI.approve(address(uniswapV2Router), msg.value), "approve failed");
+        require(paymentEntryId < freePaymentEntryId);
+
+        uint256 valueWithSlippage = msg.value.add(msg.value.div(200)); //0.5% slippage
+
+        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * getLatestPrice();
+
+        require(valueWithSlippage >= priceInMatic); //assure that you can pay with slippage
+        //TODO fare in modo che uno non possa pagare un prezzo molto più alto del dovuto, non è necessario ma è una feature carina se no uno potrebbe perdere molti soldi
+
+        require(DAI.approve(address(uniswapV2Router), msg.value), "Approve failed.");
 
         address[] memory path = new address[](2);
-        path[0] = uniswapV2Router.WETH();
+        path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
 
-        uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp + 10000); //TODO? set min dai as slippage
+        uint256 minAmountDai = 0; //TODO IMPORTANTE: assicurarsi che questa variabile sia il minimo di DAI (incluso slippage) che siamo disposti ad accettare per lo scambio, in caso contrario contratto vulnerabile a exploit
+                                  //si potrebbe assumere 1 DAI = 1 USD ma fluttua anche se di pochi centesimi, forse meglio usare chainlink?
+        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDai, path, address(this), block.timestamp); //EXACT amount of DAI received
+
+        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
+        freeSettledPaymentId = freeSettledPaymentId + 1;
 
         emit paymentSettled(freeSettledPaymentId - 1);
 
     }
 
     function unlockFunds(uint256 settledPaymentId) public {
+
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 
         address payable sellerAddress = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
 
-        DAI.transferFrom(address(this), sellerAddress, paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].price * 10**16); //TODO price in usd cents so add 16 decimals MINUS SLIPPAGE OR UNSUFFICIENT BALANCE
+        DAI.transferFrom(address(this), sellerAddress, settledPayments[settledPaymentId].amountInDAI);
 
         settledPayments[settledPaymentId].status = 2;
 

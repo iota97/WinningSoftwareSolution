@@ -3,7 +3,6 @@ const ShopContract = artifacts.require("ShopContract");
 contract("ShopContract", async accounts => {
 
     const testPrice = 5; // 0.05 USD
-    const slippage = 0.5;
 
     it("Adding payment entry", async () => {
 
@@ -42,7 +41,7 @@ contract("ShopContract", async accounts => {
 
         const valueToSend = ((10**24)/rec.answer) * testPrice; //in wei
 
-        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend + Number(((valueToSend*slippage)/100).toFixed(0))}); //this can't be the best way to do it
+        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend})
         const paymentSettledId = jsonSettledPayment.logs[0].args.settledPaymentId.toNumber();
 
         assert.equal(paymentSettledId, 0, "Error on settling payment entry.");

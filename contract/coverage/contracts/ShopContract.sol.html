@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70% </span>
+        <span class="strong">71.7% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>35/50</span>
+        <span class='fraction'>38/53</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">30.77% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>7/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">67.31% </span>
+        <span class="strong">69.09% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>35/52</span>
+        <span class='fraction'>38/55</span>
       </div>
     </div>
   </div>
@@ -205,7 +205,20 @@
 160
 161
 162
-163</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -317,10 +330,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -331,6 +349,12 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,6 +431,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 timed out
         address client;
         uint256 time;
+        uint256 amountInDAI;
     }
 &nbsp;
     mapping(uint256 =&gt; PaymentEntry) private paymentsEntries;
@@ -479,30 +504,41 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     }
 &nbsp;
     function settlePayment(uint256 paymentEntryId) payable public{
-        <span class="missing-if-branch" title="else path not taken" >E</span>require(paymentEntryId &lt; freePaymentEntryId);
-        <span class="missing-if-branch" title="else path not taken" >E</span>require(paymentsEntries[paymentEntryId].price * getLatestPrice() &lt;= msg.value);
-        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp);
-        freeSettledPaymentId = freeSettledPaymentId + 1;
 &nbsp;
-        <span class="missing-if-branch" title="else path not taken" >E</span>require(DAI.approve(address(uniswapV2Router), msg.value), "approve failed");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(paymentEntryId &lt; freePaymentEntryId);
+&nbsp;
+        uint256 valueWithSlippage = msg.value.add(msg.value.div(200)); //0.5% slippage
+&nbsp;
+        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * getLatestPrice();
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(valueWithSlippage &gt;= priceInMatic); //assure that you can pay with slippage
+        //TODO fare in modo che uno non possa pagare un prezzo molto più alto del dovuto, non è necessario ma è una feature carina se no uno potrebbe perdere molti soldi
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(DAI.approve(address(uniswapV2Router), msg.value), "Approve failed.");
 &nbsp;
         address[] memory path = new address[](2);
-        path[0] = uniswapV2Router.WETH();
+        path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
 &nbsp;
-        uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp + 10000); //TODO? set min dai as slippage
+        uint256 minAmountDai = 0; //TODO IMPORTANTE: assicurarsi che questa variabile sia il minimo di DAI (incluso slippage) che siamo disposti ad accettare per lo scambio, in caso contrario contratto vulnerabile a exploit
+                                  //si potrebbe assumere 1 DAI = 1 USD ma fluttua anche se di pochi centesimi, forse meglio usare chainlink?
+        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDai, path, address(this), block.timestamp); //EXACT amount of DAI received
+&nbsp;
+        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
+        freeSettledPaymentId = freeSettledPaymentId + 1;
 &nbsp;
         emit paymentSettled(freeSettledPaymentId - 1);
 &nbsp;
     }
 &nbsp;
     function unlockFunds(uint256 settledPaymentId) public {
+&nbsp;
         <span class="missing-if-branch" title="else path not taken" >E</span>require(settledPayments[settledPaymentId].client == msg.sender);
         <span class="missing-if-branch" title="else path not taken" >E</span>require(settledPayments[settledPaymentId].status == 1);
 &nbsp;
         address payable sellerAddress = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
 &nbsp;
-        DAI.transferFrom(address(this), sellerAddress, paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].price * 10**15); //price in usd cents so add 16 decimals
+        DAI.transferFrom(address(this), sellerAddress, settledPayments[settledPaymentId].amountInDAI);
 &nbsp;
         settledPayments[settledPaymentId].status = 2;
 &nbsp;
@@ -535,7 +571,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 25 2022 14:30:55 GMT+0100 (Ora standard dell’Europa centrale)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 25 2022 19:01:57 GMT+0100 (Ora standard dell’Europa centrale)
 </div>
 </div>
 <script src="../prettify.js"></script>
