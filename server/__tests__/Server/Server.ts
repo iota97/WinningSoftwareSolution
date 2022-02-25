@@ -79,6 +79,56 @@ class SQL_Mock implements SQL_Interface {
     };
 }
 
+import { EventEmitter } from 'events'
+import { ShopContract_Interface } from "../../Persistence/ShopContract_Interface";
+class Web3_Contract_Mock1 implements ShopContract_Interface {
+    private e1: EventEmitter;
+    
+    constructor() {
+        this.e1 = new EventEmitter;
+    }
+    
+    public getBlockTime(block: number) {
+        return new Promise<string>((resolve) => {
+            resolve("123")
+        })
+    }    
+    
+    public addedPaymentEntry(options: any) {
+        return this.e1
+    }
+    
+    public paymentSettled(options: any) {
+        return this.e1
+    }
+    
+    public statusChange(options: any) {
+        return this.e1
+    }
+        
+    public getSettledPayment(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                client: "asdf",
+                status: 10,
+                paymentEntryId: 10,
+            }
+            resolve(obj)
+        })  
+    }
+  
+    public getPaymentEntry(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                seller: "asdf",
+                price: 10,
+            }
+            resolve(obj)
+        })
+    }
+}
+
+
 describe('Server', () => { 
     const original = console.log
     beforeEach(() => {
@@ -96,7 +146,7 @@ describe('Server', () => {
     page.detailPage = jest.fn;
     page.landPage = jest.fn;
 
-    const server = new Server(new Persistence(new SQL_Mock()), page) as any;
+    const server = new Server(new Persistence(new SQL_Mock(), new Web3_Contract_Mock1()), page) as any;
     
     it('Server - confirm', async () => {
         server.confirm();

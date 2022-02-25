@@ -9,6 +9,56 @@ import { PageCreator } from "../../Server/PageCreator"
 
 dotenv.config()
 
+import { EventEmitter } from 'events'
+import { ShopContract_Interface } from "../../Persistence/ShopContract_Interface";
+class Web3_Contract_Mock1 implements ShopContract_Interface {
+    private e1: EventEmitter;
+    
+    constructor() {
+        this.e1 = new EventEmitter;
+    }
+    
+    public getBlockTime(block: number) {
+        return new Promise<string>((resolve) => {
+            resolve("123")
+        })
+    }    
+    
+    public addedPaymentEntry(options: any) {
+        return this.e1
+    }
+    
+    public paymentSettled(options: any) {
+        return this.e1
+    }
+    
+    public statusChange(options: any) {
+        return this.e1
+    }
+        
+    public getSettledPayment(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                client: "asdf",
+                status: 10,
+                paymentEntryId: 10,
+            }
+            resolve(obj)
+        })  
+    }
+  
+    public getPaymentEntry(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                seller: "asdf",
+                price: 10,
+            }
+            resolve(obj)
+        })
+    }
+}
+
+
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
@@ -127,7 +177,7 @@ class SQL_Mock implements SQL_Interface {
 import {Request, Response} from "express"
 
 describe('PageCreator', () => { 
-    const db = new Persistence(new SQL_Mock());
+    const db = new Persistence(new SQL_Mock(), new Web3_Contract_Mock1());
     const page = new PageCreator()
     
     it('Main Page - Ok', async () => {

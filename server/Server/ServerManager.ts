@@ -1,5 +1,4 @@
 import { Persistence } from "../Persistence/Persistence";
-import { ShopContractEventManager } from "../Persistence/ShopContractEventManager"
 import { Server } from './Server';
 import { PageCreator } from "./PageCreator";
 import assert from 'assert';
@@ -31,12 +30,8 @@ export class ServerManager {
         assert(this.shopContract != null)
 
         this.server = new Server(
-            new Persistence(this.sql),
+            new Persistence(this.sql, this.shopContract),
             this.page
-        )
-        new ShopContractEventManager(
-            this.sql,
-            this.shopContract
         )
         return this
     }

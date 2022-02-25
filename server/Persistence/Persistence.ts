@@ -1,12 +1,15 @@
 import { SQL_Interface } from "./SQL_Interface"
 import { payment } from "./Types/payment"
 import { paymentEntry } from "./Types/paymentEntry"
+import { ShopContractEventManager } from "./ShopContractEventManager"
+import { ShopContract_Interface } from '../Persistence/ShopContract_Interface';
 
 class Persistence {
 	private sql: SQL_Interface;
 
-	public constructor(sql: SQL_Interface) {	
+	public constructor(sql: SQL_Interface, shopContract: ShopContract_Interface) {	
 		this.sql = sql;
+		new ShopContractEventManager(sql, shopContract)
 	}
 
 	public getPaymentByBuyer(buyer: string): Promise<payment[]> {
