@@ -63,12 +63,12 @@ def serverTest():
 	os.system("cd " + cd)
 
 def scriptTest():
-	stat = os.system("cd script; python3.8 -m pytest test_sell.py")
+	stat = os.system("cd script; python3.8 -m pytest test_sell.py &> /dev/null")
 	if stat != 0:
 		print("Falliti dei test sullo script!")
 	else:
 		print("Test script completati con successo")
-	os.system("cd..")
+	os.system("cd ..")
 
 def main():
 	latexTest()
