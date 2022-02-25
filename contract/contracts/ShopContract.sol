@@ -5,8 +5,12 @@ pragma solidity 0.8.12;
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+
+import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 
 contract ShopContract is Ownable, KeeperCompatibleInterface {
     using Address for address;
@@ -21,6 +25,9 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     uint256 lastTimeStamp;
     uint256 lastTimeIndex;
 
+    IUniswapV2Router02 public immutable uniswapV2Router;
+    IERC20 DAI = IERC20(0xcB1e72786A6eb3b44C2a2429e317c8a2462CFeb1);
+
     struct PaymentEntry {
         address seller;
         uint256 price; // Dollars cent
@@ -31,7 +38,6 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 timed out
         address client;
         uint256 time;
-        uint256 payed; // In Wei
     }
 
     mapping(uint256 => PaymentEntry) private paymentsEntries;
@@ -43,15 +49,22 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(){
+    constructor(uint256 _interval, uint256 _expireDuration){
+
         priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
 
-        interval = 60; // Check every 60 sec, change to 1 hour
-        lastTimeStamp = block.timestamp;
-        lastTimeIndex = 0;
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
-        expireDuration = 60*10; // expire after 10 min, change to 14 days
+
+        lastTimeStamp = block.timestamp;
+        lastTimeIndex = 0;
+
+        interval = _interval; // Check every 60 sec, change to 1 hour
+        expireDuration = _expireDuration; // expire after 10 min, change to 14 days
+
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b); //uniswapv2 router for quickswap mumbai
+        uniswapV2Router = _uniswapV2Router;
+
     }
 
     event addedPaymentEntry(uint256 paymentEntryId);
@@ -73,7 +86,8 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
              while (i < freeSettledPaymentId) {
                 if ((block.timestamp - settledPayments[i].time) > expireDuration) {
                     if (settledPayments[i].status == 1) {
-                       payable(settledPayments[i].client).transfer(settledPayments[i].payed);
+                       //payable(settledPayments[i].client).transfer(settledPayments[i].payed);
+                       //TODO send back money to client
                        settledPayments[i].status = 3;
 
                        emit statusChanged(i);
@@ -97,18 +111,30 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     function settlePayment(uint256 paymentEntryId) payable public{
         require(paymentEntryId < freePaymentEntryId);
-        require(paymentsEntries[paymentEntryId].price*getLatestPrice() <= msg.value);
-        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, msg.value);
+        require(paymentsEntries[paymentEntryId].price * getLatestPrice() <= msg.value);
+        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp);
         freeSettledPaymentId = freeSettledPaymentId + 1;
+
+        require(DAI.approve(address(uniswapV2Router), msg.value), "approve failed");
+
+        address[] memory path = new address[](2);
+        path[0] = uniswapV2Router.WETH();
+        path[1] = address(DAI);
+
+        uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp + 10000); //TODO? set min dai as slippage
+
         emit paymentSettled(freeSettledPaymentId - 1);
+
     }
 
     function unlockFunds(uint256 settledPaymentId) public {
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 
-        address payable addr = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
-        addr.transfer(settledPayments[settledPaymentId].payed);
+        address payable sellerAddress = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
+
+        DAI.transferFrom(address(this), sellerAddress, paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].price * 10**16); //TODO price in usd cents so add 16 decimals MINUS SLIPPAGE OR UNSUFFICIENT BALANCE
+
         settledPayments[settledPaymentId].status = 2;
 
         emit statusChanged(settledPaymentId);
@@ -119,7 +145,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         require(settledPayments[settledPaymentId].status == 1);
 
         address payable addr = payable(settledPayments[settledPaymentId].client);
-        addr.transfer(settledPayments[settledPaymentId].payed);
+        //addr.transfer(settledPayments[settledPaymentId].payed); TODO return money
         settledPayments[settledPaymentId].status = 0;
 
         emit statusChanged(settledPaymentId);
