@@ -1,8 +1,9 @@
 ## Requirements
 
 ```
-pip3 install web3
-pip3 install python-dotenv
+pip3.8 install web3
+pip3.8 install python-dotenv
+pip3.8 install pytest
 ```
 
 Configure .env with:
