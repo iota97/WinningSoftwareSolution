@@ -18,6 +18,12 @@ const listSeller = document.getElementById("listSeller")
 const idWallet = document.getElementById("idWallet")
 const wrongChain = document.getElementById("wrongChain")
 const idPag = document.getElementById("idPag")
+const menu = document.getElementById("header-right");
+const relocButton = document.getElementById("relocButton")
+const confirmPop = document.getElementById("confirm")
+const sendingPop =  document.getElementById("sending")
+const successPop = document.getElementById("success")
+const errorPop = document.getElementById("error")
 
 // Global gariables
 let chainId;
@@ -44,7 +50,6 @@ function mobileCheck() {
 }
 
 function toggleMenu() {
-    let menu = document.getElementById("header-right");
     if (menu.style.display == "none") {
         menu.style.display = "block"
     } else {
@@ -225,11 +230,11 @@ function checkChainID() {
 }
 
 function showStatus(id) {
-    arr = [
-        document.getElementById("confirm"),
-        document.getElementById("sending"),
-        document.getElementById("success"),
-        document.getElementById("error"),
+    let arr = [
+        confirmPop,
+        sendingPop,
+        successPop,
+        errorPop,
     ]
     arr.forEach(item => item.style.display = "none")
     arr[id].style.display = "flex"
@@ -308,7 +313,7 @@ function onClickUnlockFunds() {
             showStatus(1)
         })
         .once('confirmation', function() {
-            document.getElementById("relocButton").onclick = location.reload();
+            relocButton.onclick = location.reload();
             showStatus(2)
         })
         .once('error', function(error) {
