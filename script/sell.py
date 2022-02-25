@@ -52,6 +52,8 @@ def sell_item(price):
         msg = "[Added] Payment entry id: "+str(payment_id)+", price: "+sys.argv[1]
         print(msg)
         logger.info(msg)
+
+        return payment_id
     except Exception as err:
         print(err)
         logger.error(err)
@@ -61,5 +63,3 @@ if __name__ == "__main__":
        print("Usage: "+sys.argv[0]+" [price_in_dollars]")
     else:
         sell_item(sys.argv[1])
-            
-      

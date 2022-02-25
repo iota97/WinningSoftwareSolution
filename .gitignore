@@ -23,6 +23,7 @@ test
 *.sh
 __pycache__
 /script/.env
+/script/*.log
 /server/.env
 !contract.json
 
