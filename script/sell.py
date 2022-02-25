@@ -16,7 +16,7 @@ logger=logging.getLogger(__name__)
 
 def sell_item(price):
     try:
-        msg = "[Adding] Price: "+sys.argv[1]
+        msg = "[Adding] Price: "+price
         print(msg)
         logger.info(msg)
         contract_json = open("contract.json", "r")
@@ -49,7 +49,7 @@ def sell_item(price):
         tx_receipt = w3.eth.waitForTransactionReceipt(w3.toHex(w3.keccak(signed_txn.rawTransaction)))
 
         payment_id = int(tx_receipt['logs'][0]['data'], 16)
-        msg = "[Added] Payment entry id: "+str(payment_id)+", price: "+sys.argv[1]
+        msg = "[Added] Payment entry id: "+str(payment_id)+", price: "+price
         print(msg)
         logger.info(msg)
 

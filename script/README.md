@@ -5,4 +5,6 @@ pip3 install web3
 pip3 install python-dotenv
 ```
 
-Your mnemonic should be saved in /script/.env
+Configure .env with:
+MNEMONIC=your memonic
+PROVIDER=Web3 provider e.g: wss://speedy-nodes-nyc.moralis.io/5c29520422f9528344aa64a1/polygon/mumbai/ws
