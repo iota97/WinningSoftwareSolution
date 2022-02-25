@@ -1,5 +1,6 @@
 ## Requirements
 
+python3.8
 ```
 pip3.8 install web3
 pip3.8 install python-dotenv
