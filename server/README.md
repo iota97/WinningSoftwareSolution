@@ -1,5 +1,6 @@
 # Requisiti
 npm
+
 MariaDB
 
 # Configurazione
