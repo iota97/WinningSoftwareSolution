@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.7% </span>
+        <span class="strong">73.68% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>38/53</span>
+        <span class='fraction'>42/57</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">30.77% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>7/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">69.09% </span>
+        <span class="strong">71.19% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>38/55</span>
+        <span class='fraction'>42/59</span>
       </div>
     </div>
   </div>
@@ -217,7 +217,36 @@
 172
 173
 174
-175</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,8 +301,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
@@ -285,6 +312,10 @@
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -292,7 +323,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -336,15 +368,29 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -395,7 +441,6 @@
 &nbsp;
 pragma solidity 0.8.12;
 &nbsp;
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -404,21 +449,28 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 &nbsp;
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
+import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
+import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 &nbsp;
 contract ShopContract is Ownable, KeeperCompatibleInterface {
+&nbsp;
     using Address for address;
-    using SafeMath for uint256;
 &nbsp;
     uint256 freePaymentEntryId;
     uint256 freeSettledPaymentId;
-    AggregatorV3Interface internal priceFeed;
+    AggregatorV3Interface internal priceFeedMatic;
+    AggregatorV3Interface internal priceFeedDAI;
 &nbsp;
     uint256 immutable interval;
     uint256 immutable expireDuration;
     uint256 lastTimeStamp;
     uint256 lastTimeIndex;
 &nbsp;
+    uint256 slippageClient; //in x1000, so 5 -&gt; 0.5% slippage
+&nbsp;
     IUniswapV2Router02 public immutable uniswapV2Router;
+    IUniswapV2Factory public immutable uniswapV2Factory;
+&nbsp;
     IERC20 DAI = IERC20(0xcB1e72786A6eb3b44C2a2429e317c8a2462CFeb1);
 &nbsp;
     struct PaymentEntry {
@@ -443,9 +495,10 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(uint256 _interval, uint256 _expireDuration){
+    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient){
 &nbsp;
-        priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
+        priceFeedMatic = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
+        priceFeedDAI = AggregatorV3Interface(0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046);
 &nbsp;
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
@@ -453,21 +506,23 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         lastTimeStamp = block.timestamp;
         lastTimeIndex = 0;
 &nbsp;
-        interval = _interval; // Check every 60 sec, change to 1 hour
-        expireDuration = _expireDuration; // expire after 10 min, change to 14 days
+        interval = _interval;
+        expireDuration = _expireDuration;
 &nbsp;
-        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b); //uniswapv2 router for quickswap mumbai
-        uniswapV2Router = _uniswapV2Router;
+        slippageClient = _slippageClient;
+&nbsp;
+        uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b); //uniswapv2 router for quickswap mumbai
+        uniswapV2Factory = IUniswapV2Factory(uniswapV2Router.factory());
 &nbsp;
     }
 &nbsp;
     event addedPaymentEntry(uint256 paymentEntryId);
     event paymentSettled(uint256 settledPaymentId);
     event statusChanged(uint256 settledPaymentId);
+    event test(uint256 value);
 &nbsp;
-    function getLatestPrice() public view returns (uint256 p) {
-        (,int price,,,) = priceFeed.latestRoundData();
-        return (10**24)/uint256(price);
+    function getSlippageAmount(uint256 number) public returns(uint256){
+        return (number * slippageClient)/1000;
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {</span>
@@ -507,9 +562,10 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 &nbsp;
         <span class="missing-if-branch" title="else path not taken" >E</span>require(paymentEntryId &lt; freePaymentEntryId);
 &nbsp;
-        uint256 valueWithSlippage = msg.value.add(msg.value.div(200)); //0.5% slippage
+        uint256 valueWithSlippage = msg.value + getSlippageAmount(msg.value);
 &nbsp;
-        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * getLatestPrice();
+        (,int priceMatic,,,) = priceFeedMatic.latestRoundData(); //8 decimals
+        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceMatic);
 &nbsp;
         <span class="missing-if-branch" title="else path not taken" >E</span>require(valueWithSlippage &gt;= priceInMatic); //assure that you can pay with slippage
         //TODO fare in modo che uno non possa pagare un prezzo molto più alto del dovuto, non è necessario ma è una feature carina se no uno potrebbe perdere molti soldi
@@ -520,9 +576,22 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
 &nbsp;
-        uint256 minAmountDai = 0; //TODO IMPORTANTE: assicurarsi che questa variabile sia il minimo di DAI (incluso slippage) che siamo disposti ad accettare per lo scambio, in caso contrario contratto vulnerabile a exploit
-                                  //si potrebbe assumere 1 DAI = 1 USD ma fluttua anche se di pochi centesimi, forse meglio usare chainlink?
-        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDai, path, address(this), block.timestamp); //EXACT amount of DAI received
+        (,int priceDAI,,,) = priceFeedDAI.latestRoundData(); //8 decimals
+        uint256 minAmountDAI = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceDAI); //price is in USD cents, adapt 8 decimals priceDAI to 18 decimals DAI
+/*
+        if(minAmountDAI &gt; 10**18){
+&nbsp;
+            minAmountDAI -= 10**18;
+&nbsp;
+        }else{
+&nbsp;
+            minAmountDAI = 0; //if price (in DAI) is less than a single USD
+&nbsp;
+        }
+*/
+        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp); //EXACT amount of DAI received
+&nbsp;
+        emit test(amountsDAI[0]); //TODO valore molto piccolo??? gas fees alte, idk
 &nbsp;
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
         freeSettledPaymentId = freeSettledPaymentId + 1;
@@ -571,7 +640,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 25 2022 19:01:57 GMT+0100 (Ora standard dell’Europa centrale)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Feb 26 2022 14:51:45 GMT+0100 (Ora standard dell’Europa centrale)
 </div>
 </div>
 <script src="../prettify.js"></script>
