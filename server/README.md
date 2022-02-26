@@ -1,3 +1,7 @@
+# Requisiti
+npm
+MariaDB
+
 # Configurazione
 La configurazione è nel file: `.env`, crearlo se non esiste
 
