@@ -1,0 +1,94 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 16/02/2022 con SyncLab}
+\setredattori{Giovanni Cocco}
+\setrevisori{Elia Scandaletti}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 26/02/2022
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 26/02/2022\\
+\textbf{Durata}: 40 minuti\\
+\textbf{Luogo}: Server Discord\\
+
+\textbf{Partecipanti}
+\begin{itemize}
+	\item Giovanni Cocco;
+	\item Matteo Galvagni;
+	\item Federico Marchi;
+	\item Raffaele Oliviero;
+	\item Elia Scandaletti;
+	\item Andrea Volpe;
+\end{itemize}
+
+\section{Ordine del giorno}
+\begin{enumerate}
+	\item programmazione PB;
+
+\end{enumerate}
+
+\section{Svolgimento}
+\section{Procedere alla fase successiva}
+Invece di aspettare l'esito completo del RTB data la strettezza dei tempi si è deciso di procedere alla fase di PB già dopo il colloquio con Cardin.
+
+\section{Piano di progetto}
+Finire la PB per 16 Marzo.
+
+\section{Piano di qualifica}
+Test i automatici con copertura 100\% su contratto (truffle), sever (jest), script (pytest) e WebApp
+
+\section{Manuale utente}
+Creare il manuale con tutte le interazione sia cliente che e-commerce.
+
+\section{Smart contract}
+\begin{itemize}
+\item Contattare pallare riguardo al refund;
+\item portare la copertura test al 100\%.
+\end{itemize}
+
+\section{Web app}
+\begin{itemize}
+	\item Trovare una suite di test;
+	\item portare la copertura test al 100\%.
+\end{itemize}	
+
+\section{Specifiche architetturali}
+\begin{itemize}
+	\item Completare il diagramma delle classi;
+	\item completare il diagramma di sequenza;
+	\item creare l'elenco dei metodi publici.
+\end{itemize}
+
+\section{Norme di progetto}
+Aggiornare le norme di progetto:
+\begin{itemize}
+	\item chi modifica il SW nella stessa PR modifica la documentazione: diagramma delle classi, di sequenza e lista metodi;
+    \item eseguire i test automatici prima di creare la PR (no regression);
+    \item se si inserisce codice assicurarsi che sia coperto da test;
+    \item nulla di implicito, sia per visibilità che per tipi;
+    \item cambio data riunioni settimanali, aggiornarsi settimana prossima a riguardo;
+\end{itemize}
+\section{Impegni presi}
+Scadenza ultima: 05/03/2022
+\begin{itemize}
+	\item Alberto: Manuale cliente ed ecommerce;
+	\item Elia: Test automatici WebApp;
+	\item Matteo: Test automatici Contratto;
+	\item Giovanni: Norme di progetto;
+	\item Federico: Manuale cliente ed ecommerce;
+	\item Raffaele: Specifiche architetturali;
+	\item Andrea: Piano di progetto, di qualifica.
+\end{itemize}
+
+\end{document}
