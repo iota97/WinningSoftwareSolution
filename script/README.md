@@ -1,6 +1,10 @@
 ## Requisiti
 
 python3.8
+
+pip3.8
+
+Installere le seguenti dipendenze aggiuntive con pip
 ```
 pip3.8 install web3
 pip3.8 install python-dotenv
