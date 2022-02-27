@@ -17,18 +17,18 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     using Address for address;
 
-    uint256 freePaymentEntryId;
-    uint256 freeSettledPaymentId;
+    uint256 private freePaymentEntryId;
+    uint256 private freeSettledPaymentId;
     AggregatorV3Interface internal priceFeedMatic;
     AggregatorV3Interface internal priceFeedDAI;
 
-    uint256 immutable interval;
-    uint256 immutable expireDuration;
-    uint256 lastTimeStamp;
-    uint256 lastTimeIndex;
+    uint256 private immutable interval;
+    uint256 private immutable expireDuration;
+    uint256 private lastTimeStamp;
+    uint256 private lastTimeIndex;
 
-    uint256 slippageClient; //in x1000, so 5 -> 0.5% slippage
-    uint256 slippageExchange;
+    uint256 public slippageClient; //in x1000, so 5 -> 0.5% slippage
+    uint256 public slippageExchange;
 
     IUniswapV2Router02 public immutable uniswapV2Router;
     IUniswapV2Factory public immutable uniswapV2Factory;
@@ -98,31 +98,28 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         return (number * slippage)/1000;
     }
 
-    function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
+    function checkUpkeep(bytes calldata) external view override returns (bool upkeepNeeded, bytes memory) {
         upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
     }
 
     function performUpkeep(bytes calldata) external override {
-        if ((block.timestamp - lastTimeStamp) > interval) {
-             uint256 i = lastTimeIndex;
-             while (i < freeSettledPaymentId) {
-                if ((block.timestamp - settledPayments[i].time) > expireDuration) {
-                    if (settledPayments[i].status == 1) {
 
-                       DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
+        require((block.timestamp - lastTimeStamp) > interval);
+        uint256 i = lastTimeIndex;
 
-                       settledPayments[i].status = 3;
+        while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration) {
 
-                       emit statusChanged(i);
-                    }
-                    i++;
-                } else {
-                    break;
-                }
+            if (settledPayments[i].status == 1) {
+
+                DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
+                settledPayments[i].status = 3;
+                emit statusChanged(i);
+
             }
-            lastTimeIndex = i;
-            lastTimeStamp = block.timestamp;
+            i++;
         }
+        lastTimeIndex = i;
+        lastTimeStamp = block.timestamp;
     }
 
     function addPaymentEntry(uint256 price) public {
@@ -168,6 +165,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     function unlockFunds(uint256 settledPaymentId) public {
 
+        require(settledPaymentId < freeSettledPaymentId);
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 
@@ -181,6 +179,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     }
 
     function cancelPayment(uint256 settledPaymentId) public {
+        require(settledPaymentId < freeSettledPaymentId);
         require(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
 

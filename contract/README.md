@@ -1,6 +1,6 @@
-## Requirements
+## Requisiti
 
-Truffle (and some plugins) are required to compile, deploy, verify and testing the contract.
+Truffle (e alcuni plugin) sono richiesti per compilare, effettuare il deploy, verificare e testare il contratto.
 ```
 npm install
 npm install -g truffle
@@ -9,44 +9,43 @@ npm install truffle-plugin-verify
 npm install solidity-coverage
 ```
 
-Openzeppelin and Chainlink libraries are also required.
+Sono richieste anche librerie di Openzeppelin e Chainlink.
 ```
 npm install @openzeppelin/contracts
 npm install @chainlink/contracts
 ```
 
-Some files are not included for privacy, they need to be manually created:
+Alcuni file non sono inclusi nella repo per privacy, devono essere invece creati manualmente:
 
-`mnemonic.secret` with your secret mnemonic phrase.
+`mnemonic.secret` con la frase mnemonica del proprio wallet.
 
-`providerlink.secret` with the link to the node's provider for the choosen network, with API key if needed (Eg.: https://polygon-mumbai.g.alchemy.com/v2/SECRET).
+`providerlink.secret` con il link al provider del nodo (con chiave API se richiesta) (Es.: https://polygon-mumbai.g.alchemy.com/v2/SECRET).
 
-`apikey.secret` with your Etherscan/BSCscan/Polygonscan API key, for verifying the contract's code.
+`apikey.secret` con la chiave API di Etherscan/BSCscan/Polygonscan, per verificare il codice del contratto.
 
-## Compiling, Deploying and Verifying
+## Compilazione, deployment e verifica
 
 ```
 truffle compile
 ```
-to compile.
+per compilare.
 ```
 truffle deploy --network <YOUR-NETWORK>
 ```
-to deploy. Add ```--reset --compile-none``` or change ```providerlink.secret``` from https to wss if any timeout errors show up while deploying.
+per eseguire il deploy sulla rete scelta. Aggiungere ```--reset --compile-none``` e/o cambiare il link in ```providerlink.secret``` da https a wss se appaiono errori di timeout.
 ```
 truffle run verify ShopContract --network <YOUR-NETWORK>
 ```
-to verify.
+per verificare il codice.
 
-Networks are defined in `truffle-config.js`, the network included in this project by default is polygon_mumbai.
+Le reti sono definite in `truffle-config.js`, la rete di default per questo progetto è polygon_mumbai.
 
 ## Testing
 ```
 truffle test --network <YOUR-NETWORK> ./test/shopcontract.js
 ```
-to test (without coverage).
+per testare (senza coperture del codice).
 ```
 truffle run coverage --file="./test/shopcontract.js" --solcoverjs ./.solcover.js
 ```
-to test (with coverage).
-
+per testare (con coperture del codice).
