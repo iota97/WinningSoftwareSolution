@@ -19,8 +19,8 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
     }
     
     public getBlockTime(block: number) {
-        return new Promise<string>((resolve) => {
-            resolve("123")
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
         })
     }    
     
@@ -35,7 +35,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
     public statusChange(options: any) {
         return this.e1
     }
-        
+    
     public getSettledPayment(id: bigint) {
         return new Promise<any>((resolve)  => {
             let obj: any  = {
@@ -46,7 +46,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
             resolve(obj)
         })  
     }
-  
+    
     public getPaymentEntry(id: bigint) {
         return new Promise<any>((resolve)  => {
             let obj: any  = {
@@ -75,8 +75,8 @@ class SQL_Mock implements SQL_Interface {
             
             let obj: payment  = {
                 id: BigInt(0),
-                created: '123',
-                confirmed: '',
+                created: BigInt(123),
+                confirmed: null,
                 buyer: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: BigInt(20000000000000000),
@@ -91,8 +91,8 @@ class SQL_Mock implements SQL_Interface {
             
             let obj: payment  ={
                 id: BigInt(0),
-                created: '123',
-                confirmed: '',
+                created: BigInt(123),
+                confirmed: null,
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
                 seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                 price: BigInt(20000000000000000),
@@ -110,8 +110,8 @@ class SQL_Mock implements SQL_Interface {
                     seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                     price: BigInt(200),
                     status: 3,
-                    created: "123",
-                    confirmed: "",
+                    created: BigInt(123),
+                    confirmed: BigInt(223),
                 }
                 resolve(obj)
             } else if (id == BigInt(1)) {
@@ -121,8 +121,8 @@ class SQL_Mock implements SQL_Interface {
                     seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                     price: BigInt(200),
                     status: 1,
-                    created: "123",
-                    confirmed: "",
+                    created: BigInt(123),
+                    confirmed: null,
                 }
                 resolve(obj)
             } else if (id == BigInt(11)) {
@@ -132,8 +132,8 @@ class SQL_Mock implements SQL_Interface {
                     seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                     price: BigInt(200),
                     status: 2,
-                    created: "123",
-                    confirmed: "2",
+                    created: BigInt(123),
+                    confirmed: BigInt(223),
                 }
                 resolve(obj)
             } else if (id == BigInt(12)) {
@@ -143,8 +143,8 @@ class SQL_Mock implements SQL_Interface {
                     seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
                     price: BigInt(200),
                     status: 0,
-                    created: "123",
-                    confirmed: "123",
+                    created: BigInt(123),
+                    confirmed: null,
                 }
                 resolve(obj)
             } else {
@@ -240,7 +240,7 @@ describe('PageCreator', () => {
     })
     
     it('Confirm Page - Ok', async () => {
-        const req = { query: { id: 0 } as any} as Request
+        const req = { query: { id: 12 } as any} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -252,7 +252,7 @@ describe('PageCreator', () => {
         } as Response
         page.confirmPage(req, res, db);
     }) 
-
+    
     it('Confirm Page - Confirmed', async () => {
         const req = { query: { id: 11 } as any} as Request
         const res = { 
@@ -337,8 +337,22 @@ describe('PageCreator', () => {
         } as Response
         page.detailPage(req, res, db);
     })
-
+    
     it('Detail Page - Cancelled', async () => {
+        const req = { query: { id: 11 } as any } as Request
+        const res = { 
+            render: (view: any, data: any) => {
+                expect(view).
+                toBe("detail")
+            },
+            redirect: (view: any, data: any) => {
+                expect(false).toBe(true)
+            },
+        } as Response
+        page.detailPage(req, res, db);
+    })
+
+    it('Detail Page - Confirmed', async () => {
         const req = { query: { id: 12 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
@@ -385,7 +399,7 @@ describe('PageCreator', () => {
         } as Response
         page.landPage({} as Request, res, db);
     })
-
+    
     it('Landing Page - Redirect 2', async () => {
         const res = { 
             render: (view: any, data: any) => {
@@ -398,7 +412,7 @@ describe('PageCreator', () => {
         } as Response
         page.landPage({ query: {id: "asd"} as any } as Request, res, db);
     })
-
+    
     it('Landing Page - Redirect 3', async () => {
         const res = { 
             render: (view: any, data: any) => {
@@ -459,7 +473,7 @@ describe('PageCreator', () => {
         } as Response
         page.detailPage({query: {}} as Request, res, db);
     })
-
+    
     it('Detail Page - Redirect', async () => { 
         const res = { 
             render: (view: any, data: any) => {

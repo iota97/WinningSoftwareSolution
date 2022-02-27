@@ -89,8 +89,8 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
     }
     
     public getBlockTime(block: number) {
-        return new Promise<string>((resolve) => {
-            resolve("123")
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
         })
     }    
     

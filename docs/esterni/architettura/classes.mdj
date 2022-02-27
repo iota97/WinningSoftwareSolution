@@ -413,7 +413,7 @@
 											"top": 1120,
 											"width": 199,
 											"height": 13,
-											"text": "+confirmed: string",
+											"text": "+confirmed: bigint | null",
 											"horizontalAlignment": 0
 										}
 									],
@@ -693,7 +693,7 @@
 											"top": 977,
 											"width": 216.0908203125,
 											"height": 13,
-											"text": "+confirmed: string",
+											"text": "+confirmed: bigint | null",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1656,7 +1656,7 @@
 											"top": 786,
 											"width": 368.88134765625,
 											"height": 13,
-											"text": "+getBlockTime(block: number): Promise<string>",
+											"text": "+getBlockTime(block: number): Promise<bigint>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2827,7 +2827,7 @@
 											"top": 1131,
 											"width": 488.82666015625,
 											"height": 13,
-											"text": "+updateSettledPayment(id: bigint, status: number, timestamp: string): Promise<void>",
+											"text": "+updateSettledPayment(id: bigint, status: number, timestamp: bigint): Promise<void>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8860,7 +8860,7 @@
 								"$ref": "AAAAAAF/IoPRhvQjt0Q="
 							},
 							"name": "confirmed",
-							"type": "string"
+							"type": "bigint | null"
 						}
 					]
 				},
@@ -8924,7 +8924,7 @@
 								"$ref": "AAAAAAF/Iog90PXWBVw="
 							},
 							"name": "confirmed",
-							"type": "string"
+							"type": "bigint | null"
 						}
 					]
 				},
@@ -9645,7 +9645,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF/IpKzC/iNAgs="
 									},
-									"type": "Promise<string>",
+									"type": "Promise<bigint>",
 									"direction": "return"
 								}
 							]
@@ -10602,7 +10602,7 @@
 										"$ref": "AAAAAAF/IpxMxvvhalI="
 									},
 									"name": "timestamp",
-									"type": "string"
+									"type": "bigint"
 								},
 								{
 									"_type": "UMLParameter",

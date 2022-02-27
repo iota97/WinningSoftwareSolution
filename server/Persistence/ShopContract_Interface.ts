@@ -8,7 +8,7 @@ export interface ShopContract_Interface {
 	paymentSettled: (options: PastEventOptions) => EventEmitter;
 	statusChange: (options: PastEventOptions) => EventEmitter;
 	
-	getBlockTime: (block: number) => Promise<string>
+	getBlockTime: (block: number) => Promise<bigint>
 
 	getSettledPayment: (id: bigint) => Promise<settledPayment>;
 	getPaymentEntry: (id: bigint) => Promise<paymentEntry>;

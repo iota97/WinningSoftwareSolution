@@ -100,8 +100,8 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
     }
     
     public getBlockTime(block: number) {
-        return new Promise<string>((resolve) => {
-            resolve("123")
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
         })
     }    
     
@@ -161,10 +161,10 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
 class Web3_Contract_Mock2 implements ShopContract_Interface {
     
     public getBlockTime(block: number) {
-        return new Promise<string>((resolve) => {
-            resolve("123")
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
         })
-    } 
+    }    
     
     public addedPaymentEntry(options: any): EventEmitter {
         throw "error"
@@ -201,10 +201,10 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
     }
     
     public getBlockTime(block: number) {
-        return new Promise<string>((resolve) => {
-            resolve("123")
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
         })
-    } 
+    }    
     
     public addedPaymentEntry(options: any) {
         setTimeout(() => {

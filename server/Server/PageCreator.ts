@@ -45,10 +45,10 @@ class PageCreator {
         }
         db.getPaymentByID(id)
         .then((item: payment) => {
-            let confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
-            if (item.confirmed == "") {
-                confirmed = ""
-            }
+            let confirmed = ""
+            if (item.confirmed != null) {
+                confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
+            }      
             res.render("confirm", {
                 price: Number(item.price) / 100,
                 buyer: item.buyer,
@@ -108,13 +108,13 @@ class PageCreator {
             qr.toDataURL(qr_url)
             .then((img_data) => {
                 const qr_str = "<a id=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
-                let conf: string = "Confirmed " + this.timeConverter(item.confirmed);
-                if (item.status == 1) {
-                    conf = "Expire " + this.timeConverter(String(BigInt(item.created) + BigInt(60*60*24*14)));
+                let conf = "Expire " + this.timeConverter(BigInt(item.created) + BigInt(60*60*24*14));
+                if (item.status == 2) {
+                    conf = "Confirmed " + this.timeConverter(item.confirmed as bigint);
                 } else if (item.status == 3) {
-                    conf = "Expired " + this.timeConverter(item.confirmed);
+                    conf = "Expired " + this.timeConverter(item.confirmed as bigint);
                 } else if (item.status == 0) {
-                    conf = "Cancelled " + this.timeConverter(item.confirmed);
+                    conf = "Cancelled " + this.timeConverter(item.confirmed as bigint);
                 }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
@@ -150,7 +150,7 @@ class PageCreator {
             item_string += "</ul>";
             
             if (items.length == 0) {
-                item_string = "<div>Nessuna transazione trovata</div>"
+                item_string = "<div class=\"info\" id=\"none-found\">No transaction found</div>"
             }
             res.render("seller", {
                 items: item_string,
@@ -176,7 +176,7 @@ class PageCreator {
         return "Open"    
     }
     
-    private timeConverter(timestamp: string): string {
+    private timeConverter(timestamp: bigint): string {
         var a = new Date(Number(timestamp)*1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var year = a.getFullYear();

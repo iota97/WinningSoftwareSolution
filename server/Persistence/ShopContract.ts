@@ -16,9 +16,9 @@ export class ShopContract implements ShopContract_Interface {
 		this.contract = contract;
 	}
 	
-	public async getBlockTime(block: number): Promise<string> {
+	public async getBlockTime(block: number): Promise<bigint> {
 		let b = await this.web3.eth.getBlock(block)
-		return String(b.timestamp);
+		return BigInt(b.timestamp);
 	}
 	public addedPaymentEntry(options: PastEventOptions): EventEmitter {
 		return this.contract.events.addedPaymentEntry(options)

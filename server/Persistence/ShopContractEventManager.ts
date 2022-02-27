@@ -66,7 +66,7 @@ class ShopContractEventManager {
 				client: res.client,
 				status: res.status,
 				created: time,
-				confirmed: ""
+				confirmed: null
 			})
 		})
 		.then(() => {

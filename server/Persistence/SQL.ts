@@ -48,7 +48,7 @@ export class SQL implements SQL_Interface {
 		})
 	}
 	
-	public updateSettledPayment(id: bigint, status: number, timestamp: string): Promise<void> {
+	public updateSettledPayment(id: bigint, status: number, timestamp: bigint): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const queryString = "UPDATE SettledPayments set status=?, confirmed=? WHERE id=?"
 			
