@@ -23,6 +23,7 @@ Questo documento contiene le procedure, gli strumenti e i criteri di qualità ch
 \addversione{0.0.6}{16/01/2022}{Elia Scandaletti}{Redazione}{Adeguamento di \ref{verifica-e-validazione} a decisioni collettive}
 \addversione{0.0.7}{04/02/2022}{Giovanni Cocco}{Redazione}{Stesure di \ref{revisioni-di-avanzamento-interne}}
 \addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Redazione}{Stesura di \ref{analisi-dei-requisiti}, \ref{analisi-delle-tecnologie} e \ref{piano-di-progetto}}
+\addversione{0.0.9}{16/02/2022}{Giovanni Cocco}{Redazione}{Stesura di \ref{norme-sw}}
 
 \begin{document}
 
@@ -30,7 +31,7 @@ Questo documento contiene le procedure, gli strumenti e i criteri di qualità ch
 
 \makeversioni
 
-\section{Introduzone}
+\section{Introduzione}
 \subsection{Scopo del documento}
 Lo scopo del presente documento è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni qui presentate.
 
@@ -249,6 +250,8 @@ Alcuni comandi utili sono:
 \end{itemize}
 
 \section{Workflow di lavoro}
+\subsection{Versionamento}
+
 Ogni modifica alla repository dovrà seguire i seguenti passaggi:
 \begin{itemize}
 \item modifica del codice su repository locale;
@@ -277,6 +280,15 @@ Quando il verificatore accetta un pull request, dovrà eliminare il branch relat
 Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
 
 Non è consentito forzare i push sulla repository remota.
+
+\subsection{Sviluppo Software}\label{norme-sw}
+Per lo sviluppo del codice valgono le seguenti regole:
+\begin{itemize}
+	\item chi modifica il SW nella stessa PR modifica la documentazione: diagramma delle classi, di sequenza e lista metodi;
+    \item eseguire i test automatici prima di creare la PR (no regression);
+    \item se si inserisce codice assicurarsi che sia coperto da test;
+    \item non lasciare nulla di implicito, sia per visibilità che per tipi.
+\end{itemize}
 
 \section{Tracciamento dei progressi}
 Per tracciare l'avanzamento del progetto, oltre alla dashboard nel \textit{Piano di Progetto}, verrà utilizzato il sistema di issues e di milestone di GitHub.
