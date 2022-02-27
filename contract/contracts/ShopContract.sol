@@ -28,6 +28,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     uint256 lastTimeIndex;
 
     uint256 slippageClient; //in x1000, so 5 -> 0.5% slippage
+    uint256 slippageExchange;
 
     IUniswapV2Router02 public immutable uniswapV2Router;
     IUniswapV2Factory public immutable uniswapV2Factory;
@@ -50,13 +51,18 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     mapping(uint256 => PaymentEntry) private paymentsEntries;
     mapping(uint256 => SettledPayment) private settledPayments;
 
+    event addedPaymentEntry(uint256 paymentEntryId);
+    event paymentSettled(uint256 settledPaymentId);
+    event statusChanged(uint256 settledPaymentId);
+    event test(uint256 uniswapvalue, uint256 chainlinkvalue);
+
     /**
      * https://docs.chain.link/docs/matic-addresses/
      * Network: Mumbai Testnet
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient){
+    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange){
 
         priceFeedMatic = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
         priceFeedDAI = AggregatorV3Interface(0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046);
@@ -71,19 +77,25 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         expireDuration = _expireDuration;
 
         slippageClient = _slippageClient;
+        slippageExchange = _slippageExchange;
 
         uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b); //uniswapv2 router for quickswap mumbai
         uniswapV2Factory = IUniswapV2Factory(uniswapV2Router.factory());
 
     }
 
-    event addedPaymentEntry(uint256 paymentEntryId);
-    event paymentSettled(uint256 settledPaymentId);
-    event statusChanged(uint256 settledPaymentId);
-    event test(uint256 value);
+    function getUniswapMaticValueInDAI() public view returns(uint){
+        uint256 amount = 1;
+        IUniswapV2Pair pair = IUniswapV2Pair(uniswapV2Factory.getPair(address(DAI), address(uniswapV2Router.WETH())));
+        (uint Res1, uint Res0,) = pair.getReserves();
 
-    function getSlippageAmount(uint256 number) public returns(uint256){
-        return (number * slippageClient)/1000;
+        // decimals
+        uint res0 = Res0*(10**18);
+        return((amount*res0)/Res1);
+    }
+
+    function getSlippageAmount(uint256 number, uint256 slippage) public returns(uint256){
+        return (number * slippage)/1000;
     }
 
     function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
@@ -96,8 +108,9 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
              while (i < freeSettledPaymentId) {
                 if ((block.timestamp - settledPayments[i].time) > expireDuration) {
                     if (settledPayments[i].status == 1) {
-                       //payable(settledPayments[i].client).transfer(settledPayments[i].payed);
-                       //TODO send back money to client
+
+                       DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
+
                        settledPayments[i].status = 3;
 
                        emit statusChanged(i);
@@ -123,26 +136,28 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
         require(paymentEntryId < freePaymentEntryId);
 
-        uint256 valueWithSlippage = msg.value + getSlippageAmount(msg.value);
-
         (,int priceMatic,,,) = priceFeedMatic.latestRoundData(); //8 decimals
         uint256 priceInMatic = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceMatic);
 
-        require(valueWithSlippage >= priceInMatic); //assure that you can pay with slippage
-        //TODO fare in modo che uno non possa pagare un prezzo molto più alto del dovuto, non è necessario ma è una feature carina se no uno potrebbe perdere molti soldi
+        require(msg.value >= priceInMatic - getSlippageAmount(priceInMatic, slippageClient) && msg.value <= priceInMatic + getSlippageAmount(priceInMatic, slippageClient)); //assure that you can pay with slippage
 
         require(DAI.approve(address(uniswapV2Router), msg.value), "Approve failed.");
 
         address[] memory path = new address[](2);
         path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
-/*
-        (,int priceDAI,,,) = priceFeedDAI.latestRoundData(); //8 decimals
-        uint256 minAmountDAI = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceDAI); //price is in USD cents, adapt 8 decimals priceDAI to 18 decimals DAI
-*/
-        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp); //EXACT amount of DAI received
 
-        //uniswap returns a much lower number of DAI, maybe this is a problem only on ganache? 
+        (,int priceDAI,,,) = priceFeedDAI.latestRoundData(); //8 decimals
+
+        uint256 uniswapMaticValueInDAI = getUniswapMaticValueInDAI(); //on mumbai this price is way lower than expected because of liquidity issues
+        uint256 chainlinkMaticValueInDAI = (uint256(priceMatic) * 10**18) / (uint256(priceDAI)); // 8 decs * 18 decs / 8 decs = 18 decs
+
+        //protects from flash loan attack
+        require(uniswapMaticValueInDAI <= chainlinkMaticValueInDAI + getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange) && uniswapMaticValueInDAI >= chainlinkMaticValueInDAI - getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange));
+
+        //emit test(uniswapMaticValueInDAI, chainlinkMaticValueInDAI);
+
+        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp); //EXACT amount of DAI received
 
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
         freeSettledPaymentId = freeSettledPaymentId + 1;
@@ -170,7 +185,8 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         require(settledPayments[settledPaymentId].status == 1);
 
         address payable addr = payable(settledPayments[settledPaymentId].client);
-        //addr.transfer(settledPayments[settledPaymentId].payed); TODO return money
+        DAI.transfer(addr, settledPayments[settledPaymentId].amountInDAI);
+
         settledPayments[settledPaymentId].status = 0;
 
         emit statusChanged(settledPaymentId);
