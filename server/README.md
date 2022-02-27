@@ -37,17 +37,17 @@ USE OnlineStoreTest;
 DROP TABLE PaymentEntries;
 DROP TABLE SettledPayments;
 DROP TABLE LastBlockSynced;
-CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));
-CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, created bigint, confirmed bigint, primary key(id));
-CREATE TABLE LastBlockSynced (id int(1), value bigint, primary key(id));
+CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255) not null, price bigint not null, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint not null, buyer varchar(255) not null, status int not null, created bigint not null, confirmed bigint, primary key(id));
+CREATE TABLE LastBlockSynced (id int(1), value bigint not null, primary key(id));
 INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 USE OnlineStore;
 DROP TABLE PaymentEntries;
 DROP TABLE SettledPayments;
 DROP TABLE LastBlockSynced;
-CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255), price bigint, primary key(id));
-CREATE TABLE SettledPayments (id bigint, item_id bigint, buyer varchar(255), status int, created bigint, confirmed bigint, primary key(id));
-CREATE TABLE LastBlockSynced (id int(1), value bigint, primary key(id));
+CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255) not null, price bigint not null, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint not null, buyer varchar(255) not null, status int not null, created bigint not null, confirmed bigint, primary key(id));
+CREATE TABLE LastBlockSynced (id int(1), value bigint not null, primary key(id));
 INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 ```
 
