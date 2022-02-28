@@ -16,7 +16,7 @@ class PageCreator {
         db.getPaymentEntryByID(id)
         .then((item: paymentEntry) => {
             res.render("land", {
-                serverURL: process.env.SERVER_URL + "/land?id=" + req.query.id,
+                serverURL: process.env.SERVER_URL + req.originalUrl,
                 seller: item.seller,
                 price: Number(item.price) / 100,
                 id: req.query.id
@@ -28,11 +28,11 @@ class PageCreator {
     }
     
     public helpPage(req: Request, res: Response): void {
-        res.render("help", {serverURL: process.env.SERVER_URL + "/help"});   
+        res.render("help", {serverURL: process.env.SERVER_URL + req.originalUrl});   
     }
     
     public mainPage(req: Request, res: Response): void {
-        res.render("main", {serverURL: process.env.SERVER_URL});
+        res.render("main", {serverURL: process.env.SERVER_URL + req.originalUrl});
     }
     
     public confirmPage(req: Request, res: Response, db: Persistence): void {
@@ -56,7 +56,7 @@ class PageCreator {
                 created: this.timeConverter(item.created),
                 confirmed: confirmed,
                 status:  this.statusConverter(item.status),
-                serverURL: process.env.SERVER_URL + "/confirm?id=" + req.query.id,
+                serverURL: process.env.SERVER_URL + req.originalUrl,
                 id: req.query.id
             });
         })    
@@ -86,7 +86,7 @@ class PageCreator {
             res.render("buyer", {
                 items: item_string,
                 id: req.query.id,
-                serverURL: process.env.SERVER_URL + "/buyer?id=" + req.query.id,
+                serverURL: process.env.SERVER_URL + req.originalUrl,
             });
         })
         .catch(() => {
@@ -117,7 +117,7 @@ class PageCreator {
                     conf = "Cancelled " + this.timeConverter(item.confirmed as bigint);
                 }
                 res.render("detail", {
-                    serverURL: process.env.SERVER_URL + "/detail?id=" + req.query.id,
+                    serverURL: process.env.SERVER_URL + req.originalUrl,
                     price: Number(item.price) / 100,
                     buyer: item.buyer,
                     seller: item.seller,
@@ -155,7 +155,7 @@ class PageCreator {
             res.render("seller", {
                 items: item_string,
                 id: req.query.id,
-                serverURL: process.env.SERVER_URL + "/seller?id=" + req.query.id,
+                serverURL: process.env.SERVER_URL + req.originalUrl,
             });       
         })
         .catch(() => {
