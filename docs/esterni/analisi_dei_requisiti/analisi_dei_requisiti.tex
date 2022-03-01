@@ -28,6 +28,8 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.1.1}{05/02/2022}{Alberto Nicoletti}{Redazione}{Adeguamento casi d'uso a tecnologie scelte}
 \addversione{0.1.2}{07/02/2022}{Andrea Volpe}{Redazione}{Modifica dei requisiti come concordato nell'incontro del 04/02/2022}
 \addversione{1.0.0}{09/02/2022}{Elia Scandaletti}{Approvazione}{Approvazione per RTB}
+\addversione{1.0.1}{01/03/2022}{Giovanni Cocco}{Redazione}{Approfondimento requisiti funzionali}
+
 
 \begin{document}
 
@@ -366,7 +368,13 @@ RFO01 & Per accedere alla webapp venditore il venditore con wallet non connesso 
 \hline
 RFO02 & Un venditore con wallet non connesso non può accedere alla webapp venditore. & Obbligatorio & Capitolato, decisione interna \\
 \hline
+RFO34 & La webapp deve comunicare il wallet del venditore al server. & Obbligatorio & UC2\\
+\hline
 RFO03 & Il venditore deve poter visualizzare la lista delle transazioni nella webapp venditore. & Obbligatorio & UC3 \\
+\hline
+RFO35 & Il server deve fornire una pagina con la lista delle transazioni. & Obbligatorio & UC3 \\
+\hline
+RFO36 & La persistenza deve permettere di filtrare le transazioni per venditore. & Obbligatorio & UC3 \\
 \hline
 RFO04 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il suo stato (attesa o completata). & Obbligatorio & UC4.1 \\
 \hline
@@ -376,17 +384,37 @@ RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni tr
 \hline
 RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\
 \hline
+RFO37 & Il server deve fornire una pagina con i dettagli di un transazione (prezzo, stato, data di creazione, data di chiusura, acquirente e venditore). & Obbligatorio & UC4 \\
+\hline
+RFO38 & La persistenza deve tener traccia dei dettagli di un transazione (prezzo, stato, data di creazione, data di chiusura, acquirente e venditore). & Obbligatorio & UC4 \\
+\hline
+RFO39 & La persistenza deve poter associare a ogni transazione il suo blocco in blockchain. & Obbligatorio & UC4.4 \\
+\hline
+RFO40 & La persistenza deve poter associare ad ogni blocco il proprio timestamp. & Obbligatorio & UC4.4 \\
+\hline
+RFO40 & La deve poter fornire i dati di una particolare transazione su richiesta del server. & Obbligatorio & UC4 \\
+\hline
 RFO08 & L'acquirente deve ricevere indietro la valuta bloccata con cui ha pagato per la transazione, quando la transazione scade. & Obbligatorio & Decisione interna, UC4.4 \\
+\hline
+RFO41 & Lo smart contract deve rimborsare la valuta al compratore se sono passati 14gg dall'apertura della transazione & Obbligatorio & Decisione interna, UC4.4 \\
+\hline
+RFO42 & Lo smart contract deve esporre pubblicamente un metodo che esegue il rimborso di tutte le transazioni scadute & Obbligatorio & Decisione interna, UC4.4 \\
 \hline
 % SCRIPT
 RFO09 & Il prodotto deve essere pubblicato automaticamente in blockchain, quando il venditore inserisce un nuovo prodotto nell'e-commerce, grazie al nostro script incluso dal venditore nel suo e-commerce. & Obbligatorio & UC5 \\
 \hline
 RFO10 & Il nostro script deve salvare un messaggio di errore in un file di log, se la pubblicazione del prodotto in blockchain dall'e-commerce (grazie allo script) fallisce. & Obbligatorio & UC5.1 \\
 \hline
+RFO43 & Lo script deve ritornare l'id del prodotto inserito in blockchain. & Obbligatorio & UC5 \\
+\hline
+RFD44 & Lo script essere usabile sia come modulo python che come script python standalone. & Desiderabile & UC5 \\
+\hline
 % LANDING PAGE
 RFO11 & Per accedere alla landing page l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC15 \\
 \hline
 RFO12 & Un acquirente con wallet non connesso non può accedere alla landing page. & Obbligatorio & Capitolato, decisione interna \\
+\hline
+RFO48 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & Capitolato, decisione interna \\
 \hline
 RFO13 & L'acquirente con wallet connesso deve vedere il prezzo da pagare in dollari nella landing page. & Obbligatorio & UC7 \\
 \hline
@@ -398,6 +426,8 @@ RFO16 & Il sistema deve cancellare la sessione di pagamento se l'acquirente con 
 \hline
 RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente su Metamask per completare il pagamento, quando conferma il pagamento sulla landing page. & Obbligatorio & UC9 \\
 \hline
+RFO47 & La landing page deve, attraverso Metamask, chiamare il metodo di pagamento dello smart contract. & Obbligatorio & UC9 \\
+\hline
 RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non va a buon fine quando l'acquirente con wallet connesso effettua il pagamento tramite Metamask. & Obbligatorio & UC9.1 \\
 \hline
 % WEBAPP ACQUIRENTE
@@ -405,9 +435,13 @@ RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non conness
 \hline
 RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & Capitolato, decisione interna \\
 \hline
-RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari e in criptovaluta nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
+RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
 \hline
 RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC12 \\
+\hline
+RFO45 & La landing page deve attravero Metamask chiamare il metodo di conferma dello smart contract. & Obbligatorio & UC12 \\
+\hline
+RFO46 & Lo smart contract deve permettere la chiamata del metodo di conferma solo all'acquirente (identificato dal suo wallet). & Obbligatorio & UC12 \\
 \hline
 RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transazione. & Obbligatorio & UC12.1 \\
 \hline
@@ -416,7 +450,11 @@ RFO24 & Per accedere alla pagina con la sua lista delle transazioni in e-commerc
 \hline
 RFO25 & Un acquirente con wallet non connesso non può accedere alla pagina con la sua lista delle transazioni in e-commerce. & Obbligatorio & Capitolato, decisione interna \\
 \hline
+RFO48 & La pagina delle transazioni deve comunicare il wallet del venditore al server. & Obbligatorio & UC13\\
+\hline
 RFO26 & L'acquirente con wallet connesso deve poter visualizzare la lista delle sue transazioni in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC14 \\
+\hline
+RFO49 & La persistenza deve permettere di filtrare le transazioni per acquirente. & Obbligatorio & UC14 \\
 \hline
 RFO27 & L'acquirente con wallet connesso deve poter visualizzare lo stato di ogni sua transazione (attesa o completata) in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.1 \\
 \hline
@@ -428,6 +466,8 @@ RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di 
 \hline
 % CONTROLLI
 RFO31 & Il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente (acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
+\hline
+RFO50 & Il sistema deve poter interrogare Metamask su quale sia la rete attualmente usata dall'utente. & Obbligatorio & UCa.1 \\
 \hline
 RFO32 & Il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
 \hline
