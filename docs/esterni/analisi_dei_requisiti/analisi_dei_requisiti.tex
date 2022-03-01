@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage{longtable}
+\usepackage[font=small,labelfont=bf]{caption}
 \graphicspath{ {images/} }
 
 \newcommand{\templates}{../../template}
@@ -99,6 +100,7 @@ Per il completamento del progetto il proponente richiede che siano ottenuti i se
 \end{itemize}
 
 \includegraphics[width=0.7\textwidth]{UC_WAV1}
+\captionof{figure}{Caso d'uso UC1}
 
 \paragraph{UC1 - Consultazione manuale ShopChain}\\
 \textbf{Attori primari}: Venditore con wallet connesso.\\
@@ -111,6 +113,7 @@ Per il completamento del progetto il proponente richiede che siano ottenuti i se
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_WAV2}
+\captionof{figure}{Caso d'uso UC2}
 
 \paragraph{UC2 - Accesso al sistema (webapp venditore)}\\
 \textbf{Attore primario}: Venditore con wallet non connesso.\\
@@ -121,6 +124,7 @@ Per il completamento del progetto il proponente richiede che siano ottenuti i se
 Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
 \includegraphics[width=0.9\textwidth]{UC_WAV3}
+\captionof{figure}{Casi d'uso UC3 e UC4}
 
 \paragraph{UC3 - visualizzazione lista transazioni}\\
 \textbf{Attore primario}: Venditore con wallet connesso. \\
@@ -145,13 +149,37 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \item Il venditore visualizza i dettagli della singola transazione.
 \end{enumerate}
 
-\includegraphics[width=0.9\textwidth]{UC_WAV4}
+\includegraphics[width=0.9\textwidth]{UC3D}
+\captionof{figure}{Casi d'uso UC3.1, UC3.2 ed UC3.3}
 
-\paragraph{4.1 - Visualizzazione stato transazione}\\
+\paragraph{UC3.1 - Visualizzazione stato transazioni}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare lo stato delle transazioni.\\
+\textbf{Postcondizioni}: Il venditore visualizza lo stato delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato lo stato delle transazioni.\\
+
+\paragraph{UC3.2 - Visualizzazione data transazioni}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare la data delle transazioni.\\
+\textbf{Postcondizioni}: Il venditore visualizza la data delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato la data delle transazioni.\\
+
+\paragraph{UC3.3 - Visualizzazione prezzo transazioni}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare il prezzo delle transazioni.\\
+\textbf{Postcondizioni}: Il venditore visualizza il prezzo delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato il prezzo delle transazioni.\\
+
+
+
+\includegraphics[width=0.9\textwidth]{UC_WAV4}
+\captionof{figure}{Casi d'uso UC4.1, UC4.2, UC4.3 ed UC4.4}
+
+\paragraph{UC4.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare lo stato di una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza lo stato di una transazione.\\
-\textbf{Scenario principale}: Viene visualizzato lo stato della transazione: in attesa oppure completata.\\
+\textbf{Scenario principale}: Viene visualizzato lo stato della transazione.\\
 
 \paragraph{UC4.2 - Visualizzazione QR Code}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
@@ -176,6 +204,8 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 
 \includegraphics[width=0.9\textwidth]{UC_script}
+\captionof{figure}{Casi d'uso UC5 e UC5.1}
+
 
 \paragraph{UC5 - Pubblicazione prodotto in blockchain}\\
 \textbf{Attore primario}: E-commerce.\\
@@ -192,6 +222,7 @@ UC5.1 Errore fallimento pubblicazione prodotto in blockchain:\\
 lo script salva in un file di log il messaggio di errore.
 
 \includegraphics[width=0.9\textwidth]{UC_LP2}
+\captionof{figure}{Casi d'uso UC7. UC8, UC8.1, UC9 e UC9.1}
 
 \paragraph{UC7 - Visualizzazione riepilogo transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
@@ -234,7 +265,24 @@ UC9.1 Visualizzazione errore pagamento non riuscito:
     \item Cancellazione sessione di pagamento.
 \end{enumerate}
 
+\includegraphics[width=0.9\textwidth]{UC7D}
+\captionof{figure}{Casi d'uso UC7.1 e UC7.2}
+
+\paragraph{UC7.1 - Visualizzazione prezzo oggetto}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'Acquirente vuole visualizzare il prezzo dell'oggetto.\\
+\textbf{Postcondizioni}: L'Acquirente visualizza il prezzo dell'oggetto.\\
+\textbf{Scenario principale}: Viene visualizzato il prezzo dell'oggetto.\\
+
+\paragraph{UC7.2 - Visualizzazione il venditore dell'oggetto}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'Acquirente vuole visualizzare il venditore dell'oggetto.\\
+\textbf{Postcondizioni}: L'Acquirente visualizza il venditore dell'oggetto.\\
+\textbf{Scenario principale}: Viene visualizzato il venditore dell'oggetto.\\
+
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
+\captionof{figure}{Caso d'uso UC10}
+
 
 \paragraph{UC10 - Accesso al sistema (WebApp Acquirente)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
@@ -245,6 +293,7 @@ UC9.1 Visualizzazione errore pagamento non riuscito:
 L'acquirente usando Metamask, si connette con il proprio wallet.
 
 \includegraphics[width=0.9\textwidth]{UC_WAA2}
+\captionof{figure}{Casi d'uso UC11, UC12 e UC12.1}
 
 \paragraph{UC11 - Visualizzazione conferma ricezione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
@@ -270,6 +319,7 @@ UC12.1 Errore wallet non corretto:
 \end{enumerate}
 
 \includegraphics[width=0.9\textwidth]{UC_ECA1}
+\captionof{figure}{Caso d'uso UC13}
 
 \paragraph{UC13 - Accesso al sistema (pagina lista transazioni acquirente in e-commerce)}\\
 \textbf{Attore primario}: Acquirente con wallet non connesso.\\
@@ -280,6 +330,8 @@ UC12.1 Errore wallet non corretto:
 L'acquirente usando Metamask, si connette con il proprio wallet.
 
 \includegraphics[width=0.9\textwidth]{UC_ECA2}
+\captionof{figure}{Casi d'uso UC14 e UC15}
+
 
 \paragraph{UC14 visualizzazione lista transazioni}\\
 \textbf{Attore primario}: Acquirente con wallet connesso. \\
@@ -292,7 +344,6 @@ L'acquirente usando Metamask, si connette con il proprio wallet.
 \item L'acquirente può scegliere che tipo di transazioni vedere (tutte, completate, in attesa);
 \item Il sistema mostra all'acquirente l'elenco delle transazioni richieste.
 \end{enumerate}
-
 \paragraph{UC15 - visualizzazione dettaglio transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Attore secondario}: Database.\\
@@ -304,7 +355,30 @@ L'acquirente usando Metamask, si connette con il proprio wallet.
 \item L'acquirente visualizza i dettagli della singola transazione.
 \end{enumerate}
 
+\includegraphics[width=0.9\textwidth]{UC14D}
+\captionof{figure}{Casi d'uso UC14.1, UC14.2 e UC14.3}
+
+\paragraph{UC14.1 - Visualizzazione stato transazioni}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'Acquirente vuole visualizzare lo stato delle transazioni.\\
+\textbf{Postcondizioni}: L'Acquirente visualizza lo stato delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato lo stato delle transazioni.\\
+
+\paragraph{UC14.2 - Visualizzazione data transazioni}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'Acquirente vuole visualizzare la data delle transazioni.\\
+\textbf{Postcondizioni}: L'Acquirente visualizza la data delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato la data delle transazioni.\\
+
+\paragraph{UC14.3 - Visualizzazione prezzo transazioni}\\
+\textbf{Attore primario}: Acquirente con wallet connesso.\\
+\textbf{Precondizioni}: L'Acquirente vuole visualizzare il prezzo delle transazioni.\\
+\textbf{Postcondizioni}: L'Acquirente visualizza il prezzo delle transazioni.\\
+\textbf{Scenario principale}: Viene visualizzato il prezzo delle transazioni.\\
+
+
 \includegraphics[width=0.9\textwidth]{UC_ECA3}
+\captionof{figure}{Casi d'uso UC15.1, UC15.2 e UC15.3}
 
 \paragraph{UC15.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
@@ -325,6 +399,7 @@ L'acquirente usando Metamask, si connette con il proprio wallet.
 \textbf{Scenario principale}: Viene visualizzata la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 
 \includegraphics[width=0.9\textwidth]{UC_controlli}
+\captionof{figure}{Casi d'uso UCa, UCa.1, UCa.2 e UCa.3}
 
 \paragraph{UCa Controllo connessione}\\
 \textbf{Attori primari}: Venditore con wallet connesso, acquirente con wallet connesso. \\
