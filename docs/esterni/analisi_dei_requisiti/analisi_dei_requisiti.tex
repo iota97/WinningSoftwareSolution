@@ -30,6 +30,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{0.1.2}{07/02/2022}{Andrea Volpe}{Redazione}{Modifica dei requisiti come concordato nell'incontro del 04/02/2022}
 \addversione{1.0.0}{09/02/2022}{Elia Scandaletti}{Approvazione}{Approvazione per RTB}
 \addversione{1.0.1}{01/03/2022}{Giovanni Cocco}{Redazione}{Approfondimento requisiti funzionali}
+\addversione{1.0.2}{01/03/2022}{Elia Scandaletti}{Redazione}{Applicazione indicazioni del prof. Cardin}
 
 
 \begin{document}
@@ -422,7 +423,7 @@ Ogni requisito è identificato da un codice univoco composto da: R(per requisito
 \subsection{Requisiti funzionali}
 
  \setlength\tabcolsep{4pt}
-\begin{longtable}{|c|p{5cm}|c|c|}
+\begin{longtable}{|c|p{7cm}|c|p{4cm}|}
 \hline
  \multicolumn{4}{| c |}{Requisiti funzionali}\\
  \hline
@@ -440,7 +441,7 @@ Ogni requisito è identificato da un codice univoco composto da: R(per requisito
 \hline
 RFO01 & Per accedere alla webapp venditore il venditore con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC2 \\
 \hline
-RFO02 & Un venditore con wallet non connesso non può accedere alla webapp venditore. & Obbligatorio & Capitolato, decisione interna \\
+RFO02 & Un venditore con wallet non connesso non può accedere alla webapp venditore. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} \\
 \hline
 RFO34 & La webapp deve comunicare il wallet del venditore al server. & Obbligatorio & UC2\\
 \hline
@@ -470,11 +471,7 @@ RFO40 & La persistenza deve poter associare ad ogni blocco il proprio timestamp.
 \hline
 RFO40 & La persistenza deve poter fornire i dati di una particolare transazione su richiesta del server. & Obbligatorio & UC4 \\
 \hline
-RFO08 & L'acquirente deve ricevere indietro la valuta bloccata con cui ha pagato per la transazione, quando la transazione scade. & Obbligatorio & Decisione interna, UC4.4 \\
-\hline
-RFO41 & Lo smart contract deve rimborsare la valuta al compratore se sono passati 14gg dall'apertura della transazione & Obbligatorio & Decisione interna, UC4.4 \\
-\hline
-RFO42 & Lo smart contract deve esporre pubblicamente un metodo che esegue il rimborso di tutte le transazioni scadute & Obbligatorio & Decisione interna, UC4.4 \\
+RFO41 & Lo smart contract deve rimborsare la valuta al compratore se sono passati 14gg dall'apertura della transazione & Obbligatorio & \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_11_12_E/2021_11_12_E.pdf}{Verbale del 12/11/2021}}, UC4.4 \\
 \hline
 % SCRIPT
 RFO09 & Il prodotto deve essere pubblicato automaticamente in blockchain, quando il venditore inserisce un nuovo prodotto nell'e-commerce, grazie al nostro script incluso dal venditore nel suo e-commerce. & Obbligatorio & UC5 \\
@@ -488,9 +485,9 @@ RFD44 & Lo script essere usabile sia come modulo python che come script python s
 % LANDING PAGE
 RFO11 & Per accedere alla landing page l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC6, UC15 \\
 \hline
-RFO12 & Un acquirente con wallet non connesso non può accedere alla landing page. & Obbligatorio & Capitolato, decisione interna \\
+RFO12 & Un acquirente con wallet non connesso non può accedere alla landing page. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_22_E/2021_12_22_E.pdf}{verbale del 22/12/2021}} \\
 \hline
-RFO48 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & Capitolato, decisione interna \\
+RFO48 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_22_E/2021_12_22_E.pdf}{verbale del 22/12/2021}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_23_I/2021_12_23_I.pdf}{verbale del 23/12/2021}} \\
 \hline
 RFO13 & L'acquirente con wallet connesso deve vedere il prezzo da pagare in dollari nella landing page. & Obbligatorio & UC7 \\
 \hline
@@ -509,7 +506,7 @@ RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non
 % WEBAPP ACQUIRENTE
 RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC10 \\
 \hline
-RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & Capitolato, decisione interna \\
+RFO20 & Un acquirente con wallet non connesso non può accedere alla webapp acquirente. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_11_12_E/2021_11_12_E.pdf}{verbale del 12/11/2021}} \\
 \hline
 RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC11 \\
 \hline
@@ -524,7 +521,7 @@ RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" ne
 % E-COMMERCE
 RFO24 & Per accedere alla pagina con la sua lista delle transazioni in e-commerce, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC13 \\
 \hline
-RFO25 & Un acquirente con wallet non connesso non può accedere alla pagina con la sua lista delle transazioni in e-commerce. & Obbligatorio & Capitolato, decisione interna \\
+RFO25 & Un acquirente con wallet non connesso non può accedere alla pagina con la sua lista delle transazioni in e-commerce. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_11_12_E/2021_11_12_E.pdf}{verbale del 12/11/2021}} \\
 \hline
 RFO48 & La pagina delle transazioni deve comunicare il wallet del venditore al server. & Obbligatorio & UC13\\
 \hline
@@ -554,7 +551,7 @@ RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato
 \pagebreak
 
 \setlength\tabcolsep{4pt}
-\begin{longtable}{|c|p{5cm}|c|c|c|}
+\begin{longtable}{|c|p{5cm}|c|p{4cm}|c|}
 \hline
  \multicolumn{5}{| c |}{Requisiti non funzionali}\\
  \hline
@@ -570,18 +567,18 @@ RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato
  \endhead
 
 \hline
-RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna & Vincolo\\
+RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/esterni/analisi_delle_tecnologie/analisi_delle_tecnologie.pdf}{analisi delle tecnologie}} & Vincolo\\
 \hline
-RND02 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato & Vincolo\\
+RND02 & Utilizzo di database PostgreSQL. & Desiderabile & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Vincolo\\
 \hline
-RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna & Vincolo\\
+RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{capitolato}} & Vincolo\\
 \hline
 RNO04 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
-con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato & Qualità\\
+con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Qualità\\
 \hline
-RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato & Qualità\\
+RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Qualità\\
 \hline
-RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, decisione interna & Vincolo\\
+RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_23_I/2021_12_23_I.pdf}{verbale del 23/12/2021}}  & Vincolo\\
 \hline
 
 \end{longtable}
