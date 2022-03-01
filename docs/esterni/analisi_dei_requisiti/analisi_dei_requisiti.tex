@@ -9,7 +9,7 @@
 \input{\templates/front_page}
 \input{\templates/history}
 
-\settitolo{Analisi dei requisiti}
+\settitolo{Analisi dei requisiti - v1.0.1} 
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
 \setredattori{Alberto Nicoletti\\Andrea Volpe}
@@ -87,11 +87,21 @@ Per il completamento del progetto il proponente richiede che siano ottenuti i se
 \end{itemize}
 
 \section{Casi d'uso}
+\subsection{Attori}
+\begin{itemize}
+\item \textbf{Venditore con wallet connesso}: venditore che ha già connesso il proprio wallet con Metamask;
+\item \textbf{venditore con wallet non connesso}: venditore che non ha ancora connesso il proprio wallet con Metamask;
+\item \textbf{acquirente con wallet connesso}: acquirente che ha già connesso il proprio wallet con Metamask;
+\item \textbf{acquirente con wallet non connesso}: acquirente che non ha ancora connesso il proprio wallet con Metamask;
+\item \textbf{e-commerce}: backend dell'e-commerce;
+\item \textbf{metamask}: applicativo di terze parti per la gestione dei wallet;
+\item \textbf{database}: persistenze SQL interna al nostro sistema.
+\end{itemize}
 
 \includegraphics[width=0.7\textwidth]{UC_WAV1}
 
 \paragraph{UC1 - Consultazione manuale ShopChain}\\
-\textbf{Attori primari}: Venditore.\\
+\textbf{Attori primari}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore usa il servizio ShopChain e vorrebbe avere più informazioni sul suo utilizzo.\\
 \textbf{Postcondizioni}: Il venditore consulta il manuale utente di ShopChain.\\
 \textbf{Scenario principale}:\\
@@ -112,7 +122,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
 \includegraphics[width=0.9\textwidth]{UC_WAV3}
 
-\paragraph{UC3 visualizzazione lista transazioni}\\
+\paragraph{UC3 - visualizzazione lista transazioni}\\
 \textbf{Attore primario}: Venditore con wallet connesso. \\
 \textbf{Attore secondario}: Database. \\
 \textbf{Precondizioni}: Il venditore ha effettuato l'accesso al sistema.\\
@@ -126,7 +136,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 
 \paragraph{UC4 - visualizzazione dettaglio transazione}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
-\textbf{Attore secondario}: Database.\\
+\textbf{Attore secondario}: Database\\
 \textbf{Precondizioni}: Il venditore ha acceduto alla funzionalità di visualizzazione della lista delle transazioni.\\
 \textbf{Postcondizioni}: Il venditore vede i dettagli di una singola transazione.\\
 \textbf{Scenario principale}:
@@ -168,9 +178,9 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \includegraphics[width=0.9\textwidth]{UC_script}
 
 \paragraph{UC5 - Pubblicazione prodotto in blockchain}\\
-\textbf{Attore primario}: Venditore con wallet connesso.\\
-\textbf{Precondizioni}: Il venditore ha integrato lo script nell'e-commerce e ha inserito un nuovo prodotto nell'e-commerce.\\
-\textbf{Postcondizioni}: Il venditore ha pubblicato il nuovo prodotto in blockchain.\\
+\textbf{Attore primario}: E-commerce.\\
+\textbf{Precondizioni}: L'e-commerce ha integrato lo script nel proprio backend.\\
+\textbf{Postcondizioni}: Lo script nell'e-commerce ha pubblicato il nuovo prodotto in blockchain.\\
 \textbf{Scenario principale}:
 \begin{enumerate}
     \item Il venditore inserisce un nuovo prodotto nell'e-commerce;
@@ -180,17 +190,6 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.
 \textbf{Estensione}:
 UC5.1 Errore fallimento pubblicazione prodotto in blockchain:\\
 lo script salva in un file di log il messaggio di errore.
-
-
-\includegraphics[width=0.9\textwidth]{UC_LP1}
-
-\paragraph{UC6 - Accesso al sistema (landing page)}\\
-\textbf{Attore primario}: Acquirente con wallet non connesso.\\
-\textbf{Attore secondario}: Metamask.\\
-\textbf{Precondizioni}: L'acquirente in landing page non è connesso con Metamask.\\
-\textbf{Postcondizioni}: L'acquirente accede al sistema.\\
-\textbf{Scenario principale}:
-L'acquirente usando Metamask, si connette con il proprio wallet.
 
 \includegraphics[width=0.9\textwidth]{UC_LP2}
 
@@ -480,34 +479,34 @@ RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato
 \pagebreak
 
 \setlength\tabcolsep{4pt}
-\begin{longtable}{|c|p{5cm}|c|c|}
+\begin{longtable}{|c|p{5cm}|c|c|c|}
 \hline
- \multicolumn{4}{| c |}{Requisiti non funzionali}\\
+ \multicolumn{5}{| c |}{Requisiti non funzionali}\\
  \hline
- Codice & Descrizione & Rilevanza & Fonti\\
+ Codice & Descrizione & Rilevanza & Fonti & Tipologia\\
  \hline
  \endfirsthead
 
  \hline
- \multicolumn{4}{| c |}{Requisiti non funzionali}\\
+ \multicolumn{5}{| c |}{Requisiti non funzionali}\\
  \hline
- Codice & Descrizione & Rilevanza & Fonti\\
+ Codice & Descrizione & Rilevanza & Fonti & Tipologia\\
  \hline
  \endhead
 
 \hline
-RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna \\
+RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & Capitolato, decisione interna & Vincolo\\
 \hline
-RND02 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato \\
+RND02 & Utilizzo di database PostgreSQL. & Desiderabile & Capitolato & Vincolo\\
 \hline
-RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna\\
+RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, decisione interna & Vincolo\\
 \hline
 RNO04 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
-con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato\\
+con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & Capitolato & Qualità\\
 \hline
-RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato\\
+RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & Capitolato & Qualità\\
 \hline
-RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, decisione interna\\
+RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, decisione interna & Vincolo\\
 \hline
 
 \end{longtable}
