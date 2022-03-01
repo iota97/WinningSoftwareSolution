@@ -38,15 +38,15 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 
 \makeversioni
 
-\section{Introduzone}
+\section{Introduzione}
 \subsection{Scopo del documento}
-Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattuto i requisiti saranno tenunuti in considerazione nelle fasi di progettazione, di verifica e di validazione.
+Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattutto i requisiti saranno tenuti in considerazione nelle fasi di progettazione, di verifica e di validazione.
 
 \section{Descrizione del prodotto}
-L'azieda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
-BlockChain}. L'obiettivo è sviluppare un sistema di pagamento sicuro e \textit{super partes} per Ecommerce che trattenga i fondi durante la spedizione e che li sblocchi all'arrivo del pacco. Ciò consiste nella realizzazione su blockchain di un contratto digitale che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
+L'azienda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
+BlockChain}. L'obiettivo è sviluppare un sistema di pagamento sicuro e \textit{super partes} per E-commerce che trattenga i fondi durante la spedizione e che li sblocchi all'arrivo del pacco. Ciò consiste nella realizzazione su blockchain di un contratto digitale che si incarichi di ricevere l’ammontare in criptovaluta, lo trattenga, e lo consegni al venditore solo quando il pacco viene recapitato all’acquirente.
 \subsection{Scopo del prodotto}
-Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere automatizzato e sicuro lo smistamento dei fondi da clienti a Ecommerce. Il processo di trasferimento del denaro avviene seguendo queste fasi:
+Il progetto consiste nello sviluppo di una piattaforma su blockchain con lo scopo di rendere automatizzato e sicuro lo smistamento dei fondi da clienti a E-commerce. Il processo di trasferimento del denaro avviene seguendo queste fasi:
 \begin{enumerate}
 \item caricamento dei dati dell'ordine di acquisto su contratto digitale;
 \item trasferimento del denaro dal wallet dell'acquirente al contratto;
@@ -515,13 +515,13 @@ RFO21 & L'acquirente con wallet connesso deve poter vedere il prezzo in dollari 
 \hline
 RFO22 & L'acquirente con wallet connesso deve poter confermare la ricezione del pacco nella webapp acquirente, dopo essere atterrato nella webapp acquirente scansionando il QR Code sul pacco. & Obbligatorio & UC12 \\
 \hline
-RFO45 & La landing page deve attravero Metamask chiamare il metodo di conferma dello smart contract. & Obbligatorio & UC12 \\
+RFO45 & La landing page deve attraverso Metamask chiamare il metodo di conferma dello smart contract. & Obbligatorio & UC12 \\
 \hline
 RFO46 & Lo smart contract deve permettere la chiamata del metodo di conferma solo all'acquirente (identificato dal suo wallet). & Obbligatorio & UC12 \\
 \hline
 RFO23 & Il sistema deve mostrare un messaggio di errore "wallet non corretto" nella webapp acquirente, nel caso in cui dopo aver confermato la ricezione del pacco nella webapp acquirente, il sistema rileva che il wallet non corrisponde a quello che ha effettuato la transazione. & Obbligatorio & UC12.1 \\
 \hline
-% ECOMMERCE
+% E-COMMERCE
 RFO24 & Per accedere alla pagina con la sua lista delle transazioni in e-commerce, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC13 \\
 \hline
 RFO25 & Un acquirente con wallet non connesso non può accedere alla pagina con la sua lista delle transazioni in e-commerce. & Obbligatorio & Capitolato, decisione interna \\
