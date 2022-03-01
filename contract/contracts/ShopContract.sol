@@ -54,7 +54,6 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     event addedPaymentEntry(uint256 paymentEntryId);
     event paymentSettled(uint256 settledPaymentId);
     event statusChanged(uint256 settledPaymentId);
-    event test(uint256 uniswapvalue, uint256 chainlinkvalue);
 
     /**
      * https://docs.chain.link/docs/matic-addresses/
@@ -151,8 +150,6 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
         //protects from flash loan attack
         require(uniswapMaticValueInDAI <= chainlinkMaticValueInDAI + getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange) && uniswapMaticValueInDAI >= chainlinkMaticValueInDAI - getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange));
-
-        //emit test(uniswapMaticValueInDAI, chainlinkMaticValueInDAI);
 
         uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp); //EXACT amount of DAI received
 
