@@ -198,14 +198,14 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     }
 
     function revertPayment(uint256 settledPaymentId) public{
-        require(settledPaymentId < freeSettledPaymentId);
+        require(settledPaymentId < freeSettledPaymentId, "err");
         require(settledPayments[settledPaymentId].client == msg.sender);
         require(settledPayments[settledPaymentId].status == 1);
-        require(block.timestamp - settledPayments[i].time) > expireDuration);
+        require(block.timestamp - settledPayments[settledPaymentId].time > expireDuration);
 
-        DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
-        settledPayments[i].status = 3;
-        emit statusChanged(i);
+        DAI.transfer(settledPayments[settledPaymentId].client, settledPayments[settledPaymentId].amountInDAI);
+        settledPayments[settledPaymentId].status = 3;
+        emit statusChanged(settledPaymentId);
     }
 
     function getPaymentEntry(uint256 paymentEntryId) public view returns(PaymentEntry memory){

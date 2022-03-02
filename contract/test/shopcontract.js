@@ -289,7 +289,7 @@ contract("ShopContract", async accounts => {
 
     });
 
-    it("Reverting expired payment manually"), async () => {
+    it("Reverting expired payment manually" , async () => {
 
         const contract = await ShopContract.deployed();
 
@@ -311,7 +311,7 @@ contract("ShopContract", async accounts => {
 
     });
 
-    it("Reverting malicious manual reverting expired payment: payment not expired"), async () => {
+    it("Reverting malicious manual reverting expired payment: payment not expired" , async () => {
 
         const contract = await ShopContract.deployed();
 
@@ -335,7 +335,7 @@ contract("ShopContract", async accounts => {
 
     });
 
-    it("Reverting malicious manual reverting expired payment: out of bounds payment id"), async () => {
+    it("Reverting malicious manual reverting expired payment: out of bounds payment id" , async () => {
 
         const contract = await ShopContract.deployed();
 
@@ -362,7 +362,7 @@ contract("ShopContract", async accounts => {
 
     });
 
-    it("Reverting malicious manual reverting expired payment: wrong address"), async () => {
+    it("Reverting malicious manual reverting expired payment: wrong address" , async () => {
 
         const contract = await ShopContract.deployed();
 
@@ -380,7 +380,7 @@ contract("ShopContract", async accounts => {
         let reverted = false;
 
         try {
-            await contract.revertPayment(settledPaymentId, {from:accounts[1]});
+            await contract.revertPayment(paymentSettledId, {from:accounts[5]});
         }catch (error) {
             reverted = true;
         }
@@ -389,7 +389,7 @@ contract("ShopContract", async accounts => {
 
     });
 
-    it("Reverting malicious manual reverting expired payment: wrong status"), async () => {
+    it("Reverting malicious manual reverting expired payment: wrong status" , async () => {
 
         const contract = await ShopContract.deployed();
 
