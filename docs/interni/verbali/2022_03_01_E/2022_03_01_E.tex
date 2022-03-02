@@ -1,0 +1,73 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 01/03/2022 con SyncLab}
+\setredattori{Matteo Galvagni}
+\setrevisori{Giovanni Cocco}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 01/03/2022 con l'azienda SyncLab.
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 01/03/2022\\
+\textbf{Durata}: 45 minuti\\
+\textbf{Luogo}: Server Discord azienda SyncLab\\
+
+\textbf{Partecipanti}
+\begin{itemize}
+	\item Giovanni Cocco;
+	\item Matteo Galvagni;
+	\item Fabio Pallaro.
+\end{itemize}
+
+
+\section{Ordine del giorno}
+\begin{enumerate}
+	\item illustrazione scelte architetturali al proponente;
+	\item discussione su problemi relativi alle tecnologie
+	\item domande su scelte architetturali al proponente;
+	\item varie ed eventuali.
+\end{enumerate}
+
+\section{Svolgimento}
+\subsection{Illustrazione scelte architetturali al proponente}
+Sono state presentate alcune scelte architetturali al proponente quali:
+\begin{itemize}
+	\item il ritorno dell'id del pagamento aperto nello script python
+	\item il passaggio del prezzo come argomento inline nello script
+	\item il salvataggio da parte dell'ecommerce dell'id di pagamento (e non dell'id oggetto in blockchain come precedentemente concordato)
+	\item la restituzione dei fondi in stablecoin invece che in valuta MATIC in caso di annullamento ordine
+	\item l'aggiunta di una variabile percentuale rappresentante la tolleranza ai cambiamenti di valore durante lo scambio da MATIC a stablecoin
+	\item l'implementazione di un timer per la restituzione dei fondi in caso il pacco non arrivi entro 14 giorni
+\end{itemize}
+Dopo una veloce spiegazione delle motivazioni delle scelte architetturali sopracitate, il proponente si è detto d'accordo con ogni scelta effettuata.
+Riguardo all'ultima scelta, ha però aggiunto che è utile implementare anche uno sblocco manuale in caso di problemi col timer che è gestito da un servizio esterno.
+
+\subsection{Discussione su problemi relativi alle tecnologie}
+Collegandosi alle motivazioni per la quale si è aggiunta una variabile percentuale di tolleranza, si è fatto notare al proponente come nella rete di test Mumbai la liquidità presente per effettuare scambi di valuta sia così bassa da comportare grande svantaggio economico durante lo scambio in stablecoin.
+È stato risposto che, essendo lo scambio in rete di test, un'alta tolleranza va comunque bene (40-50\%) data la bassissima liquidità presente.
+Inoltre, è stato informato il proponente che nei test di unità sul contratto la copertura dei branch non è sempre possibile in quanto alcuni valori
+che fanno parte di una condizione in un \textit{require} vengono restituiti da altri contratti non controllati da noi: sarebbe necessario infatti clonare tali contratti per testare i casi in cui
+la condizione risultasse falsa (comportamento comunque noto, la transazione verrebbe infatti annullata).
+Il proponente ritiene non sia necessario testare questi branch, che comunque hanno una copertura totale maggiore del 90\%.
+
+\subsection{Domande su scelte architetturali al proponente}
+È stato chiesto al proponente che percentuale di guadagno per transazione inserire nel contratto: si è deciso di optare per l'1\%.
+
+
+\section{Impegni presi}
+\begin{itemize}
+\item Sarà necessario implementare la restituzione dei fondi "manuale" e relativi test entro sabato 05/03/2022.
+\item Andrà aggiunto l'inoltro dell'1\% del valore di ogni transazione ad un wallet aziendale entro sabato 05/03/2022.
+\end{itemize}
+
+\end{document}
