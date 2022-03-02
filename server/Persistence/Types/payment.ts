@@ -4,6 +4,6 @@ export interface payment {
 	seller: string,
 	price: bigint, // Dollar cents
 	status: number,
-	created: string,
-	confirmed: string // Also cancelled
+	created: bigint,
+	confirmed: bigint | null // Also cancelled
 }

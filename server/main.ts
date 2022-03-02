@@ -1,22 +1,16 @@
 import * as dotenv from "dotenv";
+import Web3 from 'web3';
+import { ShopContract } from "./Persistence/ShopContract";
+import { SQL } from "./Persistence/SQL";
+import { PageCreator } from "./Server/PageCreator";
+import { ServerManager } from "./Server/ServerManager"
 dotenv.config();
 
-import { Persistence } from "./Persistence/Persistence";
-import { SQL, SQL_Interface } from "./Persistence/SQL";
-import { ShopContractEventManager } from "./Persistence/ShopContractEventManager"
-import { ShopContract } from "./Persistence/ShopContract"
-
-import { Server } from './Server/Server';
-import { PageCreator } from "./Server/PageCreator";
-
-import Web3 from 'web3';
-
 const provider = new Web3.providers.WebsocketProvider('wss://speedy-nodes-nyc.moralis.io/' + process.env.API_KEY  + '/polygon/mumbai/ws')
-const web3 = new Web3(provider);
-const shopContract =  new ShopContract(web3);
-const sql: SQL_Interface = new SQL();
-const persistance: Persistence = new Persistence(sql);
-const page: PageCreator = new PageCreator();
+const web3 = new Web3(provider)
 
-new ShopContractEventManager(sql, shopContract);
-new Server(persistance, page).listen();
+new ServerManager()
+.setSQL(new SQL)
+.setPageCreator(new PageCreator)
+.setContract(new ShopContract(web3))
+.start();

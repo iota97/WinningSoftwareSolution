@@ -1,15 +1,15 @@
 import * as dotenv from "dotenv";
 import { Persistence } from "../../Persistence/Persistence";
 
-import { SQL_Interface } from "../../Persistence/SQL";
+import { SQL_Interface } from "../../Persistence/SQL_Interface";
 import { payment } from "../../Persistence/Types/payment";
 import { paymentEntry } from "../../Persistence/Types/paymentEntry";
 import { settledPayment } from "../../Persistence/Types/settledPayment";
 
 class SQL_Mock implements SQL_Interface {    
-    insertPaymentEntry(entry: paymentEntry) {}
-    insertSettledPayment(entry: settledPayment) {}
-    updateSettledPayment(id: bigint, status: number) {}
+    insertPaymentEntry(entry: paymentEntry) {return new Promise<void>((resolve) => {resolve})}
+    insertSettledPayment(entry: settledPayment) {return new Promise<void>((resolve) => {resolve})}
+    updateSettledPayment(id: bigint, status: number) {return new Promise<void>((resolve) => {resolve})}
     
     
     getPaymentByBuyer(buyer: string)  { 
@@ -67,7 +67,7 @@ class SQL_Mock implements SQL_Interface {
             }
         })
     };
-    setLastSyncBlock(block: bigint) {}
+    setLastSyncBlock(block: number) {return new Promise<void>((resolve) => {resolve})}
     getLastSyncBlock() { 
         return new Promise<number>((resolve) => {
             resolve(0);
@@ -78,8 +78,57 @@ class SQL_Mock implements SQL_Interface {
 jest.useFakeTimers()
 dotenv.config()
 
+import { EventEmitter } from 'events'
+import { ShopContract_Interface } from "../../Persistence/ShopContract_Interface";
+class Web3_Contract_Mock1 implements ShopContract_Interface {
+    private e1: EventEmitter;
+    
+    constructor() {
+        this.e1 = new EventEmitter;
+    }
+    
+    public getBlockTime(block: number) {
+        return new Promise<bigint>((resolve) => {
+            resolve(BigInt(123))
+        })
+    }     
+    
+    public addedPaymentEntry(options: any) {
+        return this.e1
+    }
+    
+    public paymentSettled(options: any) {
+        return this.e1
+    }
+    
+    public statusChange(options: any) {
+        return this.e1
+    }
+        
+    public getSettledPayment(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                client: "asdf",
+                status: 10,
+                paymentEntryId: 10,
+            }
+            resolve(obj)
+        })  
+    }
+  
+    public getPaymentEntry(id: bigint) {
+        return new Promise<any>((resolve)  => {
+            let obj: any  = {
+                seller: "asdf",
+                price: 10,
+            }
+            resolve(obj)
+        })
+    }
+}
+
 describe('Persistence', () => {    
-    let persistance = new Persistence(new SQL_Mock());
+    let persistance = new Persistence(new SQL_Mock(), new Web3_Contract_Mock1());
     
     it('getPaymentByBuyer - Valid', async () => {
         persistance.getPaymentByBuyer("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")

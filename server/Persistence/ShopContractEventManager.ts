@@ -1,5 +1,8 @@
-import { SQL_Interface } from "./SQL"
-import { ShopContract_Interface } from "./ShopContract"
+import { SQL_Interface } from "./SQL_Interface"
+import { ShopContract_Interface } from "./ShopContract_Interface"
+import { EventData } from "web3-eth-contract"
+import { settledPayment } from "./Types/settledPayment"
+import { paymentEntry } from "./Types/paymentEntry";
 
 class ShopContractEventManager {
 	private shopContract: ShopContract_Interface;
@@ -12,9 +15,9 @@ class ShopContractEventManager {
 		this.hookEvent()
 	}
 	
-	private hookEvent() {
+	private hookEvent(): void {
 		this.sql.getLastSyncBlock()
-		.then((last: any) => {
+		.then((last: number) => {
 			let options = {
 				filter: {
 					value: [],
@@ -24,24 +27,24 @@ class ShopContractEventManager {
 			
 			this.shopContract.addedPaymentEntry(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', (event: any) => { this.OnAddedPaymentEntry(event, this.shopContract, this.sql) })
+			.on('data', (event: EventData) => { this.OnAddedPaymentEntry(event, this.shopContract, this.sql) })
 			
 			this.shopContract.paymentSettled(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', (event: any) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
+			.on('data', (event: EventData) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
 
 			this.shopContract.statusChange(options)
 			.on('error', (err: Error) => console.error(err))
-			.on('data', (event: any) => { this.OnStatusChange(event, this.shopContract, this.sql) })
+			.on('data', (event: EventData) => { this.OnStatusChange(event, this.shopContract, this.sql) })
 		})
 		.catch((err: Error) => {
 			console.error(err)
 		})
 	}
 	
-	private OnAddedPaymentEntry(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
+	private OnAddedPaymentEntry(event: EventData, shopContract: ShopContract_Interface, sql: SQL_Interface): void {
 		shopContract.getPaymentEntry(event.returnValues.paymentEntryId)
-		.then((res: any) => {
+		.then((res: paymentEntry) => {
 			sql.insertPaymentEntry({id: event.returnValues.paymentEntryId, seller: res.seller, price: res.price})
 		})
 		.then(() => {
@@ -52,20 +55,18 @@ class ShopContractEventManager {
 		})
 	}
 	
-	private OnPaymentSettled(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
-		let res: any;
-
+	private OnPaymentSettled(event: EventData, shopContract: ShopContract_Interface, sql: SQL_Interface): void {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
-		.then(async (res: any)  => {
+		.then(async (res: settledPayment)  => {
 			let time = await this.shopContract.getBlockTime(event.blockNumber);
 	
 			sql.insertSettledPayment({
 				id: event.returnValues.settledPaymentId,
-				item_id: res.paymentEntryId,
-				buyer: res.client,
+				paymentEntryId: res.paymentEntryId,
+				client: res.client,
 				status: res.status,
 				created: time,
-				confirmed: ""
+				confirmed: null
 			})
 		})
 		.then(() => {
@@ -76,9 +77,9 @@ class ShopContractEventManager {
 		})
 	}
 
-	private OnStatusChange(event: any, shopContract: ShopContract_Interface, sql: SQL_Interface) {
+	private OnStatusChange(event: EventData, shopContract: ShopContract_Interface, sql: SQL_Interface): void {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
-		.then(async (res: any) => {
+		.then(async (res: settledPayment) => {
 			let time = await this.shopContract.getBlockTime(event.blockNumber);
 
 			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status, time)

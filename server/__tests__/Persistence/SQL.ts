@@ -55,7 +55,7 @@ describe('SQL', function () {
     })
     
     it('setLastSyncBlock - Less', async () => {
-        return sql.setLastSyncBlock(BigInt(0))
+        return sql.setLastSyncBlock(0)
         .then()
     })
     
@@ -77,22 +77,22 @@ describe('SQL', function () {
     it('insertSettledPayment - Dummy', async () => {
         return sql.insertSettledPayment({
             id: BigInt(12),
-            item_id: BigInt(13),
-            buyer: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
+            paymentEntryId: BigInt(13),
+            client: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
             status: 1,
-            created: "123",
-            confirmed: ""
+            created: BigInt(123),
+            confirmed: null,
         })
     })
 
     it('getPaymentBySeller - Valid', async () => {
-        return sql.getPaymentBySeller("0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1")
+        return sql.getPaymentBySeller("0x4645895DE6761C3c221Da5f6D75e4393a868B4a0")
         .then(async (res: any) => {
-            let obj: any = {
+            let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                seller: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                price: BigInt(5),
-                status: 3
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: BigInt(20000000000000000),
+                status: 1
             }
             expect(res[0]).
             toMatchObject(obj)
@@ -145,9 +145,9 @@ describe('SQL', function () {
         .then(async (res: any) => {
             let obj: any  ={
                 buyer: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                seller: '0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1',
-                price: BigInt(5),
-                status: 3
+                seller: '0x4645895DE6761C3c221Da5f6D75e4393a868B4a0',
+                price: BigInt(20000000000000000),
+                status: 1
             }
             expect(res[0]).
             toMatchObject(obj)
@@ -155,7 +155,7 @@ describe('SQL', function () {
     })
 
     it('updateSettledPayment - Dummy', async () => {
-        return sql.updateSettledPayment(BigInt(12312321), 0, "12345")
+        return sql.updateSettledPayment(BigInt(12312321), 0, BigInt(12345))
     })
     
     it('closeConnection - Close', async () => {
@@ -165,7 +165,7 @@ describe('SQL', function () {
     })    
     
     it('setLastSyncBlock - Closed', async () => {
-        return sql.setLastSyncBlock(BigInt(0))
+        return sql.setLastSyncBlock(0)
         .catch(async (e: any) => {
             expect(e[0] == "E") 
         })    
@@ -218,7 +218,7 @@ describe('SQL', function () {
     })
 
     it('updateSettledPayment - Closed', async () => {
-        return sql.updateSettledPayment(BigInt(12312321), 0, "1234")
+        return sql.updateSettledPayment(BigInt(12312321), 0, BigInt(1234))
         .catch(async (e: any) => {
             expect(e[0] == "E") 
         })    
@@ -227,11 +227,11 @@ describe('SQL', function () {
     it('insertSettledPayment - Closed', async () => {
         return sql.insertSettledPayment({
             id: BigInt(12312321),
-            item_id: BigInt(12312321),
-            buyer: "asdf",
+            paymentEntryId: BigInt(12312321),
+            client: "asdf",
             status: 0,
-            created: "123",
-            confirmed: ""
+            created: BigInt(123),
+            confirmed: null,
         })
         .catch(async (e: any) => {
             expect(e[0] == "E") 
