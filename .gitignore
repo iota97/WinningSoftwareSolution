@@ -19,12 +19,12 @@ build
 *.json
 !package.json
 node_modules
-test
 *.sh
 __pycache__
 /script/.env
 /script/*.log
 /server/.env
 !contract.json
+contract/coverage
 
 !docs/esterni/*/*.pdf

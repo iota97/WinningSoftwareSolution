@@ -11,12 +11,8 @@ module.exports = {
         provider: () => new HDWalletProvider(mnemonic, providerlink),
         network_id: 80001,
         confirmations: 2,
-        timeoutBlocks: 200,
         skipDryRun: true,
         chainId: 80001,
-        gas: 2000000,
-        gasPrice: 30000000000,
-        timeoutBlocks: 250,
         networkCheckTimeout: 3000000
     }
   },
@@ -34,7 +30,7 @@ module.exports = {
     }
   },
   plugins: [
-    'truffle-plugin-verify'
+    'truffle-plugin-verify', 'solidity-coverage'
   ],
   api_keys: {
     polygonscan: apikey
