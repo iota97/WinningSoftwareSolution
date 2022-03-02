@@ -289,6 +289,122 @@ contract("ShopContract", async accounts => {
 
     });
 
+    it("Reverting expired payment manually"), async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+        const rec = await priceFeed.methods.latestRoundData().call();
+
+        const valueToSend = ((10**24)/rec.answer) * testPrice; //in wei
+
+        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend});
+        const paymentSettledId = jsonSettledPayment.logs[0].args.settledPaymentId.toNumber();
+
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        await delay(6000);
+
+        const jsonRevertedPayment = await contract.revertPayment(paymentSettledId);
+        const revertedPaymentSettledId = jsonRevertedPayment.logs[0].args.settledPaymentId.toNumber();
+
+        assert.equal(revertedPaymentSettledId, paymentSettledId, "Payment not reverted");
+
+    });
+
+    it("Reverting malicious manual reverting expired payment: payment not expired"), async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+        const rec = await priceFeed.methods.latestRoundData().call();
+
+        const valueToSend = ((10**24)/rec.answer) * testPrice; //in wei
+
+        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend});
+        const paymentSettledId = jsonSettledPayment.logs[0].args.settledPaymentId.toNumber();
+
+        let reverted = false;
+
+        try {
+            await contract.revertPayment(paymentSettledId);
+        }catch (error) {
+            reverted = true;
+        }
+
+        assert.equal(reverted, true, "Not reverted.")
+
+    });
+
+    it("Reverting malicious manual reverting expired payment: out of bounds payment id"), async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+        const rec = await priceFeed.methods.latestRoundData().call();
+
+        const valueToSend = ((10**24)/rec.answer) * testPrice; //in wei
+
+        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend});
+        const paymentSettledId = jsonSettledPayment.logs[0].args.settledPaymentId.toNumber();
+
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        await delay(6000);
+
+        let reverted = false;
+
+        try {
+            await contract.revertPayment(99);
+        }catch (error) {
+            reverted = true;
+        }
+
+        assert.equal(reverted, true, "Not reverted.")
+
+    });
+
+    it("Reverting malicious manual reverting expired payment: wrong address"), async () => {
+
+        const contract = await ShopContract.deployed();
+
+        const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+        const rec = await priceFeed.methods.latestRoundData().call();
+
+        const valueToSend = ((10**24)/rec.answer) * testPrice; //in wei
+
+        const jsonSettledPayment = await contract.settlePayment(0, {value: valueToSend});
+        const paymentSettledId = jsonSettledPayment.logs[0].args.settledPaymentId.toNumber();
+
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        await delay(6000);
+
+        let reverted = false;
+
+        try {
+            await contract.revertPayment(settledPaymentId, {from:accounts[1]});
+        }catch (error) {
+            reverted = true;
+        }
+
+        assert.equal(reverted, true, "Not reverted.")
+
+    });
+
+    it("Reverting malicious manual reverting expired payment: wrong status"), async () => {
+
+        const contract = await ShopContract.deployed();
+
+        let reverted = false;
+
+        try {
+            await contract.revertPayment(3);
+        }catch (error) {
+            reverted = true;
+        }
+
+        assert.equal(reverted, true, "Not reverted.")
+
+    });
+
     it("Checking upkeep needed", async () => {
 
         const contract = await ShopContract.deployed();
