@@ -1,0 +1,61 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{longtable}
+\graphicspath{ {images/} }
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Analisi dei requisiti}
+\setprogetto{ShopChain}
+\setcommittenti{SyncLab}
+\setredattori{Raffaele Oliviero}
+\setdestuso{esterno}
+\setdescrizione{
+Lista Metodi
+}
+
+\addversione{0.0.0}{23/2/2022}{Raffaele Oliviero}{Redazione}{Strutturazione del documento}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\section{Introduzione}
+\subsection{Scopo del documento}
+Il documento elenca i metodi pubblici di ogni classe, descrivendone i loro parametri di invocazione, i loro return e il comportamento.
+
+\section{Lista dei metodi pubblici}
+\subsection{Persistence}
+
+\subsubsection{getPaymentByBuyer(buyer)}
+Restituisce la lista delle transazioni il cui acquirente corrisponde a \texttt{buyer}. \\
+\texttt{buyer} è una stringa.
+
+\subsubsection{getPaymentBySeller()}
+\textbf{getPaymentBySeller(seller)} \\
+Restituisce la lista delle transazioni il cui venditore corrisponde a \texttt{seller}. \\
+\texttt{seller} è una stringa.
+
+\subsubsection{getPaymentByID()}
+\textbf{getPaymentByID(id)} \\
+Restituisce la transazione il cui ID corrisponde a \texttt{id} o, se esso non esiste, restituisce un messaggio di transazione inesistente \\
+\texttt{id} è un intero.
+
+\subsubsection{getPaymentEntryByID()}
+\textbf{getPaymentEntryByID(id)} \\
+Restituisce ID, venditore e prezzo dell'articolo il cui ID corrisponde a \texttt{id} o, se esso non esiste, restituisce un messaggio di articolo inesistente \\
+\texttt{buyer} è un intero.
+
+\subsection{Server}
+\subsubsection{close()}
+Interrompe la connessione al server
+
+\subsection{PageCreator}
+
+\end{document}
