@@ -33,6 +33,9 @@ Il documento elenca i metodi pubblici di ogni classe, descrivendone i loro param
 \section{Lista dei metodi pubblici}
 \subsection{Persistence}
 
+%variabili
+\newcommand\linkServerManager{https://github.com/iota97/WinningSoftwareSolution/blob/main/server/Server/ServerManager.ts?}
+
 \subsubsection{getPaymentByBuyer(buyer)}
 Restituisce la lista delle transazioni il cui acquirente corrisponde a \texttt{buyer}. \\
 \texttt{buyer} è una stringa.
@@ -52,10 +55,165 @@ Restituisce la transazione il cui ID corrisponde a \texttt{id} o, se esso non es
 Restituisce ID, venditore e prezzo dell'articolo il cui ID corrisponde a \texttt{id} o, se esso non esiste, restituisce un messaggio di articolo inesistente \\
 \texttt{buyer} è un intero.
 
+\subsection{ServerManager}
+class ServerManager
+\subsubsection{setContract(shopContract) : ServerManager}
+Imposta un contratto\\
+\textbf{Parametri}\\
+shopContract : ShopContract\_Interface\\
+\textbf{Valore Restituito}\\
+\underline{\href{\linkServerManager}{ServerManager}}\\
+\subsubsection{setSQL(sql) : ServerManager}
+Imposta una connessione SQL\\
+\textbf{Parametri}\\
+sql : SQL\_Interface\\
+\textbf{Valore Restituito}\\
+ServerManager
+\subsubsection{setPageCreator(page): ServerManager}
+Imposta un PageCreator\\
+\textbf{Parametri}\\
+page : PageCreator\\
+\textbf{Valore Restituito}\\
+ServerManager
+\subsubsection{start() : ServerManager}
+Crea e avvia un nuovo server\\
+\textbf{Parametri}\\
+\textbf{Valore Restituito}\\
+ServerManager\\
+\textbf{Eccezioni}\\
+AssertionError?
+\subsubsection{closeServer() : void}
+Chiude la connessione con il server\\
+\textbf{Parametri}\\
+\textbf{Valore Restituito}\\
+void
+
+\subsection{SQL}
+class SQL implements SQL\_Interface
+\subsubsection{closeConnection(): void}
+Chiude la connessione con il database\\
+\textbf{Parametri}\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{insertPaymentEntry(entry): Promise$<$void$>$}
+Inserisce un nuovo prodotto nel database\\
+\textbf{Parametri}\\
+entry: paymentEntry\\
+\textbf{Valore Restituito}\\
+Promise$<$void$>$
+\subsubsection{insertSettledPayment(entry): Promise$<$void$>$}
+Inserisce un nuovo pagamento nel database\\
+\textbf{Parametri}\\
+entry: settledPayment\\
+\textbf{Valore Restituito}\\
+Promise$<$void$>$
+\subsubsection{updateSettledPayment(id, status, timestamp): Promise$<$void$>$}
+Aggiorna un pagamento nel database\\
+\textbf{Parametri}\\
+id: bigint,\\ 
+status: number,\\
+timestamp: bigint\\
+\textbf{Valore Restituito}\\
+Promise$<$void$>$
+\subsubsection{getPaymentByBuyer(buyer): Promise$<$payment[ ]$>$}
+Restituisce i pagamenti di uno specifico acquirente\\
+\textbf{Parametri}\\
+buyer: string\\
+\textbf{Valore Restituito}\\
+Promise$<$payment[ ]$>$
+\subsubsection{getPaymentBySeller(seller): Promise$<$payment[ ]$>$}
+Restituisce i pagamenti di uno specifico venditore\\
+\textbf{Parametri}\\
+seller: string\\
+\textbf{Valore Restituito}\\
+Promise$<$payment[ ]$>$
+\subsubsection{getPaymentEntryByID(id): Promise$<$paymentEntry$>$}
+Restituisce uno specifico prodotto\\
+\textbf{Parametri}\\
+id: bigint\\
+\textbf{Valore Restituito}\\
+Promise$<$paymentEntry$>$
+\subsubsection{getPaymentByID(id): Promise$<$payment$>$}
+Restituisce uno specifico pagamento\\
+\textbf{Parametri}\\
+id: bigint\\
+\textbf{Valore Restituito}\\
+Promise$<$payment$>$
+\subsubsection{getLastSyncBlock(): Promise$<$number$>$}
+Restituisce l'ultimo blocco sincronizzato\\
+\textbf{Parametri}\\
+\textbf{Valore Restituito}\\
+Promise$<$number$>$
+\subsubsection{setLastSyncBlock(block): Promise $<$void$>$}
+Imposta l'ultimo blocco sincronizzato al valore passato come parametro\\
+\textbf{Parametri}\\
+block: number\\
+\textbf{Valore Restituito}\\
+Promise$<$void$>$
+
 \subsection{Server}
-\subsubsection{close()}
-Interrompe la connessione al server
+class Server
+\subsubsection{close(): void}
+Chiude la connessione con il server\\
+\textbf{Parametri}\\
+\textbf{Valore Restituito}\\
+void
 
 \subsection{PageCreator}
+class PageCreator
+\subsubsection{landPage(req, res, db): void} 
+Renderizza e invia la pagina \texttt{landing page} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response,\\
+db: Persistence\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{helpPage(req, res): void}
+Renderizza e invia la pagina \texttt{help} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{mainPage(req, res): void}
+Renderizza e invia la pagina \texttt{principale} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{confirmPage(req, res, db): void}
+Renderizza e invia la pagina \texttt{?} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response,\\
+db: Persistence\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{paymentByBuyerPage(req, res, db): void}
+Renderizza e invia la pagina delle \texttt{transazioni effettuate} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response,\\
+db: Persistence\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{detailPage(req, res, db): void}
+Renderizza e invia la pagina dei \texttt{dettagli transazione?} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response,\\
+db: Persistence\\
+\textbf{Valore Restituito}\\
+void
+\subsubsection{paymentBySellerPage(req, res, db): void}
+Renderizza e invia la pagina delle \texttt{transazioni in ingresso} al client\\
+\textbf{Parametri}\\
+req: Request,\\
+res: Response,\\
+db: Persistence\\
+\textbf{Valore Restituito}\\
+void
 
 \end{document}
