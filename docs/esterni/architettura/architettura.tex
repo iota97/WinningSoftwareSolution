@@ -21,6 +21,7 @@ Architettura del progetto
 }
 
 \addversione{0.0.0}{23/2/2022}{Giovanni Cocco}{Redazione}{Strutturazione del documento}
+\addversione{0.0.1}{03/3/2022}{Raffaele Oliviero}{Redazione}{Aggiornamento Classi}
 
 \begin{document}
 
@@ -89,8 +90,12 @@ di un metodo build v'è il metodo start.
 \subsection{Singleton}
 L'utilizzo del pattern del singleton è stata inizialmente presa in considerazione, ma poi scartata in quanto complicava la fase di testing e mocking.
 \section{Diagramma delle classi}
-Notare che in solidity i metodi e le funzioni possono avere come visibilità \textbf{external}. Non essendo disponibile nello standard UML si userà la notazione \textbf{\~} per indicarla.\\\\
+Notare che in solidity i metodi e le funzioni possono avere come visibilità \textbf{external}. Non essendo disponibile nello standard UML si userà la notazione \textbf{ +\{external\} } per indicarla.\\\\
+\paragraph{Server}
 \includegraphics[width=1.0\textwidth]{classes}
+
+\paragraph{ShopContract}
+\includegraphics[width=1.0\textwidth]{contract}
 \clearpage
 \section{Diagrammi di sequenza}
 \paragraph{Avvio server}\\
