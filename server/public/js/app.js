@@ -62,7 +62,7 @@ function setGetParameter(paramName, paramValue) {
     var hash = location.hash;
     url = url.replace(hash, '');
     if (url.indexOf(paramName + "=") >= 0) {
-        var prefix = url.substring(0, url.indexOf(paramName + "=")); 
+        var prefix = url.substring(0, url.indexOf(paramName + "="));
         var suffix = url.substring(url.indexOf(paramName + "="));
         suffix = suffix.substring(suffix.indexOf("=") + 1);
         suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
@@ -90,7 +90,7 @@ function findGetParameter(parameterName) {
     return result;
 }
 
-function handleNewChain(id) { 
+function handleNewChain(id) {
     chainId = id;
 }
 
@@ -102,7 +102,7 @@ async function isMetamaskConnected() {
     const accountsList = await ethereum.request({
         method: 'eth_accounts'
     });
-    return accountsList > 0;    
+    return accountsList > 0;
 }
 
 function showSellerButton() {
@@ -120,7 +120,7 @@ function showBuyerButton() {
 }
 
 function showContents() {
-    connectPopup.style.display = "none" 
+    connectPopup.style.display = "none"
     conn.style.display = "block"
 }
 
@@ -130,37 +130,37 @@ function updateMenuLink() {
 }
 
 async function onMetamaskConnected() {
-    try { 
+    try {
         handleNewChain(await ethereum.request({
             method: 'eth_chainId'
         }));
         handleNewAccounts(await ethereum.request({
             method: 'eth_accounts'
         }));
-        
+
         if (idWallet && idWallet.value != accounts[0]) {
             setGetParameter("id", accounts[0])
         }
-        
+
         web3 = new Web3(window.ethereum);
-        
-        showSellerButton()  
+
+        showSellerButton()
         showBuyerButton()
         showContents()
         updateMenuLink()
-        
+
         ethereum.on('chainChanged', handleNewChain);
-        ethereum.on('accountsChanged', handleNewAccounts);  
+        ethereum.on('accountsChanged', handleNewAccounts);
     } catch (error) {
         console.log(error);
-    }  
+    }
 }
 
 function onClickInstall() {
     const onboarding = new MetaMaskOnboarding({
         forwarderOrigin
     });
-    
+
     connectButton.innerText = 'Installing Metamask...';
     onboarding.startOnboarding();
 }
@@ -170,11 +170,11 @@ async function onClickConnect() {
         await ethereum.request({
             method: 'eth_requestAccounts'
         });
-        
-        onMetamaskConnected();    
+
+        onMetamaskConnected();
     } catch (error) {
         console.error(error);
-    }  
+    }
 }
 
 async function onClickOpenMetaMask() {
@@ -190,7 +190,7 @@ function isMetaMaskInstalled() {
 
 function askForInstall() {
     connectPopup.style.display = "flex";
-    
+
     if (mobileCheck()) {
         connectButton.innerText = 'Open in MetaMask!';
         connectButton.onclick = onClickOpenMetaMask;
@@ -205,10 +205,10 @@ function askToConnect() {
 }
 
 async function initialize() {
-    if (!isMetaMaskInstalled()) {          
+    if (!isMetaMaskInstalled()) {
         askForInstall()
     } else if (await isMetamaskConnected()) {
-        onMetamaskConnected()       
+        onMetamaskConnected()
     } else {
         askToConnect()
     }
@@ -221,8 +221,8 @@ function closePop(e) {
     }
 }
 
-function checkChainID() {    
-    if(parseInt(chainId, 16) != deployedChainID) {  
+function checkChainID() {
+    if(parseInt(chainId, 16) != deployedChainID) {
         wrongChain.style.display = "flex"
         return false;
     }
@@ -240,18 +240,27 @@ function showStatus(id) {
     arr[id].style.display = "flex"
 }
 
-function onClickSettlePayment() {    
+async function getLatestPrice(){
+
+    const addr = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada";
+    const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
+
+    const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+    const rec = await priceFeed.methods.latestRoundData().call();
+
+    return (10**24)/rec.answer;
+
+}
+
+async function onClickSettlePayment() {
     if (checkChainID()) {
         settlePaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        
-        let conversion;
-        shopContract.methods.getLatestPrice().call()
-        .then(p => {
-            conversion = p;
-            return shopContract.methods.getPaymentEntry(idPag.value).call()
-        })
-        .then(paymentEntry => { 
+
+        let conversion = await getLatestPrice();
+
+        shopContract.methods.getPaymentEntry(idPag.value).call()
+        .then(paymentEntry => {
             shopContract.methods.settlePayment(idPag.value).send({from: accounts[0], value: paymentEntry.price*conversion + 500})
             .once('sending', function() {
                 showStatus(0)
@@ -270,16 +279,16 @@ function onClickSettlePayment() {
                     showStatus(3)
                 }
                 settlePaymentButton.disabled = false;
-            });    
+            });
         });
     }
 }
 
-function onCancelPayment() {    
-    if(checkChainID()) {     
+function onCancelPayment() {
+    if(checkChainID()) {
         cancelPaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        
+
         shopContract.methods.cancelPayment(idPag.value).send({from: accounts[0]})
         .once('sending', function() {
             showStatus(0)
@@ -296,15 +305,15 @@ function onCancelPayment() {
                 showStatus(3)
             }
             cancelPaymentButton.disabled = false;
-        });    
+        });
     }
 }
 
-function onClickUnlockFunds() {    
-    if(checkChainID()) {     
+function onClickUnlockFunds() {
+    if(checkChainID()) {
         unlockFundsButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        
+
         shopContract.methods.unlockFunds(idPag.value).send({from: accounts[0]})
         .once('sending', function() {
             showStatus(0)
@@ -322,7 +331,7 @@ function onClickUnlockFunds() {
                 showStatus(3)
             }
             unlockFundsButton.disabled = false;
-        });    
+        });
     }
 }
 
