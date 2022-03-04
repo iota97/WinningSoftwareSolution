@@ -19,6 +19,7 @@ Lista Metodi
 }
 
 \addversione{0.0.0}{23/2/2022}{Raffaele Oliviero}{Redazione}{Strutturazione del documento}
+\addversione{0.0.1}{04/3/2022}{Andrea Volpe}{Redazione}{Inserimento metodi pubblici}
 
 \begin{document}
 
@@ -34,7 +35,7 @@ Il documento elenca i metodi pubblici di ogni classe, descrivendone i loro param
 \subsection{Persistence}
 
 %variabili
-\newcommand\linkServerManager{https://github.com/iota97/WinningSoftwareSolution/blob/main/server/Server/ServerManager.ts?}
+%\newcommand\linkServerManager{https://github.com/iota97/WinningSoftwareSolution/blob/main/server/Server/ServerManager.ts?}
 
 \subsubsection{getPaymentByBuyer(buyer)}
 Restituisce la lista delle transazioni il cui acquirente corrisponde a \texttt{buyer}. \\
@@ -62,7 +63,8 @@ Imposta un contratto\\
 \textbf{Parametri}\\
 shopContract : ShopContract\_Interface\\
 \textbf{Valore Restituito}\\
-\underline{\href{\linkServerManager}{ServerManager}}\\
+%\underline{\href{\linkServerManager}{ServerManager}}\\
+ServerManager\\
 \subsubsection{setSQL(sql) : ServerManager}
 Imposta una connessione SQL\\
 \textbf{Parametri}\\
