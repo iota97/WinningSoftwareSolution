@@ -181,7 +181,7 @@ describe('PageCreator', () => {
     const page = new PageCreator()
     
     it('Main Page - Ok', async () => {
-        const req: Request = {} as Request
+        const req: Request = {originalUrl: ""} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -198,7 +198,7 @@ describe('PageCreator', () => {
     })
     
     it('Help Page - Ok', async () => {
-        const req: Request = {} as Request
+        const req: Request = {originalUrl: "/help"} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -216,7 +216,8 @@ describe('PageCreator', () => {
     
     it('Landing Page - Ok', async () => {
         const req: Request = {
-            query: { id: 0 } as any
+            originalUrl: "/land?id=0",
+            query: { id: 0, } as any
         } as Request
         const res = { 
             render: (view: any, data: any) => {
@@ -240,7 +241,7 @@ describe('PageCreator', () => {
     })
     
     it('Confirm Page - Ok', async () => {
-        const req = { query: { id: 12 } as any} as Request
+        const req = { originalUrl: "/confirm?id=12", query: { id: 12 } as any, } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -254,7 +255,7 @@ describe('PageCreator', () => {
     }) 
     
     it('Confirm Page - Confirmed', async () => {
-        const req = { query: { id: 11 } as any} as Request
+        const req = { originalUrl: "/confirm?id=11", query: { id: 11 } as any} as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -269,7 +270,7 @@ describe('PageCreator', () => {
     
     
     it('Buyer Page - Ok', async () => {
-        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
+        const req = { originalUrl: "/buyer?id=0x4645895DE6761C3c221Da5f6D75e4393a868B4a0", query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -283,7 +284,7 @@ describe('PageCreator', () => {
     })
     
     it('Buyer Page - Empty', async () => {
-        const req = { query: { id: "asdasdasdasdd" } as any } as Request
+        const req = { originalUrl: "/buyer?id=asdasdasdasdd",query: { id: "asdasdasdasdd" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -297,7 +298,7 @@ describe('PageCreator', () => {
     })
     
     it('Seller Page - Ok', async () => {
-        const req = { query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
+        const req = { originalUrl: "/seller?id=0x4645895DE6761C3c221Da5f6D75e4393a868B4a0",query: { id: "0x4645895DE6761C3c221Da5f6D75e4393a868B4a0" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -311,7 +312,7 @@ describe('PageCreator', () => {
     })
     
     it('Seller Page - Empty', async () => {
-        const req = { query: { id: "asdasdasdasdd" } as any } as Request
+        const req = {  originalUrl: "/seller?id=asdasdasdasdd", query: { id: "asdasdasdasdd" } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -325,7 +326,7 @@ describe('PageCreator', () => {
     })
     
     it('Detail Page - Expired', async () => {
-        const req = { query: { id: 1 } as any } as Request
+        const req = { originalUrl: "/detail?id=1",query: { id: 1 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -339,7 +340,7 @@ describe('PageCreator', () => {
     })
     
     it('Detail Page - Cancelled', async () => {
-        const req = { query: { id: 11 } as any } as Request
+        const req = { originalUrl: "/detail?id=11",query: { id: 11 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -353,7 +354,7 @@ describe('PageCreator', () => {
     })
 
     it('Detail Page - Confirmed', async () => {
-        const req = { query: { id: 12 } as any } as Request
+        const req = { originalUrl: "/detail?id=12",query: { id: 12 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -368,7 +369,7 @@ describe('PageCreator', () => {
     
     
     it('Detail Page - Ok', async () => {
-        const req = { query: { id: 0 } as any } as Request
+        const req = { originalUrl: "/detail?id=0",query: { id: 0 } as any } as Request
         const res = { 
             render: (view: any, data: any) => {
                 expect(view).
@@ -486,7 +487,7 @@ describe('PageCreator', () => {
         page.detailPage({query: {id: 12312} as any} as Request, res, db);
     })
     
-    it('Confirm Page - Redirect', async () => { 
+    it('Confirm Page - Redirect 2', async () => { 
         const res = { 
             render: (view: any, data: any) => {
                 expect(false).toBe(true)
@@ -495,7 +496,7 @@ describe('PageCreator', () => {
                 expect(path).toBe("/")
             }
         } as Response
-        page.confirmPage({query: {}} as Request, res, db);
+        page.confirmPage({query: { id: "asdf" } as any} as Request, res, db);
         await delay(1000)
     })
 })
