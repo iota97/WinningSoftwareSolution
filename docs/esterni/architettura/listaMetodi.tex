@@ -58,7 +58,7 @@ Una \textbf{transazione}\\
 	\item[\texttt{2}] i fondi sono stati sbloccati
 	\item[\texttt{3}] la transazione è timed out
 	\end{itemize}
-\item[\texttt{created}] la date di creazione della transazione
+\item[\texttt{created}] la data dell'ultima modifica
 \item[\texttt{confirmed}] se la transazione è stata chiusa, ne indica la data di chiusura
 \end{itemize}
 
@@ -77,16 +77,18 @@ Una \textbf{transazione} in cui sono contenute più informazioni\\
 	\item[\texttt{2}] i fondi sono stati sbloccati
 	\item[\texttt{3}] la transazione è timed out
 	\end{itemize}
-\item[\texttt{created}] la data di creazione della transazione
+\item[\texttt{created}] la data dell'ultima modifica
 \item[\texttt{confirmed}] se la transazione è stata chiusa, ne indica la data di chiusura
 \end{itemize}
 
 \section{Lista dei metodi pubblici}
 \subsection{Persistence}
 class Persistence
-%variabili
-%\newcommand\linkServerManager{https://github.com/iota97/WinningSoftwareSolution/blob/main/server/Server/ServerManager.ts?}
-
+\subsubsection{constructor(sql, shopContract)}
+Crea ShopContractEventManager\\
+\textbf{Parametri}\\
+sql: SQL\_Interface\\
+shopContract: ShopContract\_Interface
 \subsubsection{getPaymentByBuyer(buyer): Promise$<$payment[ ]$>$}
 Restituisce le transazioni il cui acquirente corrisponde a \texttt{buyer}\\
 \textbf{Parametri}\\
@@ -100,7 +102,7 @@ seller: string\\
 \textbf{Valore Restituito}\\
 Promise$<$payment[ ]$>$
 \subsubsection{getPaymentEntryByID(id): Promise$<$paymentEntry$>$}
-Restituisce il prodotto identificato da \texttt{it}\\
+Restituisce il prodotto identificato da \texttt{id}\\
 \textbf{Parametri}\\
 id: bigint\\
 \textbf{Valore Restituito}\\
@@ -206,6 +208,8 @@ Promise$<$void$>$
 
 \subsection{SQL}
 class SQL implements SQL\_Interface
+\subsubsection{constructor()}
+Effettua la connessione al DB usando le impostazioni contenute nel file \texttt{.env}\\
 \subsubsection{closeConnection(): void}
 Chiude la connessione con il database\\
 \textbf{Parametri}\\
@@ -269,6 +273,9 @@ Promise$<$void$>$
 
 \subsection{Server}
 class Server
+\subsubsection{constructor(db, page)}
+Associa il database e il creatore di pagina e crea ed inizializza Express\\
+\textbf{Parametri}\\
 \subsubsection{close(): void}
 Chiude la connessione con il server\\
 \textbf{Parametri}\\
@@ -361,6 +368,10 @@ id: bigint
 
 \subsection{ShopContract (typescript)}
 ShopContract implementa ShopContract\_Interface
+\subsubsection{constructor(web3)}
+Associa web3 e il contratto\\
+\textbf{Parametri}\\
+web3: Web3\\
 \subsubsection{getBlockTime(block) : Promise$<$bigint$>$}
 Restituisce il timestamp di \texttt{block}\\
 \textbf{Parametri}\\
@@ -388,9 +399,15 @@ id: bigint
 
 \subsection{ShopContractEventManager}
 ShopContract implementa ShopContract\_Interface
-\subsubsection{Contstructor}
-
+\subsubsection{contstructor(sql, shopContract)}
+Crea la classe e associa gli eventi da ascoltare\\
+\textbf{Parametri}\\
+sql: SQL\_Interface
+shopContract: ShopContract\_Interface
+ 
 \subsection{ShopContract (solidity)}
+\subsubsection{constructor()}
+Associa l'interfaccia dell'aggregatore, imposta l'intervallo di controllo per aggiornamenti, l'intervallo di scadenza, la data di creazione e imposta a 0 gli indici di \textbf{prima transazione libera}, \textbf{primo articolo libero} e \textbf{ultima transazione controllata}\\
 \subsubsection{getLatestPrice() : uint256}
 Restituisce il prezzo aggiornato\\
 \subsubsection{checkUpkeep(calldata) : (bool, bytes)}
