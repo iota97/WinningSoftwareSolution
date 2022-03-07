@@ -50,12 +50,16 @@ function mobileCheck() {
 }
 
 function toggleMenu() {
-    if (menu.style.display == "none") {
+    if (menu.style.display == "none" || menu.style.display == "") {
         menu.style.display = "block"
     } else {
         menu.style.display = "none"
     }
 }
+
+function transactionHamb(x) {
+    x.classList.toggle("change");
+  }
 
 function setGetParameter(paramName, paramValue) {
     var url = window.location.href;

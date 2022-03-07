@@ -12,7 +12,12 @@
 <body>
   <header>
     <a href="/" class="logo">Shop&nbsp;Chain</a>
-    <button id="hamb" onclick="toggleMenu()">Menù</button>
+    <!--<button id="hamb" onclick="toggleMenu()">Menù</button>-->
+    <div id="hamb" class="containerHamb" onclick="toggleMenu();transactionHamb(this);">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
     <div id="header-right">
       <a id="listSeller" href="seller">Incoming</a>
       <a id="listBuyer" href="buyer">Outgoing</a>
