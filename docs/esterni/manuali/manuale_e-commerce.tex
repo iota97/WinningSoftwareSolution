@@ -40,7 +40,7 @@ Per l'inserimento e la configurazione del network \textit{Polygon} nel proprio w
 Una volta inseriti i dati e aggiunto il network, ricordare di selezionare il network.
 
 \subsubsection{Collegamento del wallet a Shop Chain}
-Una volta inserito correttamente il network è necessario collegare il proprio wallet metamask a Shop Chain. Una volta reindirizzati sulla landing page di Shop Chain, se non si ha già collegato in precedenza il proprio wallet:
+Una volta inserito correttamente il network è necessario collegare il proprio wallet metamask a Shop Chain. Nella webapp di Shop Chain, se non si ha già collegato in precedenza il proprio wallet:
 \begin {itemize}
 \item selezionare "Connect Wallet" all'apertura del pop-up (Fig. 1);
 \item approvare il collegamento dal proprio wallet Metamask.
@@ -54,6 +54,41 @@ Una volta inserito correttamente il network è necessario collegare il proprio w
 \end{figure}
 \FloatBarrier
 
+\section{Script per aggiunta nuovi prodotti}
+Per l'aggiunta di un nuovo prodotto in blockchain si rende disponibile uno script python.
+\subsection{Configurazione}
+Creare un file chiamato `.env` con:
+\begin{enumerate}
+    \item 
+MNEMONIC=il memonic del proprio wallet
+\item 
+PROVIDER=wss://speedy-nodes-nyc.moralis.io/5c29520422f9528344aa64a1/polygon/mumbai/ws
+\end{enumerate}
 
+\subsection{Utilizzo}
+Lo script richiede solamente di inserire il prezzo in dollari del prodotto che si vuole aggiungere.\\
+Lo script ritorna l'id che rappresenta il nuovo prodotto. Questo id andrà utilizzato ogni volta che si va a creare una nuova transazione di pagamento del relativo prodotto.
+
+\section{Operazioni sulle transazioni}
+Se si è connessi alla webapp ShopChain con il proprio wallet Metamask, è possibile visualizzare la lista delle transazioni.
+\\Nella pagina outgoing sono presenti le transazioni d'acquisto(vedi manuale utente acquirente).
+\\Nella pagina incoming sono presenti le transazioni in entrata.
+\\\\Cliccando su ogni transazione è possibile visualizzare le informazioni:
+\begin{itemize}
+\item Wallet acquirente
+\item id prodotto
+\item prezzo
+\end{itemize}
+Per ogni transazione viene visualizzato il suo stato:
+\begin{itemize}
+    \item 0=cancellata.
+    \item 1=in attesa. L'acquirente non ha ancora scansionato il QR Code
+    \item 2=completata. L'acquirente ha confermato la ricezione del prodotto scansionando il QR Code.
+\end{itemize}
+Per ogni transazione in attesa è possibile eseguire due operazioni:
+\begin{itemize}
+    \item Cancella: si annulla la transazione ed il denaro viene restituito all'acquirente.
+    \item Visualizza Qr Code: per stampare e applicare sul pacco del prodotto il Qr Code che verrà scansionato dall'acquirente.
+\end{itemize}
 
 \end{document}
