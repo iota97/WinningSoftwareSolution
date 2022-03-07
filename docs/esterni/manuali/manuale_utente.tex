@@ -1,0 +1,142 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{placeins}
+\settitolo{Federico Marchi}
+\setredattori{WinningSoftwareSolution}
+\setdestuso{esterno}
+\setdescrizione{
+Manuale utente.
+}
+
+\begin{document}
+
+\makefrontpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+Attraverso l'utilizzo della blockchain \textit{Polygon}, Shop Chain fornisce un sistema decentralizzato per il pagamento di prodotti in cryptovalute. Utilizzando Shop Chain è possibile effettuare una qualsiasi attività di compravendita in maniera sicura per entrambi gli attori dello scambio. L'acquirente che desidera acquistare un prodotto da un venditore in un e-commerce potrà effettuare il suo pagamento in cryptovalute. Il venditore non può disporre immediatamente del saldo ricevuto poiché sarà bloccato fino alla ricezione del pacco, momento nel quale l'acquirente può sbloccare i fondi attraverso la scannerizzazione di un codice QR presente sulla scatola.
+Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'acquirente per il corretto acquisto di un item e sucessivo ritiro e sblocco fondi attraverso il servizio Shop Chain.
+
+
+\section{Pagamento}
+\subsection{Wallet Metamask}
+Per poter effettuare il pagamento sarà necessario utilizzare un wallet Metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.
+\subsubsection{Configurazione}
+Se il network \textit{Polygon} non è gia stato inserito nel proprio wallet Metamask, procedere con la lettura del seguente paragrafo.
+Per l'inserimento e la configurazione del network \textit{Polygon} nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
+\begin{itemize}
+\item Network Name: \textbf{Matic Mainnet};
+\item New RPC Url: \textbf{https://rpc-mainnet.maticvigil.com/};
+\item ChainID: \textbf{137};
+\item Currency Simbol: \textbf{MATIC};
+\item Block Explorer URL: \textbf{https://explorer.matic.network/}.
+\end{itemize}
+Una volta inseriti i dati e aggiunto il network, selezionare il network prima di procedere con il pagamento.
+
+\subsubsection{Collegamento del wallet a Shop Chain}
+Per poter eseguire il pagamento è necessario collegare il proprio wallet Metamask a Shop Chain. Una volta reindirizzati sulla landing page di Shop Chain, se non si ha già collegato in precedenza il proprio wallet:
+\begin {itemize}
+\item selezionare "Connect Wallet" all'apertura del pop-up (Fig. 1);
+\item approvare il collegamento dal proprio wallet Metamask.
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{img/connessione_wallet.png}
+\caption{Interfaccia per la connessione del wallet Metamask.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Pagamento in MATIC}
+Per effettuare il pagamento sarà necessario detenere nel proprio wallet Metamask l'equivalente in MATIC del prezzo in dollari dell'item che si vuole acquistare. MATIC è la cryptovaluta nativa della blockchain Polygon con la quale è possibile pagare con Shop Chain. É possibile scambiare le proprie cryptovalute sul network Polygon attraverso uno dei seguenti exchange decentralizzati:
+
+\begin{itemize}
+\item \href{https://www.quickswap.exchange}{QuickSwap};
+\item \href{https://app.sushi.com/}{SushiSwap};
+\item \href{https://polygon.curve.fi/}{Curve}.
+\end{itemize}
+Una volta verificato di possedere una sufficiente quantità di MATIC si può procedere col pagamento. É possibile verificare prima del pagamento l'ammontare in dollari e l'address del venditore (Fig. 2). Infine per concludere il pagamento:
+\begin{itemize}
+\item selezionare "Confirm" (Fig. 2);
+\item confermare la transazione su Metamask.
+\end{itemize}
+
+Dovrà essere pagata anche un piccola somma per coprire i costi di transazione sul network \textit{Polygon}; questa sarà visualizzabile direttamente da Metamask durante la conferma della transazione.
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{img/oggetto_in_vendita.png}
+\caption{Interfaccia per il pagamento dell'item.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Visualizzazione acquisti}
+Attraverso la sezione "Outgoing" posta nel menù in alto a destra (Fig. 3) sarà possibile visualizzare l'insieme di pagamenti effettuati con ShopChain attraverso il wallet collegato.
+É possibile selezionare un acquisto per visualizzare i seguenti dati:
+\begin{itemize}
+\item \textbf{From}: indica l'address del wallet dal quale è stato eseguito il pagamento;
+\item \textbf{To}: indica l'address del wallet del venditore;
+\item \textbf{Opened}: indica la data in cui è stato eseguito l'acquisto;
+\item \textbf{Expired}: indica la data in cui scade l'ordine e in cui i fondi vengono automaticamente sbloccati; si tratta di 14 giorni dopo l'acquisto.
+\item \textbf{Stato dell'ordine}:
+  \begin{itemize}
+    \item \textbf{Open}: l'ordine è ancora aperto e in attesa di conferma;
+    \item \textbf{Confirmed}: l'ordine è già stato confermato attraverso la scannerizzazione del codice QR;
+    \item \textbf{Expired}: l'ordine è scaduto poiché sono passati 14 giorni senza che sia stato confermato manualmente dall'acquirente;
+    \item \textbf{Canceled}: l'ordine è stato rifiutato e dunque cancellato dall'ecommerce e non è più valido.
+  \end{itemize}
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{img/visualizzazione_ordini.png}
+\caption{Funzione Outgoing per visualizzazione pagamenti.}
+\end{figure}
+\FloatBarrier
+
+\section{Sblocco dei fondi}
+Per tutelare l'acquirente, i MATIC utilizzati per il pagamento sono bloccati e il venditore non può utilizzarli fino al momento della ricezione del pacco o dopo 14 giorni dall'acquisto. Al momento della consegna l'acquirente deve sbloccare i fondi. I seguenti paragrafi descrivono la procedura da seguire per concludere l'acquisto e sbloccare correttamente i fondi.
+\subsection{Scannerizzazione codice QR}
+Il venditore al momento della spedizione attacca sulla scatola un codice QR. L'acquirente, dopo il ritiro del pacco, deve procedere con la scannerizzazione di questo codice QR per poter raggiungere la pagina di sblocco dei fondi. La scannerizzazione può essere eseguita dal proprio smartphone in due modi:
+\begin{itemize}
+\item applicazione specifica per la scannerizzazione di codici QR: inquadrare il codice QR dalla propria fotocamera e seguire il reindirizzamento a Metamask;
+\item applicazione Metamask: selezionare l'opzione di scannerizzazione internamente a Metamask.
+\end{itemize}
+In entrambi i casi si viene reindirizzati alla pagina Shop Chain nel browser interno di Metamask per confermare la ricezione del pacco e sbloccare i fondi.
+
+\subsection{Conferma dell'ordine}
+Prima di procedere con la conferma dell'ordine controllare di:
+\begin{itemize}
+\item utilizzare il network corretto come spiegato al punto 2.1.1;
+\item utilizzare il wallet con il quale è stato eseguito il pagamento, altrimenti non sarà possibile la conferma;
+\item detenere alcuni MATIC per il pagamento delle tasse per la transazione di conferma.
+\end{itemize}
+Una volta reindirizzati sulla landing page per la conferma dell'acquisto è possibile controllare i dati dell'ordine. Infine procedere come segue:
+\begin{itemize}
+\item selezionare "Confirm" (Fig. 4);
+\item confermare la transazione di conferma su Metamask.
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{img/conferma_ordine.png}
+\caption{Interfaccia per la conferma dell'ordine.}
+\end{figure}
+\FloatBarrier
+Terminata la procedura i fondi saranno resi disponibili al venditore e il processo di vendita si è concluso correttamente.
+Grazie per aver utilizzato Shop Chain!
+
+
+
+\end{document}
