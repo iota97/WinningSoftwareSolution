@@ -1,0 +1,59 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{placeins}
+\settitolo{Manuale E-commerce Shop Chain}
+\setredattori{WinningSoftwareSolution}
+\setdestuso{esterno}
+\setdescrizione{
+Manuale e-commerce.
+}
+
+\begin{document}
+
+\makefrontpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+Attraverso l'utilizzo della blockchain \textit{Polygon}, Shop Chain fornisce un sistema decentralizzato per il pagamento di prodotti in MATIC. Utilizzando Shop Chain è possibile effettuare una qualsiasi attività di compravendita in maniera sicura per entrambi gli attori dello scambio. L'acquirente che desidera acquistare un prodotto da un venditore in un e-commerce potrà effettuare il suo pagamento in MATIC, ovvero il token nativo della blockchain \textit{Polygon}. Il venditore non può disporre immediatamente del saldo ricevuto poiché sarà bloccato fino alla ricezione del pacco, momento nel quale l'acquirente può sbloccare i fondi attraverso la scannerizzazione di un codice QR presente sulla scatola.
+Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'e-commerce al fine di vendere correttamente i propri prodotti.
+
+\section{Vendita di prodotti}
+\subsection{Wallet Metamask}
+Per poter vendere i propri prodotti sarà necessario utilizzare un wallet Metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.
+\subsubsection{Configurazione}
+Se il network \textit{Polygon} non è gia stato inserito nel proprio wallet Metamask, procedere con la lettura del seguente paragrafo.
+Per l'inserimento e la configurazione del network \textit{Polygon} nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
+\begin{itemize}
+\item Network Name: \textbf{Matic Mainnet};
+\item New RPC Url: \textbf{https://rpc-mainnet.maticvigil.com/};
+\item ChainID: \textbf{137};
+\item Currency Simbol: \textbf{MATIC};
+\item Block Explorer URL: \textbf{https://explorer.matic.network/}.
+\end{itemize}
+Una volta inseriti i dati e aggiunto il network, ricordare di selezionare il network.
+
+\subsubsection{Collegamento del wallet a Shop Chain}
+Una volta inserito correttamente il network è necessario collegare il proprio wallet metamask a Shop Chain. Una volta reindirizzati sulla landing page di Shop Chain, se non si ha già collegato in precedenza il proprio wallet:
+\begin {itemize}
+\item selezionare "Connect Wallet" all'apertura del pop-up (Fig. 1);
+\item approvare il collegamento dal proprio wallet Metamask.
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{img/connessione_wallet.png}
+\caption{Interfaccia per la connessione del wallet Metamask.}
+\end{figure}
+\FloatBarrier
+
+
+
+\end{document}
