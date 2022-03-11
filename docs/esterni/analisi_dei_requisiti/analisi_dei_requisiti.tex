@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage{longtable}
+\usepackage[hidelinks]{hyperref}
 \usepackage[font=small,labelfont=bf]{caption}
 \graphicspath{ {images/} }
 
@@ -10,7 +11,7 @@
 \input{\templates/front_page}
 \input{\templates/history}
 
-\settitolo{Analisi dei requisiti - v1.0.2} 
+\settitolo{Analisi dei requisiti - v1.0.3} 
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
 \setredattori{Alberto Nicoletti\\Andrea Volpe}
@@ -31,6 +32,7 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \addversione{1.0.0}{09/02/2022}{Elia Scandaletti}{Approvazione}{Approvazione per RTB}
 \addversione{1.0.1}{01/03/2022}{Giovanni Cocco}{Redazione}{Approfondimento requisiti funzionali}
 \addversione{1.0.2}{01/03/2022}{Elia Scandaletti}{Redazione}{Applicazione indicazioni del prof. Cardin}
+\addversione{1.0.3}{11/03/2022}{Alberto Nicoletti}{Redazione}{Applicazione indicazioni del prof. Cardin}
 
 
 \begin{document}
@@ -42,6 +44,21 @@ Analisi dei requisiti del progetto ShopChain con casi d'uso e requisiti.
 \section{Introduzione}
 \subsection{Scopo del documento}
 Lo scopo del documento è raccogliere i risultati dell'attività di analisi dei requisiti. Contiene quindi la descrizione dei casi d'uso del prodotto software da sviluppare, ed i requisiti suddivisi per tipologia. Si vuole così dimostrare una completa comprensione del problema e delle aspettative della soluzione. I casi d'uso, ma soprattutto i requisiti saranno tenuti in considerazione nelle fasi di progettazione, di verifica e di validazione.
+\subsection{Riferimenti}
+\paragraph{Riferimenti normativi}
+\begin{itemize}
+    \item \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato d'appalto C2}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/norme_di_progetto/norme_di_progetto.pdf}{Norme di Progetto}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_10_28_E/2021_10_28_E.pdf}{Verbale esterno 2021/10/28}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_11_12_E/2021_11_12_E.pdf}{Verbale esterno 2021/11/12}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_22_E/2021_12_22_E.pdf}{Verbale esterno 2021/12/22}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_23_I/2021_12_23_I.pdf}{Verbale interno 2021/12/23}}.
+\end{itemize}
+\paragraph{Riferimenti informativi}
+\begin{itemize}
+    \item \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Dispense/T07.pdf}{Slide analisi dei requisiti - Materiale didattico del corso IS}};
+    \item \underline{\href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi\%20Use\%20Case.pdf}{Slide diagrammi dei casi d'uso - Materiale didattico del corso IS}}.
+\end{itemize}
 
 \section{Descrizione del prodotto}
 L'azienda \textit{SyncLab} propone, attraverso il capitolato C2: \textit{ShopChain - Exchange Platform on
@@ -112,7 +129,7 @@ Per il completamento del progetto il proponente richiede che siano ottenuti i se
 \item Al venditore viene fornito il manuale utente già dall'acquisizione del prodotto ShopChain.
 \item Il venditore è libero di consultare il manuale in ogni momento.
 \end{enumerate}
-\textbf{Requisiti collegati}: RNO03.
+\textbf{Requisiti collegati}: RVO03.
 
 \includegraphics[width=0.9\textwidth]{UC_WAV2}
 \captionof{figure}{Caso d'uso UC2}
@@ -226,7 +243,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.\\
     \item Tramite lo script il prodotto viene pubblicato in blockchain;
     \item Il prodotto è pubblico in blockchain e utilizzabile per fare nuove transazioni.
 \end{enumerate}
-\textbf{Requisiti collegati}: RFO09, RFO43, RFD44, RNO06.\\
+\textbf{Requisiti collegati}: RFO09, RFO43, RFD44, RVO06.\\
 \textbf{Estensione}:
 \begin{enumerate}
     \item UC5.1 Errore fallimento pubblicazione prodotto in blockchain:\\
@@ -426,33 +443,8 @@ L'acquirente usando Metamask, si connette con il proprio wallet.\\
 \textbf{Scenario principale}: Viene visualizzata la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 \textbf{Requisiti collegati}: RFO30.
 
-\includegraphics[width=0.9\textwidth]{UC_controlli}
-\captionof{figure}{Casi d'uso UCa, UCa.1, UCa.2 e UCa.3}
-
-\paragraph{UCa Controllo connessione}\\
-\textbf{Attori primari}: Venditore con wallet connesso, acquirente con wallet connesso. \\
-\textbf{Precondizioni}: Il sistema vuole interagire con la blockchain.\\
-\textbf{Postcondizioni}:  Il sistema può interagire con la blockchain senza problemi.\\
-\textbf{Scenario principale}:
-Vengono fatti una serie di controlli per la corretta interazione con la blockchain.\\
-\textbf{Estensione}: UCa.1 Errore nella connessione alla rete:
-\begin{enumerate}
-\item Il venditore o l'acquirente è connesso alla rete sbagliata
-\end{enumerate}
-\textbf{Requisiti collegati all'estensione UCa.1}: RFO31, RFO50.\\
-\textbf{Estensione}: UCa.2 Errore transazione non inviata:
-\begin{enumerate}
-\item La transazione non è stata inviata correttamente.
-\end{enumerate}
-\textbf{Requisiti collegati all'estensione UCa.2}: RFO32.\\
-\textbf{Estensione}: UCa.3 Errore nessun risultato ottenibile:
-\begin{enumerate}
-\item La transazione è stata correttamente inviata, ma non è stato ottenuto nessun risultato.
-\end{enumerate}
-\textbf{Requisiti collegati all'estensione UCa.3}: RFO33.
-
 \section{Requisiti}
-Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/N(per la tipologia: funzionale, non funzionale)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
+Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
 \subsection{Requisiti funzionali}
 
  \setlength\tabcolsep{4pt}
@@ -568,15 +560,6 @@ RFO29 & L'acquirente con wallet connesso deve poter visualizzare l'importo in do
 \hline
 RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.3 \\
 \hline
-% CONTROLLI
-RFO31 & Il sistema deve mostrare un messaggio di errore "Errore nella connessione alla rete" se l'utente (acquirente o venditore) è connesso alla rete sbagliata. & Obbligatorio & UCa.1 \\
-\hline
-RFO50 & Il sistema deve poter interrogare Metamask su quale sia la rete attualmente usata dall'utente. & Obbligatorio & UCa.1 \\
-\hline
-RFO32 & Il sistema deve mostrare un messaggio di errore "Errore transazione non inviata" se la transazione non è stata inviata in maniera corretta. & Obbligatorio & UCa.2 \\
-\hline
-RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato ottenibile" se la transazione è stata inviata in maniera corretta ma non è stata ottenuto alcun risultato di risposta. & Obbligatorio & UCa.3 \\
-\hline
 
 \end{longtable}
 \pagebreak
@@ -584,36 +567,59 @@ RFO33 & Il sistema deve mostrare un messaggio di errore "Errore nessun risultato
 \setlength\tabcolsep{4pt}
 \begin{longtable}{|c|p{5cm}|c|p{4cm}|c|}
 \hline
- \multicolumn{5}{| c |}{Requisiti non funzionali}\\
+ \multicolumn{5}{| c |}{Requisiti di qualità}\\
  \hline
- Codice & Descrizione & Rilevanza & Fonti & Tipologia\\
+ Codice & Descrizione & Rilevanza & Fonti\\
+ \hline
+ \endfirsthead
+
+ \hline
+ \multicolumn{5}{| c |}{Requisiti di qualità}\\
+ \hline
+ Codice & Descrizione & Rilevanza & Fonti\\
+ \hline
+ \endhead
+
+\hline
+RQO04 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
+con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}\\
+\hline
+RQO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}\\
+\hline
+
+\end{longtable}
+
+\setlength\tabcolsep{4pt}
+\begin{longtable}{|c|p{5cm}|c|p{4cm}|c|}
+\hline
+ \multicolumn{5}{| c |}{Requisiti di vincolo}\\
+ \hline
+ Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endfirsthead
 
  \hline
  \multicolumn{5}{| c |}{Requisiti non funzionali}\\
  \hline
- Codice & Descrizione & Rilevanza & Fonti & Tipologia\\
+ Codice & Descrizione & Rilevanza & Fonti\\
  \hline
  \endhead
 
 \hline
-RNO01 & Utilizzo di blockchain pubblica. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/esterni/analisi_delle_tecnologie/analisi_delle_tecnologie.pdf}{analisi delle tecnologie}} & Vincolo\\
+RVO01 & Utilizzo di blockchain pubblica. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/esterni/analisi_delle_tecnologie/analisi_delle_tecnologie.pdf}{analisi delle tecnologie}}\\
 \hline
-RND02 & Utilizzo di database PostgreSQL. & Desiderabile & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Vincolo\\
+RVD02 & Utilizzo di database PostgreSQL. & Desiderabile & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}\\
 \hline
-RNO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{capitolato}} & Vincolo\\
+RVO03 & Il venditore deve disporre di un manuale utente per l'utilizzo del sistema. & Obbligatorio &  UC1, \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{capitolato}}\\
 \hline
-RNO04 & Test che dimostrino il corretto funzionamento dei servizi e delle funzionalità previste,
-con una copertura minima dell’ 80\% correlata di report. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Qualità\\
+RVO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_23_I/2021_12_23_I.pdf}{verbale del 23/12/2021}} \\
 \hline
-RNO05 & Documentazione su scelte implementative e progettuali effettuate, le relative motivazioni, i problemi aperti e le eventuali soluzioni proposte da esplorare. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}} & Qualità\\
+RVO07 & La webapp deve poter funzionare su tutti i browser che supportano Metamask: Chrome, Firefox, Brave, Edge. & Obbligatorio & Decisione interna.\\
 \hline
-RNO06 & Deve essere reso disponibile uno script python scaricabile dai venditori da integrare nel loro e-commerce per la pubblicazione automatica dei nuovi prodotti in blockchain. & Obbligatorio & UC5, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/docs/interni/verbali/2021_12_23_I/2021_12_23_I.pdf}{verbale del 23/12/2021}}  & Vincolo\\
+RVO08 & La landing page deve poter funzionare su tutti i browser che supportano Metamask: Chrome, Firefox, Brave, Edge. & Obbligatorio & Decisione interna.\\
 \hline
-
+RVO09 & Lo script per l'aggiunta prodotti deve poter funzionare su tutti i pc che abbiano python 3.8. & Obbligatorio & Decisione interna.\\
+\hline
 \end{longtable}
-
-
 
 \end{document}
