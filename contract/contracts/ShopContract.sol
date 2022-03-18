@@ -1,21 +1,18 @@
 //SPDX-License-Identifier: none
 
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 
-import "@openzeppelin/contracts/utils/Address.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
-contract ShopContract is Ownable, KeeperCompatibleInterface {
+//TODO sistemare slippage exchange, enum per lo stato
 
-    using Address for address;
+contract ShopContract is KeeperCompatibleInterface {
 
     uint256 private freePaymentEntryId;
     uint256 private freeSettledPaymentId;
@@ -29,6 +26,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     uint256 public slippageClient; //in x1000, so 5 -> 0.5% slippage
     uint256 public slippageExchange;
+    uint256 public slippageDAI;
 
     uint256 takeFee;
     address payable shopchainAddress;
@@ -58,13 +56,52 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
     event paymentSettled(uint256 settledPaymentId);
     event statusChanged(uint256 settledPaymentId);
 
+    modifier inBoundsPaymentEntryIndex(uint256 paymentEntryId) {
+        require(paymentEntryId < freePaymentEntryId);
+        _;
+    }
+
+    modifier inBoundsSettledPaymentIndex(uint256 settledPaymentId) {
+        require(settledPaymentId < freeSettledPaymentId);
+        _;
+    }
+
+    modifier onlyClient(uint256 settledPaymentId) {
+        require(settledPayments[settledPaymentId].client == msg.sender);
+        _;
+    }
+
+    modifier onlySeller(uint256 settledPaymentId) {
+        require(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller == msg.sender);
+        _;
+    }
+
+    modifier statusPaid(uint256 settledPaymentId) {
+        require(settledPayments[settledPaymentId].status == 1);
+        _;
+    }
+
+    modifier peggedDAI { //requires that the DAI value is pegged to USD (in the interval defined by slippageExchange), prevents catastrophic failure if DAI gets pwned
+        (,int truncatedPriceDAI,,,) = priceFeedDAI.latestRoundData();
+        uint256 priceDAI = uint256(truncatedPriceDAI) * 10**10; //8 decimals + 10 = 18 decimals
+        require(priceDAI >= 10**18 - getSlippageAmount(10**18, slippageDAI) && priceDAI <= 10**18 + getSlippageAmount(10**18, slippageDAI));
+        _;
+    }
+
+    modifier sufficientMatic(uint256 paymentEntryId) {
+        (,int priceMatic,,,) = priceFeedMatic.latestRoundData(); //8 decimals
+        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceMatic);
+        require(msg.value >= priceInMatic - getSlippageAmount(priceInMatic, slippageClient) && msg.value <= priceInMatic + getSlippageAmount(priceInMatic, slippageClient)); //client matic slippage check
+        _;
+    }
+
     /**
      * https://docs.chain.link/docs/matic-addresses/
      * Network: Mumbai Testnet
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _takeFee, address payable _shopchainAddress){
+    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _slippageDAI, uint256 _takeFee, address payable _shopchainAddress){
 
         priceFeedMatic = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
         priceFeedDAI = AggregatorV3Interface(0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046);
@@ -80,6 +117,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
         slippageClient = _slippageClient;
         slippageExchange = _slippageExchange;
+        slippageDAI = _slippageDAI;
 
         takeFee = _takeFee;
         shopchainAddress = _shopchainAddress;
@@ -89,17 +127,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     }
 
-    function getUniswapMaticValueInDAI() public view returns(uint){
-        uint256 amount = 1;
-        IUniswapV2Pair pair = IUniswapV2Pair(uniswapV2Factory.getPair(address(DAI), address(uniswapV2Router.WETH())));
-        (uint Res1, uint Res0,) = pair.getReserves();
-
-        // decimals
-        uint res0 = Res0*(10**18);
-        return((amount*res0)/Res1);
-    }
-
-    function getSlippageAmount(uint256 number, uint256 slippage) public returns(uint256){
+    function getSlippageAmount(uint256 number, uint256 slippage) internal returns(uint256){
         return (number * slippage)/1000;
     }
 
@@ -134,30 +162,18 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         emit addedPaymentEntry(freePaymentEntryId - 1);
     }
 
-    function settlePayment(uint256 paymentEntryId) payable public{
+    function settlePayment(uint256 paymentEntryId) payable public inBoundsPaymentEntryIndex(paymentEntryId) sufficientMatic(paymentEntryId) peggedDAI{
 
-        require(paymentEntryId < freePaymentEntryId);
-
-        (,int priceMatic,,,) = priceFeedMatic.latestRoundData(); //8 decimals
-        uint256 priceInMatic = paymentsEntries[paymentEntryId].price * (10**24)/uint256(priceMatic);
-
-        require(msg.value >= priceInMatic - getSlippageAmount(priceInMatic, slippageClient) && msg.value <= priceInMatic + getSlippageAmount(priceInMatic, slippageClient)); //assure that you can pay with slippage
-
-        require(DAI.approve(address(uniswapV2Router), msg.value), "Approve failed.");
+        DAI.approve(address(uniswapV2Router), msg.value);
 
         address[] memory path = new address[](2);
         path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
 
-        (,int priceDAI,,,) = priceFeedDAI.latestRoundData(); //8 decimals
+        //here the slippage is in DAI, not in USD, so the final slippage in USD will be slippageDAI + slippageExchange
+        uint256 minAmountDAI = paymentsEntries[paymentEntryId].price * (10**18 - getSlippageAmount(10**18, slippageExchange));
 
-        uint256 uniswapMaticValueInDAI = getUniswapMaticValueInDAI(); //on mumbai this price is way lower than expected because of liquidity issues
-        uint256 chainlinkMaticValueInDAI = (uint256(priceMatic) * 10**18) / (uint256(priceDAI)); // 8 decs * 18 decs / 8 decs = 18 decs
-
-        //protects from flash loan attack
-        require(uniswapMaticValueInDAI <= chainlinkMaticValueInDAI + getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange) && uniswapMaticValueInDAI >= chainlinkMaticValueInDAI - getSlippageAmount(chainlinkMaticValueInDAI, slippageExchange));
-
-        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(0, path, address(this), block.timestamp); //EXACT amount of DAI received
+        uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDAI, path, address(this), block.timestamp); //EXACT amount of DAI received
 
         settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
         freeSettledPaymentId = freeSettledPaymentId + 1;
@@ -166,11 +182,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
 
     }
 
-    function unlockFunds(uint256 settledPaymentId) public {
-
-        require(settledPaymentId < freeSettledPaymentId);
-        require(settledPayments[settledPaymentId].client == msg.sender);
-        require(settledPayments[settledPaymentId].status == 1);
+    function unlockFunds(uint256 settledPaymentId) public inBoundsSettledPaymentIndex(settledPaymentId) onlyClient(settledPaymentId) statusPaid(settledPaymentId){
 
         address payable sellerAddress = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
 
@@ -184,10 +196,7 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         emit statusChanged(settledPaymentId);
     }
 
-    function cancelPayment(uint256 settledPaymentId) public {
-        require(settledPaymentId < freeSettledPaymentId);
-        require(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller == msg.sender);
-        require(settledPayments[settledPaymentId].status == 1);
+    function cancelPayment(uint256 settledPaymentId) public inBoundsSettledPaymentIndex(settledPaymentId) onlySeller(settledPaymentId) statusPaid(settledPaymentId){
 
         address payable addr = payable(settledPayments[settledPaymentId].client);
         DAI.transfer(addr, settledPayments[settledPaymentId].amountInDAI);
@@ -197,24 +206,19 @@ contract ShopContract is Ownable, KeeperCompatibleInterface {
         emit statusChanged(settledPaymentId);
     }
 
-    function revertPayment(uint256 settledPaymentId) public{
-        require(settledPaymentId < freeSettledPaymentId, "err");
-        require(settledPayments[settledPaymentId].client == msg.sender);
-        require(settledPayments[settledPaymentId].status == 1);
-        require(block.timestamp - settledPayments[settledPaymentId].time > expireDuration);
+    function revertPayment(uint256 settledPaymentId) public inBoundsSettledPaymentIndex(settledPaymentId) onlyClient(settledPaymentId) statusPaid(settledPaymentId){
+        require(block.timestamp - settledPayments[settledPaymentId].time > expireDuration); //txn expired
 
         DAI.transfer(settledPayments[settledPaymentId].client, settledPayments[settledPaymentId].amountInDAI);
         settledPayments[settledPaymentId].status = 3;
         emit statusChanged(settledPaymentId);
     }
 
-    function getPaymentEntry(uint256 paymentEntryId) public view returns(PaymentEntry memory){
-        require(paymentEntryId < freePaymentEntryId);
+    function getPaymentEntry(uint256 paymentEntryId) public view inBoundsPaymentEntryIndex(paymentEntryId) returns(PaymentEntry memory){
         return paymentsEntries[paymentEntryId];
     }
 
-    function getSettledPayment(uint256 settledPaymentId) public view returns(SettledPayment memory){
-        require(settledPaymentId < freeSettledPaymentId);
+    function getSettledPayment(uint256 settledPaymentId) public view inBoundsSettledPaymentIndex(settledPaymentId) returns(SettledPayment memory){
         return settledPayments[settledPaymentId];
     }
 }
