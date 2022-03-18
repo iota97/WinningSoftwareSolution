@@ -81,7 +81,7 @@ contract ShopContract is KeeperCompatibleInterface {
         _;
     }
 
-    modifier peggedDAI { //requires that the DAI value is pegged to USD (in the interval defined by slippageExchange), prevents catastrophic failure if DAI gets pwned
+    modifier peggedDAI { //requires that the DAI value is pegged to USD (in the interval defined by slippageDAI), prevents catastrophic failure if DAI gets pwned
         (,int truncatedPriceDAI,,,) = priceFeedDAI.latestRoundData();
         uint256 priceDAI = uint256(truncatedPriceDAI) * 10**10; //8 decimals + 10 = 18 decimals
         require(priceDAI >= 10**18 - getSlippageAmount(10**18, slippageDAI) && priceDAI <= 10**18 + getSlippageAmount(10**18, slippageDAI));
@@ -127,7 +127,7 @@ contract ShopContract is KeeperCompatibleInterface {
 
     }
 
-    function getSlippageAmount(uint256 number, uint256 slippage) internal returns(uint256){
+    function getSlippageAmount(uint256 number, uint256 slippage) internal pure returns(uint256){
         return (number * slippage)/1000;
     }
 
@@ -170,8 +170,11 @@ contract ShopContract is KeeperCompatibleInterface {
         path[0] = uniswapV2Router.WETH(); //WMATIC canonic address
         path[1] = address(DAI);
 
-        //here the slippage is in DAI, not in USD, so the final slippage in USD will be slippageDAI + slippageExchange
-        uint256 minAmountDAI = paymentsEntries[paymentEntryId].price * (10**18 - getSlippageAmount(10**18, slippageExchange));
+        (,int truncatedPriceDAI,,,) = priceFeedDAI.latestRoundData();
+        uint256 priceDAI = uint256(truncatedPriceDAI) * 10**10; //8 decimals + 10 = 18 decimals
+
+        uint256 minAmountDAI = (paymentsEntries[paymentEntryId].price/priceDAI);
+        minAmountDAI = minAmountDAI - getSlippageAmount(minAmountDAI, slippageExchange); //removes slippage %, slippageExchange is the slippage calculated on the real DAI price, value may vary according to slippageDAI
 
         uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDAI, path, address(this), block.timestamp); //EXACT amount of DAI received
 
