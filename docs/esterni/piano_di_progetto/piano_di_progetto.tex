@@ -22,6 +22,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{0.0.1}{07/02/2022}{Elia Scandaletti}{Redazione}{Aggiornamento impegni secondo Verbale del 04/02/2022}
 \addversione{0.0.2}{11/02/2022}{Elia Scandaletti}{Redazione}{Aggiornamento per RTB}
 \addversione{1.0.0}{12/02/2022}{Giovanni Cocco}{Approvazione}{Approvazione per RTB}
+\addversione{2.0.0}{19/03/2022}{Giovanni Cocco}{Redazione}{Rifacimento documento}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -34,156 +35,75 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 
 \makeversioni
 
-\section{Programmazione}
-\subsection{Revisioni di avanzamento}
-\paragraph{RTB}
-Prodotti necessari:
-\begin{itemize}
-\item Analisi dei Requisiti;
-\item Analisi delle Tecnologie;
-\item Proof of Concept.
+\tableofcontents
+\clearpage
+
+\section{Pianificazione generale}
+\subsection{Diagramma di Gannt}
+\subsection{Consultivo attuale}
+\subsection{Preventivo a finire}
+
+\section{Dettagli di periodo}
+\subsection{Metodo di lavoro}
+Il metodo di lavoro fa uso del framework SCRUM. Si farà inoltre uso della tecnica di Continuos Integration.\\
+Questo metodo si presta meglio di un modello a cascata data la difficoltà di realizzare una pianificazione accurata a monte con tecnologie poco conosciute.\\\\
+Tuttavia si terrà che:
+\begin{itemize} 
+\item dei cicli non vadano a buon fine portanto a iterazioni (ove incrementi sono sempre preferibili);
+\item delle attività critiche blocchino le altre portanto a una perdita di parallelismo all'interno del gruppo.
 \end{itemize}
-
-
-\subsection{RTB}
-\paragraph{Analisi dei Requisiti}
-Inizio: 01/12/2021\par
-Fine prevista: 08/02/2022\par
-Fine effettiva: 09/02/2021
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Analista & 42 & 52.5 & 25\euro & 1050\euro & 1312.5\euro \\\hline
-Verificatore & 8 & 11.5 & 15\euro & 120\euro & 172.5\euro \\\hline
-Totale ore: & 50 & 64 & Totale costi: & 1170\euro & 1485 \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & +14 & \multicolumn{2}{r|}{Differenza di costo:} & +315 \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Andrea Volpe & Analista & 21 & 31.25  & +10.25 \\\hline
-Alberto Nicoletti & Analista & 21 & 21.25 & +0.25 \\\hline
-Giovanni Cocco & Verificatore & 8 & 7.5 & -0.5 \\\hline
-Elia Scandaletti & Verificatore & 0 & 3 & +3 \\\hline
-Raffaele Oliviero & Verificatore & 0 & 1 & +1 \\\hline
-\end{tabular}
-
-\paragraph{Analisi delle Tecnologie}
-Inizio: 01/12/2021\par
-Fine prevista: 08/02/2022\par
-Fine effettiva: 11/02/2022
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Progettista & 42 & 80.5 & 25\euro & 1050\euro & 2012.5\euro \\\hline
-Verificatore & 6 & 2 & 15\euro & 90\euro & 30\euro \\\hline
-Totale ore: & 48 & 82.5 & Totale costi: & 1140\euro & 2042.5\euro \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & +34.5 & \multicolumn{2}{r|}{Differenza di costo:} & +902.5\euro \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Matteo Galvagni & Progettista & 21 & 34.5 & +13.5 \\\hline
-Federico Marchi & Progettista & 21 & 46 & +25 \\\hline
-Giovanni Cocco & Verificatore & 6 & 2 & -4 \\\hline
-\end{tabular}
-
-\paragraph{Piano di Progetto (RTB)}
-Inizio: 01/12/2021\par
-Fine prevista: 08/02/2022\par
-Fine effettiva: TBD
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Responsabile & 21 & 29 & 30\euro & 630\euro & 870\euro \\\hline
-Verificatore & 3 & TBD & 15\euro & 45\euro & TBD \\\hline
-Totale ore: & 24 & TBD & Totale costi: & 675\euro & TBD \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & TBD & \multicolumn{2}{r|}{Differenza di costo:} & TBD \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Elia Scandaletti & Responsabile & 11 & 16 & +5 \\\hline
-Raffaele Oliviero & Responsabile & 10 & 13 & +3 \\\hline
-Giovanni Cocco & Verificatore & 3 & TBD & TBD \\\hline
-\end{tabular}
-
-\paragraph{Piano di Qualifica (RTB)}
-Inizio: 01/12/2021\par
-Fine prevista: 08/02/2022\par
-Fine effettiva: 05/02/2022
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Responsabile & 21 & 8 & 30\euro & 630\euro & 240\euro \\\hline
-Verificatore & 3 & 0.5 & 15\euro & 45\euro & 7.50\euro \\\hline
-Totale ore: & 24 & 8.5 & Totale costi: & 675\euro & 247.50\euro \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & -15.5 & \multicolumn{2}{r|}{Differenza di costo:} & -427.50\euro \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Elia Scandaletti & Responsabile & 10 & 5.5 & -4.5 \\\hline
-Raffaele Oliviero & Responsabile & 11 & 2.5 & -8.5 \\\hline
-Giovanni Cocco & Verificatore & 3 & 0.5 & -2.5 \\\hline
-\end{tabular}
-
-\paragraph{Sviluppo Proof of Concept}
-Inizio: 23/12/2021\par
-Fine prevista: 08/02/2022\par
-Fine effettiva: 07/02/2022
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Programmatore & 40 & 44 & 15\euro & 600\euro & 660\euro \\\hline
-Verificatore & 3 & 4 & 15\euro & 45\euro & 60\euro \\\hline
-Totale ore: & 43 & 48 & Totale costi: & 645\euro & 720\euro \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & +5 & \multicolumn{2}{r|}{Differenza di costo:} & +75\euro \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Giovanni Cocco & Programmatore & 20 & 21 & +1 \\\hline
-Matteo Galvagni & Programmatore & 20 & 23 & +3 \\\hline
-Elia Scandaletti & Verificatore & 3 & 4 & +1 \\\hline
-\end{tabular}
-
-\paragraph{Presentazione Proof of Concept}
-Inizio: 01/01/2021\par
-Fine prevista: 10/02/2022\par
-Fine effettiva: 09/02/2022
-
-Ore richieste:\\[0.5em]
-\begin{tabular}{|l|l|l||l|l|l|l|}\hline
-Ruolo & Ore prev. & Ore eff. & Costi orari & Costi prev. & Costi eff.\\\hline
-Responsabile & 2 & 2.5 & 30\euro & 60\euro & 75\euro \\\hline
-Verificatore & 0.5 & 0.5 & 15\euro & 7.50\euro & 7.50\euro \\\hline
-Totale ore: & 2.5 & 3 & Totale costi: & 67.50\euro & 82.50\euro \\\hline
-\multicolumn{2}{|r|}{Differenza di ore:} & +0.5 & \multicolumn{2}{r|}{Differenza di costo:} & +15\euro \\\hline
-\end{tabular}
-
-Ruoli assegnati:\\[0.5em]
-\begin{tabular}{|l|l|l|l|l|}\hline
-Membro & Ruolo & Ore prev. & Ore eff. & Diff. ore \\\hline
-Matteo Galvagni & Responsabile & 2 & 2.5 & +0.5 \\\hline
-Giovanni Cocco & Verificatore & 0.5 & 0.5 & 0 \\\hline
-\end{tabular}
-
-\paragraph{Grafico di Gannt}
-Il grafico di Gannt può essere consultato al seguente indirizzo: \underline{\href{https://tinyurl.com/swegannt}{https://tinyurl.com/swegannt}}.
-
-
-\subsection{Grafico dei costi}
-Il grafico dei costi può essere consultato al seguente indirizzo: \underline{\href{https://tinyurl.com/swecosti}{https://tinyurl.com/swecosti}}.
-
+I cicli di SCRUM avverranno ad intervalli settimanali, ogni ciclo inizia con una riunione che comprende:
+\begin{itemize}
+\item resoconto della settimana precedente;
+\item focus su problematiche riscontrate e soluzioni adottate;
+\item aggiornamento della pianificazione della settimana successiva;
+\item assegnazioni degli item ai componenti del gruppo da parte del responsabile.
+\end{itemize}
+I cicli di SCRUM verranno elencati nella sezione seguente adottando una approccio schematico e disciplinato.\\
+Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
+\subsection{Cicli di SCRUM}
+\subsubsection{Cliclo 0}
+\textbf{Data di inizio:} 9-11-2021\\
+\textbf{Data di fine pianficata:} 23-03-2022\\
+\textbf{Data di fine effettiva:} N/A
+\paragraph{Pianificazione}\\
+\textbf{Item da realizzare:}
+\begin{itemize}
+\item piano di progetto;
+\item piano di qualifica;
+\item norme di progetto;
+\item PoC.
+\end{itemize}
+\textbf{Ore stimate:}
+\begin{itemize}
+\item analista: 60 ore (1500€);
+\item progettista: 80 ore (2000€);
+\item programmatore: 45 ore (675€);
+\item responsabile: 40 ore (1200€);
+\item verificatore: 20 ore (300€).
+\end{itemize}
+\textbf{Possibili problematiche:}\\(\textit{problema: mitigazione prevista})
+\begin{itemize}
+\item difficoltà con le tecnologie: si realizzeranno nel PoC prima le parti più critiche;
+\end{itemize}
+\paragraph{Resoconto}\\
+\textbf{Ore effettive:}
+\begin{itemize}
+\item analista: 57 ore (1400€);
+\item progettista: 80 ore (2000€);
+\item programmatore: 46 ore (690€);
+\item responsabile: 40 ore (1200€);
+\item verificatore: 19 ore (285€).
+\end{itemize}
+\textbf{Problematiche riscontrate:}\\(\textit{problema: soluzione adottata})
+\begin{itemize}
+\item difficoltà di tracciamento del lavoro: utilizzo issues GitHub;
+\item difficoltà di coordinamento: riunioni settimanali;
+\end{itemize}
+\textbf{Nozioni apprese:}
+\begin{itemize}
+\item abbiamo capito la necessità di meglio organizzare i documenti;
+\item abbiamo meglio compreso le tecnologie;
+\item abbiamo meglio compreso il capitolato.
+\end{itemize}
 \end{document}
