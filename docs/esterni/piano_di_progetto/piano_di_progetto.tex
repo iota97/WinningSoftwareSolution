@@ -3,7 +3,7 @@
 \usepackage{pdflscape}
 \usepackage{pgfgantt}
 \usepackage{pgfplots}
-
+\usepackage{tabularx}
 
 \newcommand{\templates}{../../template}
 \input{\templates/style}
@@ -43,67 +43,160 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \subsection{Consultivo attuale}
 \subsection{Preventivo a finire}
 
-\section{Dettagli di periodo}
-\subsection{Metodo di lavoro}
+\section{Metodo di lavoro}
 Il metodo di lavoro fa uso del framework SCRUM. Si farà inoltre uso della tecnica di Continuos Integration.\\
 Questo metodo si presta meglio di un modello a cascata data la difficoltà di realizzare una pianificazione accurata a monte con tecnologie poco conosciute.\\\\
 Tuttavia si terrà che:
 \begin{itemize} 
-\item dei cicli non vadano a buon fine portanto a iterazioni (ove incrementi sono sempre preferibili);
-\item delle attività critiche blocchino le altre portanto a una perdita di parallelismo all'interno del gruppo.
+    \item dei cicli non vadano a buon fine portanto a iterazioni (ove incrementi sono sempre preferibili);
+    \item delle attività critiche blocchino le altre portanto a una perdita di parallelismo all'interno del gruppo.
 \end{itemize}
 I cicli di SCRUM avverranno ad intervalli settimanali, ogni ciclo inizia con una riunione che comprende:
 \begin{itemize}
-\item resoconto della settimana precedente;
-\item focus su problematiche riscontrate e soluzioni adottate;
-\item aggiornamento della pianificazione della settimana successiva;
-\item assegnazioni degli item ai componenti del gruppo da parte del responsabile.
+    \item resoconto della settimana precedente;
+    \item focus su problematiche riscontrate e soluzioni adottate;
+    \item aggiornamento della pianificazione della settimana successiva;
+    \item assegnazioni degli item ai componenti del gruppo da parte del responsabile.
 \end{itemize}
 I cicli di SCRUM verranno elencati nella sezione seguente adottando una approccio schematico e disciplinato.\\
 Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
-\subsection{Cicli di SCRUM}
-\subsubsection{Cliclo 0}
+
+\section{Cicli di SCRUM}
+
+\subsection{Ciclo 0}
 \textbf{Data di inizio:} 9-11-2021\\
 \textbf{Data di fine pianficata:} 23-03-2022\\
 \textbf{Data di fine effettiva:} N/A
-\paragraph{Pianificazione}\\
-\textbf{Item da realizzare:}
-\begin{itemize}
-\item piano di progetto;
-\item piano di qualifica;
-\item norme di progetto;
-\item PoC.
-\end{itemize}
-\textbf{Ore stimate:}
-\begin{itemize}
-\item analista: 60 ore (1500€);
-\item progettista: 80 ore (2000€);
-\item programmatore: 45 ore (675€);
-\item responsabile: 40 ore (1200€);
-\item verificatore: 20 ore (300€).
-\end{itemize}
-\textbf{Possibili problematiche:}\\(\textit{problema: mitigazione prevista})
-\begin{itemize}
-\item difficoltà con le tecnologie: si realizzeranno nel PoC prima le parti più critiche;
-\end{itemize}
-\paragraph{Resoconto}\\
-\textbf{Ore effettive:}
-\begin{itemize}
-\item analista: 57 ore (1400€);
-\item progettista: 80 ore (2000€);
-\item programmatore: 46 ore (690€);
-\item responsabile: 40 ore (1200€);
-\item verificatore: 19 ore (285€).
-\end{itemize}
-\textbf{Problematiche riscontrate:}\\(\textit{problema: soluzione adottata})
-\begin{itemize}
-\item difficoltà di tracciamento del lavoro: utilizzo issues GitHub;
-\item difficoltà di coordinamento: riunioni settimanali;
-\end{itemize}
-\textbf{Nozioni apprese:}
-\begin{itemize}
-\item abbiamo capito la necessità di meglio organizzare i documenti;
-\item abbiamo meglio compreso le tecnologie;
-\item abbiamo meglio compreso il capitolato.
-\end{itemize}
+
+\subsubsection{Pianificazione}\mbox{}
+
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Piano di progetto & 2\\
+        \hline
+        Piano di qualifica & 2\\
+        \hline
+        Norme di progetto & 2\\
+        \hline
+        Analisi delle tecnologie & 2\\
+        \hline
+        Analisi dei requisiti & 4\\
+        \hline
+        PoC & 3\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 40  & 1200\\
+        \hline
+        Amministratore  & 20 & 60  & 1200\\
+        \hline
+        Analista        & 25 & 60  & 1500\\
+        \hline
+        Progettista     & 25 & 80  & 2000\\
+        \hline
+        Programmatore   & 15 & 45  & 675\\
+        \hline
+        Verificatore    & 15 & 20  & 300\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 305 & 6875\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        Difficoltà con le tecnologie & Si realizzeranno nel PoC prima le parti più critiche\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 40  & 1200\\
+        \hline
+        Amministratore  & 20 & 60  & 1200\\
+        \hline
+        Analista        & 25 & 57 (-3)  & 1425 (-75)\\
+        \hline
+        Progettista     & 25 & 80  & 2000\\
+        \hline
+        Programmatore   & 15 & 46 (+1)  & 690 (+15)\\
+        \hline
+        Verificatore    & 15 & 19 (-1)  & 285€ (-15)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 302 (-3) & 6800 (-75)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Difficoltà di tracciamento del lavoro & Utilizzo issues GitHub\\
+        \hline
+        Difficoltà di coordinamento & Riunioni settimanali\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Necessità di meglio organizzare i documenti & Aumento dei tempi e costi inizialmente, poi la miglior documentazione porterà a un più celere sviluppo\\
+        \hline
+        Miglior compresione delle tecnologie & Diminuzione delle ore previste di programmazione\\
+        \hline
+        Miglior compresione del capitolato & Pianificazione più accurata e minor incertezza futura\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
 \end{document}
