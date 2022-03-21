@@ -1,0 +1,75 @@
+\contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Scopo del documento}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Processi Primari}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Fornitura}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Sviluppo}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Processi di supporto}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Documentazione}{3}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Strumenti Utilizzati}{3}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Struttura}{3}{subsubsection.3.1.2}%
+\contentsline {paragraph}{Pagina di intestazione\\}{3}{section*.2}%
+\contentsline {paragraph}{Elenco delle versioni\\}{4}{section*.3}%
+\contentsline {paragraph}{Indice\\}{4}{section*.4}%
+\contentsline {subsubsection}{\numberline {3.1.3}Convenzioni utilizzate}{4}{subsubsection.3.1.3}%
+\contentsline {paragraph}{Riferimenti a file e cartelle\\}{4}{section*.5}%
+\contentsline {paragraph}{Stringhe e nomi\\}{4}{section*.6}%
+\contentsline {paragraph}{Riferimenti tra documenti\\}{4}{section*.7}%
+\contentsline {subsection}{\numberline {3.2}Versionamento}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Verifica}{4}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Regole Generali}{4}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Metodi di Verifica}{5}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Change Management}{5}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Processi organizzativi}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Gestione dei processi}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Miglioramento dei processi}{5}{subsection.4.2}%
+\contentsline {section}{\numberline {5}norme vecchie}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Documentazione}{6}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Strumenti utilizzati}{6}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Ciclo di vita}{6}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Versionamento}{6}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Organizzazione dei file}{6}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Struttura dei documenti}{7}{subsubsection.5.1.5}%
+\contentsline {paragraph}{Pagina di intestazione\\}{7}{section*.8}%
+\contentsline {paragraph}{Elenco delle versioni\\}{7}{section*.9}%
+\contentsline {paragraph}{Stile\\}{7}{section*.10}%
+\contentsline {subsubsection}{\numberline {5.1.6}Convenzioni utilizzate}{8}{subsubsection.5.1.6}%
+\contentsline {paragraph}{Riferimenti a file e cartelle\\}{8}{section*.11}%
+\contentsline {paragraph}{Stringhe e nomi\\}{8}{section*.12}%
+\contentsline {paragraph}{Riferimenti tra documenti\\}{8}{section*.13}%
+\contentsline {subsubsection}{\numberline {5.1.7}Documenti}{8}{subsubsection.5.1.7}%
+\contentsline {paragraph}{Norme di progetto\\}{8}{section*.14}%
+\contentsline {subparagraph}{Scopo}{8}{section*.15}%
+\contentsline {subparagraph}{Titolo}{8}{section*.16}%
+\contentsline {subparagraph}{Nome del file}{8}{section*.17}%
+\contentsline {paragraph}{Verbali\\}{8}{section*.18}%
+\contentsline {subparagraph}{Scopo}{8}{section*.19}%
+\contentsline {subparagraph}{Titolo}{8}{section*.20}%
+\contentsline {subparagraph}{Nome dei file}{9}{section*.21}%
+\contentsline {subparagraph}{Indice}{9}{section*.22}%
+\contentsline {subparagraph}{Struttura}{9}{section*.23}%
+\contentsline {subparagraph}{Stesura}{9}{section*.24}%
+\contentsline {paragraph}{Piano di Qualifica\\}{9}{section*.25}%
+\contentsline {subparagraph}{Scopo}{9}{section*.26}%
+\contentsline {subparagraph}{Titolo}{9}{section*.27}%
+\contentsline {subparagraph}{Nome del file}{9}{section*.28}%
+\contentsline {paragraph}{Piano di Progetto\\}{9}{section*.29}%
+\contentsline {subparagraph}{Scopo}{9}{section*.30}%
+\contentsline {subparagraph}{Titolo}{9}{section*.31}%
+\contentsline {subparagraph}{Nome del file}{9}{section*.32}%
+\contentsline {paragraph}{Analisi dei requisiti\\}{9}{section*.33}%
+\contentsline {subparagraph}{Scopo}{10}{section*.34}%
+\contentsline {subparagraph}{Titolo}{10}{section*.35}%
+\contentsline {subparagraph}{Nome del file}{10}{section*.36}%
+\contentsline {paragraph}{Analisi delle tecnologie\\}{10}{section*.37}%
+\contentsline {subparagraph}{Scopo}{10}{section*.38}%
+\contentsline {subparagraph}{Titolo}{10}{section*.39}%
+\contentsline {subparagraph}{Nome del file}{10}{section*.40}%
+\contentsline {subsection}{\numberline {5.2}Verifica e Validazione}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Configurazione}{10}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Repository GitHub}{10}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Comandi utili\\}{10}{section*.41}%
+\contentsline {section}{\numberline {6}(vecchio)Workflow di lavoro}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Versionamento}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Sviluppo Software}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {7}(vecchio)Tracciamento dei progressi}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Revisioni di avanzamento interne}{12}{subsection.7.1}%
