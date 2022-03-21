@@ -42,13 +42,115 @@ Lo scopo del presente documento è definire procedure, strumenti e criteri di qu
 
 \section{Processi Primari}
 \subsection{Fornitura}\label{fornitura}
+Il processo di fornitura determina le attività e le risorse che servo per gestire e assicurare il progetto. In qusta sezione vengono stilate le norme per la gestione dei rapporti con il proponente ed il committente.
+\subsubsection{Repository pubblica}
+Durante tutto il progetto verrà usata un' unica repository pubblica. La parte di repository che interessa al proponente ed al committente è la cartella \textit{public} definita come parte pubblica della repository. Questa cartella contiene un file read-me in cui viene spiegato ed elencato il contenuto della parte pubblica con un avviso che chiede di restarne all'interno, ignorando il resto della repository, detta parte privata.\\\\
+La parte pubblica contiene i documenti necessari alle revisioni di periodo con il committente.\\
+Ogni file nella parte pubblica deve indicare la versione nel nome del file stesso.\\
+Ogni modifica alla parte pubblica deve essere approvata dal responsabile, cui spetta accettare le pull request della parte pubblica.
+\subsubsection{Contatti con proponente e committente}
 
+Tutti i contatti con il proponente ed il committente avvengono tramite la mail del gruppo \textit{winnningsoftwaresolution@gmail.com}.\\\\
+L'invio di una mail nasce dalla richiesta di uno o più componenti del gruppo e necessita di una discussione con il responsabile e della sua approvazione.\\\\
+Le mail per la presentazione ad una revisione di periodo necessita della conferma di tutti i componenti, che valutano l'effettiva preparazione del gruppo per la revisione. Questa mail deve contenere la lettera di presentazione con il link alla parte pubblica della repository.\\\\
+I colloqui devono essere richiesti tramite mail. La reale necessita di un colloquio va discussa durante la riunione settimanale.\\\\
+I colloqui con il proponente si svologo su meet o su discord. I colloqui con il committente si svolgono su zoom.
 \subsection{Sviluppo}
 
 \section{Processi di supporto}
 \subsection{Documentazione}
-\subsection{Verifica}
+\subsubsection{Strumenti Utilizzati}
+Per la stesure dei documenti verrà utilizzato il linguaggio \LaTeX.
+Ogni documento dovrà includere il file \texttt{docs/template/style.tex} che contiene indicazioni di stile.
+Ogni documento userà per la prima pagina il template \texttt{docs/template/front\_page.tex}.
+Eventuali risorse che dovessero servire per il template, saranno nella stessa cartella.
+\subsubsection{Struttura}
+Ogni documento avrà:
+\begin{itemize}
+\item Una pagina di intestazione
+\item Una pagina di elenco delle versioni, dove ammesso
+\item Una pagina di indice, dove ammesso
+\item Il contenuto
+\end{itemize}
 
+Le sezioni avranno le seguenti caratteristiche:
+
+\paragraph{Pagina di intestazione}
+La pagina di intestazione contiene:
+\begin{itemize}
+\item logo e nome del gruppo;
+\item nome del progetto e azienda cliente;
+\item contatto;
+\item titolo del documento;
+\item informazioni sul documento:
+\begin{itemize}
+	\item elenco dei redattori;
+	\item elenco dei revisori;
+	\item elenco dei responsabili;
+	\item versione, laddove prevista;
+	\item destinazione d'uso;
+\end{itemize}
+\item breve descrizione.
+\end{itemize}
+
+La destinazione d'uso può essere ``interno'' o ``esterno''.
+
+
+
+\paragraph{Elenco delle versioni}
+L'elenco delle versioni è una tabella con le seguenti colonne:
+\begin{itemize}
+\item versione;
+\item data;
+\item persona;
+\item attività;
+\item descrizione.
+\end{itemize}
+
+Con persona si intende il membro del gruppo che svolge l'attività.
+
+Le possibili attività su un documento sono ``Redazione'', ``Revisione'' e ``Approvazione''.
+
+Le righe della tabella sono in ordine cronologico inverso.
+
+\paragraph{Indice}
+L'indice è creato usando il comando \verb-\tableofcontents-.
+
+\subsubsection{Convenzioni utilizzate}
+\paragraph{Riferimenti a file e cartelle}
+Per indicare il nome di un file o di una cartella si utilizza il  \texttt{testo monospaziato}.
+
+Il nome di una cartella termina sempre con \texttt{/}.
+
+\paragraph{Stringhe e nomi}
+Le stringhe vengono scritte tra doppi apici `` ''.
+
+Per indicare un parametro in un nome o una stringa si usa del testo tra parentesi angolari $<$ $>$. Il parametro non può contenere spazi.
+
+Per indicare una parte di nome o stringa opzionale si usa del testo tra parentesi quadre [ ].
+
+\paragraph{Riferimenti tra documenti}
+Per riferirsi a sezioni all'interno dello stesso documento si usa il comando \verb-\ref-.
+
+Per riferirsi a sezioni di un altro documento si usa il nome di quella sezione scritto in corsivo.
+
+\subsection{Versionamento}
+Per il versionamento si farà uso del Versionamento Semantico, secondo le seguenti \href{https://semver.org/lang/it/#specifica-di-versionamento-semantico-semver}{linee guida}, se non indicato diversamente successivamente.
+
+Un qualsiasi scatto di versione può avvenire solo attraverso una previa verifica
+\subsection{Verifica}
+\subsubsection{Regole Generali}
+\begin{itemize}
+\item Il verificatore si occupa di controllare le Pull Request aperte dagli altri membri del gruppo
+\item Il verificatore non può aver contribuito ai prodotti che deve verificare.
+\item Il verificatore non può modificare i prodotti che verifica, ad eccezione di correzioni grammaticali.
+\item Il verificatore, qualora trovasse errori, è tenuto a commentare le PR, usando la funzione apposita di GitHub.
+\end{itemize}
+\subsubsection{Metodi di Verifica}
+Il verificatore può far uso dei test automatici presenti nel \textit{Piano di qualifica}.
+Per le sezioni di codice è consigliato un walkthrough del prodotto, similmente si dovrebbero chiedere a chi abbia scritto il codice eventuali delucidazioni su elementi poco chiari
+\subsection{Change Management}
+Nel caso si dovessero cambiare sezione del codice bisogna controllare che eventuali modifiche non vadano ad impattare altri elementi. Per evitare ciò bisogna fare uso del \textit{Diagramma delle classi} presente nelle \textit{Specifiche architetturali}.
 \section{Processi organizzativi}
 \subsection{Gestione dei processi}
 È stato scelto il modello Scrum con sprint di durata settimanale.
