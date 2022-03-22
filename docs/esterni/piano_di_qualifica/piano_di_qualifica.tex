@@ -1,5 +1,8 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\usepgfplotslibrary{dateplot}
 
 \newcommand{\templates}{../../template}
 \input{\templates/style}
@@ -25,82 +28,174 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 
 \makeversioni
 
-\section{Premessa}
-Al fine di garantire la qualità del prodotto saranno fatte due attività: verifica e validazione.
-\subsection{Verifica}
-Ogni PR verrà verificata con attenzione al rispetto delle metriche definite da questo documento.
-\subsection{Validazione}
-Il prodotto finale verrà validato confrontandolo con le specifiche definite dall'analisi dei requisiti.
-\subsection{Metriche}
-Il seguente documento definisce metriche e requisiti minimi per l'accettazione di una PR.\\
-Il documento è suddiviso per categoria di prodotti.\\\\
-Queste metriche dovranno essere calcolabili in maniera automatica.
-\section{Documenti}
-\subsection{Metriche}
+\tableofcontents
+\clearpage
+
+\section{Qualità di prodotto}
+
+\subsection{Analisi statica}
 \subsubsection{Indice di Gulpease}
-L'indice Gulpease è un indice di leggibilità di un testo tarato sulla lingua italiana.\\\\
-Ha il vantaggio di utilizzare la lunghezza delle parole in lettere anziché in sillabe.\\
-Questo semplifica il calcolo automatico.\\
-I risultati sono compresi tra 0 e 100. Il valore "100" indica la leggibilità più alta.\\\\
-In generale risulta che testi coi seguenti indici sono difficili da leggere.
+\[ \text{Indice di Gulpease} = 89 + \frac{300*\text{\#frasi} - 10*\text{\#lettere}}{\text{\#parole}} \]
 \begin{itemize}
-    \item < 80 per chi ha la licenza elementare;
-    \item < 60 per chi ha la licenza media;
-    \item < 40 per chi ha un diploma superiore.
+	\item \#lettere: numero di caratteri alfanumerici;
+	\item \#parole: numero di gruppi di caratteri alfanumerici;
+	\item \#frasi: numero di gruppi di punti o punti e virgola consecutivi.
 \end{itemize}
 
-\[ \text{Indice di Gulpease} = 89 + \frac{300*\text{numero di frasi} - 10*\text{numero di lettere}}{\text{numero di parole}} \]
+\subparagraph{Prodotti coinvolti:}
+\begin{center}
+	\begin{tabularx}{\textwidth}{|X|X|}
+		\hline
+		\textbf{Prodotto} & \textbf{Valore minimo } \\
+		\hline
+		Documenti interni & 40                      \\
+		\hline
+		Documenti esterni & 50                      \\
+		\hline
+	\end{tabularx}\\[8pt]
+	\mbox{}\\
+\end{center}
 
-I parametri saranno calcolati:
+\subparagraph{Strumenti utilizzati:}
 \begin{itemize}
-	\item frasi: i punti presenti nel testo;
-	\item lettere: i caratteri alfanumerici;
-	\item parole: le parole.
+	\item Python - \texttt{textract}.
 \end{itemize}
 
-\subsection{Requisiti minimi}
-\subsubsection{Indice di Gulpease}
-\begin{itemize}
-	\item \textbf{Documenti interni}: minimo 40;
-	\item \textbf{Documenti esterni}: minimo 50.
+\subparagraph{Andamento:}
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Prodotti esterni},
+				axis x line = none,
+				axis y line = none,
+				ymin = 0, ymax = 100
+			]
+			\addplot [red]{40}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = 0, ymax = 100
+			]
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Minimo}
+			\addplot coordinates {
+					(2022-03-22, 50)
+					(2022-03-23, 60)
+					(2022-03-30, 55)
+				};\addlegendentry{Documento test}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Prodotti esterni},
+				axis x line = none,
+				axis y line = none,
+				ymin = 0, ymax = 100
+			]
+			\addplot [red]{50}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = 0, ymax = 100
+			]
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Minimo}
+			\addplot coordinates {
+					(2022-03-22, 50)
+					(2022-03-23, 60)
+					(2022-03-30, 55)
+				};\addlegendentry{Documento test}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\subparagraph{Riferimenti:} \underline{\href{http://www.corrige.it/leggibilita/lindice-gulpease/}{http://www.corrige.it/leggibilita/lindice-gulpease/}}
+
+\subsection{Analisi dinamica}
+
+\subsubsection{Copertura di codice}
+La metrica si basa sullo statement coverage.
+
+\subparagraph{Prodotti coinvolti:}
+\begin{center}
+	\begin{tabularx}{\textwidth}{|X|X|}
+		\hline
+		\textbf{Prodotto} & \textbf{Valore minimo } \\
+		\hline
+		Software          & 80\%                    \\
+		\hline
+	\end{tabularx}\\[8pt]
+	\mbox{}\\
+\end{center}
+
+\subparagraph{Strumenti utilizzati:} \begin{itemize}
+	\item Jest;
+	\item JSCoverage;
+	\item truffle.
 \end{itemize}
 
-\subsection{Stato attuale}
-\begin{tabular}{|l|l|}\hline
-	Data & Stato \\\hline
-	12/12/2021 & N/A \\\hline
-	22/1/2022 & Creati script per automatizzare il processo\\\hline
-	9/2/2022 & Raggiunta copertura 100\%\\\hline
-\end{tabular}
+\subparagraph{Andamento:}
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Statement Coverage},
+				axis x line = none,
+				axis y line = none,
+				ymin = 0, ymax = 100
+			]
+			\addplot [red]{80}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = 0, ymax = 100
+			]
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Minimo}
+			\addplot coordinates {
+					(2022-03-22, 10)
+				};\addlegendentry{WebApp - frontend}
+			\addplot coordinates {
+					(2022-03-22, 100)
+				};\addlegendentry{Server - backend}
+			\addplot coordinates {
+					(2022-03-22, 95)
+				};\addlegendentry{Contratto}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
 
-\subsection{Aspettative di miglioramento}
-\begin{tabular}{|l|l|l|}\hline
-	Data & Obiettivo & Data realizzazione attesa \\\hline
-	30/11/2121 & Creare script per automatizzare il processo & 30/12/2021\\\hline
-	12/1/2022 & Copertura al 100\% & 30/1/2022\\\hline
-\end{tabular}
-
-
-
-\section{Software}
-\subsection{Requisiti minimi}
-Il software dovrà essere coperto almeno per l'80\% da test come richiesto dal proponente.\\\\
-A questo scopo saranno creati appositi test automatici per verificare la correttezza del prodotto al momento della PR.\\
-L'insieme dei test verrà usato per assicurarsi di non introdurre regression durante lo sviluppo.
-
-\subsection{Stato attuale}
-\begin{tabular}{|l|l|}\hline
-	Data & Stato \\\hline
-	4/2/2022 & Creato PoC di test per il server (JTest)\\\hline
-\end{tabular}
-
-\subsection{Aspettative di miglioramento}
-\begin{tabular}{|l|l|l|}\hline
-	Data & Obiettivo & Data realizzazione attesa \\\hline
-	20/1/2022 & Verificare la possibilità di test automatici del server & 7/2/2022\\\hline
-	13/2/2022 & Verificare la possibilità di test automatici del contratto & 5/3/2022\\\hline
-	13/2/2022 & Verificare la possibilità di test automatici del JS utente & 5/3/2022\\\hline
-\end{tabular}
-
-
+\section{Qualità di processo}
 \end{document}
