@@ -44,6 +44,143 @@ Lo scopo del presente documento è definire procedure, strumenti e criteri di qu
 \subsection{Fornitura}\label{fornitura}
 
 \subsection{Sviluppo}
+\subsubsection{Gestione}
+\paragraph{Gestione tempistiche}
+\begin{itemize}
+	\item Lo sviluppo del prodotto (corrispondente all'inizio dello spring, \textbf{??link paragrafo spring})
+	va da mercoledì al sabato estremi inclusi, i restanti 3 giorni vengono spesi per effettuare la verifica
+	sul lavoro svolto. 
+\end{itemize}
+\subsubsection{Analisi dei requisiti}
+\paragraph{Scopo}
+\begin{itemize}
+	\item Fornire un'analisi dettagliata del capitolato proposto al fine 
+	di trovare i requisiti che coprano interamente le esigenze della proponente.
+	\item Fornire ai verificatori tutti i requisiti con per poter effettuare la 
+	validazione del sistema e delle sue unità.
+\end{itemize}
+\paragraph{Descrizione}
+Fonti da cui rilevare le informazioni:
+\begin{itemize}
+	\item Capitolato
+	\item Verbali dei meeting con la proponente
+	\item Verbali dei meeting interni
+\end{itemize}
+\paragraph{Struttura}
+\begin{itemize}
+	\item Descrizione del documento
+	\item Casi d'uso
+	\begin{itemize}
+		\item Utilizzare il programma StarUML per il disegno dei diagrammi.
+		\item Esportare i diagrammi in formato SVG.
+		\item Numerare ogni caso d'uso come \textit{UCX} nel caso di caso d'uso senza padri. 
+		Numerare \textit{UCX.x} ogni caso d'uso figlio di X.\\
+		Dove \textit{X} e \textit{x} sono numeri interi positivi $>$= 1, progressivi.\\
+		E' buona norma seguire una numerazione progressiva in base all'ordine in cui sono 
+		disposti i diagrammi, sebbene nel tempo possono essere eliminati/aggiunti casi d'uso
+		quindi per evitare di dover rienumerare tutti i diagrammi, se si aggiungono casi d'uso
+		partire dalla numerazione del caso d'uso maggiore senza padri se si sta inserendo un caso
+		d'uso senza padri, altrimenti seguire in modo progressivo la numerazione \textit{UCX.(nuovo numero)}
+		partendo dal figlio precedente.
+		\item Ogni diagramma deve essere identificato dalla stringa \textit{Figura N}.\\
+		Dove \textit{N} è un numero interi positivo $>$= 1, progressivo.
+	\end{itemize}
+	\item Requisiti
+	\begin{itemize}
+		\item Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: 
+		funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, 
+		facoltativo)+x(un numero univoco a due cifre).
+	\end{itemize}
+\end{itemize}
+\paragraph{Modifiche al documento}
+Prima di apportare qualsiasi modifica significativa funzionale al documento(e.i. 
+aggiunta/rimozione casi d'uso, requisiti...) bisogna contattare la proponente 
+(dettagli per il contatto della proponente al paragrafo \textbf{??})
+e attendere conferma di accettazione delle modifiche che si vogliono apportare
+al documento.
+
+\subsubsection{Progettazione}
+\paragraph{Scopo}
+La progettazione ha compito di definire tutte le caratteristiche che il prodotto dovrà avere per soddisfare al meglio
+tutti i requisiti degli stakeholders.
+\paragraph{Descrizione}
+Tramite questa attività si andrà a fissare l'architettura del prodotto.
+\paragraph{Specifica Architetturale}
+\begin{itemize}
+	\item Gli elementi devono essere il più semplici possibile, contenendo solo il necessario e nulla di superfluo
+	\item Gli elementi non devono essere accessibili dall'esterno se non strettamente necessario
+	\item Gli elementi distinti devono essere il meno accoppiati possibile
+	\item Gli elementi parte delle stesse funzionalità/moduli devono essere il più coesi possibile
+\end{itemize}
+\paragraph{Design Pattern}
+\begin{itemize}
+	\item Implementare codice tramite l'uso di design pattern solo ove il costo di un'architettura simile sia inferiore
+	ai benefici.
+\end{itemize}
+\paragraph{Diagrammi UML}
+\begin{itemize}
+	\item \textbf{Diagramma delle classi}: consentono di descrivere tipi di entità, con le loro caratteristiche e le 
+	relazioni tra esse. Si astraggono da un linguaggio di programmazione specifico, permettendo di non 
+	dipendere da esso nella rappresentazione.\\
+	\href{https://www.math.unipd.it/~rcardin/swea/2021/Diagrammi%20delle%20Classi_4x4.pdf}{\underline{Riferimento diagramma delle classi}}
+	\item \textbf{Diagramma di sequenza}: modellano le iterazioni tra gli oggetti in un unico caso d'uso. Illustrano come 
+	le diverse parti di un sistema interagiscono per lo svolgimento di un compito e l'ordine in cui queste interazioni
+	avvengono durante l'esecuzione di un specifico caso d'uso.\\
+	\href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Sequenza.pdf}{\underline{Riferimento diagramma di sequenza}}
+
+\end{itemize}
+	
+
+\subsubsection{Codifica}
+\paragraph{Scopo}
+La codifica ha il compito di trasformare l'architettura del prodotto in codice eseguibile dai calcolatori.\\
+I programmatori trasformano quindi il lavoro fatto dai progettisti in codice, basandosi puramente sulle scelte architetturali.
+\paragraph{Descrizione}
+La scrittura del codice deve rispetare le norme elencate di seguito
+\paragraph{Convenzioni linguistiche}
+\begin{itemize}
+	\item Il codice deve essere scritto in lingua inglese (nomi di variabili, classi, commenti ecc..)
+\end{itemize}
+\paragraph{Convenzioni nomenclatura file}
+	\begin{itemize}
+		\item Nel caso il file contenga una classe, il nome del file deve essere: \textit{NomeClasse.EstensioneFile}.
+		\item Nel caso il file non descriva una classe dare un nome significativo al file che ne descriva il compito
+		(e.i. \textit{index.html} per la pagina principale di un sito). 
+	\end{itemize}
+\paragraph{Convenzioni documentazione}
+	\begin{itemize}
+		\item Se il compito di un metodo è particolarmente complesso e difficile da dedurre, aggiungere un commento
+		per esplicitare il suo funzionamento.
+		\item Indicare all'interno di un commento la stringa \textit{TODO:} seguita dal lavoro/correzione da fare su quel 
+		blocco di codice in futuro.
+	\end{itemize}
+\paragraph{Convenzioni stile di codifica}
+\begin{itemize}
+	\item Utilizzare la notazione \textit{CamelCase} per nominare varibili, funzioni, classi.
+	\item Se il linguaggio prevede l'utilizzo delle classi, suddividere ogni classe in un file separato.
+	\item Se un istruzione condizionale(e.i. if-else) o un istruzione di ciclo(e.i. for, while) prevede un blocco,
+	la parentesi di apertura del blocco deve essere in linea con l'istruzione associata.
+	\item Indentare il codice tramite l'utilizzo di 4 spazi.
+\end{itemize}
+\subparagraph{Server/TypeScript}
+\begin{itemize}
+	\item In caso di istruzione asincrona, deve essere inclusa all'interno di una \textit{Promise}.
+\end{itemize}
+\subparagraph{Phyton}
+\subparagraph{HTML}
+\begin{itemize}
+	\item Utilizzare tutte le buone prassi per rendere il sito accessibile, seguendo le linee guida 
+	\href{https://www.w3.org/Translations/WCAG21-it/}{\underline{WCAG 2.1}}
+\end{itemize}
+\subparagraph{CSS}
+	\begin{itemize}
+		\item Mantenere un solo file chiamato \textit{style.css} per la versione desktop 
+		\item Mantenere un solo file chiamato \textit{mini.css} per la versione mobile
+		\item Specificare le unità di misura in \textit{em} o in \textit{\%}
+	\end{itemize}
+
+
+
 
 \section{Processi di supporto}
 \subsection{Documentazione}
