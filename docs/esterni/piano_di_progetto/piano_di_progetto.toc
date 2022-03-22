@@ -5,5 +5,5 @@
 \contentsline {section}{\numberline {2}Metodo di lavoro}{3}{section.2}%
 \contentsline {section}{\numberline {3}Cicli di SCRUM}{3}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Ciclo 0}{3}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Pianificazione}{3}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Pianificazione}{4}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Resoconto}{4}{subsubsection.3.1.2}%

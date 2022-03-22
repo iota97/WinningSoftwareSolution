@@ -40,6 +40,18 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 
 \section{Pianificazione generale}
 \subsection{Diagramma di Gannt}
+\begin{ganttchart}[
+    hgrid,
+    vgrid={*6{draw=none}, dotted},
+    expand chart = \textwidth,
+    time slot format = isodate
+]{2021-12-01}{2022-04-29}
+\gantttitlecalendar{year, month=itname} \\
+\ganttbar{RTB}{2021-12-01}{2022-03-22} \\
+\ganttbar{PB}{2022-03-22}{2022-04-15} \\
+\ganttbar{CA}{2022-04-15}{2022-04-29}
+\end{ganttchart}
+
 \subsection{Consultivo attuale}
 \subsection{Preventivo a finire}
 
