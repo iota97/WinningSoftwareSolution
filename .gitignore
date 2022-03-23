@@ -4,7 +4,8 @@
 *.dvi
 *.log
 *.synctex.gz
-#*.pdf
+*.pdf
+*.toc
 *.rubbercache
 *.fls
 *.fdb_latexmk
@@ -23,3 +24,5 @@ test
 *.sh
 __pycache__
 /script/.env
+
+!public/**.pdf
