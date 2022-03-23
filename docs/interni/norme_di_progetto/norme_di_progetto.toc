@@ -1,0 +1,82 @@
+\contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Scopo del documento}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Processi Primari}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Fornitura}{3}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Repository pubblica}{3}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Contatti con proponente e committente}{3}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Sviluppo}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Gestione}{4}{subsubsection.2.2.1}%
+\contentsline {paragraph}{Gestione tempistiche\\}{4}{section*.2}%
+\contentsline {subsubsection}{\numberline {2.2.2}Analisi dei requisiti}{4}{subsubsection.2.2.2}%
+\contentsline {paragraph}{Scopo\\}{4}{section*.3}%
+\contentsline {paragraph}{Descrizione\\}{4}{section*.4}%
+\contentsline {paragraph}{Struttura\\}{4}{section*.5}%
+\contentsline {paragraph}{Modifiche al documento\\}{5}{section*.6}%
+\contentsline {subsubsection}{\numberline {2.2.3}Progettazione}{5}{subsubsection.2.2.3}%
+\contentsline {paragraph}{Scopo\\}{5}{section*.7}%
+\contentsline {paragraph}{Descrizione\\}{5}{section*.8}%
+\contentsline {paragraph}{Specifica Architetturale\\}{5}{section*.9}%
+\contentsline {paragraph}{Design Pattern\\}{5}{section*.10}%
+\contentsline {paragraph}{Diagrammi UML\\}{5}{section*.11}%
+\contentsline {subsubsection}{\numberline {2.2.4}Organizzazione dei file}{5}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Workflow Github}{6}{subsubsection.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.6}Codifica}{6}{subsubsection.2.2.6}%
+\contentsline {paragraph}{Scopo\\}{6}{section*.12}%
+\contentsline {paragraph}{Descrizione\\}{6}{section*.13}%
+\contentsline {paragraph}{Convenzioni linguistiche\\}{7}{section*.14}%
+\contentsline {paragraph}{Convenzioni nomenclatura file\\}{7}{section*.15}%
+\contentsline {paragraph}{Convenzioni documentazione\\}{7}{section*.16}%
+\contentsline {paragraph}{Convenzioni stile di codifica\\}{7}{section*.17}%
+\contentsline {subparagraph}{Server/TypeScript}{7}{section*.18}%
+\contentsline {subparagraph}{HTML}{7}{section*.19}%
+\contentsline {subparagraph}{CSS}{7}{section*.20}%
+\contentsline {section}{\numberline {3}Processi di supporto}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Documentazione}{8}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Ciclo di vita}{8}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Strumenti Utilizzati}{8}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Struttura}{8}{subsubsection.3.1.3}%
+\contentsline {paragraph}{Pagina di intestazione\\}{8}{section*.21}%
+\contentsline {paragraph}{Elenco delle versioni\\}{9}{section*.22}%
+\contentsline {paragraph}{Indice\\}{9}{section*.23}%
+\contentsline {paragraph}{Norme di progetto\\}{9}{section*.24}%
+\contentsline {subparagraph}{Scopo}{9}{section*.25}%
+\contentsline {subparagraph}{Titolo}{9}{section*.26}%
+\contentsline {subparagraph}{Nome del file}{9}{section*.27}%
+\contentsline {paragraph}{Verbali\\}{9}{section*.28}%
+\contentsline {subparagraph}{Scopo}{9}{section*.29}%
+\contentsline {subparagraph}{Titolo}{9}{section*.30}%
+\contentsline {subparagraph}{Nome dei file}{10}{section*.31}%
+\contentsline {subparagraph}{Indice}{10}{section*.32}%
+\contentsline {subparagraph}{Struttura}{10}{section*.33}%
+\contentsline {subparagraph}{Stesura}{10}{section*.34}%
+\contentsline {paragraph}{Piano di Qualifica\\}{10}{section*.35}%
+\contentsline {subparagraph}{Scopo}{10}{section*.36}%
+\contentsline {subparagraph}{Titolo}{10}{section*.37}%
+\contentsline {subparagraph}{Nome del file}{10}{section*.38}%
+\contentsline {paragraph}{Piano di Progetto\\}{10}{section*.39}%
+\contentsline {subparagraph}{Scopo}{10}{section*.40}%
+\contentsline {subparagraph}{Titolo}{10}{section*.41}%
+\contentsline {subparagraph}{Nome del file}{10}{section*.42}%
+\contentsline {paragraph}{Analisi dei requisiti\\}{10}{section*.43}%
+\contentsline {subparagraph}{Scopo}{11}{section*.44}%
+\contentsline {subparagraph}{Titolo}{11}{section*.45}%
+\contentsline {subparagraph}{Nome del file}{11}{section*.46}%
+\contentsline {paragraph}{Analisi delle tecnologie\\}{11}{section*.47}%
+\contentsline {subparagraph}{Scopo}{11}{section*.48}%
+\contentsline {subparagraph}{Titolo}{11}{section*.49}%
+\contentsline {subparagraph}{Nome del file}{11}{section*.50}%
+\contentsline {subsubsection}{\numberline {3.1.4}Convenzioni utilizzate}{11}{subsubsection.3.1.4}%
+\contentsline {paragraph}{Riferimenti a file e cartelle\\}{11}{section*.51}%
+\contentsline {paragraph}{Stringhe e nomi\\}{11}{section*.52}%
+\contentsline {paragraph}{Riferimenti tra documenti\\}{11}{section*.53}%
+\contentsline {subsection}{\numberline {3.2}Versionamento}{11}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Repository GitHub}{11}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Convenzioni}{12}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Comandi utili}{12}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Verifica}{12}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Regole Generali}{12}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Metodi di Verifica}{12}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Change Management}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Processi organizzativi}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Gestione dei processi}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Miglioramento dei processi}{13}{subsection.4.2}%
