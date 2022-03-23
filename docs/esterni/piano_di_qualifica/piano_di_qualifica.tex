@@ -21,6 +21,8 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \addversione{0.0.2}{16/01/2021}{Giovanni Cocco}{Redazione}{Migliorata la leggibilità.}
 \addversione{0.0.3}{04/02/2021}{Giovanni Cocco}{Redazione}{Stesura iniziale sezione software.}
 \addversione{0.0.4}{21/02/2021}{Giovanni Cocco}{Redazione}{Aggiunta dashboard al docuemento.}
+\addversione{2.0.0}{23/03/2021}{Elia Scandaletti}{Redazione}{Rifacimento del documento.}
+
 
 \begin{document}
 
@@ -33,7 +35,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 
 \section{Qualità di prodotto}
 
-\subsection{Analisi statica}
+\subsection{Documentazione}
 \subsubsection{Indice di Gulpease}
 \[ \text{Indice di Gulpease} = 89 + \frac{300*\text{\#frasi} - 10*\text{\#lettere}}{\text{\#parole}} \]
 \begin{itemize}
@@ -44,13 +46,13 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 
 \subparagraph{Prodotti coinvolti:}
 \begin{center}
-	\begin{tabularx}{\textwidth}{|X|X|}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
 		\hline
-		\textbf{Prodotto} & \textbf{Valore minimo } \\
+		\textbf{Prodotto} & \textbf{Valore accettabile} & \textbf{Valore ottimale } \\
 		\hline
-		Documenti interni & 40                      \\
+		Documenti interni & $>$ 40                      & $>$ 60                    \\
 		\hline
-		Documenti esterni & 50                      \\
+		Documenti esterni & $>$ 50                      & $>$ 60                    \\
 		\hline
 	\end{tabularx}\\[8pt]
 	\mbox{}\\
@@ -71,6 +73,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 				axis y line = none,
 				ymin = 0, ymax = 100
 			]
+			\addplot [green]{60}; \label{opt}
 			\addplot [red]{40}; \label{min}
 		\end{axis}
 		\begin{axis}[
@@ -84,15 +87,20 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 						anchor = north east
 					},
 				xtick = data,
-				ymin = 0, ymax = 100
+				ymin = 0, ymax = 100,
+				legend pos = south east
 			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Minimo}
 			\addplot coordinates {
-					(2022-03-22, 50)
-					(2022-03-23, 60)
-					(2022-03-30, 55)
-				};\addlegendentry{Documento test}
+					(2022-03-23, 55.2)
+				};\addlegendentry{Norme di progetto}
+
+			\addplot coordinates {
+					(2022-03-23, 0)
+				};\addlegendentry{Verbali interni (min)}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
@@ -106,6 +114,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 				axis y line = none,
 				ymin = 0, ymax = 100
 			]
+			\addplot [green]{60}; \label{opt}
 			\addplot [red]{50}; \label{min}
 		\end{axis}
 		\begin{axis}[
@@ -119,33 +128,50 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 						anchor = north east
 					},
 				xtick = data,
-				ymin = 0, ymax = 100
+				ymin = 0, ymax = 100,
+				legend pos = south east
 			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
 			\addlegendimage{/pgfplots/refstyle=min}
-			\addlegendentry{Minimo}
+			\addlegendentry{Accettabile}
 			\addplot coordinates {
-					(2022-03-22, 50)
-					(2022-03-23, 60)
-					(2022-03-30, 55)
-				};\addlegendentry{Documento test}
+					(2022-03-23, 55.2)
+				};\addlegendentry{Analisi dei requisiti}
+
+			\addplot coordinates {
+					(2022-03-23, 0)
+				};\addlegendentry{Piano di progetto}
+
+			\addplot coordinates {
+					(2022-03-23, 0)
+				};\addlegendentry{Piano di qualifica}
+
+			\addplot coordinates {
+					(2022-03-23, 60.1)
+				};\addlegendentry{Analisi delle tecnologie}
+
+			\addplot coordinates {
+					(2022-03-23, 0)
+				};\addlegendentry{Verbali esterni (min)}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
 
 \subparagraph{Riferimenti:} \underline{\href{http://www.corrige.it/leggibilita/lindice-gulpease/}{http://www.corrige.it/leggibilita/lindice-gulpease/}}
 
-\subsection{Analisi dinamica}
+\subsection{Prodotti software}
 
-\subsubsection{Copertura di codice}
+\subsubsection{Copertura statement}
 La metrica si basa sullo statement coverage.
 
 \subparagraph{Prodotti coinvolti:}
 \begin{center}
-	\begin{tabularx}{\textwidth}{|X|X|}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
 		\hline
-		\textbf{Prodotto} & \textbf{Valore minimo } \\
+		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
 		\hline
-		Software          & 80\%                    \\
+		Software          & $>$ 80\%                     & 100\%                     \\
 		\hline
 	\end{tabularx}\\[8pt]
 	\mbox{}\\
@@ -154,6 +180,7 @@ La metrica si basa sullo statement coverage.
 \subparagraph{Strumenti utilizzati:} \begin{itemize}
 	\item Jest;
 	\item JSCoverage;
+	\item PyTest;
 	\item truffle.
 \end{itemize}
 
@@ -165,8 +192,9 @@ La metrica si basa sullo statement coverage.
 				title = {Statement Coverage},
 				axis x line = none,
 				axis y line = none,
-				ymin = 0, ymax = 100
+				ymin = 0, ymax = 110
 			]
+			\addplot [green]{100}; \label{opt}
 			\addplot [red]{80}; \label{min}
 		\end{axis}
 		\begin{axis}[
@@ -180,10 +208,13 @@ La metrica si basa sullo statement coverage.
 						anchor = north east
 					},
 				xtick = data,
-				ymin = 0, ymax = 100
+				ymin = 0, ymax = 110,
+				legend pos = south east
 			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
 			\addlegendimage{/pgfplots/refstyle=min}
-			\addlegendentry{Minimo}
+			\addlegendentry{Accettabile}
 			\addplot coordinates {
 					(2022-03-22, 10)
 				};\addlegendentry{WebApp - frontend}
@@ -191,11 +222,196 @@ La metrica si basa sullo statement coverage.
 					(2022-03-22, 100)
 				};\addlegendentry{Server - backend}
 			\addplot coordinates {
-					(2022-03-22, 95)
+					(2022-03-22, 100)
 				};\addlegendentry{Contratto}
+			\addplot coordinates {
+					(2022-03-22, 100)
+				};\addlegendentry{Script}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\subsubsection{Copertura branch}
+La metrica si basa sullo branch coverage.
+
+\subparagraph{Prodotti coinvolti:}
+\begin{center}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
+		\hline
+		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
+		\hline
+		Software          & $>$ 80\%                     & 100\%                     \\
+		\hline
+	\end{tabularx}\\[8pt]
+	\mbox{}\\
+\end{center}
+
+\subparagraph{Strumenti utilizzati:} \begin{itemize}
+	\item Jest;
+	\item JSCoverage;
+	\item PyTest;
+	\item truffle.
+\end{itemize}
+
+\subparagraph{Andamento:}
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Branch Coverage},
+				axis x line = none,
+				axis y line = none,
+				ymin = 0, ymax = 110
+			]
+			\addplot [green]{100}; \label{opt}
+			\addplot [red]{80}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = 0, ymax = 110,
+				legend pos = south east
+			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Accettabile}
+			\addplot coordinates {
+					(2022-03-22, 10)
+				};\addlegendentry{WebApp - frontend}
+			\addplot coordinates {
+					(2022-03-22, 100)
+				};\addlegendentry{Server - backend}
+			\addplot coordinates {
+					(2022-03-22, 95.1)
+				};\addlegendentry{Contratto}
+			\addplot coordinates {
+					(2022-03-22, 100)
+				};\addlegendentry{Script}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
 
 \section{Qualità di processo}
+\subsubsection{Time variance}
+La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
+
+\subparagraph{Prodotti coinvolti:}
+\begin{center}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
+		\hline
+		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
+		\hline
+		Software          & $<$ 20\%                     & 0\%                       \\
+		\hline
+		Documentazione    & $<$ 20\%                     & 0\%                       \\
+		\hline
+	\end{tabularx}\\[8pt]
+	\mbox{}\\
+\end{center}
+
+\subparagraph{Andamento:}
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Time variance},
+				axis x line = none,
+				axis y line = none,
+				ymin = -10, ymax = 110
+			]
+			\addplot [green]{0}; \label{opt}
+			\addplot [red]{20}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = -10, ymax = 110
+			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Accettabile}
+			\addplot coordinates {
+					(2022-03-22, 0)
+				};\addlegendentry{Documenti}
+			\addplot coordinates {
+					(2022-03-22, 0)
+				};\addlegendentry{Software}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\subsubsection{Budget variance}
+La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
+
+\subparagraph{Prodotti coinvolti:}
+\begin{center}
+	\begin{tabularx}{\textwidth}{|X|X|X|}
+		\hline
+		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
+		\hline
+		Software          & $<$ 20\%                     & 0\%                       \\
+		\hline
+		Documentazione    & $<$ 20\%                     & 0\%                       \\
+		\hline
+	\end{tabularx}\\[8pt]
+	\mbox{}\\
+\end{center}
+
+\subparagraph{Andamento:}
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.8\textwidth}
+		\begin{axis}[
+				title = {Budget variance},
+				axis x line = none,
+				axis y line = none,
+				ymin = -10, ymax = 110
+			]
+			\addplot [green]{0}; \label{opt}
+			\addplot [red]{20}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				xtick = data,
+				ymin = -10, ymax = 110
+			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Accettabile}
+			\addplot coordinates {
+					(2022-03-22, 0)
+				};\addlegendentry{Documenti}
+			\addplot coordinates {
+					(2022-03-22, 0)
+				};\addlegendentry{Software}
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
 \end{document}

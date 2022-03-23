@@ -1,13 +1,23 @@
 \contentsline {section}{\numberline {1}Qualità di prodotto}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Analisi statica}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Documentazione}{3}{subsection.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.1}Indice di Gulpease}{3}{subsubsection.1.1.1}%
 \contentsline {subparagraph}{Prodotti coinvolti:}{3}{section*.2}%
 \contentsline {subparagraph}{Strumenti utilizzati:}{3}{section*.3}%
 \contentsline {subparagraph}{Andamento:}{3}{section*.4}%
 \contentsline {subparagraph}{Riferimenti:}{4}{section*.5}%
-\contentsline {subsection}{\numberline {1.2}Analisi dinamica}{4}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Copertura di codice}{4}{subsubsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2}Prodotti software}{4}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Copertura statement}{4}{subsubsection.1.2.1}%
 \contentsline {subparagraph}{Prodotti coinvolti:}{4}{section*.6}%
 \contentsline {subparagraph}{Strumenti utilizzati:}{4}{section*.7}%
 \contentsline {subparagraph}{Andamento:}{4}{section*.8}%
-\contentsline {section}{\numberline {2}Qualità di processo}{5}{section.2}%
+\contentsline {subsubsection}{\numberline {1.2.2}Copertura branch}{5}{subsubsection.1.2.2}%
+\contentsline {subparagraph}{Prodotti coinvolti:}{5}{section*.9}%
+\contentsline {subparagraph}{Strumenti utilizzati:}{5}{section*.10}%
+\contentsline {subparagraph}{Andamento:}{5}{section*.11}%
+\contentsline {section}{\numberline {2}Qualità di processo}{6}{section.2}%
+\contentsline {subsubsection}{\numberline {2.0.1}Time variance}{6}{subsubsection.2.0.1}%
+\contentsline {subparagraph}{Prodotti coinvolti:}{6}{section*.12}%
+\contentsline {subparagraph}{Andamento:}{6}{section*.13}%
+\contentsline {subsubsection}{\numberline {2.0.2}Budget variance}{7}{subsubsection.2.0.2}%
+\contentsline {subparagraph}{Prodotti coinvolti:}{7}{section*.14}%
+\contentsline {subparagraph}{Andamento:}{7}{section*.15}%
