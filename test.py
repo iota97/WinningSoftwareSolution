@@ -26,17 +26,22 @@ def compile(tex):
 	return stat
 
 def latexTest():
+	res = {'./verbali_interni_(minimo).tex': 10000, './verbali_esterni_(minimo).tex': 10000}
 	for tex in glob.glob("./**/*.tex", recursive = True):
 		min_g = 40
 		if tex.startswith("./docs/template"):
 			continue
-		if tex.startswith("./docs/esterni"):
-			min_g = 50
+		
+		t = 0
+		if tex.startswith("./docs/interni/verbali"):
+			t = 1
+		if tex.startswith("./docs/esterni/verbali"):
+			t = 2
 
 		stat = compile(tex)
 
 		if stat != 0:
-			print("Errore compilazione: " + tex)
+			print("[Failed]: errore compilazione: " + tex)
 		else:
 			# Questi sono stati redatti prima della scelta di utilizzare questo indice, non ha senso modificarli
 			if tex.startswith("./docs/esterni/scelta_architettura") or tex.startswith("./docs/esterni/candidatura") or tex.startswith("./docs/esterni/ricerca_blockchain"):
@@ -44,8 +49,16 @@ def latexTest():
 
 			g = gulpease(tex[:-3]+"pdf")
 			if g < min_g:
-				print("Indice di Gulpease troppo basso per " + tex + ": " + str(float("{:.2f}".format(g))))
+				print("[Failed]: indice di Gulpease troppo basso per " + tex + ": " + str(float("{:.2f}".format(g))))
+			elif t == 0:
+				res[tex] = g
+			elif t == 1:
+				res['./verbali_interni_(minimo).tex'] = min(res['./verbali_interni_(minimo).tex'], g)
+			elif t == 2:
+				res['./verbali_esterni_(minimo).tex'] = min(res['./verbali_esterni_(minimo).tex'], g)
 
+	for key in res:
+		print(os.path.basename(key)[:-4].capitalize().replace('_', ' ')+": "+str(float("{:.2f}".format(res[key]))))
 
 def main():
 	latexTest()
