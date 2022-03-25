@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: none
+//SPDX-License-Identifier: UNLICENSED
 
 pragma solidity 0.8.13;
 
@@ -10,14 +10,13 @@ import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
-//TODO sistemare slippage exchange, enum per lo stato
-
 contract ShopContract is KeeperCompatibleInterface {
 
     uint256 private freePaymentEntryId;
     uint256 private freeSettledPaymentId;
-    AggregatorV3Interface internal priceFeedMatic;
-    AggregatorV3Interface internal priceFeedDAI;
+
+    AggregatorV3Interface internal priceFeedMatic = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
+    AggregatorV3Interface internal priceFeedDAI = AggregatorV3Interface(0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046);
 
     uint256 private immutable interval;
     uint256 private immutable expireDuration;
@@ -28,13 +27,20 @@ contract ShopContract is KeeperCompatibleInterface {
     uint256 public slippageExchange;
     uint256 public slippageDAI;
 
-    uint256 takeFee;
+    uint256 private feeToTake;
     address payable shopchainAddress;
 
     IUniswapV2Router02 public immutable uniswapV2Router;
     IUniswapV2Factory public immutable uniswapV2Factory;
 
     IERC20 DAI = IERC20(0xcB1e72786A6eb3b44C2a2429e317c8a2462CFeb1);
+
+    enum Status{
+        CANCELLED,
+        PAID,
+        UNLOCKED,
+        EXPIRED
+    }
 
     struct PaymentEntry {
         address seller;
@@ -43,7 +49,7 @@ contract ShopContract is KeeperCompatibleInterface {
 
     struct SettledPayment {
         uint256 paymentEntryId;
-        uint256 status; //0 cancelled, 1 paid, 2 money unlocked, 3 timed out
+        Status status;
         address client;
         uint256 time;
         uint256 amountInDAI;
@@ -77,7 +83,7 @@ contract ShopContract is KeeperCompatibleInterface {
     }
 
     modifier statusPaid(uint256 settledPaymentId) {
-        require(settledPayments[settledPaymentId].status == 1);
+        require(settledPayments[settledPaymentId].status == Status.PAID);
         _;
     }
 
@@ -101,10 +107,7 @@ contract ShopContract is KeeperCompatibleInterface {
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _slippageDAI, uint256 _takeFee, address payable _shopchainAddress){
-
-        priceFeedMatic = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
-        priceFeedDAI = AggregatorV3Interface(0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046);
+    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _slippageDAI, uint256 _feeToTake, address payable _shopchainAddress){
 
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
@@ -119,10 +122,10 @@ contract ShopContract is KeeperCompatibleInterface {
         slippageExchange = _slippageExchange;
         slippageDAI = _slippageDAI;
 
-        takeFee = _takeFee;
+        feeToTake = _feeToTake;
         shopchainAddress = _shopchainAddress;
 
-        uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b); //uniswapv2 router for quickswap mumbai
+        uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b);
         uniswapV2Factory = IUniswapV2Factory(uniswapV2Router.factory());
 
     }
@@ -142,10 +145,10 @@ contract ShopContract is KeeperCompatibleInterface {
 
         while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration) {
 
-            if (settledPayments[i].status == 1) {
+            if (settledPayments[i].status == Status.PAID) {
 
                 DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
-                settledPayments[i].status = 3;
+                settledPayments[i].status = Status.EXPIRED;
                 emit statusChanged(i);
 
             }
@@ -178,7 +181,7 @@ contract ShopContract is KeeperCompatibleInterface {
 
         uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDAI, path, address(this), block.timestamp); //EXACT amount of DAI received
 
-        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, 1, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
+        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, Status.PAID, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
         freeSettledPaymentId = freeSettledPaymentId + 1;
 
         emit paymentSettled(freeSettledPaymentId - 1);
@@ -189,12 +192,12 @@ contract ShopContract is KeeperCompatibleInterface {
 
         address payable sellerAddress = payable(paymentsEntries[settledPayments[settledPaymentId].paymentEntryId].seller);
 
-        uint256 feeToTake = (settledPayments[settledPaymentId].amountInDAI * takeFee)/1000;
+        uint256 amountToTake = (settledPayments[settledPaymentId].amountInDAI * feeToTake)/1000;
 
-        DAI.transferFrom(address(this), sellerAddress, settledPayments[settledPaymentId].amountInDAI - feeToTake);
-        DAI.transferFrom(address(this), shopchainAddress, feeToTake);
+        DAI.transferFrom(address(this), sellerAddress, settledPayments[settledPaymentId].amountInDAI - amountToTake);
+        DAI.transferFrom(address(this), shopchainAddress, amountToTake);
 
-        settledPayments[settledPaymentId].status = 2;
+        settledPayments[settledPaymentId].status = Status.UNLOCKED;
 
         emit statusChanged(settledPaymentId);
     }
@@ -204,7 +207,7 @@ contract ShopContract is KeeperCompatibleInterface {
         address payable addr = payable(settledPayments[settledPaymentId].client);
         DAI.transfer(addr, settledPayments[settledPaymentId].amountInDAI);
 
-        settledPayments[settledPaymentId].status = 0;
+        settledPayments[settledPaymentId].status = Status.CANCELLED;
 
         emit statusChanged(settledPaymentId);
     }
@@ -213,7 +216,7 @@ contract ShopContract is KeeperCompatibleInterface {
         require(block.timestamp - settledPayments[settledPaymentId].time > expireDuration); //txn expired
 
         DAI.transfer(settledPayments[settledPaymentId].client, settledPayments[settledPaymentId].amountInDAI);
-        settledPayments[settledPaymentId].status = 3;
+        settledPayments[settledPaymentId].status = Status.EXPIRED;
         emit statusChanged(settledPaymentId);
     }
 
