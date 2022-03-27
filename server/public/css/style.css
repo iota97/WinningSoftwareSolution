@@ -178,7 +178,7 @@ html body {
   margin-top: 0em;
 }
 
-#qr, #cancelPaymentButton {
+#qr, #cancelPaymentButton, #refundPaymentButton {
   display: none;
 }
 
@@ -206,7 +206,7 @@ html body {
   height: auto;
 }
 
-.pop>div>button, .info>button, #qr, #cancelPaymentButton, #unlockFundsButton {
+.pop>div>button, .info>button, #qr, #cancelPaymentButton, #unlockFundsButton, #refundPaymentButton {
   cursor: pointer;
   border-style: solid;
   border-color: #0c162c;
@@ -221,12 +221,12 @@ html body {
   margin-bottom: 3em;
 }
 
-.info>button, #qr, #cancelPaymentButton {
+.info>button, #qr, #cancelPaymentButton, #refundPaymentButton{
   top: 0em;
   margin-bottom: 2em;
 }
 
-#qr, #cancelPaymentButton, #unlockFundsButton {
+#qr, #cancelPaymentButton, #unlockFundsButton, #refundPaymentButton {
   text-decoration: none;
   margin: 1.7em;
   font-weight: bold;

@@ -14,8 +14,10 @@
     <div class="date"><%-confirmed%></div>
     <div class="status" id="status"><%-status%></div>
     <%-qr%>
+    <input id="idTimestamp" type="hidden" value="<%=timestamp%>">
     <input id="idPag" type="hidden" value="<%=id%>">
     <a id="cancelPaymentButton" onclick="onCancelPayment()">Cancel transaction</a>
+    <a id="refundPaymentButton" onclick="onRefundPayment()">Refund transaction</a>
 </div>
 
 <%- include('footer.ejs') %>

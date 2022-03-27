@@ -5,11 +5,13 @@ const forwarderOrigin = currentUrl.hostname === 'localhost' ? 'http://localhost:
 const connectButton = document.getElementById('connectButton');
 const connectPopup = document.getElementById("connect");
 const seller = document.getElementById("seller");
+const buyer = document.getElementById("buyer");
 const qr = document.getElementById("qr");
 const statusTrans = document.getElementById("status");
 const unlockFundsButton = document.getElementById("unlockFundsButton");
 const settlePaymentButton = document.getElementById("settlePaymentButton");
 const cancelPaymentButton = document.getElementById("cancelPaymentButton")
+const refundPaymentButton = document.getElementById("refundPaymentButton")
 const serverURL = document.getElementById('serverURL');
 const chainName = document.getElementById("chainName");
 const conn = document.getElementById("con");
@@ -18,6 +20,7 @@ const listSeller = document.getElementById("listSeller")
 const idWallet = document.getElementById("idWallet")
 const wrongChain = document.getElementById("wrongChain")
 const idPag = document.getElementById("idPag")
+const idTimestamp = document.getElementById("idTimestamp")
 const menu = document.getElementById("header-right");
 const relocButton = document.getElementById("relocButton")
 const confirmPop = document.getElementById("confirm")
@@ -114,9 +117,16 @@ function showSellerButton() {
 }
 
 function showBuyerButton() {
-    if (unlockFundsButton && statusTrans.innerText == "Open") {
+    if (unlockFundsButton  && accounts[0].toUpperCase() == buyer.innerText.toUpperCase()
+    && statusTrans.innerText == "Open") {
         unlockFundsButton.style.display = "block";
     }
+
+    // TODO: CHANGE THIS!!!
+    if (refundPaymentButton  && accounts[0].toUpperCase() == buyer.innerText.toUpperCase()
+    && statusTrans.innerText == "Open" && BigInt(idTimestamp.value) + 5n < (+ new Date())/1000) {
+        refundPaymentButton.style.display = "block";
+    } 
 }
 
 function showContents() {
@@ -240,17 +250,26 @@ function showStatus(id) {
     arr[id].style.display = "flex"
 }
 
-function onClickSettlePayment() {    
+async function getLatestPrice(){
+
+    const addr = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada";
+    const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
+
+    const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+    const rec = await priceFeed.methods.latestRoundData().call();
+
+    return (10**24)/rec.answer;
+
+}
+
+async function onClickSettlePayment() {    
     if (checkChainID()) {
         settlePaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-        
-        let conversion;
-        shopContract.methods.getLatestPrice().call()
-        .then(p => {
-            conversion = p;
-            return shopContract.methods.getPaymentEntry(idPag.value).call()
-        })
+      
+        let conversion = await getLatestPrice();
+
+        shopContract.methods.getPaymentEntry(idPag.value).call()
         .then(paymentEntry => { 
             shopContract.methods.settlePayment(idPag.value).send({from: accounts[0], value: paymentEntry.price*conversion + 500})
             .once('sending', function() {
@@ -288,6 +307,32 @@ function onCancelPayment() {
             showStatus(1)
         })
         .once('confirmation', function() {
+            showStatus(2)
+        })
+        .once('error', function(error) {
+            // This happen on metamask popup close
+            if (!error || error.code != 4001) {
+                showStatus(3)
+            }
+            cancelPaymentButton.disabled = false;
+        });    
+    }
+}
+
+function onRefundPayment() {    
+    if(checkChainID()) {     
+        cancelPaymentButton.disabled = true;
+        const shopContract = new web3.eth.Contract(contractABI, contractAddress);
+        
+        shopContract.methods.revertPayment(idPag.value).send({from: accounts[0]})
+        .once('sending', function() {
+            showStatus(0)
+        })
+        .once('transactionHash', function() {
+            showStatus(1)
+        })
+        .once('confirmation', function() {
+            relocButton.onclick = location.reload();
             showStatus(2)
         })
         .once('error', function(error) {

@@ -126,6 +126,7 @@ class PageCreator {
                     status:  this.statusConverter(item.status),
                     qr: qr_str,
                     id: req.query.id,
+                    timestamp: item.created
                 });
             })
         })
