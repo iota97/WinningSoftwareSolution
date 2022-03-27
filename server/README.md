@@ -59,8 +59,56 @@ INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 
 Un demone riavvia il server ogni volta che un file typescript viene modificato per facilitare lo sviluppo
 
-# Test
+# Test server
 `npm test`
+
+# Test WebApp
+Per eseguire i test sulla Web App si è scelto di utilizzare JSCover in modalità proxy.
+
+In altre parole, i file js dell'applicazione passeranno attraverso un server proxy che li trasformerà e terrà traccia della loro copertura.
+
+Per eseguire i test sarà necessario:
+1. [avviare il server della Web App](##avvio-del-server-shopchain);
+2. [avviare il server di JSCover](##avvio-del-server-proxy);
+3. [configurare il proxy](##configurazione-del-proxy);
+4. [eseguire e salvare i test](##esecuzione-dei-test).
+
+
+## Avvio del server ShopChain
+Il server ShopChain va avviato regolarmente con il comando `npm start`.
+
+## Avvio del server proxy
+Per avviare il server proxy eseguire il seguente comando:
+
+`java -jar JSCover-all.jar -ws --proxy --port=3128 --report-dir=jscoverage --local-storage`
+
+È possibile cambiare porta nel caso la `3128` sia già occupata.
+
+## Configurazione del proxy
+Il server da raggiungere è un server locale ma spesso le impostazioni del browser o del sistema operativo impediscono l'uso del proxy quando ci si collega a `localhost` o a `127.0.0.1`.
+
+Per questo motivo è necessario aggiungere un nuovo host chiamato `localhost-proxy` alla lista degli host noti (`/etc/hosts` nei sistemi Unix) e impostare come proxy `localhost-proxy:3128`.
+
+## Esecuzione dei test
+Per eseguire i test sarà necessario connettersi a [`http://localhost-proxy:8080`](http://localhost-proxy:8080).
+
+### Salvataggio dei dati
+JSCover terrà traccia di ogni linea di codice eseguita e salverà i dati nel localStorage di HTML5.
+
+Per salvare i dati nella cartella `jscoverage` sarà necessario:
+1. caricare la pagina [`http://localhost-proxy:8080/jscoverage.html`](http://localhost-proxy:8080/jscoverage.html);
+2. aprire la tab "Store";
+3. cliccare su "Store Report".
+
+### Cancellazione dei dati
+I dati dei test sono cumulativi, pertanto quando bisogna effettuare i test da zero è necessario cancellare i dati salvati.
+
+Per cancellare i dati è necessario caricare la pagina [`http://localhost-proxy:8080/jscoverage-clear-local-storage.html`](http://localhost-proxy:8080/jscoverage-clear-local-storage.html).
+
+### Vedere i report
+Per visualizzare il report è sufficiente:
+1. caricare la pagina [`http://localhost-proxy:8080/jscoverage.html`](http://localhost-proxy:8080/jscoverage.html);
+2. aprire la tab "Summary".
 
 # Altro
 ### Selezione rete di test da Metamask

@@ -3,6 +3,7 @@ import { Persistence } from "../Persistence/Persistence"
 import { paymentEntry } from "../Persistence/Types/paymentEntry";
 import { payment } from "../Persistence/Types/payment";
 import { Request, Response } from "express"
+import * as CONTRACT from "../public/contract/contract.json";
 
 class PageCreator {
     public landPage(req: Request, res: Response, db: Persistence): void {
@@ -108,7 +109,7 @@ class PageCreator {
             qr.toDataURL(qr_url)
             .then((img_data) => {
                 const qr_str = "<a id=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
-                let conf = "Expire " + this.timeConverter(BigInt(item.created) + BigInt(60*60*24*14));
+                let conf = "Expire " + this.timeConverter(BigInt(item.created) + BigInt(CONTRACT.TIMEOUT));
                 if (item.status == 2) {
                     conf = "Confirmed " + this.timeConverter(item.confirmed as bigint);
                 } else if (item.status == 3) {
