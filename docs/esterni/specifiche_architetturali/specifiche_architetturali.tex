@@ -1,0 +1,165 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{longtable}
+\graphicspath{ {images/} }
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Specifiche Architetturali}
+\setprogetto{ShopChain}
+\setcommittenti{SyncLab}
+\setredattori{Giovanni Cocco}
+\setrevisori{Federico Marchi}
+\setresponsabili{Giovanni Cocco}
+\setdestuso{esterno}
+\setdescrizione{
+Architettura del progetto
+}
+
+\addversione{1.0.0}{23/2/2022}{Giovanni Cocco}{Redazione}{Creazione del documento}
+
+\begin{document}
+
+\makefrontpage
+
+\makeversioni
+
+\tableofcontents
+\clearpage
+
+\section{Introduzone}
+\subsection{Scopo del documento}
+Il documento illustra le scelte architetturali e illustra l'architettura.
+
+\section{Tecnologie/Linguaggi/Librerie}
+
+\subsection{Solidity}
+\begin{itemize}
+\item \textbf{Versione:} 0.8.13
+\item \textbf{Documentazione:} \href{https://docs.soliditylang.org/en/v0.8.13/}{https://docs.soliditylang.org/en/v0.8.13/}
+\end{itemize}
+
+\subsection{Typescript}
+\begin{itemize}
+\item \textbf{Versione:} 4.6.3
+\item \textbf{Documentazione:} \href{https://www.typescriptlang.org/docs/}{https://www.typescriptlang.org/docs/}
+\end{itemize}
+
+\subsection{Express}
+\begin{itemize}
+\item \textbf{Versione:} 4.17.2
+\item \textbf{Documentazione:} \href{https://devdocs.io/express/}{https://devdocs.io/express/}
+\end{itemize}
+
+\subsection{MariaDB}
+\begin{itemize}
+\item \textbf{Versione:} 10.7.3
+\item \textbf{Documentazione:} \href{https://mariadb.com/kb/en/documentation/}{https://mariadb.com/kb/en/documentation/}
+\end{itemize}
+
+\subsection{Python}
+\begin{itemize}
+\item \textbf{Versione:} 3.8
+\item \textbf{Documentazione:} \href{https://docs.python.org/3.8/}{https://docs.python.org/3.8/}
+\end{itemize}
+
+\subsection{Web3}
+\begin{itemize}
+\item \textbf{Versione:} 1.7.1
+\item \textbf{Documentazione:} \href{https://web3js.readthedocs.io/en/v1.7.1/}{https://web3js.readthedocs.io/en/v1.7.1/}
+\end{itemize}
+
+\subsection{MetaMask}
+\begin{itemize}
+\item \textbf{Versione:} 10.11.3
+\item \textbf{Documentazione:} \href{https://docs.metamask.io/guide/}{https://docs.metamask.io/guide/}
+\end{itemize}
+\clearpage
+\section{Architettura}
+Il progetto si compone di 4 macro parti:
+\begin{itemize}
+\item Server
+\item Smart contract
+\item Web app
+\item Script di messa in vendita
+\end{itemize}
+\subsection{Server}
+\subsubsection{Diagramma delle classi}
+\includegraphics[width=1.0\textwidth]{server_class}
+\paragraph{Commenti}
+La classe ShopContract andrà a interfacciarsi con il contratto in blockchain.\\
+La classe PageCreator andrà a interfacciarsi con la WebApp.
+\subsubsection{Design pattern: Constructor injection}
+\paragraph{Descrizione}
+Le dipendenze sono tracciate e passate agli oggetti tramite il construttore.
+\paragraph{Motivazioni}
+Facilità il tracciamento delle dipendenze e agevola il mocking in fase di test.
+
+\subsection{Smart contract}
+\subsubsection{Diagramma delle classi}
+\includegraphics[width=1.0\textwidth]{contract}
+\paragraph{Commenti}
+\subsubsection{Pattern architetturale adottato}
+\paragraph{Descrizione}
+\paragraph{Motivazioni}
+
+\subsection{Web app}
+\subsubsection{Diagramma delle classi}
+[grafico]
+\paragraph{Commenti}
+\subsubsection{Pattern architetturale adottato}
+\paragraph{Descrizione}
+\paragraph{Motivazioni}
+
+\subsection{Script di messa in vendita}
+\subsubsection{sell\_item}
+\textbf{Parametri}\\
+price: float - il prezzo in dollari della entry di pagamento.\\\\
+\textbf{Valore Restituito}\\
+entry id: int - l'id dell'entry inserita in blockchain (-1 in caso di errore).\\\\
+\textbf{Comportamento}\\
+Il metodo inserisce una nuova entry di pagamento in blockchain con il prezzo specificato.\\
+Sia in caso si successo che di errore tutte le informazione vengono salvate nel file \textit{sell.log}.
+
+\section{Diagrammi di sequenza}
+\subsection{Main}
+\includegraphics[width=1.0\textwidth]{main}
+\paragraph{Commenti}
+Mostra cosa avviene all'avvio del server.
+
+\subsection{Ascolto eventi del contratto}
+\includegraphics[width=1.0\textwidth]{shopContractEventManager}
+\paragraph{Commenti}
+Mostra la sottoscrizione degli eventi del contratto.
+
+\subsection{Inizializzazione server web}
+\includegraphics[width=1.0\textwidth]{server}
+\paragraph{Commenti}
+Mostra l'inizializzazione delle routes per express.
+
+\subsection{Nuovo oggetto in vendita}
+\includegraphics[width=1.0\textwidth]{addedPaymentEntry}
+\paragraph{Commenti}
+Mostra cosa succede quando viene inserito una nuova entry di pagamento da parte di un e-commerce.
+
+\subsection{Nuova transazione}
+\includegraphics[width=1.0\textwidth]{settledPayment}
+\paragraph{Commenti}
+Mostra cosa succede quando viene create una nuova transazione.
+
+\subsection{Cambio di stato di una transazione}
+\includegraphics[width=1.0\textwidth]{statusChanged}
+\paragraph{Commenti}
+Mostra cosa succede quando una transazione cambia di stato.
+
+\subsection{Pagina transazioni in entrata}
+\includegraphics[width=1.0\textwidth]{paymentBySellerPage}
+\paragraph{Commenti}
+Mostra cosa succede quando un utente richiede la pagina delle transazione in entrata.\\
+Le altre pagine utilizzano lo stesso modello e dunque si preferisce evitare diagrammi di sequenza ridondanti.
+
+\end{document}
