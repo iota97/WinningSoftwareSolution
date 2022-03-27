@@ -1,0 +1,23 @@
+<%- include('header.ejs') %>
+
+<div class="info">
+    <strong class="price">Price <%-price%>$</strong>
+    <div class="addr">
+        From: <span id="buyer"><%-buyer%></span>
+    </div>
+    
+    <div class="addr">
+        To: <span id="seller"><%-seller%></span>
+    </div>
+    
+    <div class="date">Opened <%-created%></div>
+    <div class="date"><%-confirmed%></div>
+    <div class="status" id="status"><%-status%></div>
+    <%-qr%>
+    <input id="idTimestamp" type="hidden" value="<%=timestamp%>">
+    <input id="idPag" type="hidden" value="<%=id%>">
+    <a id="cancelPaymentButton" onclick="onCancelPayment()">Cancel transaction</a>
+    <a id="refundPaymentButton" onclick="onRefundPayment()">Refund transaction</a>
+</div>
+
+<%- include('footer.ejs') %>

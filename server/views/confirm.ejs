@@ -1,0 +1,15 @@
+<%- include('header.ejs') %>
+
+<div class="info">
+    <strong class="price">Price <%-price%>$</strong>
+    <span class="addr">From: <%-buyer%></span>
+    <span class="addr">To: <%-seller%></span>
+    <span class="date">Opened <%-created%></span>
+    <%-confirmed%>
+    <span class="status" id="status"><%-status%></span>
+    
+    <input id="idPag" type="hidden" value="<%=id%>">
+    <a id="unlockFundsButton" onclick="onClickUnlockFunds()">Confirm</a>
+</div>
+
+<%- include('footer.ejs') %>

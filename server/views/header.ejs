@@ -1,9 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index page</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Shop Chain</title>
+  <meta name="author" content="Winning Software Solution">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media ="screen and (max-width:600px), only screen and (max-width:600px)" href="css/mini.css"/>
+</head>
+
+<body>
+  <header>
+    <a href="/" class="logo">Shop&nbsp;Chain</a>
+    <button id="hamb" onclick="toggleMenu()">Menù</button>
+    <div id="header-right">
+      <a id="listSeller" href="seller">Incoming</a>
+      <a id="listBuyer" href="buyer">Outgoing</a>
+      <a href="help">Help</a>
+    </div>
+  </header>
+  <div id="connect" class="pop">
+    <div>
+      <h1>Connect with MetaMask</h1>
+      <img src="img/meta.png" width="1200" height="1200" />
+      <button id="connectButton" onclick="onClickConnect()">Connect with MetaMask</button>
+    </div>
+    <input id="serverURL" type="hidden" value="<%=serverURL%>" />
+  </div>
+  
+  <div id="confirm" class="pop">
+    <div>
+      <h1>Awaiting confirmation</h1>
+      <img src="img/meta.png" width="260" height="256" />
+      <p>Please confirm the transaction in MetaMask</p>
+      <button onclick="closePop(event)">Cancel</button>
+    </div>
+  </div>
+  
+  <div id="success" class="pop">
+    <div>
+      <h1>Transaction completed</h1>
+      <img src="img/success.png" width="260" height="256" />
+      <p>The transaction was successfully sent</p>
+      <button onclick="closePop(event)" id="relocButton">Done</button>
+    </div>
+  </div>
+  
+  <div id="error" class="pop">
+    <div>
+      <h1>Transaction failed</h1>
+      <img src="img/error.png" width="260" height="256" />
+      <p>An error occurred processing the transaction</p>
+      <button onclick="closePop(event)">Close</button>
+    </div>
+  </div>
+  
+  <div id="wrongChain" class="pop">
+    <div>
+      <h1>Wrong chain</h1>
+      <img src="img/error.png" width="260" height="256" />
+      <p>Please select <span id="chainName"></span> from MetaMask</p>
+      <button onclick="location.reload()">Retry</button>
+    </div>
+  </div>
+  
+  <div id="sending" class="pop">
+    <div>
+      <h1>Awaiting receipt</h1>
+      <img src="img/wait.gif" width="200" height="200" />
+      <p>Hold on, this might take a bit...</p>
+    </div>
+  </div>
+  <div class="notfooter">
+    <div id="con">
+      

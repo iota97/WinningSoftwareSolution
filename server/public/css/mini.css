@@ -1,0 +1,26 @@
+header a {
+    float: none;
+    text-align: left;
+}
+
+#hamb {
+    display: block;
+    margin-right: 1em;
+    float: right;
+    width: 2.8em;
+    height: 2.5em;
+    font-weight: bold;
+    color: white;
+    background-color: #0c162c;
+    border-style: none;
+}
+
+#header-right a {
+    display: block;
+}
+
+#header-right {
+    display: none;
+    margin-top: 1em;
+    float: none;
+}

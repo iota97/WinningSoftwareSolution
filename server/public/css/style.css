@@ -1,0 +1,284 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+html body {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 1.2rem;
+  background-color: #f5f7fd;
+}
+
+#main h2 {
+  margin: 1em;
+}
+
+#main p {
+  margin: 2em;
+}
+
+#none-found {
+  padding: 2em 0em;
+}
+
+.nascosto {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.transactions {
+  margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactions li {
+  text-align: center;
+  position: relative;
+  width: 15em;
+  height: 10em;
+  flex: 1;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+  background-repeat: no-repeat;
+  background-size: 2.9em;
+}
+
+.transactions li.stato0 {
+  background-image: url("../img/grey.png");
+}
+
+.transactions li.stato1 {
+  background-image: url("../img/yellow.png");
+}
+
+.transactions li.stato2 {
+  background-image: url("../img/green.png");
+}
+
+.transactions li.stato3 {
+  background-image: url("../img/red.png");
+}
+
+
+.transactions a {
+  text-decoration: none;
+  margin: 1em;
+}
+
+.info {
+  margin: auto;
+  margin-top: 3em;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  max-width: 30em;
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+  margin-bottom: 3em;
+}
+
+.price {
+  font-size: 1.2em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.addr {
+  white-space: nowrap; 
+  overflow: hidden;
+  font-size: 0.8em;
+  margin: 1.7em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+  text-overflow: ellipsis;
+}
+
+.date {
+  display: block;
+  font-size: 0.8em;
+  margin: 1.5em;
+}
+
+.status {
+  display: block;
+  font-size: 1em;
+  margin: 1.5em;
+}
+
+#con {
+  display: none;
+}
+
+.pop {
+  z-index: 999;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000000d0;
+}
+
+.pop>div>p {
+  margin-top: 2.5em;
+  font-size: 1.2em;
+}
+
+#sending p {
+  margin-bottom: 2.7em;
+}
+
+#confirm img, #success img, #sending img, #error img, #wrongChain img {
+  margin-top: -1.7em;
+  margin-bottom: -2.2em;
+  height: 40%;
+  width: 40%;  
+}
+
+#sending img {
+  margin-top: 1.2em;
+  margin-bottom: -0.5em;
+}
+
+#confirm button, #success button, #sending button, #error button, #wrongChain button {
+  top: 3.5em,;
+}
+
+#unlockFundsButton {
+  display: none;
+  margin-top: 0em;
+}
+
+#qr, #cancelPaymentButton, #refundPaymentButton {
+  display: none;
+}
+
+.pop>div {
+  width: 40em;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  max-width: 30em;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  padding: .5rem;
+}
+
+.pop>div>h1 {
+  margin-top: 1.2em;
+  margin-bottom: 0.9em;
+}
+
+.pop>div>img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 9em;
+  height: auto;
+}
+
+.pop>div>button, .info>button, #qr, #cancelPaymentButton, #unlockFundsButton, #refundPaymentButton {
+  cursor: pointer;
+  border-style: solid;
+  border-color: #0c162c;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  font-weight: bold;
+  color: white;
+  background-color: #0c162c;
+  padding: 1em;
+  min-width: 12em;
+  margin-top: 4em;
+  margin-bottom: 3em;
+}
+
+.info>button, #qr, #cancelPaymentButton, #refundPaymentButton{
+  top: 0em;
+  margin-bottom: 2em;
+}
+
+#qr, #cancelPaymentButton, #unlockFundsButton, #refundPaymentButton {
+  text-decoration: none;
+  margin: 1.7em;
+  font-weight: bold;
+}
+
+.extraspace {
+  margin-bottom: 7em;
+}
+
+header {
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #0c162c;
+  padding: 1em;
+}
+
+#hamb {
+  display: none;
+}
+
+header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 0.5em;
+  text-decoration: none;
+  font-size: 1.2em; 
+  border-radius: 10px;
+}
+
+header a.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#header-right {
+  float: right;
+}
+
+.notfooter {
+  flex: 1 0 auto;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+footer {
+  flex-shrink: 0;
+  text-align: center;
+  overflow: hidden;
+  background-color: #0c162c;
+  padding: 1em;
+}
