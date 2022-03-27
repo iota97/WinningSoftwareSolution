@@ -26,5 +26,6 @@ __pycache__
 /server/.env
 !contract.json
 contract/coverage
+.apikey.secret.swp
 
 !docs/esterni/*/*.pdf

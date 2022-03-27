@@ -37,7 +37,7 @@ per eseguire il deploy sulla rete scelta. Aggiungere ```--reset --compile-none``
 truffle run verify ShopContract --network <YOUR-NETWORK>
 ```
 per verificare il codice.
-Questo comando restituirà un link a Polygonscan dove sarà possibile visionare codice verificato, indirizzo sulla quale il contratto è stato deployato e ABI del contratto.
+Questo comando restituirà un link a PolygonScan dove sarà possibile visionare codice verificato, indirizzo sulla quale il contratto è stato deployato e ABI del contratto.
 
 Le reti sono definite in `truffle-config.js`, la rete di default per questo progetto è polygon_mumbai.
 
@@ -50,3 +50,6 @@ per testare (senza coperture del codice).
 sudo truffle run coverage --file="./test/shopcontract.js" --solcoverjs ./.solcover.js
 ```
 per testare (con coperture del codice).
+
+
+Attualmente deployato all'address [0xEdDF0fad7844aEa6546Bfb9E635da1481Ce20B1a](https://mumbai.polygonscan.com/address/0xEdDF0fad7844aEa6546Bfb9E635da1481Ce20B1a).
