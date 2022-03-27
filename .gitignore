@@ -5,6 +5,7 @@
 *.log
 *.synctex.gz
 *.pdf
+*.toc
 *.rubbercache
 *.fls
 *.fdb_latexmk
@@ -27,5 +28,4 @@ __pycache__
 !contract.json
 contract/coverage
 .apikey.secret.swp
-
-!docs/esterni/*/*.pdf
+!public/**.pdf

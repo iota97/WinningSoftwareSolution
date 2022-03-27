@@ -8,21 +8,23 @@
 \settitolo{Norme di progetto}
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
-\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco}
+\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco \\ Alberto Nicoletti}
 \setdestuso{interno}
 \setdescrizione{
-Questo documento contiene le procedure, gli strumenti e i criteri di qualità che verranno usati nel progetto. 
+Questo documento contiene le procedure, gli strumenti e i criteri di qualità che verranno usati nel progetto.
 }
 
-\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Redazione}{Stesura \ref{documentazione}}
-\addversione{0.0.1}{14/11/2021}{Elia Scandaletti}{Redazione}{Stesura \ref{configurazione-github}}
+\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Redazione}{Stesura documentazione}
+\addversione{0.0.1}{14/11/2021}{Elia Scandaletti}{Redazione}{Stesura configurazione Github}
 \addversione{0.0.2}{07/12/2021}{Elia Scandaletti}{Redazione}{Inserimento norme da verbale del 01/12/2021}
-\addversione{0.0.3}{22/12/2021}{Elia Scandaletti}{Redazione}{Stesura \ref{documentazione-documenti-verbali-stesura}}
+\addversione{0.0.3}{22/12/2021}{Elia Scandaletti}{Redazione}{Stesura regole stesura verbali}
 \addversione{0.0.4}{09/01/2022}{Raffaele Oliviero}{Redazione}{Ristrutturazione documento}
-\addversione{0.0.5}{09/01/2022}{Raffaele Oliviero}{Redazione}{Stesura \ref{documentazione-documenti-piano-di-qualifica} e \ref{verifica-e-validazione}}
-\addversione{0.0.6}{16/01/2022}{Elia Scandaletti}{Redazione}{Adeguamento di \ref{verifica-e-validazione} a decisioni collettive}
-\addversione{0.0.7}{04/02/2022}{Giovanni Cocco}{Redazione}{Stesure di \ref{revisioni-di-avanzamento-interne}}
-\addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Redazione}{Stesura di \ref{analisi-dei-requisiti}, \ref{analisi-delle-tecnologie} e \ref{piano-di-progetto}}
+\addversione{0.0.5}{09/01/2022}{Raffaele Oliviero}{Redazione}{Stesura struttura del piano di qualifica e della verifica e validazione}
+\addversione{0.0.6}{16/01/2022}{Elia Scandaletti}{Redazione}{Adeguamento di verifica e validazione secondo decisioni collettive}
+\addversione{0.0.7}{04/02/2022}{Giovanni Cocco}{Redazione}{Stesure delle revisioni di avanzamento interne}
+\addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Redazione}{Stesura di: analisi dei requisiti, analisi delle tecnologie e piano di progetto}
+\addversione{0.0.9}{16/02/2022}{Giovanni Cocco}{Redazione}{Stesura di norme software}
+\addversione{2.0.0}{20/03/2022}{Alberto Nicoletti}{Redazione}{Rifacimento documento completo}
 
 \begin{document}
 
@@ -30,16 +32,198 @@ Questo documento contiene le procedure, gli strumenti e i criteri di qualità ch
 
 \makeversioni
 
-\section{Introduzone}
+\tableofcontents
+\pagebreak
+
+\section{Introduzione}
 \subsection{Scopo del documento}
 Lo scopo del presente documento è definire procedure, strumenti e criteri di qualità al fine di stabilire un Way of Working. Ogni membro del gruppo sarà tenuto a rispettare le indicazioni qui presentate.
 
+
+\section{Processi Primari}
+\subsection{Fornitura}\label{fornitura}
+Il processo di fornitura determina le attività e le risorse che servo per gestire e assicurare il progetto. In qusta sezione vengono stilate le norme per la gestione dei rapporti con il proponente ed il committente.
+\subsubsection{Repository pubblica}
+Durante tutto il progetto verrà usata un unica repository pubblica. La parte di repository che interessa al proponente ed al committente è la cartella \textit{public} definita come parte pubblica della repository. Questa cartella contiene un file read-me in cui viene spiegato ed elencato il contenuto della parte pubblica con un avviso che chiede di restarne all'interno, ignorando il resto della repository, detta parte privata.\\\\
+La parte pubblica contiene i documenti necessari alle revisioni di periodo con il committente.\\
+Ogni file nella parte pubblica deve indicare la versione nel nome del file stesso nel seguente modo: $<$NomeFile$>$\_v$<$versione$>$.pdf.\\
+Ogni modifica alla parte pubblica deve essere approvata dal responsabile, cui spetta accettare le pull request della parte pubblica.
+\subsubsection{Contatti con proponente e committente}
+
+Tutti i contatti con il proponente ed il committente avvengono tramite la mail del gruppo \textit{winnningsoftwaresolution@gmail.com}.\\\\
+L'invio di una mail nasce dalla richiesta di uno o più componenti del gruppo e necessita di una discussione con il responsabile e della sua approvazione.\\\\
+Le mail per la presentazione ad una revisione di periodo necessita della conferma di tutti i componenti, che valutano l'effettiva preparazione del gruppo per la revisione. Questa mail deve contenere la lettera di presentazione con i link ai vari documenti nella parte pubblica della repository.\\\\
+I colloqui devono essere richiesti tramite mail. La reale necessita di un colloquio va discussa durante la riunione settimanale.\\\\
+I colloqui con il proponente si svolgono su Meet o su Discord. I colloqui con il committente si svolgono su Zoom.
+\subsection{Sviluppo}\label{processi-primari-sviluppo}
+\subsubsection{Gestione}
+\paragraph{Gestione tempistiche}
+Lo sviluppo del prodotto va da mercoledì (corrispondente all'inizio del ciclo di Sprint) al sabato estremi inclusi, i restanti 3 giorni vengono spesi per effettuare la verifica sul lavoro svolto. 
+\subsubsection{Analisi dei requisiti}
+\paragraph{Scopo}
+Fornire un'analisi dettagliata del capitolato proposto al fine di trovare i requisiti che coprano interamente le esigenze della proponente.
+
+Fornire ai verificatori tutti i requisiti con per poter effettuare la validazione del sistema e delle sue unità.
+\paragraph{Descrizione}
+Fonti da cui rilevare le informazioni:
+\begin{itemize}
+	\item Capitolato
+	\item Verbali dei meeting con la proponente
+	\item Verbali dei meeting interni
+\end{itemize}
+\paragraph{Struttura}
+\begin{itemize}
+	\item Descrizione del documento
+	\item Casi d'uso
+	\begin{itemize}
+		\item Utilizzare il programma \href{https://staruml.io/}{\textit{\underline{StarUML}}} per il disegno dei diagrammi.
+		\item Esportare i diagrammi in formato \textit{SVG}.
+		\item Numerare ogni caso d'uso come \textit{UCX}. \\
+		Ogni generalizzazione di X viene numerata come \textit{UCX.x} .\\
+		Dove \textit{X} e \textit{x} sono numeri interi positivi $>$= 1, progressivi.\\
+		E' buona norma seguire una numerazione progressiva in base all'ordine in cui sono 
+		disposti i diagrammi, sebbene nel tempo possono essere eliminati/aggiunti casi d'uso.\\
+		Per evitare di dover rinumerare tutti i diagrammi: \\
+		Se si aggiungono casi d'uso, partire dalla numerazione del caso d'uso con indice \textit{X} maggiore.\\
+		Per l'aggiunta di generalizzazioni, le regole sono analoghe per l'indice \textit{x}.
+		\item Ogni diagramma deve essere identificato dalla stringa \textit{Figura N}.\\
+		Dove \textit{N} è un numero interi positivo $>$= 1, progressivo.
+	\end{itemize}
+	\item Requisiti
+	\begin{itemize}
+		\item Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: 
+		funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, 
+		facoltativo)+x(un numero univoco a due cifre).
+	\end{itemize}
+\end{itemize}
+\paragraph{Modifiche al documento}
+Prima di apportare qualsiasi modifica significativa funzionale al documento (e.g. 
+aggiunta/rimozione casi d'uso, requisiti...) bisogna contattare il proponente 
+e attendere conferma di accettazione delle modifiche che si vogliono apportare
+al documento.
+
+\subsubsection{Progettazione}
+\paragraph{Scopo}
+La progettazione ha compito di definire tutte le caratteristiche che il prodotto dovrà avere per soddisfare al meglio
+tutti i requisiti degli stakeholders.
+\paragraph{Descrizione}
+Tramite questa attività si andrà a fissare l'architettura del prodotto.
+\paragraph{Specifica Architetturale}
+\begin{itemize}
+	\item Gli elementi devono essere il più semplici possibile, contenendo solo il necessario e nulla di superfluo;
+	\item Gli elementi non devono essere accessibili dall'esterno se non strettamente necessario;
+	\item Gli elementi distinti devono essere il meno accoppiati possibile;
+	\item Gli elementi parte delle stesse funzionalità/moduli devono essere il più coesi possibile.
+\end{itemize}
+\paragraph{Design Pattern}
+Implementare codice tramite l'uso di design pattern solo ove il costo di un'architettura simile sia inferiore ai benefici.
+\paragraph{Diagrammi UML}
+\begin{itemize}
+	\item \textbf{Diagramma delle classi}: consentono di descrivere tipi di entità, con le loro caratteristiche e le 
+	relazioni tra esse. Si astraggono da un linguaggio di programmazione specifico, permettendo di non 
+	dipendere da esso nella rappresentazione.\\
+	\href{https://www.math.unipd.it/~rcardin/swea/2021/Diagrammi%20delle%20Classi_4x4.pdf}{\underline{Riferimento diagramma delle classi}}
+	\item \textbf{Diagramma di sequenza}: modellano le iterazioni tra gli oggetti in un unico caso d'uso. Illustrano come 
+	le diverse parti di un sistema interagiscono per lo svolgimento di un compito e l'ordine in cui queste interazioni
+	avvengono durante l'esecuzione di un specifico caso d'uso.\\
+	\href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Sequenza.pdf}{\underline{Riferimento diagramma di sequenza}}
+
+\end{itemize}
+
+\subsubsection{Organizzazione dei file}
+Tutta la documentazione sarà contenuta all'interno della cartella \texttt{docs/}. La cartella è a sua volta divisa in due sottocartelle \texttt{docs/interni/} e \texttt{docs/esterni/}, che conterranno rispettivamente la documentazione interna al gruppo e quella da condividere con gli altri stakeholders.
+
+I verbali interni saranno conservati nella sottocartella \texttt{interni/verbali/}.
+I verbali esterni saranno conservati nella sottocartella \texttt{esterni/verbali/}.
+
+Per ogni documento sarà presente una cartella che sarà chiamata \texttt{$<$nome$>$/}, dove \texttt{$<$nome$>$} è il nome del documento.
+
+Il file principale di ogni documento sarà all'interno della rispettiva cartella e sarà chiamato \texttt{$<$nome$>$.tex}, dove \texttt{$<$nome$>$} è il nome del file.
+
+Le specifiche di nomenclature sono descritte in \ref{convenzioni}.
+
+Eventuali altri file utilizzati nella stesura del documento saranno posizionati all'interno della stessa cartella.
+
+\subsubsection{Workflow Github}
+
+Ogni modifica alla repository dovrà seguire i seguenti passaggi:
+\begin{itemize}
+\item Modifica del codice su repository locale;
+\item Push su un branch remoto;
+\item Pull request tramite piattaforma web GitHub per merge sul branch \texttt{main};
+\item Review della pull request;
+\item Merge sul branch \texttt{main}.
+\end{itemize}
+
+Un branch remoto è un branch su cui operano uno o più membri del gruppo e ha come scopo l'elaborazione di un prodotto o di un processo di progetto. Il branch si chiamerà come il prodotto o il processo relativo.
+
+Le modifiche su un branch remoto avverranno tramite merge di un branch locale o con commit diretto. I membri del gruppo che lavorano sul branch concordano una modalità.
+
+È auspicabile che i branch locali non compaiano nella repository remota.
+
+Prima di effettuare un push alla repository remota o un merge è necessario fare uno squash dei commit superflui.
+
+Non appena chi lavora su un branch remoto ritenga che ci sia materiale pronto per una revisione, apre una pull request su GitHub.
+
+La review dovrà essere fatta dal verificatore. Il verificatore potrà accettare la pull request.
+
+Una pull request può essere accettata solo se tutti i prodotti coinvolti superano i requisiti minimi definiti nel \textit{Piano di Qualifica}.
+
+Quando il verificatore accetta un pull request, dovrà eliminare il branch relativo a quest'ultima.
+
+Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
+
+Non è consentito forzare i push sulla repository remota.	
+
+\subsubsection{Codifica}
+\paragraph{Scopo}
+La codifica ha il compito di trasformare l'architettura del prodotto in codice eseguibile dai calcolatori.\\
+I programmatori trasformano quindi il lavoro fatto dai progettisti in codice, basandosi puramente sulle scelte architetturali.
+\paragraph{Descrizione}
+La scrittura del codice deve rispetare le norme elencate di seguito
+\paragraph{Convenzioni linguistiche}
+\begin{itemize}
+	\item Il codice deve essere scritto in lingua inglese (nomi di variabili, classi, commenti ecc..)
+\end{itemize}
+\paragraph{Convenzioni nomenclatura file}
+	\begin{itemize}
+		\item Nel caso il file contenga una classe, il nome del file deve essere: \textit{NomeClasse.EstensioneFile}.
+		\item Nel caso il file non descriva una classe dare un nome significativo al file che ne descriva il compito
+		(e.i. \textit{index.html} per la pagina principale di un sito). 
+	\end{itemize}
+\paragraph{Convenzioni documentazione}
+	\begin{itemize}
+		\item Se il compito di un metodo è particolarmente complesso e difficile da dedurre, aggiungere un commento
+		per esplicitare il suo funzionamento.
+		\item Indicare all'interno di un commento la stringa \textit{TODO:} seguita dal lavoro/correzione da fare su quel 
+		blocco di codice in futuro.
+	\end{itemize}
+\paragraph{Convenzioni stile di codifica}
+\begin{itemize}
+	\item Utilizzare la notazione \textit{PascalCase} per nominare varibili, funzioni, classi.
+	\item Se il linguaggio prevede l'utilizzo delle classi, suddividere ogni classe in un file separato.
+	\item Se un istruzione condizionale(e.g. if-else) o un istruzione di ciclo(e.g. for, while) prevede un blocco,
+	la parentesi di apertura del blocco deve essere in linea con l'istruzione associata.
+	\item Indentare il codice tramite l'utilizzo di 4 spazi.
+\end{itemize}
+\subparagraph{Server/TypeScript}
+\begin{itemize}
+	\item In caso di istruzione asincrona, deve essere inclusa all'interno di una \textit{Promise}.
+\end{itemize}
+\subparagraph{HTML}
+\begin{itemize}
+	\item Utilizzare tutte le buone prassi per rendere il sito accessibile, seguendo le linee guida 
+	\href{https://www.w3.org/Translations/WCAG21-it/}{\underline{WCAG 2.1}}
+\end{itemize}
+\subparagraph{CSS}
+	\begin{itemize}
+		\item Mantenere un solo file chiamato \textit{style.css} per la versione desktop 
+		\item Mantenere un solo file chiamato \textit{mini.css} per la versione mobile
+		\item Specificare le unità di misura in \textit{em} o in \textit{\%}
+	\end{itemize}
+
 \section{Processi di supporto}
-
-\subsection{Documentazione}\label{documentazione}
-
-\subsubsection{Strumenti utilizzati}
-Per la stesura dei documenti verrà utilizzato il linguaggio \LaTeX.
+\subsection{Documentazione}
 
 \subsubsection{Ciclo di vita}
 Ogni documento passa per le seguenti fasi di vita:
@@ -54,102 +238,64 @@ Non è possibile per un membro del gruppo coprire più ruoli nella gestione dell
 
 Una volta che un documento è revisionato o approvato può comunque tornare in fase di stesura sulla base delle esigenze del momento.
 
-\subsubsection{Versionamento}
-Ogni documento è univocamente identificabile dal titolo e dalla versione. La versione è definita da tre numeri nel formato \texttt{$<$x$>$.$<$y$>$.$<$z$>$}.
+\subsubsection{Strumenti Utilizzati}
+Per la stesure dei documenti verrà utilizzato il linguaggio \LaTeX.
 
-La prima versione è la \texttt{0.0.0}
-
-Il numero \texttt{$<$z$>$} viene modificato ogni volta che viene effettuata una stesura del documento.
-
-Il numero \texttt{$<$y$>$} viene modificato ogni volta che viene effettuata una revisione del documento.
-
-Il numero \texttt{$<$x$>$} viene modificato ogni volta che viene effettuata un'approvazione del documento.
-
-Se il numero \texttt{$<$x$>$} viene modificato, \texttt{$<$y$>$} e \texttt{$<$z$>$} tornano a 0.
-
-Se il numero \texttt{$<$y$>$} viene modificato, \texttt{$<$z$>$} torna a 0.
-
-I verbali sono esclusi dal sistema di versionamento poiché non possono essere modificati nel tempo.
-
-\subsubsection{Organizzazione dei file}
-Tutta la documentazione sarà contenuta all'interno della cartella \texttt{docs/}. La cartella è a sua volta divisa in due sottocartelle \texttt{docs/interni/} e \texttt{docs/esterni/}, che conterranno rispettivamente la documentazione interna al gruppo e quella da condividere con gli altri stakeholders.
-
-Tutti i verbali saranno conservati nella sottocartella \texttt{interni/verbali/}.
-
-Per ogni documento sarà presente una cartella che sarà chiamata \texttt{$<$nome$>$/}, dove \texttt{$<$nome$>$} è il nome del documento come specificato nella sezione \ref{documentazione-documenti}.
-
-Il file principale di ogni documento sarà all'interno della rispettiva cartella e sarà chiamato \texttt{$<$nome$>$.tex}, dove \texttt{$<$nome$>$} è il nome del file come definito nella sezione \ref{documentazione-documenti}.
-
-Eventuali altri file utilizzati nella stesura del documento saranno posizionati all'interno della stessa cartella.
-
-\subsubsection{Struttura dei documenti}
-Ogni documento avrà una pagina di intestazione e una pagina con l'elenco delle versioni, laddove il versionamento del documento è ammesso.
-Sarà inserita una pagina con l'indice, a meno di indicazione contraria nella sezione \ref{documentazione-documenti}.
-
-\paragraph{Pagina di intestazione}
-La pagina di intestazione contiene:
-\begin{itemize}
-\item logo e nome del gruppo;
-\item nome del progetto e azienda cliente;
-\item contatto;
-\item titolo del documento;
-\item informazioni sul documento:
-\begin{itemize}
-	\item elenco dei redattori;
-	\item elenco dei revisori;
-	\item elenco dei responsabili;
-	\item versione, laddove prevista;
-	\item destinazione d'uso;
-\end{itemize}
-\item breve descrizione.
-\end{itemize}
-
-La destinazione d'uso può essere ``interno'' o ``esterno''.
+Ogni documento dovrà includere il file \texttt{docs/template/style.tex} che contiene indicazioni di stile.
 
 Ogni documento userà per la prima pagina il template \texttt{docs/template/front\_page.tex}.
 
 Eventuali risorse che dovessero servire per il template, saranno nella stessa cartella.
+\subsubsection{Struttura}
+Ogni documento avrà:
+\begin{itemize}
+\item Una pagina di intestazione;
+\item Una pagina di elenco delle versioni, dove ammesso;
+\item Una pagina di indice, dove ammesso;
+\item Il contenuto.
+\end{itemize}
+
+Le sezioni avranno le seguenti caratteristiche:
+
+\paragraph{Pagina di intestazione}
+La pagina di intestazione contiene:
+\begin{itemize}
+\item Logo e nome del gruppo;
+\item Nome del progetto e azienda cliente;
+\item Contatto;
+\item Titolo del documento;
+\item Informazioni sul documento:
+\begin{itemize}
+	\item Elenco dei redattori;
+	\item Elenco dei revisori;
+	\item Elenco dei responsabili;
+	\item Versione, laddove prevista;
+	\item Destinazione d'uso.
+\end{itemize}
+\item Breve descrizione.
+\end{itemize}
+
+La destinazione d'uso può essere ``interno'' o ``esterno''.
+
+
 
 \paragraph{Elenco delle versioni}
 L'elenco delle versioni è una tabella con le seguenti colonne:
 \begin{itemize}
-\item versione;
-\item data;
-\item persona;
-\item attività;
-\item descrizione.
+\item Versione;
+\item Data;
+\item Persona;
+\item Attività;
+\item Descrizione.
 \end{itemize}
 
 Con persona si intende il membro del gruppo che svolge l'attività.
 
-Le possibili attività su un documento sono ``Redazione'', ``Revisione'' e ``Approvazione''.
-
 Le righe della tabella sono in ordine cronologico inverso.
 
-\paragraph{Stile}
-Ogni documento dovrà includere il file \texttt{docs/template/style.tex} che contiene indicazioni di stile.
+\paragraph{Indice}
+L'indice è creato usando il comando \verb-\tableofcontents-.
 
-
-
-\subsubsection{Convenzioni utilizzate}
-\paragraph{Riferimenti a file e cartelle}
-Per indicare il nome di un file o di una cartella si utilizza il  \texttt{testo monospaziato}.
-
-Il nome di una cartella termina sempre con \texttt{/}.
-
-\paragraph{Stringhe e nomi}
-Le stringhe vengono scritte tra doppi apici `` ''.
-
-Per indicare un parametro in un nome o una stringa si usa del testo tra parentesi angolari $<$ $>$. Il parametro non può contenere spazi.
-
-Per indicare una parte di nome o stringa opzionale si usa del testo tra parentesi quadre [ ].
-
-\paragraph{Riferimenti tra documenti}
-Per riferirsi a sezioni all'interno dello stesso documento si usa il comando \verb-\ref-.
-
-Per riferirsi a sezioni di un altro documento si usa il nome di quella sezione scritto in corsivo.
-
-\subsubsection{Documenti}\label{documentazione-documenti}
 
 \paragraph{Norme di progetto}
 \subparagraph{Scopo}
@@ -178,12 +324,12 @@ Non è presente una pagina con l'indice.
 \subparagraph{Struttura}
 Ogni verbale deve riportare:
 \begin{itemize}
-\item data, ora e durata;
-\item luogo;
-\item partecipanti;
-\item ordine del giorno;
-\item riassunto dei contenuti;
-\item eventuali impegni assunti.
+\item Data, ora e durata;
+\item Luogo;
+\item Partecipanti;
+\item Ordine del giorno;
+\item Riassunto dei contenuti;
+\item Eventuali impegni assunti.
 \end{itemize}
 \subparagraph{Stesura}\label{documentazione-documenti-verbali-stesura}
 All'inizio di ogni riunione verrà nominato un partecipante che redigerà il verbale e uno che lo approverà.
@@ -224,19 +370,41 @@ Il titolo del documento è ``Analisi delle tecnologie".
 \subparagraph{Nome del file}
 Il file sarà chiamato \texttt{analisi\_delle\_tecnologie.tex}.
 
-\subsection{Verifica e Validazione}\label{verifica-e-validazione}
-Ogni prodotto per essere accettato nel branch \texttt{main} deve rispettare i requisiti minimi definiti dal \textit{Piano di Qualifica}. 
 
-A tal fine, verrà predisposto un insieme di test per rendere automatica, in toto o in parte, la verifica e la validazione dei prodotti.
+\subsubsection{Convenzioni utilizzate}\label{convenzioni}
+\paragraph{Riferimenti a file e cartelle}
+Per indicare il nome di un file o di una cartella si utilizza il  \texttt{testo monospaziato}.
 
-\subsection{Configurazione}
+Il nome di una cartella termina sempre con \texttt{/}.
+
+\paragraph{Stringhe e nomi}
+Le stringhe vengono scritte tra doppi apici `` ''.
+
+Per indicare un parametro in un nome o una stringa si usa del testo tra parentesi angolari $<$ $>$. Il parametro non può contenere spazi.
+
+Per indicare una parte di nome o stringa opzionale si usa del testo tra parentesi quadre [ ].
+
+\paragraph{Riferimenti tra documenti}
+Per riferirsi a sezioni all'interno dello stesso documento si usa il comando \verb-\ref-.
+
+Per riferirsi a sezioni di un altro documento si usa il nome di quella sezione scritto in corsivo.
+
+
+
+\subsection{Versionamento}
+
 
 \subsubsection{Repository GitHub}\label{configurazione-github}
-Per il versionamento del progetto si è scelto di utilizzare git su piattaforma GitHub.
+Per il versionamento del progetto si è scelto di utilizzare Git su piattaforma GitHub.
 
 La repository \url{https://github.com/iota97/WinningSoftwareSolution} conterrà tutti i file del progetto.
 
-\paragraph{Comandi utili}
+\subsubsection{Convenzioni}
+Per il versionamento si farà uso del Versionamento Semantico, secondo le seguenti \href{https://semver.org/lang/it/#specifica-di-versionamento-semantico-semver}{linee guida}, se non indicato diversamente successivamente.
+
+Un qualsiasi scatto di versione può avvenire solo attraverso una previa verifica
+
+\subsubsection{Comandi utili}
 Alcuni comandi utili sono:
 \begin{itemize}
 \item \textbf{Sincronizzazione con repository remota:} \texttt{git pull};
@@ -248,59 +416,49 @@ Alcuni comandi utili sono:
 \item \textbf{Push su un branch già esistente:} \texttt{git push}.
 \end{itemize}
 
-\section{Workflow di lavoro}
-Ogni modifica alla repository dovrà seguire i seguenti passaggi:
+\subsection{Verifica}
+\subsubsection{Regole Generali}
 \begin{itemize}
-\item modifica del codice su repository locale;
-\item modifica su un branch collettivo;
-\item pull request tramite piattaforma web GitHub per merge sul branch \texttt{main};
-\item review della pull request;
-\item merge sul branch \texttt{main}.
+\item Il verificatore si occupa di controllare le Pull Request aperte dagli altri membri del gruppo;
+\item Il verificatore non può aver contribuito ai prodotti che deve verificare;
+\item Il verificatore non può modificare i prodotti che verifica;
+\item Il verificatore, qualora trovasse errori, è tenuto a commentare le PR, usando la funzione apposita di GitHub.
 \end{itemize}
+\subsubsection{Metodi di Verifica}
+Il verificatore può far uso dei test automatici presenti nel \textit{Piano di qualifica}.
 
-Un branch collettivo è un branch su cui operano uno o più membri del gruppo e ha come scopo l'elaborazione di un prodotto o di un processo di progetto. Il branch si chiamerà come il prodotto o il processo relativo.
+Per le sezioni di codice è consigliato un walkthrough del prodotto, similmente si dovrebbe chiedere a chi abbia scritto il codice eventuali delucidazioni su elementi poco chiari
+\subsection{Change Management}
+Nel caso si dovessero cambiare sezione del codice bisogna controllare che eventuali modifiche non vadano ad impattare altri elementi. 
 
-Le modifiche su un branch collettivo avverranno tramite merge di un branch personale o con commit diretto. I membri del gruppo che lavorano sul branch concordano una modalità.
+Per evitare ciò bisogna fare uso del \textit{Diagramma delle classi} presente nelle \textit{Specifiche architetturali}.
+\section{Processi organizzativi}
+\subsection{Gestione dei processi}
+È stato scelto il modello SCRUM con sprint di durata settimanale.
+Si è deciso di effettuare una riunione interna ogni mercoledì dove discutere dei seguenti punti:
+\begin{itemize}
+\item Resoconto dello sprint precedente;
+\item Eventuali problemi riscontrati e soluzioni adottate;
+\item Resoconto di ore e costi per ogni componente;
+\item Pianificazione prossimi sprint.
+\end{itemize}
+I resoconti dovranno essere preparati dai singoli membri prima di ogni esposizione.\\
+Ogni incontro dovrà produrre un aggiornamento delle milestones (e diagramma di Gantt).\\
+La pianificazione dei prossimi sprint consisterà nel dividere il lavoro in item e decidere il numero di membri adatto per item.\\
+Ogni ciclo di SCRUM prevederà un nuovo responsabile, scelto per cognome in ordine alfabetico.\\
+Il responsabile dovrà assegnare le persone agli item considerando la rotazione dei ruoli.\\
+Il responsabile dovrà poi creare le issues su GitHub relative agli item e assegnarvici i membri.\\
+Le issues dovranno essere collegate alle milestones di appartenenza dal responsabile.\\
+Il responsabile si occuperà di aggiornare preventivo e consultivo totale, compilando nel PdP la sezione del ciclo di Scrum corrispondente.\\
+È stato inoltre deciso che in caso di problemi singolarmente insormontabili andrà notificato il responsabile su Telegram che si occuperà di assegnare
+un membro per la risoluzione.\\
+Il responsabile dovrà creare la issue su GitHub relativa al problema assegnandovici la persona scelta.\\
+Le soluzioni adottate per la risoluzione del problema andranno documentate dal responsabile stesso.\\
 
-È auspicabile che i branch personali non compaiano nella repository remota.
+\subsection{Miglioramento dei processi}
+Durante l'attività di consuntivo di periodo dell'incontro settimanale, viene discusso il lavoro fatto fino ad ora, dando particolare peso ai problemi riscontrati. 
 
-Prima di effettuare un push alla repository remota o un merge è necessario fare uno squash dei commit superflui.
+In base a ciò si valutano le eventuali migliorie e correzioni applicabili.
 
-Non appena chi lavora su un branch collettivo ritenga che ci sia materiale pronto per una revisione, apre una pull request su GitHub.
-
-La review dovrà essere fatta dal verificatore. Il verificatore potrà accettare la pull request.
-
-Una pull request può essere accettata solo se tutti i prodotti coinvolti superano i requisiti minimi definiti nel \textit{Piano di Qualifica}.
-
-Quando il verificatore accetta un pull request, dovrà eliminare il branch relativo a quest'ultima.
-
-Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
-
-Non è consentito forzare i push sulla repository remota.
-
-\section{Tracciamento dei progressi}
-Per tracciare l'avanzamento del progetto, oltre alla dashboard nel \textit{Piano di Progetto}, verrà utilizzato il sistema di issues e di milestone di GitHub.
-
-Il \textit{Piano di Progetto} definisce quali sono le milestone.
-
-Per ogni milestone verranno create delle issues, in accordo con il \textit{Piano di Progetto}.
-
-Gli issues sono obiettivi intermedi, necessari a raggiungere la milestone corrispondente.
-
-Ogni issue è legato a una milestone.
-
-Un issue può essere diviso in più parti utilizzando una task list.
-
-Ogni sotto-task può essere trasformata in un issue. Quest'ultimo dovrà essere collegato alla stessa milestone dell'issue padre.
-
-\subsection{Revisioni di avanzamento interne}\label{revisioni-di-avanzamento-interne}
-Al fine di verificare periodicamente l'effettivo avanzamento delle varie task e meglio coordinare il gruppo è previsto di trovarsi sul canale Discord del gruppo settimanalmente.\\
-
-Questo incontro avverrà ogni \textbf{Mercoledì alle 15.00}.\\
-
-In caso un componente non possa presentarsi dovrà presentare un resoconto scritto del suo stato di avanzamento ed eventuali criticità riscontrate.\\
-
-Questo resoconto va consegnato \textbf{prima del meeting} in modo che sia possibile discutere con i presenti anche della parte di lavoro svolta dagli assenti.
-Gli assenti rimarranno aggiornati sullo stato di avanzamento consultando i verbali redatti in occasione di ogni incontro.
 
 \end{document}
