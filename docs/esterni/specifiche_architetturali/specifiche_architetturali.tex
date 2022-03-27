@@ -87,6 +87,7 @@ Il progetto si compone di 4 macro parti:
 \item Web app
 \item Script di messa in vendita
 \end{itemize}
+
 \subsection{Server}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{server_class}
@@ -98,6 +99,11 @@ La classe PageCreator andrà a interfacciarsi con la WebApp.
 Le dipendenze sono tracciate e passate agli oggetti tramite il construttore.
 \paragraph{Motivazioni}
 Facilità il tracciamento delle dipendenze e agevola il mocking in fase di test.
+\subsubsection{Schema DB}
+\includegraphics[width=1.0\textwidth]{db}
+\paragraph{Commenti}
+Schema delle tabelle del database.\\
+\textbf{LastSyncedBlock} contiene una sola riga con \textit{id} 0 con il valore dell'ultimo blocco sincronizzato.
 
 \subsection{Smart contract}
 \subsubsection{Diagramma delle classi}
