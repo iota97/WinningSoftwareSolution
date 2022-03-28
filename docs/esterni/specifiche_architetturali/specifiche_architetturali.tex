@@ -96,7 +96,7 @@ Il documento illustra le scelte architetturali e illustra l'architettura.
 \item \textbf{Documentazione:} \href{https://docs.metamask.io/guide/}{https://docs.metamask.io/guide/}
 \end{itemize}
 
-\section{Architettura}
+\section{Architettura generale}
 Il progetto si compone di 4 macro parti:
 \begin{itemize}
 \item Server
@@ -104,7 +104,43 @@ Il progetto si compone di 4 macro parti:
 \item Web app
 \item Script di messa in vendita
 \end{itemize}
+\subsection{Server}
+Realizzato in typescript con express come modulo http e MariaDB come database SQL.
+Si divide in 2 parti principali: la persistenza e il server web.
+\subsubsection{Persistenza}
+Si occupa di gestire i dati delle transazioni.\\\\
+Si collega allo smart contract attraverso un websocket fornito da moralis.io.\\
+Rimane in ascolto degli eventi dello smart contract e 
+aggiorna il database SQL di conseguenza.\\
+Tiene sempre traccia dell'ultimo blocco da cui ha ricevuto un evento
+e all'avvio recupera tutti gli eventi arretrati partendo da quest'ultimo blocco.\\\\
+I dati nel database SQL vengono forniti al frontend.\\\\
+Notare come è molto oneroso
+effettuare query sui dati in block chain in quanto non sono disponibili strutture dati adeguate.\\
+Questa soluzione ci permette una maggiore flessibilità e apertura a modifiche future quali aggiungere query specifiche.\\\\
+Inoltre il contratto una volta publicato non può essere modificabile al fine di garantire la trasparenza ed è quindi cruciale
+che il codice di quest'ultimo sia semplice ed affidabile.
+\subsubsection{Server Web}
+Riceve le richieste HTTP dalla rete e risponde con le pagine della Web app.
 
+\subsection{Smart contract}
+Realizzato in solidity e publicato su una rete Polygon tiene traccia delle transazioni; gestisce la logica e la sicurezza di esse.\\\\
+Per gestire il timer che fa scadere le transazioni si usa il servizio Upkeeper di ChainLink.\\
+Uno smart contract non esegue operazioni se non viene chiamato, per realizzare un timer si realizzano delle funzioni che se è passato abbastanza tempo
+eseguono le operazioni. Upkeeper chiama automaticamente queste funzioni dall'esterno a intervalli di tempo prefissato.
+
+\subsection{Web app}
+Fornita all'utente tramite il server web fornisce la logica lato client.\\
+Tramite MetaMask l'utente interagisce direttamente col contratto.\\\\
+In caso di utenti mobile reindirizza tramite DeepLink per aprire la pagine sull'app di Metamask.\\\\
+I deep link vengono usati anche per il QR code di ricezione del pacco.\\
+Possono essere scansionati sia da dentro l'app di MetaMask che dalla fotocamera del cellulare.
+
+\subsection{Script di messa in vendita}
+Usato dall'ecommerce per inserire prodotti in vendita in blockchain al fine di verificare che il prezzo sia corretto al momento della vendita.
+Realizzato in python per flessibilità, si connette alla block chain tramite moralis.io.
+
+\section{Dettagli archittettura}
 \subsection{Server}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{server_class}
