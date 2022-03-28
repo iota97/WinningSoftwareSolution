@@ -73,20 +73,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 35 & 1050\\
         \hline
-        Amministratore  & 20 & 60  & 1200\\
+        Amministratore  & 20 & 3  & 60\\
         \hline
-        Analista        & 25 & 57 (-3)  & 1425 (-75)\\
+        Analista        & 25 & 39 & 975\\
         \hline
-        Progettista     & 25 & 80  & 2000\\
+        Progettista     & 25 & 105  & 2625\\
         \hline
-        Programmatore   & 15 & 46 (+1)  & 690 (+15)\\
+        Programmatore   & 15 & 85 & 1275\\
         \hline
-        Verificatore    & 15 & 19 (-1)  & 285€ (-15)\\
+        Verificatore    & 15 & 16 & 240\\
         \hline
         \hline
-        \textbf{Totale} &    & 302 (-3) & 6800 (-75)\\
+        \textbf{Totale} &    & 283 & 6225\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -105,7 +105,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         Amministratore  & 20 & 40  & 800\\
         \hline
-        Analista        & 25 & 60  & 1500\\
+        Analista        & 25 & 70  & 1750\\
         \hline
         Progettista     & 25 & 50  & 1250\\
         \hline
@@ -114,7 +114,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         Verificatore    & 15 & 80  & 1200\\
         \hline
         \hline
-        \textbf{Totale} &    & 415 & 8275\\
+        \textbf{Totale} &    & 425 & 8525\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -136,7 +136,7 @@ I cicli di SCRUM avverranno ad intervalli settimanali, ogni ciclo inizia con una
     \item assegnazioni degli item ai componenti del gruppo da parte del responsabile.
 \end{itemize}
 I cicli di SCRUM verranno elencati nella sezione seguente adottando una approccio schematico e disciplinato.\\
-Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
+Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Include anche il lavoro svolto tra la prima richiesta di RTB e il superamento effettivo.
 
 \section{Sprint di SCRUM}
 
@@ -168,6 +168,14 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \hline
         PoC & 3\\
         \hline
+        Sviluppo server & 1\\
+        \hline
+        Sviluppo web app & 2\\
+        \hline
+        Sviluppo script  & 1\\
+        \hline
+        Sviluppo contratto & 1\\
+        \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
 \end{center}
@@ -180,20 +188,20 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 30  & 900\\
         \hline
-        Amministratore  & 20 & 60  & 1200\\
+        Amministratore  & 20 & 20  & 400\\
         \hline
-        Analista        & 25 & 60  & 1500\\
+        Analista        & 25 & 50  & 1250\\
         \hline
-        Progettista     & 25 & 80  & 2000\\
+        Progettista     & 25 & 100  & 2500\\
         \hline
-        Programmatore   & 15 & 45  & 675\\
+        Programmatore   & 15 & 40  & 600\\
         \hline
         Verificatore    & 15 & 20  & 300\\
         \hline
         \hline
-        \textbf{Totale} &    & 305 & 6875\\
+        \textbf{Totale} &    & 260 & 5950\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -223,20 +231,20 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 35 (+5)  & 1050 (+150)\\
         \hline
-        Amministratore  & 20 & 60  & 1200\\
+        Amministratore  & 20 & 3  (-17) & 60 (-340)\\
         \hline
-        Analista        & 25 & 57 (-3)  & 1425 (-75)\\
+        Analista        & 25 & 39 (-11) & 975 (-275)\\
         \hline
-        Progettista     & 25 & 80  & 2000\\
+        Progettista     & 25 & 105 (+5) & 2625 (+125)\\
         \hline
-        Programmatore   & 15 & 46 (+1)  & 690 (+15)\\
+        Programmatore   & 15 & 85 (+45) & 1275 (+675)\\
         \hline
-        Verificatore    & 15 & 19 (-1)  & 285€ (-15)\\
+        Verificatore    & 15 & 16 (-4)  & 240 (-60)\\
         \hline
         \hline
-        \textbf{Totale} &    & 302 (-3) & 6800 (-75)\\
+        \textbf{Totale} &    & 283 (-3) & 6225 (+275)\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -267,6 +275,8 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
         \hline
         Necessità di meglio organizzare i documenti & Aumento dei tempi e costi inizialmente, poi la miglior documentazione porterà a un più celere sviluppo\\
+        \hline
+        Necessità di organizzare la repository in modo da favorire la fornitura & Creazione di una cartella \texttt{public} nella repository del progetto\\
         \hline
         Miglior comprensione delle tecnologie & Diminuzione delle ore previste di programmazione\\
         \hline
