@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage{longtable}
+\usepackage[font=small,labelfont=bf]{caption}
 \graphicspath{ {images/} }
 
 \newcommand{\templates}{../../template}
@@ -34,6 +35,22 @@ Architettura del progetto
 \section{Introduzone}
 \subsection{Scopo del documento}
 Il documento illustra le scelte architetturali e illustra l'architettura.
+
+\section{Riferimenti}
+\subsection{Riferimenti normativi}
+\begin{itemize}
+    \item \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato d'appalto C2}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/interni/norme_di_progetto_v2.0.0.pdf}{Norme di Progetto}};
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_01_03_E.pdf}{Verbale esterno 2021/03/01}}.
+\end{itemize}
+\subsection{Riferimenti informativi}
+\begin{itemize}
+    \item \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Dispense/T09.pdf}{Progettazione Software - Materiale didattico del corso IS}};
+    \item \underline{\href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi\%20di\%20Sequenza.pdf}{Slide diagrammi di sequenza - Materiale didattico del corso IS}};
+    \item \underline{\href{https://www.math.unipd.it/~rcardin/swea/2022/Software\%20Architecture\%20Patterns.pdf}{Slide design pattern architetturali - Materiale didattico del corso IS}};
+    \item \underline{\href{https://www.math.unipd.it/~rcardin/swea/2021/Diagrammi\%20delle\%20Classi_4x4.pdf}{Slide diagrammi delle classi - Materiale didattico del corso IS}};
+    \item \underline{\href{https://www.math.unipd.it/~rcardin/sweb/2022/L03.pdf}{Slide principi SOLID - Materiale didattico del corso IS}}.
+\end{itemize}
 
 \section{Tecnologie/Linguaggi/Librerie}
 
@@ -78,7 +95,7 @@ Il documento illustra le scelte architetturali e illustra l'architettura.
 \item \textbf{Versione:} 10.11.3
 \item \textbf{Documentazione:} \href{https://docs.metamask.io/guide/}{https://docs.metamask.io/guide/}
 \end{itemize}
-\clearpage
+
 \section{Architettura}
 Il progetto si compone di 4 macro parti:
 \begin{itemize}
@@ -91,6 +108,7 @@ Il progetto si compone di 4 macro parti:
 \subsection{Server}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{server_class}
+\captionof{figure}{Diagramma delle classi del server}
 \paragraph{Commenti}
 La classe ShopContract andrà a interfacciarsi con il contratto in blockchain.\\
 La classe PageCreator andrà a interfacciarsi con la WebApp.
@@ -101,6 +119,7 @@ Le dipendenze sono tracciate e passate agli oggetti tramite il construttore.
 Facilità il tracciamento delle dipendenze e agevola il mocking in fase di test.
 \subsubsection{Schema DB}
 \includegraphics[width=1.0\textwidth]{db}
+\captionof{figure}{Schema del DB relazionale}
 \paragraph{Commenti}
 Schema delle tabelle del database.\\
 \textbf{LastSyncedBlock} contiene una sola riga con \textit{id} 0 con il valore dell'ultimo blocco sincronizzato.
@@ -108,6 +127,8 @@ Schema delle tabelle del database.\\
 \subsection{Smart contract}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{contract}
+\captionof{figure}{Diagramma delle classi del contratto}
+
 \paragraph{Commenti}
 \subsubsection{Pattern architetturale adottato}
 \paragraph{Descrizione}
@@ -132,38 +153,39 @@ Il metodo inserisce una nuova entry di pagamento in blockchain con il prezzo spe
 Sia in caso si successo che di errore tutte le informazione vengono salvate nel file \textit{sell.log}.
 
 \section{Diagrammi di sequenza}
-\subsection{Main}
-\includegraphics[width=1.0\textwidth]{main}
-\paragraph{Commenti}
-Mostra cosa avviene all'avvio del server.
-
-\subsection{Ascolto eventi del contratto}
-\includegraphics[width=1.0\textwidth]{shopContractEventManager}
-\paragraph{Commenti}
-Mostra la sottoscrizione degli eventi del contratto.
-
 \subsection{Inizializzazione server web}
 \includegraphics[width=1.0\textwidth]{server}
+\captionof{figure}{Diagramma di sequenza dell'inizializzazione del server}
 \paragraph{Commenti}
 Mostra l'inizializzazione delle routes per express.
 
+\subsection{Ascolto eventi del contratto}
+\includegraphics[width=1.0\textwidth]{shopContractEventManager}
+\captionof{figure}{Diagramma di sequenza dell'ascolto degli eventi}
+\paragraph{Commenti}
+Mostra la sottoscrizione degli eventi del contratto.
+
 \subsection{Nuovo oggetto in vendita}
 \includegraphics[width=1.0\textwidth]{addedPaymentEntry}
+\captionof{figure}{Diagramma di sequenza di un nuovo oggetto in vendita}
 \paragraph{Commenti}
 Mostra cosa succede quando viene inserito una nuova entry di pagamento da parte di un e-commerce.
 
 \subsection{Nuova transazione}
 \includegraphics[width=1.0\textwidth]{settledPayment}
+\captionof{figure}{Diagramma di sequenza di una nuova transazione}
 \paragraph{Commenti}
 Mostra cosa succede quando viene create una nuova transazione.
 
 \subsection{Cambio di stato di una transazione}
 \includegraphics[width=1.0\textwidth]{statusChanged}
+\captionof{figure}{Diagramma di sequenza del cambio di stato di una transazione}
 \paragraph{Commenti}
 Mostra cosa succede quando una transazione cambia di stato.
 
 \subsection{Pagina transazioni in entrata}
 \includegraphics[width=1.0\textwidth]{paymentBySellerPage}
+\captionof{figure}{Diagramma di sequenza della richeista della pagina delle transazioni in entrata}
 \paragraph{Commenti}
 Mostra cosa succede quando un utente richiede la pagina delle transazione in entrata.\\
 Le altre pagine utilizzano lo stesso modello e dunque si preferisce evitare diagrammi di sequenza ridondanti.
