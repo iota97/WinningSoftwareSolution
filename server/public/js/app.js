@@ -36,6 +36,7 @@ let transactionID;
 let contractABI;
 let contractAddress;
 let deployedChainID;
+let timeout = 99999999999;
 
 fetch("contract/contract.json")
 .then(res => res.json())
@@ -44,6 +45,7 @@ fetch("contract/contract.json")
     contractAddress = res.ADDRESS
     deployedChainID = res.CHAIN_ID
     chainName.innerText = res.CHAIN_NAME
+    timeout = res.TIMEOUT
 })
 
 function mobileCheck() {
@@ -122,9 +124,8 @@ function showBuyerButton() {
         unlockFundsButton.style.display = "block";
     }
 
-    // TODO: CHANGE THIS!!!
     if (refundPaymentButton  && accounts[0].toUpperCase() == buyer.innerText.toUpperCase()
-    && statusTrans.innerText == "Open" && BigInt(idTimestamp.value) + 5n < (+ new Date())/1000) {
+    && statusTrans.innerText == "Open" && BigInt(idTimestamp.value) + BigInt(timeout) < (+ new Date())/1000) {
         refundPaymentButton.style.display = "block";
     } 
 }
