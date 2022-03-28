@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{placeins}
+\usepackage{listings}
 \settitolo{Manuale E-commerce Shop Chain}
 \setredattori{WinningSoftwareSolution}
 \setdestuso{esterno}
@@ -22,14 +23,14 @@ Manuale e-commerce.
 
 \section{Introduzione}
 Attraverso l'utilizzo della blockchain \textit{Polygon}, Shop Chain fornisce un sistema decentralizzato per il pagamento di prodotti in MATIC. Utilizzando Shop Chain è possibile effettuare una qualsiasi attività di compravendita in maniera sicura per entrambi gli attori dello scambio. L'acquirente che desidera acquistare un prodotto da un venditore in un e-commerce potrà effettuare il suo pagamento in MATIC, ovvero il token nativo della blockchain \textit{Polygon}. Il venditore non può disporre immediatamente del saldo ricevuto poiché sarà bloccato fino alla ricezione del pacco, momento nel quale l'acquirente può sbloccare i fondi attraverso la scannerizzazione di un codice QR presente sulla scatola.
-Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'e-commerce al fine di vendere correttamente i propri prodotti.
+\\Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'e-commerce al fine di vendere correttamente i propri prodotti.
 
-\section{Vendita di prodotti}
+\section{Configurazione wallet}
 \subsection{Wallet Metamask}
-Per poter vendere i propri prodotti sarà necessario utilizzare un wallet Metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.
+Per poter vendere i propri prodotti sarà necessario l'utilizzo di un wallet Metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.
 \subsubsection{Configurazione}
-Se il network \textit{Polygon} non è gia stato inserito nel proprio wallet Metamask, procedere con la lettura del seguente paragrafo.
-Per l'inserimento e la configurazione del network \textit{Polygon} nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
+Se il network Polygon non è gia stato inserito nel proprio wallet Metamask, procedere con la lettura del seguente paragrafo.
+\\Per l'inserimento e la configurazione del network Polygon nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
 \begin{itemize}
 \item Network Name: \textbf{Matic Mainnet};
 \item New RPC Url: \textbf{https://rpc-mainnet.maticvigil.com/};
@@ -39,7 +40,7 @@ Per l'inserimento e la configurazione del network \textit{Polygon} nel proprio w
 \end{itemize}
 Una volta inseriti i dati e aggiunto il network, ricordare di selezionare il network.
 
-\subsubsection{Collegamento del wallet a Shop Chain}
+\subsubsection{Collegamento a Shop Chain}
 Una volta inserito correttamente il network è necessario collegare il proprio wallet metamask a Shop Chain. Nella webapp di Shop Chain, se non si ha già collegato in precedenza il proprio wallet:
 \begin {itemize}
 \item selezionare "Connect Wallet" all'apertura del pop-up (Fig. 1);
@@ -47,48 +48,171 @@ Una volta inserito correttamente il network è necessario collegare il proprio w
 \end{itemize}
 
 \FloatBarrier
-\begin{figure}
+\begin{figure}[!h]
 \centering
 \includegraphics[width=0.5\linewidth]{img/connessione_wallet.png}
-\caption{Interfaccia per la connessione del wallet Metamask.}
+\caption{Connessione del wallet Metamask a Shop Chain.}
 \end{figure}
 \FloatBarrier
 
-\section{Script per aggiunta nuovi prodotti}
-Per l'aggiunta di un nuovo prodotto in blockchain si rende disponibile uno script python.
-\subsection{Configurazione}
-Creare un file chiamato `.env` con:
+\section{Vendere un prodotto con Shop Chain}
+Il venditore che desidera vendere il proprio prodotto attraverso Shop Chain deve utilizzare uno script python.
+\\La seguente sezione ha lo scopo di illustrare la corretta procedura per la vendita dei propri prodotti con Shop Chain.
+\subsection{Requisiti e configurazione}
+\subsubsection{Python, Pip e dipendenze}
+Al fine di utilizzare correttamente lo script è necessario:
+\begin{itemize}
+  \item \href{https://www.python.org/downloads/}{\textbf{Python}} versione maggiore o uguale a 3.8;
+  \item \textbf{Pip} versione maggiore o uguale a 3.8;
+  \item installare le seguenti dipendenze:
+  \begin{itemize}
+    \item web3;
+    \item python-dotenv;
+    \item pytest.
+  \end{itemize}
+\end{itemize}
+\subsubsection{Mnemonic phrase}
+La mnemonic phrase del proprio wallet sarà necessaria per la configurazione. Se non si ha già salvato in precedenza la propria mnemonic, è possibile ottenerla da Metamask attraverso la seguente procedura:
 \begin{enumerate}
-    \item 
-MNEMONIC=il memonic del proprio wallet
-\item 
-PROVIDER=wss://speedy-nodes-nyc.moralis.io/5c29520422f9528344aa64a1/polygon/mumbai/ws
+  \item accedere al proprio wallet Metamask;
+  \item selezionare il proprio account in alto a destra (Fig. 2);
+  \item selezionare l'opzione "Settings";
+  \item selezionare l'opzione "Security \& Privacy";
+  \item selezionare l'opzione "Reveal Secret Recovery Phrase";
+  \item inserire la propria password.
 \end{enumerate}
-
-\subsection{Utilizzo}
-Lo script richiede solamente di inserire il prezzo in dollari del prodotto che si vuole aggiungere.\\
-Lo script ritorna l'id che rappresenta il nuovo prodotto. Questo id andrà utilizzato ogni volta che si va a creare una nuova transazione di pagamento del relativo prodotto.
-
-\section{Operazioni sulle transazioni}
-Se si è connessi alla webapp ShopChain con il proprio wallet Metamask, è possibile visualizzare la lista delle transazioni.
-\\Nella pagina outgoing sono presenti le transazioni d'acquisto(vedi manuale utente acquirente).
-\\Nella pagina incoming sono presenti le transazioni in entrata.
-\\\\Cliccando su ogni transazione è possibile visualizzare le informazioni:
+Una volta ottenuta la propria mnemonic phrase salvarla per i passi successivi.
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.4\linewidth]{img/account_meta.png}
+\caption{Selezione account metamask.}
+\end{figure}
+\FloatBarrier
+\subsubsection{Provider}
+L'ultima fase prima della configurazione prevede di ottenere il provider per la Mainnet di Polygon.
+Sarà dunque necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
+\begin{enumerate}
+  \item selezionare la sezione "SpeedyNodes" dal menù;
+  \item selezionare l'endpoint per Polygon Network;
+  \item selezionare il protocollo WS;
+  \item copiare l'url dell'endpoint per la Mainnet (Fig. 3).
+\end{enumerate}
+Una volta effettuata questa procedura salvare l'url per i passi successivi.
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\linewidth]{img/moralis.png}
+\caption{Provider su moralis.io.}
+\end{figure}
+\FloatBarrier
+\subsubsection{Configurazione}
+Infine è necessario creare un file chiamato `.env` all'interno della stessa cartella contenente lo script `sell.py`. Il file dovrà contenere:
 \begin{itemize}
-\item Wallet acquirente
-\item id prodotto
-\item prezzo
+  \item la mnemonic phrase del proprio wallet, ottenuta al punto 3.1.2;
+  \item il provider ottenuto al punto 3.1.3.
 \end{itemize}
-Per ogni transazione viene visualizzato il suo stato:
+Di seguito un esempio del formato corretto da utilizzare:
+\begin{verbatim}
+MNEMONIC=mnemonic phrase del proprio wallet
+PROVIDER=provider url
+\end{verbatim}
+\subsection{Caricamento del prodotto da vendere}
+Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python. Verranno illustrati due modi per la corretta esecuzione dello script `sell.py`.
+\subsubsection{Sell.py da terminale}
+È possibile eseguire lo script `sell.py` direttamente da terminale, attraverso il comando:
+\begin{lstlisting}[language=bash]
+  $ python3 sell.py [item price]
+\end{lstlisting}
+Sostituire [item price] con il prezzo con il quale si desidera vendere il proprio prodotto.
+Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo del prodotto messo in vendita.
+\\
+\\
+\textbf{Esempio}
+\\
+Se vogliamo vendere un prodotto al prezzo di 2\$, basterà inviare il comando:
+\begin{lstlisting}[language=bash]
+  $ python3 sell.py 2
+\end{lstlisting}
+l'output visualizzato sarà:
+\begin{lstlisting}[language=bash]
+  $ [Adding] Price: 2
+  $ [Added] Payment entry id: 3, price: 2
+\end{lstlisting}
+Dove :
 \begin{itemize}
-    \item 0=cancellata.
-    \item 1=in attesa. L'acquirente non ha ancora scansionato il QR Code
-    \item 2=completata. L'acquirente ha confermato la ricezione del prodotto scansionando il QR Code.
+  \item \textbf{paymement entry id: 3}: indica che l'id dell'oggetto messo in vendita è 3;
+  \item \textbf{price: 2}: indica che il prezzo a cui è stato messo in vendita il prodotto è di 2\$.
 \end{itemize}
-Per ogni transazione in attesa è possibile eseguire due operazioni:
-\begin{itemize}
-    \item Cancella: si annulla la transazione ed il denaro viene restituito all'acquirente.
-    \item Visualizza Qr Code: per stampare e applicare sul pacco del prodotto il Qr Code che verrà scansionato dall'acquirente.
-\end{itemize}
+\subsubsection{Script python}
+È possibile realizzare un proprio script in python per la vendita di prodotti.\\
+La funzione per mettere in vendita il proprio prodotto è \textbf{sell\_item} di `sell.py`. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
+È dunque necessario includere nel proprio script la funzione come segue:
+\begin{verbatim}
+from sell import sell_item
+\end{verbatim}
+\\
+\textbf{Esempio}
+\\
+Uno script per vendere il proprio prodotto può essere impostato come segue:
+\begin{verbatim}
+from sell import sell_item
 
+sell_item(2)
+\end{verbatim}
+L'output visualizzato sarà:
+\begin{lstlisting}[language=bash]
+  $ [Adding] Price: 2
+  $ [Added] Payment entry id: 3, price: 2
+\end{lstlisting}
+Dove :
+\begin{itemize}
+  \item \textbf{paymement entry id: 3}: indica che l'id dell'oggetto messo in vendita è 3;
+  \item \textbf{price: 2}: indica che il prezzo a cui è stato messo in vendita il prodotto è di 2\$.
+\end{itemize}
+\section{Visualizzazione e gestione transazioni}
+Per la visualizzazione delle transazioni ricevute da un e-commerce in entrata, è necessario recarsi nella sezione \textbf{Incoming} (Fig. 4) su Shop Chain. Selezionando una transazione sarà possibile gestirla e vederne i dettagli.
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\linewidth]{img/incoming.png}
+\caption{Sezione Incoming.}
+\end{figure}
+\FloatBarrier
+\subsubsection{Visualizzazione transazione}
+\\Selezionando una transazione è possibile visualizzare le seguenti informazioni (Fig. 5 riquadro 1):
+\begin{itemize}
+  \item \textbf{Price:} indica il prezzo dell'oggetto acquistato;
+  \item \textbf{From:} indica l'address del wallet dell'acquirente;
+  \item \textbf{To:} indica l'address del proprio wallet, ovvero il wallet che ha ricevuto il pagamento;
+  \item \textbf{Opened:} indica la data in cui è stato eseguito l'acquisto;
+  \item \textbf{Expire:} indica la data di scadenza dell'ordine (14 giorni dalla data di acquisto), al raggiungimento di questa data i fondi verranno automaticamente sbloccati e saranno resi disponibili all'e-commerce;
+  \item \textbf{Stato dell'ordine}:
+  \begin{itemize}
+    \item \textbf{Open}: l'ordine è ancora aperto e in attesa di conferma;
+    \item \textbf{Confirmed}: l'ordine è già stato confermato attraverso la scannerizzazione del codice QR dall'acquirente;
+    \item \textbf{Expired}: l'utente ha chiesto il refund poiché non ha ricevuto il pacco entro 14 giorni;
+    \item \textbf{Canceled}: l'ordine è stato rifiutato dall'e-commerce. I fondi utilizzati per il pagamento vengono restituiti all'acquirente nella valuta stabile DAI.
+  \end{itemize}
+\end{itemize}
+\subsubsection{Gestione transazione}
+Per ciascuna vendita l'e-commerce può scegliere se (Fig. 5 riquadro 2):
+\begin{itemize}
+  \item \textbf{Accettare il pagamento:} l'e-commerce che decide di accettare il pagamento deve necessariamente seguire la procedura sotto riportata per permettere all'acquirente di sbloccare i fondi nel momento della ricezione del pacco.\\
+  La procedura prevede di:
+  \begin{itemize}
+    \item Selezionare l'opzione "Download QR";
+    \item stampare il codice QR scaricato in formato .png;
+    \item attaccare la stampa del codice QR sul pacco contenente l'oggetto acquistato prima di spedirlo.
+  \end{itemize}
+  \\Una volta spedito il pacco è necessario aspettare la ricezione e lo sblocco fondi da parte dell'acquirente. In caso l'acquirente non sblocchi manualmente i fondi, questi verranno resi disponibili al venditore dopo 14 giorni dall'acquisto.
+  \item \textbf{Annullare il pagamento:} l'e-commerce che decide di annullare il pagamento deve selezionare l'opzione "Cancel transaction". L'acquirente viene rimborsato in DAI con l'esatto importo pagato al momento dell'acquisto.
+\end{itemize}
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.5\linewidth]{img/transazione_venditore.png}
+\caption{Visualizzazione e gestione vendite.}
+\end{figure}
+\FloatBarrier
 \end{document}
