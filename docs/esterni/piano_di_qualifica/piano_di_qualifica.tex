@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{pgfplots}
 \usepackage{tabularx}
+\usepackage[font=small,labelfont=bf]{caption}
+
 \usepgfplotslibrary{dateplot}
 
 \newcommand{\templates}{../../template}
@@ -22,7 +24,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \addversione{0.0.3}{04/02/2021}{Giovanni Cocco}{Redazione}{Stesura iniziale sezione software.}
 \addversione{0.0.4}{21/02/2021}{Giovanni Cocco}{Redazione}{Aggiunta dashboard al docuemento.}
 \addversione{2.0.0}{23/03/2021}{Elia Scandaletti}{Redazione}{Rifacimento del documento.}
-
+\addversione{2.1.0}{30/03/2021}{Giovanni Cocco}{Redazione}{Aggiornamento per ciclo 1.}
 
 \begin{document}
 
@@ -50,25 +52,89 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 		\hline
 		\textbf{Prodotto} & \textbf{Valore accettabile} & \textbf{Valore ottimale } \\
 		\hline
-		Documenti interni & $>$ 40                      & $>$ 60                    \\
+		Documenti interni & $>$ 40                      & $>$ 50                    \\
 		\hline
-		Documenti esterni & $>$ 50                      & $>$ 60                    \\
+		Documenti esterni & $>$ 40                      & $>$ 60                    \\
 		\hline
 	\end{tabularx}\\[8pt]
 	\mbox{}\\
 \end{center}
+\subparagraph{Note:}
+Si tiene conto che un indice di 40 è leggibile a una persona in possesso di un diploma superiore (come tutti i nostri stakeholders).
+Inoltre l'indice di Gulpease calcolato risulta con un bias verso il basso dato che non tiene conto della leggibilità aggiuntiva fornita da tabelle ed elenci puntati
+(entrabi abbondantementi presenti nei nostri documenti).
 
 \subparagraph{Strumenti utilizzati:}
 \begin{itemize}
 	\item Python - \texttt{textract}.
 \end{itemize}
 
-\subparagraph{Andamento:}
+\clearpage
+
+\subparagraph{Struttura del grafico:}
+Ogni punto indica il valore dell'indice di Gulpease in un test effettuato in tale data.
+Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
+
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
+		\pgfplotsset{width=0.9\textwidth}
 		\begin{axis}[
-				title = {Prodotti esterni},
+				title = {Documenti interni},
+				axis x line = none,
+				axis y line = none,
+				ymin = 0, ymax = 100
+			]
+			\addplot [green]{50}; \label{opt}
+			\addplot [red]{40}; \label{min}
+		\end{axis}
+		\begin{axis}[
+				date coordinates in = x,
+				xticklabel =	\year-\month-\day,
+				x tick label style = {
+						font = \small,
+						text width = 1.9cm,
+						align = center,
+						rotate = 70,
+						anchor = north east
+					},
+				ymin = 0, ymax = 100,
+				legend pos = south east
+			]
+			\addlegendimage{/pgfplots/refstyle=opt}
+			\addlegendentry{Ottimale}
+			\addlegendimage{/pgfplots/refstyle=min}
+			\addlegendentry{Accettabile}
+			\addplot coordinates {
+					(2021-11-09, 53.46)
+					(2021-11-12, 70.60)
+					(2021-11-13, 51.47)
+					(2021-12-01, 55.36)
+					(2021-12-15, 43.31)
+					(2021-12-23, 47.59)
+					(2022-01-11, 51.46)
+					(2022-02-04, 51.68)
+					(2022-02-09, 52.46)
+					(2022-02-26, 72.56)
+					(2022-03-23, 72.44)
+				};\addlegendentry{Verbali interni}
+
+			\addplot coordinates {
+					(2022-03-02, 55.2)
+					(2022-03-27, 55.15)
+				};\addlegendentry{Norme di progetto}
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\captionof{figure}{Leggibilità dei documenti interni nel tempo}
+
+\clearpage
+\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{width=0.9\textwidth}
+		\begin{axis}[
+				title = {Documenti esterni},
 				axis x line = none,
 				axis y line = none,
 				ymin = 0, ymax = 100
@@ -86,48 +152,6 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 						rotate = 70,
 						anchor = north east
 					},
-				xtick = data,
-				ymin = 0, ymax = 100,
-				legend pos = south east
-			]
-			\addlegendimage{/pgfplots/refstyle=opt}
-			\addlegendentry{Ottimale}
-			\addlegendimage{/pgfplots/refstyle=min}
-			\addlegendentry{Minimo}
-			\addplot coordinates {
-					(2022-03-23, 55.2)
-				};\addlegendentry{Norme di progetto}
-
-			\addplot coordinates {
-					(2022-03-23, 0)
-				};\addlegendentry{Verbali interni (min)}
-		\end{axis}
-	\end{tikzpicture}
-\end{center}
-
-\begin{center}
-	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
-		\begin{axis}[
-				title = {Prodotti esterni},
-				axis x line = none,
-				axis y line = none,
-				ymin = 0, ymax = 100
-			]
-			\addplot [green]{60}; \label{opt}
-			\addplot [red]{50}; \label{min}
-		\end{axis}
-		\begin{axis}[
-				date coordinates in = x,
-				xticklabel =	\year-\month-\day,
-				x tick label style = {
-						font = \small,
-						text width = 1.9cm,
-						align = center,
-						rotate = 70,
-						anchor = north east
-					},
-				xtick = data,
 				ymin = 0, ymax = 100,
 				legend pos = south east
 			]
@@ -136,27 +160,35 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Accettabile}
 			\addplot coordinates {
+					(2021-10-28, 49.78)
+					(2021-11-02, 57.98)
+					(2021-11-12, 44.78)
+					(2021-12-09, 43.59)
+					(2021-12-22, 46.31)
+					(2022-02-16, 63.87)
+					(2022-03-01, 47.52)	
+				};\addlegendentry{Verbali esterni}
+			\addplot coordinates {
 					(2022-03-23, 55.2)
+					(2022-03-27, 55.16)
 				};\addlegendentry{Analisi dei requisiti}
 
 			\addplot coordinates {
-					(2022-03-23, 0)
+					(2022-03-23, 40.8)
+					(2022-03-27, 41.8)
 				};\addlegendentry{Piano di progetto}
 
 			\addplot coordinates {
-					(2022-03-23, 0)
+					(2022-03-23, 50.00)
+					(2022-03-27, 51.76)
+
 				};\addlegendentry{Piano di qualifica}
 
-			\addplot coordinates {
-					(2022-03-23, 60.1)
-				};\addlegendentry{Analisi delle tecnologie}
-
-			\addplot coordinates {
-					(2022-03-23, 0)
-				};\addlegendentry{Verbali esterni (min)}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
+\captionof{figure}{Leggibilità dei documenti esterni nel tempo}
+
 
 \subparagraph{Riferimenti:} \underline{\href{http://www.corrige.it/leggibilita/lindice-gulpease/}{http://www.corrige.it/leggibilita/lindice-gulpease/}}
 
@@ -171,7 +203,7 @@ La metrica si basa sullo statement coverage.
 		\hline
 		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
 		\hline
-		Software          & $>$ 80\%                     & 100\%                     \\
+		Software          & $>$ 80\%                     & $>$ 95\%                     \\
 		\hline
 	\end{tabularx}\\[8pt]
 	\mbox{}\\
@@ -184,17 +216,20 @@ La metrica si basa sullo statement coverage.
 	\item truffle.
 \end{itemize}
 
+\subparagraph{Struttura del grafico:}
+Ogni punto indica la copertura percentuale degli statement nella data indicata.
+
 \subparagraph{Andamento:}
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
+		\pgfplotsset{width=0.9\textwidth}
 		\begin{axis}[
 				title = {Statement Coverage},
 				axis x line = none,
 				axis y line = none,
 				ymin = 0, ymax = 110
 			]
-			\addplot [green]{100}; \label{opt}
+			\addplot [green]{95}; \label{opt}
 			\addplot [red]{80}; \label{min}
 		\end{axis}
 		\begin{axis}[
@@ -207,7 +242,6 @@ La metrica si basa sullo statement coverage.
 						rotate = 70,
 						anchor = north east
 					},
-				xtick = data,
 				ymin = 0, ymax = 110,
 				legend pos = south east
 			]
@@ -216,20 +250,29 @@ La metrica si basa sullo statement coverage.
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Accettabile}
 			\addplot coordinates {
-					(2022-03-22, 10)
+					(2022-03-02, 0)
+					(2022-03-22, 60)
+					(2022-03-27, 85)
 				};\addlegendentry{WebApp - frontend}
 			\addplot coordinates {
-					(2022-03-22, 100)
+					(2022-03-02, 0)
+					(2022-03-22, 95)
+					(2022-03-27, 100)
 				};\addlegendentry{Server - backend}
 			\addplot coordinates {
-					(2022-03-22, 100)
+					(2022-03-02, 0)
+					(2022-03-22, 80)
+					(2022-03-27, 100)
 				};\addlegendentry{Contratto}
 			\addplot coordinates {
-					(2022-03-22, 100)
+					(2022-03-02, 0)
+					(2022-03-22, 90)
+					(2022-03-27, 100)
 				};\addlegendentry{Script}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
+\captionof{figure}{Copertura degli statement nel tempo}
 
 \subsubsection{Copertura branch}
 La metrica si basa sullo branch coverage.
@@ -240,7 +283,7 @@ La metrica si basa sullo branch coverage.
 		\hline
 		\textbf{Prodotto} & \textbf{Valore accettabile } & \textbf{Valore ottimale } \\
 		\hline
-		Software          & $>$ 80\%                     & 100\%                     \\
+		Software          & $>$ 80\%                     & $>$ 95\%                     \\
 		\hline
 	\end{tabularx}\\[8pt]
 	\mbox{}\\
@@ -253,17 +296,20 @@ La metrica si basa sullo branch coverage.
 	\item truffle.
 \end{itemize}
 
+\subparagraph{Struttura del grafico:}
+Ogni punto indica la copertura percentuale delle branch nella data indicata.
+
 \subparagraph{Andamento:}
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
+		\pgfplotsset{width=0.9\textwidth}
 		\begin{axis}[
 				title = {Branch Coverage},
 				axis x line = none,
 				axis y line = none,
 				ymin = 0, ymax = 110
 			]
-			\addplot [green]{100}; \label{opt}
+			\addplot [green]{95}; \label{opt}
 			\addplot [red]{80}; \label{min}
 		\end{axis}
 		\begin{axis}[
@@ -276,7 +322,6 @@ La metrica si basa sullo branch coverage.
 						rotate = 70,
 						anchor = north east
 					},
-				xtick = data,
 				ymin = 0, ymax = 110,
 				legend pos = south east
 			]
@@ -285,21 +330,31 @@ La metrica si basa sullo branch coverage.
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Accettabile}
 			\addplot coordinates {
-					(2022-03-22, 10)
+					(2022-03-02, 0)
+					(2022-03-22, 50)
+					(2022-03-27, 80)
 				};\addlegendentry{WebApp - frontend}
 			\addplot coordinates {
-					(2022-03-22, 100)
+					(2022-03-02, 0)
+					(2022-03-22, 85)
+					(2022-03-27, 100)
 				};\addlegendentry{Server - backend}
 			\addplot coordinates {
-					(2022-03-22, 95.1)
+					(2022-03-02, 0)
+					(2022-03-22, 75.1)
+					(2022-03-27, 95.1)
 				};\addlegendentry{Contratto}
 			\addplot coordinates {
-					(2022-03-22, 100)
+					(2022-03-02, 0)
+					(2022-03-22, 57)
+					(2022-03-27, 100)
 				};\addlegendentry{Script}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
+\captionof{figure}{Copertura delle branch nel tempo}
 
+\clearpage
 \section{Qualità di processo}
 \subsubsection{Time variance}
 La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
@@ -318,15 +373,18 @@ La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
 	\mbox{}\\
 \end{center}
 
+\subparagraph{Struttura del grafico:}
+Ogni punto indica la variazione del consultivo rispetto al preventivo di un ciclo di sprint.
+
 \subparagraph{Andamento:}
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
+		\pgfplotsset{width=0.9\textwidth}
 		\begin{axis}[
 				title = {Time variance},
 				axis x line = none,
 				axis y line = none,
-				ymin = -10, ymax = 110
+				ymin = -110, ymax = 110
 			]
 			\addplot [green]{0}; \label{opt}
 			\addplot [red]{20}; \label{min}
@@ -341,23 +399,26 @@ La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
 						rotate = 70,
 						anchor = north east
 					},
-				xtick = data,
-				ymin = -10, ymax = 110
+				ymin = -110, ymax = 110
 			]
 			\addlegendimage{/pgfplots/refstyle=opt}
 			\addlegendentry{Ottimale}
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Accettabile}
 			\addplot coordinates {
-					(2022-03-22, 0)
+					(2022-03-23, 0)
+					(2022-03-30, +25)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
-					(2022-03-22, 0)
+					(2022-03-23, 0)
+					(2022-03-30, -33)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
+\captionof{figure}{Rispetto delle scadenze temporali nel tempo}
 
+\clearpage
 \subsubsection{Budget variance}
 La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
 
@@ -375,15 +436,18 @@ La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
 	\mbox{}\\
 \end{center}
 
+\subparagraph{Struttura del grafico:}
+Ogni punto indica la variazione del consultivo rispetto al preventivo di un ciclo di sprint.
+
 \subparagraph{Andamento:}
 \begin{center}
 	\begin{tikzpicture}
-		\pgfplotsset{width=0.8\textwidth}
+		\pgfplotsset{width=0.9\textwidth}
 		\begin{axis}[
 				title = {Budget variance},
 				axis x line = none,
 				axis y line = none,
-				ymin = -10, ymax = 110
+				ymin = -110, ymax = 110
 			]
 			\addplot [green]{0}; \label{opt}
 			\addplot [red]{20}; \label{min}
@@ -398,20 +462,23 @@ La metrica si basa sulla variazione percentuale rispetto alla stima iniziale.
 						rotate = 70,
 						anchor = north east
 					},
-				xtick = data,
-				ymin = -10, ymax = 110
+				ymin = -110, ymax = 110
 			]
 			\addlegendimage{/pgfplots/refstyle=opt}
 			\addlegendentry{Ottimale}
 			\addlegendimage{/pgfplots/refstyle=min}
 			\addlegendentry{Accettabile}
 			\addplot coordinates {
-					(2022-03-22, 0)
+					(2022-03-23, 0)
+					(2022-03-30, +30)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
-					(2022-03-22, 0)
+					(2022-03-23, 0)
+					(2022-03-30, -33)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}
 \end{center}
+\captionof{figure}{Rispetto delle budget economico nel tempo}
+
 \end{document}

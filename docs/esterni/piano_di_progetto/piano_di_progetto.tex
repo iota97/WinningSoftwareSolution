@@ -4,6 +4,7 @@
 \usepackage{pgfgantt}
 \usepackage{pgfplots}
 \usepackage{tabularx}
+\usepackage[font=small,labelfont=bf]{caption}
 
 \newcommand{\templates}{../../template}
 \input{\templates/style}
@@ -23,6 +24,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{0.0.2}{11/02/2022}{Elia Scandaletti}{Redazione}{Aggiornamento per RTB}
 \addversione{1.0.0}{12/02/2022}{Giovanni Cocco}{Approvazione}{Approvazione per RTB}
 \addversione{2.0.0}{19/03/2022}{Giovanni Cocco}{Redazione}{Rifacimento documento}
+\addversione{2.1.0}{27/03/2022}{Giovanni Cocco}{Redazione}{Ciclo 1}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -49,20 +51,24 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
     y unit title = .8cm,
     y unit chart = .7cm,
     group peaks width = 2,
-]{2021-12-01}{2022-04-29}
+]{2021-12-01}{2022-05-29}
 \gantttitlecalendar{year, month=itname} \\
 \ganttgroup[progress=100]{RTB}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi dei requisiti}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi delle tecnologie}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Sviluppo PoC}{2022-01-02}{2022-02-08} \\
-\ganttgroup[progress=75]{PB}{2022-02-26}{2022-03-16} \\
-\ganttbar[progress=80]{Specifica architetturale}{2022-02-26}{2022-03-05} \\
-\ganttbar[progress=65]{Manuale Utente}{2022-02-26}{2022-03-05} \\
-\ganttbar[progress=100]{Sviluppo Contratto}{2022-02-26}{2022-03-05} \\
-\ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-05} \\
-\ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-05} \\
-\ganttbar[progress=75]{Sviluppo WebApp}{2022-02-26}{2022-03-16} \\
+\ganttgroup[progress=75]{PB}{2022-02-26}{2022-04-7} \\
+\ganttbar[progress=50]{Specifica architetturale}{2022-02-26}{2022-04-07} \\
+\ganttbar[progress=65]{Manuale Utente}{2022-02-26}{2022-04-07} \\
+\ganttbar[progress=100]{Sviluppo Contratto}{2022-02-26}{2022-03-29} \\
+\ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
+\ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
+\ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
+\ganttgroup[progress=0]{CA}{2022-04-07}{2022-04-29} \\
+
 \end{ganttchart}
+\captionof{figure}{Diagramma di Gannt del progetto}
+
 
 \subsection{Consuntivo attuale}
 \begin{center}
@@ -73,20 +79,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 53  & 1590\\
         \hline
-        Amministratore  & 20 & 60  & 1200\\
+        Amministratore  & 20 & 62  & 1240\\
         \hline
-        Analista        & 25 & 57 (-3)  & 1425 (-75)\\
+        Analista        & 25 & 67  & 1675 \\
         \hline
-        Progettista     & 25 & 80  & 2000\\
+        Progettista     & 25 & 100  & 2500\\
         \hline
-        Programmatore   & 15 & 46 (+1)  & 690 (+15)\\
+        Programmatore   & 15 & 106  & 1590\\
         \hline
-        Verificatore    & 15 & 19 (-1)  & 285€ (-15)\\
+        Verificatore    & 15 & 29  & 435 \\
         \hline
         \hline
-        \textbf{Totale} &    & 302 (-3) & 6800 (-75)\\
+        \textbf{Totale} &    & 437 & 9030\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -103,18 +109,18 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         Responsabile    & 30 & 50  & 1500\\
         \hline
-        Amministratore  & 20 & 40  & 800\\
+        Amministratore  & 20 & 20  & 400\\
         \hline
-        Analista        & 25 & 60  & 1500\\
+        Analista        & 25 & 10  & 2500\\
         \hline
-        Progettista     & 25 & 50  & 1250\\
+        Progettista     & 25 & 20  & 5000\\
         \hline
-        Programmatore   & 15 & 135  & 2025\\
+        Programmatore   & 15 & 50  & 750\\
         \hline
-        Verificatore    & 15 & 80  & 1200\\
+        Verificatore    & 15 & 100  & 1500\\
         \hline
         \hline
-        \textbf{Totale} &    & 415 & 8275\\
+        \textbf{Totale} &    & 250 & 11650\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -136,17 +142,16 @@ I cicli di SCRUM avverranno ad intervalli settimanali, ogni ciclo inizia con una
     \item assegnazioni degli item ai componenti del gruppo da parte del responsabile.
 \end{itemize}
 I cicli di SCRUM verranno elencati nella sezione seguente adottando una approccio schematico e disciplinato.\\
-Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
+Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Include anche il lavoro svolto tra la prima richiesta di RTB e il superamento effettivo.
 
 \section{Sprint di SCRUM}
 
 \subsection{Sprint 0}
 \textbf{Data di inizio:} 9-11-2021\\
 \textbf{Data di fine pianificata:} 23-03-2022\\
-\textbf{Data di fine effettiva:} N/A
+\textbf{Data di fine effettiva:} 23-30-2022
 
 \subsubsection{Pianificazione}\mbox{}
-
 
 \begin{center}
     \begin{tabularx}{\textwidth}{|X|X|}
@@ -167,6 +172,16 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         Analisi dei requisiti & 4\\
         \hline
         PoC & 3\\
+        \hline
+        Progettazione architetturale & 3\\
+        \hline
+        Sviluppo server & 1\\
+        \hline
+        Sviluppo web app & 2\\
+        \hline
+        Sviluppo script  & 1\\
+        \hline
+        Sviluppo contratto & 1\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -223,7 +238,7 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 50 (+10)  & 1500\\
         \hline
         Amministratore  & 20 & 60  & 1200\\
         \hline
@@ -231,12 +246,12 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         \hline
         Progettista     & 25 & 80  & 2000\\
         \hline
-        Programmatore   & 15 & 46 (+1)  & 690 (+15)\\
+        Programmatore   & 15 & 66 (+21)  & 990 (+315)\\
         \hline
-        Verificatore    & 15 & 19 (-1)  & 285€ (-15)\\
+        Verificatore    & 15 & 19 (-1)  & 285 (-15)\\
         \hline
         \hline
-        \textbf{Totale} &    & 302 (-3) & 6800 (-75)\\
+        \textbf{Totale} &    & 332 (+27) & 7400 (+525)\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -271,6 +286,147 @@ Il primo ciclo sarà riassuntivo del lavoro fino all'RTB.
         Miglior comprensione delle tecnologie & Diminuzione delle ore previste di programmazione\\
         \hline
         Miglior compresone del capitolato & Pianificazione più accurata e minor incertezza futura\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsection{Sprint 1}
+\textbf{Data di inizio:} 23-03-2022\\
+\textbf{Data di fine pianificata:} 30-03-2022\\
+\textbf{Data di fine effettiva:} 30-03-2022
+
+\subsubsection{Pianificazione}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Eliminazione pdf dalla parte privata del repo & 1\\
+        \hline
+        Creazione e popolamento cartella pubblica & 1\\
+        \hline
+        Aggiornamento documento \textit{Analisi dei Requisiti} & 1\\
+        \hline
+        Contattare prof. Cardin riguardo documento \textit{Analisi dei Requisiti} & 1\\
+        \hline
+        Sviluppo server & 2\\
+        \hline
+        Sviluppo WebApp & 2\\
+        \hline
+        Sviluppo script per messa in vendita prodotto & 1\\
+        \hline
+        Completamento contratto & 2\\
+        \hline
+        Inizio stesura documento \textit{Specifiche Architetturali} & 1\\
+        \hline
+        Stesura dei documenti \textit{Manuale Acquirente} & 1\\
+        \hline
+        Stesura dei documenti \textit{Manuale E-Commerce} & 1\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 3  & 90\\
+        \hline
+        Amministratore  & 20 & 2  & 40\\
+        \hline
+        Analista        & 25 & 10  & 250\\
+        \hline
+        Progettista     & 25 & 20  & 500\\
+        \hline
+        Programmatore   & 15 & 60  & 900\\
+        \hline
+        Verificatore    & 15 & 10  & 150\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 105 & 1930\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        Eventuali dubbi sui documenti & Si chiederà un colloquio al docente Cardin per eventuali chiarimenti\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 3  & 90\\
+        \hline
+        Amministratore  & 20 & 2  & 40\\
+        \hline
+        Analista        & 25 & 10  & 250\\
+        \hline
+        Progettista     & 25 & 20  & 500\\
+        \hline
+        Programmatore   & 15 & 40 (-20) & 600 (-300)\\
+        \hline
+        Verificatore    & 15 & 10  & 150\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 105 & 1630 (-300)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Necessarie correzione dei manuali & Si proseguirà la stesure nel prossimo ciclo di sprint\\
+        \hline
+        Dubbi sulle specifiche architetturali & Richiesta chiarimenti a Cardin\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Necessità di chiarimenti sui documenti & Aumento dei tempi\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
