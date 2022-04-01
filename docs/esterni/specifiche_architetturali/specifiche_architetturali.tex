@@ -110,7 +110,7 @@ Si divide in 2 parti principali: la persistenza e il server web.
 \subsubsection{Persistenza}
 Si occupa di gestire i dati delle transazioni.\\\\
 Si collega allo smart contract attraverso un websocket fornito da moralis.io.\\
-Rimane in ascolto degli eventi dello smart contract e 
+Rimane in ascolto degli eventi dello smart contract e
 aggiorna il database SQL di conseguenza.\\
 Tiene sempre traccia dell'ultimo blocco da cui ha ricevuto un evento
 e all'avvio recupera tutti gli eventi arretrati partendo da quest'ultimo blocco.\\\\
@@ -124,10 +124,10 @@ che il codice di quest'ultimo sia semplice ed affidabile.
 Riceve le richieste HTTP dalla rete e risponde con le pagine della Web app.
 
 \subsection{Smart contract}
-Realizzato in solidity e publicato su una rete Polygon tiene traccia delle transazioni; gestisce la logica e la sicurezza di esse.\\\\
-Per gestire il timer che fa scadere le transazioni si usa il servizio Upkeeper di ChainLink.\\
-Uno smart contract non esegue operazioni se non viene chiamato, per realizzare un timer si realizzano delle funzioni che se è passato abbastanza tempo
-eseguono le operazioni. Upkeeper chiama automaticamente queste funzioni dall'esterno a intervalli di tempo prefissato.
+Realizzato in solidity e pubblicato sulla rete Polygon tiene traccia delle transazioni; gestisce la logica e la sicurezza di esse.\\\\
+Per gestire il timer che fa scadere le transazioni si usa il servizio Upkeep di ChainLink.\\
+Uno smart contract non esegue operazioni se non viene chiamato, per realizzare un timer si realizzano delle funzioni che
+eseguono le operazioni necessarie se è passato abbastanza tempo. Un upkeeper chiama automaticamente queste funzioni dall'esterno a intervalli di tempo prefissato.
 
 \subsection{Web app}
 Fornita all'utente tramite il server web fornisce la logica lato client.\\
@@ -152,7 +152,7 @@ La classe PageCreator andrà a interfacciarsi con la WebApp.
 \paragraph{Descrizione}
 Le dipendenze sono tracciate e passate agli oggetti tramite il construttore.
 \paragraph{Motivazioni}
-Facilità il tracciamento delle dipendenze e agevola il mocking in fase di test.
+Facilita il tracciamento delle dipendenze e agevola il mocking in fase di test.
 \subsubsection{Schema DB}
 \includegraphics[width=1.0\textwidth]{db}
 \captionof{figure}{Schema del DB relazionale}
@@ -164,18 +164,34 @@ Schema delle tabelle del database.\\
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{contract}
 \captionof{figure}{Diagramma delle classi del contratto}
-
 \paragraph{Commenti}
-\subsubsection{Pattern architetturale adottato}
+\subsubsection{Lista dei metodi}
+TODO
+\subsubsection{Design pattern: Oracle}
 \paragraph{Descrizione}
+Le informazioni sul reale valore di una valuta sono fornite da un oracolo.
 \paragraph{Motivazioni}
+Per evitare manipolazioni temporanee del valore della valuta stabile utilizzata si utilizza il valore fornito da ChainLink.
+ChainLink restituisce la media del valore di una valuta tra più fornitori, evitando manipolazioni di un singolo fornitore.
+\subsubsection{Design pattern: Access restriction}
+\paragraph{Descrizione}
+La chiamata di alcune funzioni è ristretta ad alcune tipologie di utenti.
+\paragraph{Motivazioni}
+È necessario mantenere una distinzione tra cliente e venditore all'interno del contratto.
+Il venditore non potrà chiamare funzioni riservate al cliente (per esempio, sbloccandosi i fondi) e viceversa.
+\subsubsection{Design pattern: Guard check}
+\paragraph{Descrizione}
+L'input fornito alle funzioni è validato prima di essere processato, annullando la transazione se non valido.
+\paragraph{Motivazioni}
+Alcune funzioni richiedono il passaggio in input di un ID.
+Deve essere controllato che tale ID esista prima di continuare le operazioni.
 
 \subsection{Web app}
 \subsubsection{Diagramma delle classi}
 Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Lista dei metodi}
 TODO
-\subsubsection{Pattern adottati}
+\subsubsection{Design pattern: Nessuno}
 \paragraph{Descrizione}
 Non è stato adottato alcun design pattern.
 \paragraph{Motivazioni}
