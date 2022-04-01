@@ -199,7 +199,7 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.\\
 
 
 \includegraphics[width=0.9\textwidth]{UC_WAV4}
-\captionof{figure}{Casi d'uso UC4.1, UC4.2, UC4.3 ed UC4.4}
+\captionof{figure}{Casi d'uso UC4.1, UC4.2, UC4.3, UC4.4 ed UC4.5}
 
 \paragraph{UC4.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
@@ -232,6 +232,13 @@ Il venditore usando Metamask, si connette alla webapp con il proprio wallet.\\
 \textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 \textbf{Requisiti collegati}: RFO07, RFO39, RFO41.
+
+\paragraph{UC4.5 - annulla transazione}\\
+\textbf{Attore primario}: Venditore  con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole annullare una transazione in attesa.\\
+\textbf{Postcondizioni}: La transazione è stata annullata ed i fondi sono stati restituiti all'acquirente.\\
+\textbf{Scenario principale}: Il venditore annulla una transizione in stato di attessa ed i fondi vengono restituiti all'acquirente.\\
+\textbf{Requisiti collegati}: RFO51.
 
 \includegraphics[width=0.9\textwidth]{UC_script}
 \captionof{figure}{Casi d'uso UC5 e UC5.1}
@@ -424,7 +431,7 @@ L'acquirente usando Metamask, si connette con il proprio wallet.\\
 
 
 \includegraphics[width=0.9\textwidth]{UC_ECA3}
-\captionof{figure}{Casi d'uso UC15.1, UC15.2 e UC15.3}
+\captionof{figure}{Casi d'uso UC15.1, UC15.2, UC15.3 ed UC15.4}
 
 \paragraph{UC15.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
@@ -446,6 +453,13 @@ L'acquirente usando Metamask, si connette con il proprio wallet.\\
 \textbf{Postcondizioni}: L'acquirente visualizza la scadenza di una transazione in attesa.\\
 \textbf{Scenario principale}: Viene visualizzata la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 \textbf{Requisiti collegati}: RFO30.
+
+\paragraph{UC15.4 - Annulla transazione}\\
+\textbf{Attore primario}: Acquirente  con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole annullare una transazione in attesa dopo i 14 giorni.\\
+\textbf{Postcondizioni}: La transazione è stata annullata e l'acquirente ha ricevuto i propri fondi.\\
+\textbf{Scenario principale}: Il pacco non è arrivato entro i 14 giorni. Quindi l'acquirente può annullare la transazione.\\
+\textbf{Requisiti collegati}: RFO52.
 
 \section{Requisiti}
 Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
@@ -514,7 +528,7 @@ RFO11 & Per accedere alla landing page l'acquirente con wallet non connesso deve
 \hline
 RFO12 & Un acquirente con wallet non connesso non può accedere alla landing page. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_12_22_E.pdf}{verbale del 22/12/2021}} \\
 \hline
-RFO48 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_12_22_E.pdf}{verbale del 22/12/2021}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/interni/verbali/2021_12_23_I.pdf}{verbale del 23/12/2021}} \\
+RFO50 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_12_22_E.pdf}{verbale del 22/12/2021}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/interni/verbali/2021_12_23_I.pdf}{verbale del 23/12/2021}} \\
 \hline
 RFO13 & L'acquirente con wallet connesso deve vedere il prezzo da pagare in dollari nella landing page. & Obbligatorio & UC7 \\
 \hline
@@ -563,6 +577,10 @@ RFO28 & L'acquirente con wallet connesso deve poter visualizzare l'importo di og
 RFO29 & L'acquirente con wallet connesso deve poter visualizzare l'importo in dollari di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.2 \\
 \hline
 RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di ogni sua transazione in una pagina apposita, dedicata all'e-commerce. & Obbligatorio & UC15.3 \\
+\hline
+RFO51 & Il venditore con wallet connesso deve poter annullare una transazione in attesa. & Obbligatorio & UC4.5 \\
+\hline
+RFO52 & L'acquirente con wallet connesso deve poter annullare una transazione dopo lo scadere dei 14 giorni dall'apertura della transazione. & Obbligatorio & UC4.5 \\
 \hline
 
 \end{longtable}
