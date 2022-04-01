@@ -13,7 +13,7 @@
 \settitolo{Specifiche Architetturali}
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
-\setredattori{Giovanni Cocco}
+\setredattori{Giovanni Cocco\\Elia Scandaletti\\Matteo Galvagni}
 \setrevisori{Federico Marchi}
 \setresponsabili{Giovanni Cocco}
 \setdestuso{esterno}
@@ -132,7 +132,7 @@ eseguono le operazioni. Upkeeper chiama automaticamente queste funzioni dall'est
 \subsection{Web app}
 Fornita all'utente tramite il server web fornisce la logica lato client.\\
 Tramite MetaMask l'utente interagisce direttamente col contratto.\\\\
-In caso di utenti mobile reindirizza tramite DeepLink per aprire la pagine sull'app di Metamask.\\\\
+In caso di utenti mobile reindirizza tramite deep link per aprire la pagine sull'app di Metamask.\\\\
 I deep link vengono usati anche per il QR code di ricezione del pacco.\\
 Possono essere scansionati sia da dentro l'app di MetaMask che dalla fotocamera del cellulare.
 
@@ -172,11 +172,14 @@ Schema delle tabelle del database.\\
 
 \subsection{Web app}
 \subsubsection{Diagramma delle classi}
-[grafico]
-\paragraph{Commenti}
-\subsubsection{Pattern architetturale adottato}
+Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
+\subsubsection{Lista dei metodi}
+TODO
+\subsubsection{Pattern adottati}
 \paragraph{Descrizione}
+Non è stato adottato alcun design pattern.
 \paragraph{Motivazioni}
+Adottare pattern architetturali avrebbe richiesto un costo ben superiore ai benefici. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 
 \subsection{Script di messa in vendita}
 \subsubsection{sell\_item}
