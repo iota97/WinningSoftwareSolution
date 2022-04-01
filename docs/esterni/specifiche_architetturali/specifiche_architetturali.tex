@@ -32,7 +32,7 @@ Architettura del progetto
 \tableofcontents
 \clearpage
 
-\section{Introduzone}
+\section{Introduzione}
 \subsection{Scopo del documento}
 Il documento illustra le scelte architetturali e illustra l'architettura.
 
@@ -118,7 +118,7 @@ I dati nel database SQL vengono forniti al frontend.\\\\
 Notare come è molto oneroso
 effettuare query sui dati in block chain in quanto non sono disponibili strutture dati adeguate.\\
 Questa soluzione ci permette una maggiore flessibilità e apertura a modifiche future quali aggiungere query specifiche.\\\\
-Inoltre il contratto una volta publicato non può essere modificabile al fine di garantire la trasparenza ed è quindi cruciale
+Inoltre il contratto una volta pubblicato non può essere modificabile al fine di garantire la trasparenza ed è quindi cruciale
 che il codice di quest'ultimo sia semplice ed affidabile.
 \subsubsection{Server Web}
 Riceve le richieste HTTP dalla rete e risponde con le pagine della Web app.
@@ -137,10 +137,10 @@ I deep link vengono usati anche per il QR code di ricezione del pacco.\\
 Possono essere scansionati sia da dentro l'app di MetaMask che dalla fotocamera del cellulare.
 
 \subsection{Script di messa in vendita}
-Usato dall'ecommerce per inserire prodotti in vendita in blockchain al fine di verificare che il prezzo sia corretto al momento della vendita.
+Usato dall'e-commerce per inserire prodotti in vendita in blockchain al fine di verificare che il prezzo sia corretto al momento della vendita.
 Realizzato in python per flessibilità, si connette alla block chain tramite moralis.io.
 
-\section{Dettagli archittettura}
+\section{Dettagli architettura}
 \subsection{Server}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{server_class}
@@ -150,7 +150,7 @@ La classe ShopContract andrà a interfacciarsi con il contratto in blockchain.\\
 La classe PageCreator andrà a interfacciarsi con la WebApp.
 \subsubsection{Design pattern: Constructor injection}
 \paragraph{Descrizione}
-Le dipendenze sono tracciate e passate agli oggetti tramite il construttore.
+Le dipendenze sono tracciate e passate agli oggetti tramite il costruttore.
 \paragraph{Motivazioni}
 Facilita il tracciamento delle dipendenze e agevola il mocking in fase di test.
 \subsubsection{Schema DB}
@@ -268,7 +268,7 @@ Mostra cosa succede quando una transazione cambia di stato.
 
 \subsection{Pagina transazioni in entrata}
 \includegraphics[width=1.0\textwidth]{paymentBySellerPage}
-\captionof{figure}{Diagramma di sequenza della richeista della pagina delle transazioni in entrata}
+\captionof{figure}{Diagramma di sequenza della richiesta della pagina delle transazioni in entrata}
 \paragraph{Commenti}
 Mostra cosa succede quando un utente richiede la pagina delle transazione in entrata.\\
 Le altre pagine utilizzano lo stesso modello e dunque si preferisce evitare diagrammi di sequenza ridondanti.
