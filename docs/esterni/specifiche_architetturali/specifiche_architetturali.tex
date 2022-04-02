@@ -165,8 +165,36 @@ Schema delle tabelle del database.\\
 \includegraphics[width=1.0\textwidth]{contract}
 \captionof{figure}{Diagramma delle classi del contratto}
 \paragraph{Commenti}
+In Solidity esistono due particolari visibilità di funzione che differiscono da quelle normali: \textit{internal} ed \textit{external}.
+Una funzione \textit{internal} può essere chiamata solo dal contratto in cui è dichiarata e da contratti derivanti.
+Una funzione \textit{external} può essere chiamata solo dall'esterno e non all'interno del contratto stesso.
 \subsubsection{Lista dei metodi}
-TODO
+\begin{itemize}
+    \item \textbf{constructor(\_interval: uint256, \_expireDuration: uint256, \_slippageClient: uint256, \_slippageExchange: uint256, \_slippageDAI: uint256, \_feeToTake: uint256, \_shopchainAddress: address): void}
+    \\Imposta l'intervallo di controllo per aggiornamenti e l'intervallo di scadenza.
+    Imposta gli slippage, la percentuale di fee da trattenere e l'address a cui inviarla.
+    Imposta router e factory dell'exchange su cui convertire Matic in DAI.\\
+    \item \textbf{checkUpkeep(calldata: bytes): (upkeepNeeded: bool, memory: bytes)}
+    Se chiamata, restituisce tramite \textit{upkeepNeeded} se è passato l'intervallo di tempo minimo dall'ultimo upkeep e dunque se è necessario performarne un altro.\\
+    \item \textbf{performUpkeep(calldata: bytes): void}
+    Controlla se l'intervallo di tempo minimo per ogni upkeep è passato, se è così scorre dall'ultima transazione vista alla più recente transazione che abbia superato la durata massima senza sblocco dei fondi
+    e restituisce il denaro all'indirizzo del cliente.\\
+    \item \textbf{addPaymentEntry(price: uint256): void}
+    Aggiunge un'entry di pagamento alla relativa mappa.\\
+    \item \textbf{settlePayment(paymentEntryId: uint256): void}
+    Completa il pagamento dato l'id di un pagamento aperto, eseguendo i necessari controlli e aggiungendo un nuovo pagamento completato alla relativa mappa.\\
+    \item \textbf{unlockFunds(settledPaymentId: uint256): void}
+    Dato l'id di un pagamento completato, se chiamata dal cliente originale e dopo necessari controlli sblocca i fondi che vengono inviati all'indirizzo del venditore.\\
+    \item \textbf{cancelPayment(settledPaymentId: uint256): void}
+    Se il venditore avesse necessità di annullare una transazione dopo il pagamento da parte del cliente, questa funzione si occuperà di restituire il denaro al cliente.\\
+    \item \textbf{revertPayment(settledPaymentId: uint256): void}
+    Se il servizio di UpKeep dovesse smettere di funzionare per qualsiasi motivo, questa funzione consente al cliente di ottenere un rimborso manualmente qualora il pacco non sia arrivato dopo l'intervallo prefissato.\\
+    \item \textbf{getPaymentEntry(paymentEntryId: uint256): PaymentEntry}
+    Ritorna l'oggetto rappresentante un'entry di pagamento aperta da un venditore.\\
+    \item \textbf{getSettledPayment(settledPaymentId: uint256): SettledPayment}
+    Ritorna l'oggetto rappresentante un pagamento completato da un cliente relativo ad un'entry di pagamento di un venditore.\\
+
+\end{itemize}
 \subsubsection{Design pattern: Oracle}
 \paragraph{Descrizione}
 Le informazioni sul reale valore di una valuta sono fornite da un oracolo.
