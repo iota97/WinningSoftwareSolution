@@ -9027,6 +9027,7 @@
 								"$ref": "AAAAAAF/IqsXkWXCtR0="
 							},
 							"name": "{internal}getSlippageAmount",
+							"visibility": "protected",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -10769,7 +10770,7 @@
 											"top": 395,
 											"width": 1067.06640625,
 											"height": 13,
-											"text": "+{internal}getSlippageAmount(number: uint256, slippage: uint256): uint256",
+											"text": "#{internal}getSlippageAmount(number: uint256, slippage: uint256): uint256",
 											"horizontalAlignment": 0
 										},
 										{
