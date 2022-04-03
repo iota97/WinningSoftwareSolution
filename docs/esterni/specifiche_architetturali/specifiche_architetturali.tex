@@ -240,7 +240,7 @@ Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumenta
     \item \textbf{askForInstall(): void} Mostra un pop-up per chiedere all'utente di installare MetaMask.
     \item \textbf{askToConnect(): void} Mostra un pop-up per chiedere all'utente di collegare il proprio wallet a MetaMask.
     \item \textbf{async initialize(): void} Funzione di inizializzazione che verifica se MetaMask è installato e collegato a un wallet e, in caso negativo, mostra i rispettivi pop-up per guidare l'utente nella risoluzione del problema.
-    \item \textbf{closePop(e: HTMLElement): void} Procedura per chiudere il pop-up dato.
+    \item \textbf{closePop(e: Event): void} Procedura per chiudere il pop-up dato.
     \item \textbf{checkChainID(): boolean} Controlla che MetaMask sia collegata alla stessa blockchain del contratto.
     \item \textbf{showStatus(id: int): void} Mostra il pop-up corrispondente all'esito della transazione in corso o appena effettuata.
     \item \textbf{onClickSettlePayment(): void} Procedura per invocare il metodo del contratto settledPayment.
