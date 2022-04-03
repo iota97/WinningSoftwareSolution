@@ -220,6 +220,7 @@ Deve essere controllato che tale ID esista prima di continuare le operazioni.
 \subsubsection{Diagramma delle classi}
 Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Lista dei metodi}
+Nessuno dei seguenti metodi prevede alcuna verifica sull'identità dell'utente o sulla validità delle richieste fatte. Questo perché la web app serve solo a fare da interfaccia per la blockchain che è pubblica per definizione. Tutta la parte di sicurezza è implementata nel contratto. Inoltre, essendo lo script eseguito lato client, sarebbe facile per un attaccante bypassare qualsiasi controllo.
 \begin{itemize}
     \item \textbf{mobileCheck(): boolean} Controlla se sta venendo usato un dispositivo mobile.
     \item \textbf{toggleMenu(): void} Mostra o nasconde il menu nella versione mobile dell'app.
