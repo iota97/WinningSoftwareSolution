@@ -55,7 +55,7 @@ Una volta inserito correttamente il network è necessario collegare il proprio w
 \end{figure}
 \FloatBarrier
 \section{Visualizzazione e gestione transazioni}
-Per la visualizzazione delle transazioni ricevute da un e-commerce in entrata, è necessario recarsi nella sezione \textbf{Incoming} (Fig. 4) su Shop Chain. Selezionando una transazione sarà possibile gestirla e vederne i dettagli.
+Per la visualizzazione delle transazioni ricevute da un e-commerce in entrata, è necessario recarsi nella sezione \textbf{Incoming} (Fig. 2) su Shop Chain. Selezionando una transazione sarà possibile gestirla e vederne i dettagli.
 \FloatBarrier
 \begin{figure}[!h]
 \centering
@@ -64,7 +64,7 @@ Per la visualizzazione delle transazioni ricevute da un e-commerce in entrata, �
 \end{figure}
 \FloatBarrier
 \subsection{Visualizzazione transazione}
-Selezionando una transazione è possibile visualizzare le seguenti informazioni (Fig. 5 riquadro 1):
+Selezionando una transazione è possibile visualizzare le seguenti informazioni (Fig. 3 riquadro 1):
 \begin{itemize}
   \item \textbf{Price:} indica il prezzo dell'oggetto acquistato;
   \item \textbf{From:} indica l'address del wallet dell'acquirente;
@@ -80,7 +80,7 @@ Selezionando una transazione è possibile visualizzare le seguenti informazioni 
   \end{itemize}
 \end{itemize}
 \subsection{Gestione transazione}
-Per ciascuna vendita l'e-commerce può scegliere se (Fig. 5 riquadro 2):
+Per ciascuna vendita l'e-commerce può scegliere se (Fig. 3 riquadro 2):
 \begin{itemize}
   \item \textbf{Accettare il pagamento:} l'e-commerce che decide di accettare il pagamento deve necessariamente seguire la procedura sotto riportata per permettere all'acquirente di sbloccare i fondi nel momento della ricezione del pacco.\\
   La procedura prevede di:
@@ -89,7 +89,7 @@ Per ciascuna vendita l'e-commerce può scegliere se (Fig. 5 riquadro 2):
     \item stampare il codice QR scaricato in formato .png;
     \item attaccare la stampa del codice QR sul pacco contenente l'oggetto acquistato prima di spedirlo.
   \end{itemize}
-  Una volta spedito il pacco è necessario aspettare la ricezione e lo sblocco fondi da parte dell'acquirente. In caso l'acquirente non sblocchi manualmente i fondi, questi verranno resi disponibili al venditore dopo 14 giorni dall'acquisto.\\
+  Una volta spedito il pacco è necessario aspettare la ricezione e lo sblocco fondi da parte dell'acquirente. Se il pacco non viene spedito l'acquirente riceverà il rimborso in DAI dopo 14 giorni dall'acquisto.\\
   \item \textbf{Annullare il pagamento:} l'e-commerce che decide di annullare il pagamento deve selezionare l'opzione "Cancel transaction". L'acquirente viene rimborsato in DAI con l'esatto importo pagato al momento dell'acquisto.
 \end{itemize}
 \FloatBarrier
@@ -99,21 +99,6 @@ Per ciascuna vendita l'e-commerce può scegliere se (Fig. 5 riquadro 2):
 \caption{Visualizzazione e gestione vendite.}
 \end{figure}
 \FloatBarrier
-\subsection{Reindirizzamento alla landing page}
-Al fine di permettere all'acquirente, direttamente dal proprio e-commerce, di essere reindirizzato sulla landing page di Shop Chain per effettuare l'acquisto è necessario strutturare l'url di reindirizzamento come segue:
-\begin{quote}
-  \verb|\land?id=<id_item>&r=<pagina_di_ritorno>|.
-\end{quote}
-e dunque sostituire:
-\begin{itemize}
-  \item \verb|<id_item>| con l'id del prodotto che l'acquirente desidera acquistare;
-  \item \verb|<pagina_di_ritorno>| con l'url della pagina alla quale si vuole reindirizzare l'acquirente al termine dell'acquisto.
-\end{itemize}
-Dopo aver confermato il pagamento l'acquirente verrà direttamente reindirizzato alla pagina di ritorno, l'url sarà strutturato come segue:
-\begin{quote}
-  \verb|<pagina_di_ritorno>\transaction_id=<id_transazione>|.
-\end{quote}
-dove \verb|<id_transazione>| corrisponde all'id della transazione effettuata dall'acquirente per l'acquisto del prodotto.
 \section{Vendere un prodotto con Shop Chain}
 Il venditore che desidera vendere il proprio prodotto attraverso Shop Chain deve utilizzare uno script python.
 \\La seguente sezione ha lo scopo di illustrare la corretta procedura per la vendita dei propri prodotti con Shop Chain.
@@ -121,8 +106,8 @@ Il venditore che desidera vendere il proprio prodotto attraverso Shop Chain deve
 \subsubsection{Python, Pip e dipendenze}
 Al fine di utilizzare correttamente lo script è necessario:
 \begin{itemize}
-  \item \href{https://www.python.org/downloads/}{Python3.8};
-  \item Pip3.8;
+  \item \href{https://www.python.org/downloads/}{python3.8};
+  \item pip3.8;
   \item installare le seguenti dipendenze:
   \begin{itemize}
     \item web3;
@@ -134,7 +119,7 @@ Al fine di utilizzare correttamente lo script è necessario:
 La mnemonic phrase del proprio wallet sarà necessaria per la configurazione. Se non si ha già salvato in precedenza la propria mnemonic, è possibile ottenerla da Metamask attraverso la seguente procedura:
 \begin{enumerate}
   \item accedere al proprio wallet Metamask;
-  \item selezionare il proprio account in alto a destra (Fig. 2);
+  \item selezionare il proprio account in alto a destra (Fig. 4);
   \item selezionare l'opzione "Settings";
   \item selezionare l'opzione "Security \& Privacy";
   \item selezionare l'opzione "Reveal Secret Recovery Phrase";
@@ -156,7 +141,7 @@ Sarà dunque necessario registrarsi su \href{https://www.moralis.io}{moralis.io}
   \item selezionare la sezione "SpeedyNodes" dal menù;
   \item selezionare l'endpoint per Polygon Network;
   \item selezionare il protocollo WS;
-  \item copiare l'url dell'endpoint per la Mainnet (Fig. 3).
+  \item copiare l'url dell'endpoint per la Mainnet (Fig. 5).
 \end{enumerate}
 Una volta effettuata questa procedura salvare l'url per i passi successivi.
 \FloatBarrier
@@ -230,4 +215,19 @@ Dove :
   \item \textbf{paymement entry id: 3}: indica che l'id dell'oggetto messo in vendita è 3;
   \item \textbf{price: 2}: indica che il prezzo a cui è stato messo in vendita il prodotto è di 2\$.
 \end{itemize}
+\subsection{Reindirizzamento alla landing page}
+Al fine di permettere all'acquirente, direttamente dal proprio e-commerce, di essere reindirizzato sulla landing page di Shop Chain per effettuare l'acquisto è necessario strutturare l'url di reindirizzamento come segue:
+\begin{quote}
+  \verb|\land?id=<id_item>&r=<pagina_di_ritorno>|.
+\end{quote}
+e dunque sostituire:
+\begin{itemize}
+  \item \verb|<id_item>| con l'id del prodotto che l'acquirente desidera acquistare;
+  \item \verb|<pagina_di_ritorno>| con l'url della pagina alla quale si vuole reindirizzare l'acquirente al termine dell'acquisto.
+\end{itemize}
+Dopo aver confermato il pagamento l'acquirente verrà direttamente reindirizzato alla pagina di ritorno, l'url sarà strutturato come segue:
+\begin{quote}
+  \verb|<pagina_di_ritorno>?transaction_id=<id_transazione>|.
+\end{quote}
+dove \verb|<id_transazione>| corrisponde all'id della transazione effettuata dall'acquirente per l'acquisto del prodotto.
 \end{document}
