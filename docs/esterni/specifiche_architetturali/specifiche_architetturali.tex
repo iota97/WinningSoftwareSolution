@@ -176,7 +176,7 @@ Una funzione \textit{external} può essere chiamata solo dall'esterno e non all'
     Imposta gli slippage, la percentuale di fee da trattenere e l'address a cui inviarla.
     Imposta router e factory dell'exchange su cui convertire Matic in DAI.\\
     \item \textbf{checkUpkeep(calldata: bytes): (upkeepNeeded: bool, memory: bytes)}
-    Se chiamata, restituisce tramite \textit{upkeepNeeded} se è passato l'intervallo di tempo minimo dall'ultimo upkeep e dunque se è necessario performarne un altro.\\
+    Se chiamata, restituisce tramite \textit{upkeepNeeded} se è passato l'intervallo di tempo minimo dall'ultimo upkeep e dunque se è necessario per formarne un altro.\\
     \item \textbf{performUpkeep(calldata: bytes): void}
     Controlla se l'intervallo di tempo minimo per ogni upkeep è passato, se è così scorre dall'ultima transazione vista alla più recente transazione che abbia superato la durata massima senza sblocco dei fondi
     e restituisce il denaro all'indirizzo del cliente.\\
