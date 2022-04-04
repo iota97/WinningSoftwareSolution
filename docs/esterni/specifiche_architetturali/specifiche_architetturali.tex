@@ -23,6 +23,7 @@ Architettura del progetto
 
 \addversione{1.0.0}{23/02/2022}{Giovanni Cocco}{Redazione}{Creazione del documento}
 \addversione{1.1.0}{03/04/2022}{Elia Scandaletti}{Redazione}{Aggiunti dettagli dell'architettura}
+\addversione{1.2.0}{04/04/2022}{Matteo Galvagni}{Redazione}{Aggiunti dettagli del contratto}
 
 \begin{document}
 
@@ -140,7 +141,7 @@ Possono essere scansionati sia da dentro l'app di MetaMask che dalla fotocamera 
 \subsection{Script di messa in vendita}
 Usato dall'e-commerce per inserire prodotti in vendita in blockchain al fine di verificare che il prezzo sia corretto al momento della vendita.
 Realizzato in python per flessibilità, si connette alla block chain tramite moralis.io.
-
+\newpage
 \section{Dettagli architettura}
 \subsection{Server}
 \subsubsection{Diagramma delle classi}
@@ -161,6 +162,7 @@ Facilita il tracciamento delle dipendenze e agevola il mocking in fase di test.
 Schema delle tabelle del database.\\
 \textbf{LastSyncedBlock} contiene una sola riga con \textit{id} 0 con il valore dell'ultimo blocco sincronizzato.
 
+\newpage
 \subsection{Smart contract}
 \subsubsection{Diagramma delle classi}
 \includegraphics[width=1.0\textwidth]{contract}
@@ -216,37 +218,38 @@ L'input fornito alle funzioni è validato prima di essere processato, annullando
 Alcune funzioni richiedono il passaggio in input di un ID.
 Deve essere controllato che tale ID esista prima di continuare le operazioni.
 
+\newpage
 \subsection{Web app}
 \subsubsection{Diagramma delle classi}
 Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Lista dei metodi}
 Nessuno dei seguenti metodi prevede alcuna verifica sull'identità dell'utente o sulla validità delle richieste fatte. Questo perché la web app serve solo a fare da interfaccia per la blockchain che è pubblica per definizione. Tutta la parte di sicurezza è implementata nel contratto. Inoltre, essendo lo script eseguito lato client, sarebbe facile per un attaccante bypassare qualsiasi controllo.
 \begin{itemize}
-    \item \textbf{mobileCheck(): boolean} Controlla se sta venendo usato un dispositivo mobile.
-    \item \textbf{toggleMenu(): void} Mostra o nasconde il menu nella versione mobile dell'app.
-    \item \textbf{setGetParameter(paramName: string, paramValue: string): void} Imposta un dato parametro GET nella barra dell'URL del browser.
-    \item \textbf{findGetParameter(parameterName: string): string} Ritorna un dato parametro GET dall'URL corrente.
-    \item \textbf{handleNewChain(id: string): void} Funzione utilizzata per gestire il cambio di blockchain a cui è collegato MetaMask.
-    \item \textbf{handleNewAccounts(newAccounts: string[]): void} Funzione utilizzata per gestire il cambio di wallet utilizzati in MetaMask.
-    \item \textbf{async isMetamaskConnected(): boolean} Controlla se MetaMask è connesso a un wallet.
-    \item \textbf{showSellerButton(): void} Nella parte di web app relativa al venditore, mostra il bottone di annullamento dell'ordine insieme al QR code.
-    \item \textbf{showBuyerButton(): void} Nella parte di web app relativa all'acquirente, mostra il bottone di sblocco manuale del pagamento.
-    \item \textbf{showContents(): void} Nasconde i pop-up e mostra il contenuto della pagina.
-    \item \textbf{updateMenuLink(): void} Aggiorna i link nel menù in modo che puntino alle pagine relative al wallet attualmente collegato.
-    \item \textbf{async onMetamaskConnected(): void} Procedura asincrona che viene eseguita alla connessione di MetaMask a un wallet.
-    \item \textbf{onClickInstall(): void} Procedura per l'installazione di MetaMask.
-    \item \textbf{async onClickConnect(): void} Procedura per la connessione a MetaMask.
-    \item \textbf{async onClickOpenMetaMask(): void} Procedura per aprire la web app nell'applicazione mobile di MetaMask.
-    \item \textbf{isMetaMaskInstalled(): boolean} Controlla se MetaMask è installato.
-    \item \textbf{askForInstall(): void} Mostra un pop-up per chiedere all'utente di installare MetaMask.
-    \item \textbf{askToConnect(): void} Mostra un pop-up per chiedere all'utente di collegare il proprio wallet a MetaMask.
-    \item \textbf{async initialize(): void} Funzione di inizializzazione che verifica se MetaMask è installato e collegato a un wallet e, in caso negativo, mostra i rispettivi pop-up per guidare l'utente nella risoluzione del problema.
-    \item \textbf{closePop(e: Event): void} Procedura per chiudere il pop-up dato.
-    \item \textbf{checkChainID(): boolean} Controlla che MetaMask sia collegata alla stessa blockchain del contratto.
-    \item \textbf{showStatus(id: int): void} Mostra il pop-up corrispondente all'esito della transazione in corso o appena effettuata.
-    \item \textbf{onClickSettlePayment(): void} Procedura per invocare il metodo del contratto settledPayment.
-    \item \textbf{onCancelPayment(): void} Procedura per invocare il metodo del contratto cancelPayment.
-    \item \textbf{onClickUnlockFunds(): void} Procedura per invocare il metodo del contratto unlockFunds.
+    \item \textbf{mobileCheck(): boolean} Controlla se sta venendo usato un dispositivo mobile.\\
+    \item \textbf{toggleMenu(): void} Mostra o nasconde il menu nella versione mobile dell'app.\\
+    \item \textbf{setGetParameter(paramName: string, paramValue: string): void} Imposta un dato parametro GET nella barra dell'URL del browser.\\
+    \item \textbf{findGetParameter(parameterName: string): string} Ritorna un dato parametro GET dall'URL corrente.\\
+    \item \textbf{handleNewChain(id: string): void} Funzione utilizzata per gestire il cambio di blockchain a cui è collegato MetaMask.\\
+    \item \textbf{handleNewAccounts(newAccounts: string[]): void} Funzione utilizzata per gestire il cambio di wallet utilizzati in MetaMask.\\
+    \item \textbf{async isMetamaskConnected(): boolean} Controlla se MetaMask è connesso a un wallet.\\
+    \item \textbf{showSellerButton(): void} Nella parte di web app relativa al venditore, mostra il bottone di annullamento dell'ordine insieme al QR code.\\
+    \item \textbf{showBuyerButton(): void} Nella parte di web app relativa all'acquirente, mostra il bottone di sblocco manuale del pagamento.\\
+    \item \textbf{showContents(): void} Nasconde i pop-up e mostra il contenuto della pagina.\\
+    \item \textbf{updateMenuLink(): void} Aggiorna i link nel menù in modo che puntino alle pagine relative al wallet attualmente collegato.\\
+    \item \textbf{async onMetamaskConnected(): void} Procedura asincrona che viene eseguita alla connessione di MetaMask a un wallet.\\
+    \item \textbf{onClickInstall(): void} Procedura per l'installazione di MetaMask.\\
+    \item \textbf{async onClickConnect(): void} Procedura per la connessione a MetaMask.\\
+    \item \textbf{async onClickOpenMetaMask(): void} Procedura per aprire la web app nell'applicazione mobile di MetaMask.\\
+    \item \textbf{isMetaMaskInstalled(): boolean} Controlla se MetaMask è installato.\\
+    \item \textbf{askForInstall(): void} Mostra un pop-up per chiedere all'utente di installare MetaMask.\\
+    \item \textbf{askToConnect(): void} Mostra un pop-up per chiedere all'utente di collegare il proprio wallet a MetaMask.\\
+    \item \textbf{async initialize(): void} Funzione di inizializzazione che verifica se MetaMask è installato e collegato a un wallet e, in caso negativo, mostra i rispettivi pop-up per guidare l'utente nella risoluzione del problema.\\
+    \item \textbf{closePop(e: Event): void} Procedura per chiudere il pop-up dato.\\
+    \item \textbf{checkChainID(): boolean} Controlla che MetaMask sia collegata alla stessa blockchain del contratto.\\
+    \item \textbf{showStatus(id: int): void} Mostra il pop-up corrispondente all'esito della transazione in corso o appena effettuata.\\
+    \item \textbf{onClickSettlePayment(): void} Procedura per invocare il metodo del contratto settledPayment.\\
+    \item \textbf{onCancelPayment(): void} Procedura per invocare il metodo del contratto cancelPayment.\\
+    \item \textbf{onClickUnlockFunds(): void} Procedura per invocare il metodo del contratto unlockFunds.\\
 \end{itemize}
 \subsubsection{Design pattern: Nessuno}
 \paragraph{Descrizione}
