@@ -248,7 +248,8 @@ function showStatus(id) {
         errorPop,
     ]
     arr.forEach(item => item.style.display = "none")
-    arr[id].style.display = "flex"
+    if (id >= 0)
+        arr[id].style.display = "flex"
 }
 
 async function getLatestPrice(){
@@ -288,6 +289,8 @@ async function onClickSettlePayment() {
                 // This happen on metamask popup close
                 if (!error || error.code != 4001) {
                     showStatus(3)
+                } else {
+                    showStatus(-1)
                 }
                 settlePaymentButton.disabled = false;
             });    
@@ -314,6 +317,8 @@ function onCancelPayment() {
             // This happen on metamask popup close
             if (!error || error.code != 4001) {
                 showStatus(3)
+            } else {
+                showStatus(-1)
             }
             cancelPaymentButton.disabled = false;
         });    
@@ -340,6 +345,8 @@ function onRefundPayment() {
             // This happen on metamask popup close
             if (!error || error.code != 4001) {
                 showStatus(3)
+            } else {
+                showStatus(-1)
             }
             cancelPaymentButton.disabled = false;
         });    
