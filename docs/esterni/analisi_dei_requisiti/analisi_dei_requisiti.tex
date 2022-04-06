@@ -293,7 +293,6 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
 \textbf{Estensione}:
 UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
 \begin{enumerate}
-    \item cancellazione sessione di pagamento.
     \item l'acquirente viene reindirizzato al sito web dell'e-commerce.
 \end{enumerate}
 \textbf{Requisiti collegati all'estensione UC8.1}: RFO15, RFO16.
@@ -314,7 +313,6 @@ UC8.1 Visualizzazione messaggio procedura di pagamento annullata:
 UC9.1 Visualizzazione errore pagamento non riuscito:
 \begin{enumerate}
     \item Il pagamento non è stato completato con successo;
-    \item Cancellazione sessione di pagamento.
 \end{enumerate}
 \textbf{Requisiti collegati all'estensione UC9.1}: RFO18.
 
@@ -538,13 +536,9 @@ RFO14 & L'acquirente con wallet connesso poter confermare il pagamento nella lan
 \hline
 RFO15 & Il sistema deve reindirizzare l'acquirente sul sito web dell'e-commerce se l'acquirente con wallet connesso annulla il pagamento sulla landing page. & Obbligatorio & UC8.1 \\
 \hline
-RFO16 & Il sistema deve cancellare la sessione di pagamento se l'acquirente con wallet connesso annulla il pagamento sulla landing page. & Obbligatorio & UC8.1 \\
-\hline
 RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente su Metamask per completare il pagamento, quando conferma il pagamento sulla landing page. & Obbligatorio & UC9 \\
 \hline
 RFO47 & La landing page deve, attraverso Metamask, chiamare il metodo di pagamento dello smart contract. & Obbligatorio & UC9 \\
-\hline
-RFO18 & Il sistema deve cancellare la sessione di pagamento, se il pagamento non va a buon fine quando l'acquirente con wallet connesso effettua il pagamento tramite Metamask. & Obbligatorio & UC9.1 \\
 \hline
 % WEBAPP ACQUIRENTE
 RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC10 \\
