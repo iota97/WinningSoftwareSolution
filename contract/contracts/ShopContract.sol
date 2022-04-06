@@ -8,10 +8,10 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
 contract ShopContract is KeeperCompatibleInterface {
 
+    uint256 private batch;
     uint256 private freePaymentEntryId;
     uint256 private freeSettledPaymentId;
 
@@ -31,7 +31,6 @@ contract ShopContract is KeeperCompatibleInterface {
     address payable shopchainAddress;
 
     IUniswapV2Router02 public immutable uniswapV2Router;
-    IUniswapV2Factory public immutable uniswapV2Factory;
 
     IERC20 DAI = IERC20(0xcB1e72786A6eb3b44C2a2429e317c8a2462CFeb1);
 
@@ -107,7 +106,9 @@ contract ShopContract is KeeperCompatibleInterface {
      * Aggregator: MATIC/USD Dec: 8
      * Address: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
      */
-    constructor(uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _slippageDAI, uint256 _feeToTake, address payable _shopchainAddress){
+    constructor(uint256 _batch, uint256 _interval, uint256 _expireDuration, uint256 _slippageClient, uint256 _slippageExchange, uint256 _slippageDAI, uint256 _feeToTake, address payable _shopchainAddress){
+
+        batch = _batch;
 
         freePaymentEntryId = 0;
         freeSettledPaymentId = 0;
@@ -126,7 +127,6 @@ contract ShopContract is KeeperCompatibleInterface {
         shopchainAddress = _shopchainAddress;
 
         uniswapV2Router = IUniswapV2Router02(0x8954AfA98594b838bda56FE4C12a09D7739D179b);
-        uniswapV2Factory = IUniswapV2Factory(uniswapV2Router.factory());
 
     }
 
@@ -135,16 +135,14 @@ contract ShopContract is KeeperCompatibleInterface {
     }
 
     function checkUpkeep(bytes calldata) external view override returns (bool upkeepNeeded, bytes memory) {
-        upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
+        upkeepNeeded = (block.timestamp - lastTimeStamp) > interval && block.timestamp - settledPayments[lastTimeIndex].time > expireDuration;
     }
 
     function performUpkeep(bytes calldata) external override {
-
-        require((block.timestamp - lastTimeStamp) > interval);
+        require((block.timestamp - lastTimeStamp) > interval  && block.timestamp - settledPayments[lastTimeIndex].time > expireDuration);
         uint256 i = lastTimeIndex;
 
-        while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration) {
-
+        while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration && i - lastTimeIndex < batch) {
             if (settledPayments[i].status == Status.PAID) {
 
                 DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
@@ -154,8 +152,13 @@ contract ShopContract is KeeperCompatibleInterface {
             }
             i++;
         }
+
+        // if we reached #batch transaction don't update lastTimeStamp so another upkeeper can keep processing the rest
+        if (i - lastTimeIndex < batch) {
+            lastTimeStamp = block.timestamp;
+        }
         lastTimeIndex = i;
-        lastTimeStamp = block.timestamp;
+
     }
 
     function addPaymentEntry(uint256 price) public {
