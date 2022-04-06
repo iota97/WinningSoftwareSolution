@@ -42,7 +42,7 @@ Il documento illustra le scelte architetturali e illustra l'architettura.
 \begin{itemize}
     \item \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato d'appalto C2}};
     \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/interni/norme_di_progetto_v2.0.0.pdf}{Norme di Progetto}};
-    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_01_03_E.pdf}{Verbale esterno 2021/03/01}}.
+    \item \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2022_01_03_E.pdf}{Verbale esterno 2022/03/01}}.
 \end{itemize}
 \subsection{Riferimenti informativi}
 \begin{itemize}
@@ -178,7 +178,7 @@ Una funzione \textit{external} può essere chiamata solo dall'esterno e non all'
     Imposta gli slippage, la percentuale di fee da trattenere e l'address a cui inviarla.
     Imposta router e factory dell'exchange su cui convertire Matic in DAI.\\
     \item \textbf{checkUpkeep(calldata: bytes): (upkeepNeeded: bool, memory: bytes)}
-    Se chiamata, restituisce tramite \textit{upkeepNeeded} se è passato l'intervallo di tempo minimo dall'ultimo upkeep e dunque se è necessario per formarne un altro.\\
+    Se chiamata, restituisce tramite \textit{upkeepNeeded} se è passato l'intervallo di tempo minimo dall'ultimo upkeep e dunque se è necessario eseguirne un altro.\\
     \item \textbf{performUpkeep(calldata: bytes): void}
     Controlla se l'intervallo di tempo minimo per ogni upkeep è passato, se è così scorre dall'ultima transazione vista alla più recente transazione che abbia superato la durata massima senza sblocco dei fondi
     e restituisce il denaro all'indirizzo del cliente.\\
@@ -264,7 +264,7 @@ price: float - il prezzo in dollari della entry di pagamento.\\\\
 entry id: int - l'id dell'entry inserita in blockchain (-1 in caso di errore).\\\\
 \textbf{Comportamento}\\
 Il metodo inserisce una nuova entry di pagamento in blockchain con il prezzo specificato.\\
-Sia in caso si successo che di errore tutte le informazione vengono salvate nel file \textit{sell.log}.
+Sia in caso si successo che di errore tutte le informazioni vengono salvate nel file \textit{sell.log}.
 
 \section{Diagrammi di sequenza}
 \subsection{Inizializzazione server web}
@@ -283,13 +283,13 @@ Mostra la sottoscrizione degli eventi del contratto.
 \includegraphics[width=1.0\textwidth]{addedPaymentEntry}
 \captionof{figure}{Diagramma di sequenza di un nuovo oggetto in vendita}
 \paragraph{Commenti}
-Mostra cosa succede quando viene inserito una nuova entry di pagamento da parte di un e-commerce.
+Mostra cosa succede quando viene inserita una nuova entry di pagamento da parte di un e-commerce.
 
 \subsection{Nuova transazione}
 \includegraphics[width=1.0\textwidth]{settledPayment}
 \captionof{figure}{Diagramma di sequenza di una nuova transazione}
 \paragraph{Commenti}
-Mostra cosa succede quando viene create una nuova transazione.
+Mostra cosa succede quando viene creata una nuova transazione.
 
 \subsection{Cambio di stato di una transazione}
 \includegraphics[width=1.0\textwidth]{statusChanged}
