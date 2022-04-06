@@ -440,11 +440,12 @@ contract("ShopContract", async accounts => {
 
     it("Reverting performing upkeep", async () => {
 
-        let reverted = false;
+        await contract.performUpkeep(0);
+        await contract.performUpkeep(0);
+        await contract.performUpkeep(0);
+        await contract.performUpkeep(0);
 
-        try{
-            await contract.performUpkeep(0); //performs upkeep first time
-        }catch(error){}
+        let reverted = false;
 
         try {
             await contract.performUpkeep(0); //this should fail

@@ -135,14 +135,14 @@ contract ShopContract is KeeperCompatibleInterface {
     }
 
     function checkUpkeep(bytes calldata) external view override returns (bool upkeepNeeded, bytes memory) {
-        upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
+        upkeepNeeded = (block.timestamp - lastTimeStamp) > interval && block.timestamp - settledPayments[lastTimeIndex].time > expireDuration;
     }
 
     function performUpkeep(bytes calldata) external override {
-        require((block.timestamp - lastTimeStamp) > interval);
+        require((block.timestamp - lastTimeStamp) > interval  && block.timestamp - settledPayments[lastTimeIndex].time > expireDuration);
         uint256 i = lastTimeIndex;
 
-        while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration && i - lastTimeIndex < 1024) {
+        while (i < freeSettledPaymentId && (block.timestamp - settledPayments[i].time) > expireDuration && i - lastTimeIndex < batch) {
             if (settledPayments[i].status == Status.PAID) {
 
                 DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
