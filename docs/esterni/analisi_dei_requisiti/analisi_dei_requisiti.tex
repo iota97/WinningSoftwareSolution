@@ -206,7 +206,7 @@ UC2.1 Errore venditore con wallet non connesso:
 
 
 \includegraphics[width=0.9\textwidth]{UC_WAV4}
-\captionof{figure}{Casi d'uso UC4.1, UC4.2, UC4.3, UC4.4 ed UC4.5}
+\captionof{figure}{Casi d'uso UC4.1, UC4.2, UC4.3, UC4.4, UC4.5, UC4.6, UC4.7, UC4.8}
 
 \paragraph{UC4.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
@@ -235,9 +235,9 @@ UC2.1 Errore venditore con wallet non connesso:
 
 \paragraph{UC4.4 - Visualizzazione scadenza transazione}\\
 \textbf{Attore primario}: Venditore  con wallet connesso.\\
-\textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione in attesa.\\
-\textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione in attesa.\\
-\textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione in attesa, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare la scadenza di una transazione.\\
+\textbf{Postcondizioni}: Il venditore visualizza la scadenza di una transazione.\\
+\textbf{Scenario principale}: Il venditore vede la data della scadenza di una transazione, oltre la quale l'acquirente riceverà indietro la valuta bloccata.\\
 \textbf{Requisiti collegati}: RFO07, RFO39, RFO41.
 
 \paragraph{UC4.5 - annulla transazione}\\
@@ -246,6 +246,27 @@ UC2.1 Errore venditore con wallet non connesso:
 \textbf{Postcondizioni}: La transazione è stata annullata ed i fondi sono stati restituiti all'acquirente.\\
 \textbf{Scenario principale}: Il venditore annulla una transizione in stato di attessa ed i fondi vengono restituiti all'acquirente.\\
 \textbf{Requisiti collegati}: RFO51.
+
+\paragraph{UC4.6 - visualizzazione data transazione}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare la data di creazione una transazione.\\
+\textbf{Postcondizioni}: Il venditore visualizza la data di creazione di una transazione.\\
+\textbf{Scenario principale}: Il venditore vede la data di creazione di una transazione.\\
+\textbf{Requisiti collegati}: RFOX.
+
+\paragraph{UC4.7 - visualizzazione wallet venditore}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare il wallet del venditore.\\
+\textbf{Postcondizioni}: Il venditore vuole visualizzare il wallet del venditore.\\
+\textbf{Scenario principale}: Il venditore visualizza il wallet del venditore.\\
+\textbf{Requisiti collegati}: RFOX.
+
+\paragraph{UC4.8 - visualizzazione wallet acquirente}\\
+\textbf{Attore primario}: Venditore con wallet connesso.\\
+\textbf{Precondizioni}: Il venditore vuole visualizzare il wallet dell'acquirente.\\
+\textbf{Postcondizioni}: Il venditore vuole visualizzare il wallet dell'acquirente.\\
+\textbf{Scenario principale}: Il venditore visualizza il wallet dell'acquirente.\\
+\textbf{Requisiti collegati}: RFOX.
 
 \includegraphics[width=0.9\textwidth]{UC_script}
 \captionof{figure}{Casi d'uso UC5 e UC5.1}
@@ -496,13 +517,19 @@ RFO36 & La persistenza deve permettere di filtrare le transazioni per venditore.
 \hline
 RFO04 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il suo stato (attesa o completata). & Obbligatorio & UC4.1 \\
 \hline
-RFO05 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il QR Code da applicare sul pacco. & Obbligatorio & UC4.2 \\
+RFO05 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione in attesa, il QR Code da applicare sul pacco. & Obbligatorio & UC4.2 \\
 \hline
 RFO51 & La webapp venditore deve poter generare data una stringa un QR Code. & Obbligatorio & UC4.2 \\
 \hline
 RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, l'importo in dollari. & Obbligatorio & UC4.3 \\
 \hline
 RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\
+\hline
+RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la data di creazione della transazione. & Obbligatorio & UC4.6 \\
+\hline
+RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet del venditore. & Obbligatorio & UC4.7 \\
+\hline
+RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet dell'acquirente. & Obbligatorio & UC4.8 \\
 \hline
 RFO37 & Il server deve fornire una pagina con i dettagli di un transazione (prezzo, stato, data di creazione, data di chiusura, acquirente e venditore). & Obbligatorio & UC4 \\
 \hline
