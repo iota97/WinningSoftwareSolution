@@ -252,21 +252,21 @@ UC2.1 Errore venditore con wallet non connesso:
 \textbf{Precondizioni}: Il venditore vuole visualizzare la data di creazione una transazione.\\
 \textbf{Postcondizioni}: Il venditore visualizza la data di creazione di una transazione.\\
 \textbf{Scenario principale}: Il venditore vede la data di creazione di una transazione.\\
-\textbf{Requisiti collegati}: RFOX.
+\textbf{Requisiti collegati}: RFO59.
 
 \paragraph{UC4.7 - visualizzazione wallet venditore}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare il wallet del venditore.\\
 \textbf{Postcondizioni}: Il venditore vuole visualizzare il wallet del venditore.\\
 \textbf{Scenario principale}: Il venditore visualizza il wallet del venditore.\\
-\textbf{Requisiti collegati}: RFOX.
+\textbf{Requisiti collegati}: RFO60.
 
 \paragraph{UC4.8 - visualizzazione wallet acquirente}\\
 \textbf{Attore primario}: Venditore con wallet connesso.\\
 \textbf{Precondizioni}: Il venditore vuole visualizzare il wallet dell'acquirente.\\
 \textbf{Postcondizioni}: Il venditore vuole visualizzare il wallet dell'acquirente.\\
 \textbf{Scenario principale}: Il venditore visualizza il wallet dell'acquirente.\\
-\textbf{Requisiti collegati}: RFOX.
+\textbf{Requisiti collegati}: RFO61.
 
 \includegraphics[width=0.9\textwidth]{UC_script}
 \captionof{figure}{Casi d'uso UC5 e UC5.1}
@@ -310,7 +310,7 @@ Viene mostrato all'acquirente il riepilogo della transazione con il prezzo in do
     \item Il sistema mostra il riepilogo della transazione;
     \item L'acquirente conferma l'ordine.
 \end{enumerate}
-\textbf{Requisiti collegati}: RFO14.\\
+\textbf{Requisiti collegati}: RFO14, RFO58.\\
 \textbf{Estensione}:
 UC8.1 Reindirizzamento acquirente in e-commerce:
 \begin{enumerate}
@@ -339,7 +339,7 @@ UC9.1 Annullamento pagamento:
     \item Il pagamento non viene completato con successo;
     \item L'acquirente può nuovamente confermare il pagamento (UC8);
 \end{enumerate}
-\textbf{Requisiti collegati all'estensione UC9.1}: RFO18.
+\textbf{Requisiti collegati all'estensione UC9.1}: RFO18, RFO58.
 
 \includegraphics[width=0.9\textwidth]{UC7D}
 \captionof{figure}{Casi d'uso UC7.1 e UC7.2}
@@ -349,12 +349,14 @@ UC9.1 Annullamento pagamento:
 \textbf{Precondizioni}: L'Acquirente vuole visualizzare il prezzo dell'oggetto.\\
 \textbf{Postcondizioni}: L'Acquirente visualizza il prezzo dell'oggetto.\\
 \textbf{Scenario principale}: Viene visualizzato il prezzo dell'oggetto.\\
+\textbf{Requisiti collegati}: RFO56.\\
 
 \paragraph{UC7.2 - Visualizzazione il venditore dell'oggetto}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
 \textbf{Precondizioni}: L'Acquirente vuole visualizzare il venditore dell'oggetto.\\
 \textbf{Postcondizioni}: L'Acquirente visualizza il venditore dell'oggetto.\\
 \textbf{Scenario principale}: Viene visualizzato il venditore dell'oggetto.\\
+\textbf{Requisiti collegati}: RFO57.
 
 \includegraphics[width=0.9\textwidth]{UC_WAA1}
 \captionof{figure}{Caso d'uso UC10}
@@ -548,11 +550,11 @@ RFO06 & Il venditore deve poter visualizzare nella webapp venditore, per ogni tr
 \hline
 RFO07 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la scadenza della transazione. & Obbligatorio & UC4.4 \\
 \hline
-RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la data di creazione della transazione. & Obbligatorio & UC4.6 \\
+RFO59 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, la data di creazione della transazione. & Obbligatorio & UC4.6 \\
 \hline
-RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet del venditore. & Obbligatorio & UC4.7 \\
+RFO60 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet del venditore. & Obbligatorio & UC4.7 \\
 \hline
-RFOX & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet dell'acquirente. & Obbligatorio & UC4.8 \\
+RFO61 & Il venditore deve poter visualizzare nella webapp venditore, per ogni transazione, il wallet dell'acquirente. & Obbligatorio & UC4.8 \\
 \hline
 RFO37 & Il server deve fornire una pagina con i dettagli di un transazione (prezzo, stato, data di creazione, data di chiusura, acquirente e venditore). & Obbligatorio & UC4 \\
 \hline
@@ -580,9 +582,9 @@ RFO12 & Un acquirente con wallet non connesso non può accedere alla landing pag
 \hline
 RFO50 & La landing page deve tracciare l'id dell'oggetto venduto tramite metodo GET. & Obbligatorio & \underline{\href{https://www.math.unipd.it/~tullio/IS-1/2021/Progetto/C2.pdf}{Capitolato}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/esterni/verbali/2021_12_22_E.pdf}{verbale del 22/12/2021}}, \underline{\href{https://github.com/iota97/WinningSoftwareSolution/blob/main/public/interni/verbali/2021_12_23_I.pdf}{verbale del 23/12/2021}} \\
 \hline
-RFOX & L'acquirente con wallet connesso deve vedere il prezzo dell'oggetto nella landing page. & Obbligatorio & UC7.1 \\
+RFO56 & L'acquirente con wallet connesso deve vedere il prezzo dell'oggetto nella landing page. & Obbligatorio & UC7.1 \\
 \hline
-RFOX & L'acquirente con wallet connesso deve vedere il wallet del venditore dell'oggetto nella landing page. & Obbligatorio & UC7.2 \\
+RFO57 & L'acquirente con wallet connesso deve vedere il wallet del venditore dell'oggetto nella landing page. & Obbligatorio & UC7.2 \\
 \hline
 RFO14 & L'acquirente con wallet connesso poter confermare il pagamento nella landing page. & Obbligatorio & UC8 \\
 \hline
@@ -592,7 +594,7 @@ RFO17 & L'acquirente con wallet connesso deve essere indirizzato automaticamente
 \hline
 RFO47 & La landing page deve, attraverso Metamask, chiamare il metodo di pagamento dello smart contract. & Obbligatorio & UC9 \\
 \hline
-RFOX & L'acquirente deve poter confermare nuovamente il pagamento se il pagamento tramite Metamask fallisce. & Obbligatorio & UC8, UC9.1 \\
+RFO58 & L'acquirente deve poter confermare nuovamente il pagamento se il pagamento tramite Metamask fallisce. & Obbligatorio & UC8, UC9.1 \\
 \hline
 % WEBAPP ACQUIRENTE
 RFO19 & Per accedere alla webapp acquirente, l'acquirente con wallet non connesso deve connettere il proprio wallet tramite Metamask. & Obbligatorio & UC10 \\
