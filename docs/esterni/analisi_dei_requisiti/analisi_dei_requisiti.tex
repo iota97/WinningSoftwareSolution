@@ -454,7 +454,7 @@ L'acquirente usando Metamask, si connette con il proprio wallet.\\
 
 
 \includegraphics[width=0.9\textwidth]{UC_ECA3}
-\captionof{figure}{Casi d'uso UC15.1, UC15.2, UC15.3 ed UC15.4}
+\captionof{figure}{Casi d'uso UC15.1, UC15.2, UC15.3, UC15.4, UC15.5, UC15.6 ed UC15.7}
 
 \paragraph{UC15.1 - Visualizzazione stato transazione}\\
 \textbf{Attore primario}: Acquirente con wallet connesso.\\
@@ -483,6 +483,27 @@ L'acquirente usando Metamask, si connette con il proprio wallet.\\
 \textbf{Postcondizioni}: La transazione è stata annullata e l'acquirente ha ricevuto i propri fondi.\\
 \textbf{Scenario principale}: Il pacco non è arrivato entro i 14 giorni. Quindi l'acquirente può annullare la transazione.\\
 \textbf{Requisiti collegati}: RFO52.
+
+\paragraph{UC15.5 - Visualizzazione indirizzo wallet venditore}\\
+\textbf{Attore primario}: Acquirente  con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare l'indirizzo del wallet del venditore.\\
+\textbf{Postcondizioni}: L'acquirente l'indirizzo del wallet del venditore.\\
+\textbf{Scenario principale}: Viene mostrato l'indirizzo del wallet del venditore.\\
+\textbf{Requisiti collegati}: RFO53.
+
+\paragraph{UC15.6 - Visualizzazione indirizzo wallet acquirente}\\
+\textbf{Attore primario}: Acquirente  con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare l'indirizzo del wallet dell'acquirente.\\
+\textbf{Postcondizioni}: L'acquirente l'indirizzo del wallet dell'acquirente.\\
+\textbf{Scenario principale}: Viene mostrato l'indirizzo del wallet dell'acquirente.\\
+\textbf{Requisiti collegati}: RFO54.
+
+\paragraph{UC15.7 - Visualizzazione data transazione}\\
+\textbf{Attore primario}: Acquirente  con wallet connesso.\\
+\textbf{Precondizioni}: L'acquirente vuole visualizzare la data della transazione.\\
+\textbf{Postcondizioni}: L'acquirente visualizza la data della transazione.\\
+\textbf{Scenario principale}: Viene visualizzata la data della transazione.\\
+\textbf{Requisiti collegati}: RFO55.
 
 \section{Requisiti}
 Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, facoltativo)+x(un numero univoco a due cifre).
@@ -607,7 +628,13 @@ RFO30 & L'acquirente con wallet connesso deve poter visualizzare la scadenza di 
 \hline
 RFO51 & Il venditore con wallet connesso deve poter annullare una transazione in attesa. & Obbligatorio & UC4.5 \\
 \hline
-RFO52 & L'acquirente con wallet connesso deve poter annullare una transazione dopo lo scadere dei 14 giorni dall'apertura della transazione. & Obbligatorio & UC4.5 \\
+RFO52 & L'acquirente con wallet connesso deve poter annullare una transazione dopo lo scadere dei 14 giorni dall'apertura della transazione. & Obbligatorio & UC15.4 \\
+\hline
+RFO53 & L'acquirente con wallet connesso deve poter visualizzare l'indirizzo del wallet del venditore. & Obbligatorio & UC15.5 \\
+\hline
+RFO54 & L'acquirente con wallet connesso deve poter visualizzare l'indirizzo del wallet dell'acquirente. & Obbligatorio & UC15.6 \\
+\hline
+RFO55 & L'acquirente con wallet connesso deve poter visualizzare la data della transazione. & Obbligatorio & UC15.7 \\
 \hline
 
 \end{longtable}
