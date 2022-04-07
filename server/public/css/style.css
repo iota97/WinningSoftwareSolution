@@ -99,6 +99,11 @@ html body {
   margin-bottom: 3em;
 }
 
+.info a {
+  color: #0c162c;
+  font-weight: bold;
+}
+
 .price {
   font-size: 1.2em;
   margin: 1.7em;
