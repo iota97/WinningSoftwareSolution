@@ -25,6 +25,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \addversione{0.0.4}{21/02/2021}{Giovanni Cocco}{Redazione}{Aggiunta dashboard al docuemento.}
 \addversione{2.0.0}{23/03/2021}{Elia Scandaletti}{Redazione}{Rifacimento del documento.}
 \addversione{2.1.0}{30/03/2021}{Giovanni Cocco}{Redazione}{Aggiornamento per ciclo 1.}
+\addversione{2.2.0}{07/04/2021}{Matteo Galvagni}{Redazione}{Aggiornamento per ciclo 2.}
 
 \begin{document}
 
@@ -116,11 +117,13 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-02-09, 52.46)
 					(2022-02-26, 72.56)
 					(2022-03-23, 72.44)
+					(2022-04-07, 66.92)
 				};\addlegendentry{Verbali interni}
 
 			\addplot coordinates {
 					(2022-03-02, 55.2)
 					(2022-03-27, 55.15)
+					(2022-04-07, 55.19)
 				};\addlegendentry{Norme di progetto}
 
 		\end{axis}
@@ -166,22 +169,24 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2021-12-09, 43.59)
 					(2021-12-22, 46.31)
 					(2022-02-16, 63.87)
-					(2022-03-01, 47.52)	
+					(2022-03-01, 47.52)
 				};\addlegendentry{Verbali esterni}
 			\addplot coordinates {
 					(2022-03-23, 55.2)
 					(2022-03-27, 55.16)
+					(2022-04-07, 55.17)
 				};\addlegendentry{Analisi dei requisiti}
 
 			\addplot coordinates {
 					(2022-03-23, 40.8)
 					(2022-03-27, 41.8)
+					(2022-04-07, 42.58)
 				};\addlegendentry{Piano di progetto}
 
 			\addplot coordinates {
 					(2022-03-23, 50.00)
 					(2022-03-27, 51.76)
-
+					(2022-04-07, 56.17)
 				};\addlegendentry{Piano di qualifica}
 
 		\end{axis}
@@ -275,7 +280,7 @@ Ogni punto indica la copertura percentuale degli statement nella data indicata.
 \captionof{figure}{Copertura degli statement nel tempo}
 
 \subsubsection{Copertura branch}
-La metrica si basa sullo branch coverage.
+La metrica si basa sul branch coverage.
 
 \subparagraph{Prodotti coinvolti:}
 \begin{center}
@@ -343,6 +348,7 @@ Ogni punto indica la copertura percentuale delle branch nella data indicata.
 					(2022-03-02, 0)
 					(2022-03-22, 75.1)
 					(2022-03-27, 95.1)
+					(2022-04-07, 95.56)
 				};\addlegendentry{Contratto}
 			\addplot coordinates {
 					(2022-03-02, 0)
@@ -408,10 +414,12 @@ Ogni punto indica la variazione del consultivo rispetto al preventivo di un cicl
 			\addplot coordinates {
 					(2022-03-23, 0)
 					(2022-03-30, +25)
+					(2022-04-07, +14)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
 					(2022-03-23, 0)
 					(2022-03-30, -33)
+					(2022-04-07, -18)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}
@@ -471,10 +479,12 @@ Ogni punto indica la variazione del consultivo rispetto al preventivo di un cicl
 			\addplot coordinates {
 					(2022-03-23, 0)
 					(2022-03-30, +30)
+					(2022-04-07, +18)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
 					(2022-03-23, 0)
 					(2022-03-30, -33)
+					(2022-04-07, -29)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}

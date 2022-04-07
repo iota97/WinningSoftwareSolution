@@ -25,7 +25,9 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{1.0.0}{12/02/2022}{Giovanni Cocco}{Approvazione}{Approvazione per RTB}
 \addversione{2.0.0}{19/03/2022}{Giovanni Cocco}{Redazione}{Rifacimento documento}
 \addversione{2.1.0}{27/03/2022}{Giovanni Cocco}{Redazione}{Ciclo 1}
-\addversione{2.2.0}{02/04/2022}{Matteo Galvagni}{Redazione}{Ciclo 2}
+\addversione{2.2.0}{03/04/2021}{Matteo Galvagni}{Redazione}{Aggiunto preventivo per ciclo 2.}
+\addversione{2.3.0}{07/04/2021}{Matteo Galvagni}{Redazione}{Aggiornamento ciclo 2.}
+
 
 
 \def\pgfcalendarmonthitname#1{%
@@ -437,7 +439,7 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
 \subsection{Sprint 2}
 \textbf{Data di inizio:} 30-03-2022\\
 \textbf{Data di fine pianificata:} 07-04-2022\\
-\textbf{Data di fine effettiva:} TODO
+\textbf{Data di fine effettiva:} 07-04-2022
 
 \subsubsection{Pianificazione}\mbox{}
 
@@ -470,16 +472,16 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \hline
         Amministratore  & 20 & 6  & 120\\
         \hline
-        Analista        & 25 & 8  & 200\\
+        Analista        & 25 & 20  & 500\\
         \hline
-        Progettista     & 25 & 10  & 250\\
+        Progettista     & 25 & 6  & 150\\
         \hline
-        Programmatore   & 15 & 18  & 270\\
+        Programmatore   & 15 & 14  & 210\\
         \hline
         Verificatore    & 15 & 8  & 120\\
         \hline
         \hline
-        \textbf{Totale} &    & 54 & 1080\\
+        \textbf{Totale} &    & 58 & 1220\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -494,6 +496,64 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Problema} & \textbf{Misure di mitigazione}\\
         \hline
         Eventuali dubbi sulla stesura dei documenti & Si farà una riunione per decidere come redigerli.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 5 (+1) & 150 (+30)\\
+        \hline
+        Amministratore  & 20 & 3 (-3)  & 60 (-60)\\
+        \hline
+        Analista        & 25 & 25 (+5)  & 625 (+125)\\
+        \hline
+        Progettista     & 25 & 2 (-4) & 50 (-100)\\
+        \hline
+        Programmatore   & 15 & 10 (-4) & 150 (-60)\\
+        \hline
+        Verificatore    & 15 & 13.5 (+5.5) & 202.50 (+82.5)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 58.5 (+0.5) & 1237.50 (+17.5)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Metamask ha smesso di inviare correttamente transazioni & Il problema è stato affrontato da due membri scelti dal responsabile e si è rivelato riconducibile all'RPC utilizzata per la rete di test.
+        Una volta cambiato link Metamask ha ripreso a funzionare.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Necessità di considerare nel preventivo possibili problematiche con le tecnologie utilizzate & Futura aggiunta di alcune ore nel preventivo per risoluzione di eventuali bug\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
