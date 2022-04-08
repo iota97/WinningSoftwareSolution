@@ -161,7 +161,8 @@ Facilita il tracciamento delle dipendenze e agevola il mocking in fase di test.
 Schema delle tabelle del database.\\
 \textbf{LastSyncedBlock} contiene una sola riga con \textit{id} 0 con il valore dell'ultimo blocco sincronizzato.
 \subsubsection{Testing}
-Per testare le funzionalità del server viene utilizzato il framework Jest. Vengono eseguiti dei test di copertura automatici sia sulla parte di gestione delle risposte al cliente, sia sulla parte di persistenza. \\
+Per testare le funzionalità del server viene utilizzato il framework Jest alla versione 27.4.7 (\href{https://jestjs.io/docs/27.4/getting-started}{https://jestjs.io/docs/27.4/getting-started}). \\
+Vengono eseguiti dei test di copertura automatici sia sulla parte di gestione delle risposte al cliente, sia sulla parte di persistenza. \\
 Per eseguire i test è sufficiente eseguire il comando \texttt{npm test} all'interno della cartella \texttt{server}.
 
 \newpage
@@ -265,7 +266,7 @@ Non è stato adottato alcun design pattern.
 \paragraph{Motivazioni}
 Adottare pattern architetturali avrebbe richiesto un costo ben superiore ai benefici. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Testing}
-Per eseguire i test sulla web app si è scelto di utilizzare JSCover in modalità proxy.
+Per eseguire i test sulla web app si è scelto di utilizzare JSCover in modalità proxy (\href{http://tntim96.github.io/JSCover/manual/manual.xml#gettingStartedProxy}{http://tntim96.github.io/JSCover/manual/manual.xml\#gettingStartedProxy}). \\
 In altre parole, i file js dell'applicazione passeranno attraverso un server proxy che li trasformerà e terrà traccia della loro copertura. \\
 Per eseguire i test sarà necessario:
 \begin{enumerate}
