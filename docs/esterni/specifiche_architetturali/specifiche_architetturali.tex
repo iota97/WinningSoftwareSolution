@@ -284,6 +284,8 @@ entry id: int - l'id dell'entry inserita in blockchain (-1 in caso di errore).
 \paragraph{Comportamento}\\
 Il metodo inserisce una nuova entry di pagamento in blockchain con il prezzo specificato.\\
 Sia in caso si successo che di errore tutte le informazioni vengono salvate nel file \textit{sell.log}.
+\subsubsection{Testing}
+I test vengono eseguiti attraverso le funzioni nel file \texttt{test\_sell.py}. I test coprono sia un caso di successo, sia un caso di fallimento. I test eseguono sia lo script simulando una linea di comando, sia importando la funzione \texttt{sell\_item} ed eseguendola.
 
 \section{Diagrammi di sequenza}
 \subsection{Inizializzazione server web}
