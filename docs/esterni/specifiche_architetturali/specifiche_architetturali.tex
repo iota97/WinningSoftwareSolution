@@ -274,31 +274,6 @@ Per eseguire i test sarà necessario:
     \item configurare il proxy;
     \item eseguire e salvare i test.
 \end{enumerate}
-\paragraph{Avvio del server ShopChain}
-Per avviare il server proxy eseguire il seguente comando: \\\texttt{java -jar JSCover-all.jar -ws --proxy --port=3128 --report-dir=jscoverage --local-storage}\\
-È possibile cambiare porta nel caso la \texttt{3128} sia già occupata.
-\paragraph{Configurazione del proxy}
-Il server da raggiungere è un server locale ma spesso le impostazioni del browser o del sistema operativo impediscono l'uso del proxy quando ci si collega a \texttt{localhost} o a \texttt{127.0.0.1}. \\
-Per questo motivo è necessario aggiungere un nuovo host chiamato \texttt{localhost-proxy} alla lista degli host noti (\texttt{/etc/hosts} nei sistemi Unix) e impostare come proxy \texttt{localhost-proxy:3128}.
-\paragraph{Esecuzione dei test}
-Per eseguire i test sarà necessario connettersi a \texttt{http://localhost-proxy:8080}.
-\subparagraph{Salvataggio dei dati}
-JSCover terrà traccia di ogni linea di codice eseguita e salverà i dati nel localStorage di HTML5. \\
-Per salvare i dati nella cartella \texttt{jscoverage} sarà necessario:
-\begin{enumerate}
-    \item caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage.html};
-    \item aprire la tab ``Store";
-    \item cliccare su ``Store Report".
-\end{enumerate}
-\subparagraph{Cancellazione dei dati}
-I dati dei test sono cumulativi, perciò quando bisogna effettuare i test da zero è necessario cancellare i dati salvati. \\
-Per cancellare i dati è necessario caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
-\subparagraph{Vedere i report}
-Per visualizzare il report è sufficiente:
-\begin{enumerate}
-    \item caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage.html};
-    \item aprire la tab ``Summary".
-\end{enumerate}
 
 \subsection{Script di messa in vendita}
 \subsubsection{sell\_item}
