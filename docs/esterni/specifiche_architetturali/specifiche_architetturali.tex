@@ -35,7 +35,7 @@ Architettura del progetto
 
 \section{Introduzione}
 \subsection{Scopo del documento}
-Il documento illustra le scelte architetturali e illustra l'architettura.
+Il presente documento ha lo scopo di illustrare le scelte architetturali e l'architettura.
 
 \section{Riferimenti}
 \subsection{Riferimenti normativi}
@@ -126,20 +126,20 @@ Riceve le richieste HTTP dalla rete e risponde con le pagine della Web app.
 
 \subsection{Smart contract}
 Realizzato in solidity e pubblicato sulla rete Polygon tiene traccia delle transazioni; gestisce la logica e la sicurezza di esse.\\\\
-Per gestire il timer che fa scadere le transazioni si usa il servizio Upkeep di ChainLink.\\
-Uno smart contract non esegue operazioni se non viene chiamato, per realizzare un timer si realizzano delle funzioni che
-eseguono le operazioni necessarie se è passato abbastanza tempo. Un upkeeper chiama automaticamente queste funzioni dall'esterno a intervalli di tempo prefissato.
+Per la gestione del timer utilizzato per far scadere le transazioni si utilizza il servizio Upkeep di ChainLink.\\
+Uno smart contract non esegue operazioni se non viene chiamato, dunque per realizzare un timer sono state implementate delle funzioni che
+eseguono le operazioni necessarie nel caso in cui sia passato abbastanza tempo. Un upkeeper chiama automaticamente queste funzioni dall'esterno a intervalli di tempo prefissato.
 
 \subsection{Web app}
 Fornita all'utente tramite il server web fornisce la logica lato client.\\
 Tramite MetaMask l'utente interagisce direttamente col contratto.\\\\
-In caso di utenti mobile reindirizza tramite deep link per aprire la pagine sull'app di Metamask.\\\\
+In caso di utenti da dispositivo mobile reindirizza tramite deep link per aprire le pagine sull'app di Metamask.\\\\
 I deep link vengono usati anche per il QR code di ricezione del pacco.\\
-Possono essere scansionati sia da dentro l'app di MetaMask che dalla fotocamera del cellulare.
+Possono essere scansionati sia dall'app di MetaMask, sia direttamente dalla fotocamera del cellulare.
 
 \subsection{Script di messa in vendita}
 Usato dall'e-commerce per inserire prodotti in vendita in blockchain al fine di verificare che il prezzo sia corretto al momento della vendita.
-Realizzato in python per flessibilità, si connette alla block chain tramite moralis.io.
+Realizzato in python per flessibilità, si connette alla blockchain tramite moralis.io.
 \newpage
 \section{Dettagli architettura}
 \subsection{Server}
@@ -147,8 +147,8 @@ Realizzato in python per flessibilità, si connette alla block chain tramite mor
 \includegraphics[width=1.0\textwidth]{server_class}
 \captionof{figure}{Diagramma delle classi del server}
 \paragraph{Commenti}
-La classe ShopContract andrà a interfacciarsi con il contratto in blockchain.\\
-La classe PageCreator andrà a interfacciarsi con la WebApp.
+La classe ShopContract si interfaccia con il contratto in blockchain.\\
+La classe PageCreator si interfaccia con la WebApp.
 \subsubsection{Design pattern: Constructor injection}
 \paragraph{Descrizione}
 Le dipendenze sono tracciate e passate agli oggetti tramite il costruttore.
@@ -160,6 +160,10 @@ Facilita il tracciamento delle dipendenze e agevola il mocking in fase di test.
 \paragraph{Commenti}
 Schema delle tabelle del database.\\
 \textbf{LastSyncedBlock} contiene una sola riga con \textit{id} 0 con il valore dell'ultimo blocco sincronizzato.
+\subsubsection{Testing}
+Per testare le funzionalità del server viene utilizzato il framework Jest alla versione 27.4.7 (\href{https://jestjs.io/docs/27.4/getting-started}{https://jestjs.io/docs/27.4/getting-started}). \\
+Vengono eseguiti dei test di copertura automatici sia sulla parte di gestione delle risposte al cliente, sia sulla parte di persistenza. \\
+Per eseguire i test è sufficiente eseguire il comando \texttt{npm test} all'interno della cartella \texttt{server}.
 
 \newpage
 \subsection{Smart contract}
@@ -209,7 +213,7 @@ ChainLink restituisce la media del valore di una valuta tra più fornitori, evit
 La chiamata di alcune funzioni è ristretta ad alcune tipologie di utenti.
 \paragraph{Motivazioni}
 È necessario mantenere una distinzione tra cliente e venditore all'interno del contratto.
-Il venditore non potrà chiamare funzioni riservate al cliente (per esempio, sbloccandosi i fondi) e viceversa.
+Il venditore non può chiamare funzioni riservate al cliente (per esempio la funzione di sblocco fondi) e viceversa.
 \subsubsection{Design pattern: Guard check}
 \paragraph{Descrizione}
 L'input fornito alle funzioni è validato prima di essere processato, annullando la transazione se non valido.
@@ -226,12 +230,12 @@ Di comune accordo col Proponente i test che richiedono il mocking completo di al
 \newpage
 \subsection{Web app}
 \subsubsection{Diagramma delle classi}
-Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
+Non sono presenti classi. Questo perché introdurre delle classi avrebbe aumentato la complessità del codice, a fronte di vantaggi irrisori. Infatti la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Lista dei metodi}
 Nessuno dei seguenti metodi prevede alcuna verifica sull'identità dell'utente o sulla validità delle richieste fatte. Questo perché la web app serve solo a fare da interfaccia per la blockchain che è pubblica per definizione. Tutta la parte di sicurezza è implementata nel contratto. Inoltre, essendo lo script eseguito lato client, sarebbe facile per un attaccante bypassare qualsiasi controllo.
 \begin{itemize}
-    \item \textbf{mobileCheck(): boolean} Controlla se sta venendo usato un dispositivo mobile.\\
-    \item \textbf{toggleMenu(): void} Mostra o nasconde il menu nella versione mobile dell'app.\\
+    \item \textbf{mobileCheck(): boolean} Controlla se si sta utilizzando un dispositivo mobile.\\
+    \item \textbf{toggleMenu(): void} Mostra o nasconde il menù nella versione mobile dell'app.\\
     \item \textbf{setGetParameter(paramName: string, paramValue: string): void} Imposta un dato parametro GET nella barra dell'URL del browser.\\
     \item \textbf{findGetParameter(parameterName: string): string} Ritorna un dato parametro GET dall'URL corrente.\\
     \item \textbf{handleNewChain(id: string): void} Funzione utilizzata per gestire il cambio di blockchain a cui è collegato MetaMask.\\
@@ -250,7 +254,7 @@ Nessuno dei seguenti metodi prevede alcuna verifica sull'identità dell'utente o
     \item \textbf{askToConnect(): void} Mostra un pop-up per chiedere all'utente di collegare il proprio wallet a MetaMask.\\
     \item \textbf{async initialize(): void} Funzione di inizializzazione che verifica se MetaMask è installato e collegato a un wallet e, in caso negativo, mostra i rispettivi pop-up per guidare l'utente nella risoluzione del problema.\\
     \item \textbf{closePop(e: Event): void} Procedura per chiudere il pop-up dato.\\
-    \item \textbf{checkChainID(): boolean} Controlla che MetaMask sia collegata alla stessa blockchain del contratto.\\
+    \item \textbf{checkChainID(): boolean} Controlla che MetaMask sia collegato alla stessa blockchain del contratto.\\
     \item \textbf{showStatus(id: int): void} Mostra il pop-up corrispondente all'esito della transazione in corso o appena effettuata.\\
     \item \textbf{onClickSettlePayment(): void} Procedura per invocare il metodo del contratto settledPayment.\\
     \item \textbf{onCancelPayment(): void} Procedura per invocare il metodo del contratto cancelPayment.\\
@@ -262,50 +266,28 @@ Non è stato adottato alcun design pattern.
 \paragraph{Motivazioni}
 Adottare pattern architetturali avrebbe richiesto un costo ben superiore ai benefici. Questo perché la web app è molto semplice ed una mera interfaccia asincrona per la comunicazione col contratto in blockchain.
 \subsubsection{Testing}
-Per eseguire i test sulla web app si è scelto di utilizzare JSCover in modalità proxy.
-In altre parole, i file js dell'applicazione passeranno attraverso un server proxy che li trasformerà e terrà traccia della loro copertura. \\
-Per eseguire i test sarà necessario:
+Per eseguire i test sulla web app si è scelto di utilizzare JSCover in modalità proxy (\href{http://tntim96.github.io/JSCover/manual/manual.xml#gettingStartedProxy}{http://tntim96.github.io/JSCover/manual/manual.xml\#gettingStartedProxy}). \\
+In altre parole, i file js dell'applicazione passano attraverso un server proxy che li trasforma e tiene traccia della loro copertura. \\
+Per eseguire i test è necessario:
 \begin{enumerate}
     \item avviare il server della web app;
     \item avviare il server di JSCover;
     \item configurare il proxy;
     \item eseguire e salvare i test.
 \end{enumerate}
-\paragraph{Avvio del server ShopChain}
-Per avviare il server proxy eseguire il seguente comando: \\\texttt{java -jar JSCover-all.jar -ws --proxy --port=3128 --report-dir=jscoverage --local-storage}\\
-È possibile cambiare porta nel caso la \texttt{3128} sia già occupata.
-\paragraph{Configurazione del proxy}
-Il server da raggiungere è un server locale ma spesso le impostazioni del browser o del sistema operativo impediscono l'uso del proxy quando ci si collega a \texttt{localhost} o a \texttt{127.0.0.1}. \\
-Per questo motivo è necessario aggiungere un nuovo host chiamato \texttt{localhost-proxy} alla lista degli host noti (\texttt{/etc/hosts} nei sistemi Unix) e impostare come proxy \texttt{localhost-proxy:3128}.
-\paragraph{Esecuzione dei test}
-Per eseguire i test sarà necessario connettersi a \texttt{http://localhost-proxy:8080}.
-\subparagraph{Salvataggio dei dati}
-JSCover terrà traccia di ogni linea di codice eseguita e salverà i dati nel localStorage di HTML5. \\
-Per salvare i dati nella cartella \texttt{jscoverage} sarà necessario:
-\begin{enumerate}
-    \item caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage.html};
-    \item aprire la tab ``Store";
-    \item cliccare su ``Store Report".
-\end{enumerate}
-\subparagraph{Cancellazione dei dati}
-I dati dei test sono cumulativi, perciò quando bisogna effettuare i test da zero è necessario cancellare i dati salvati. \\
-Per cancellare i dati è necessario caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
-\subparagraph{Vedere i report}
-Per visualizzare il report è sufficiente:
-\begin{enumerate}
-    \item caricare la pagina \texttt{http://localhost-proxy:8080/jscoverage.html};
-    \item aprire la tab ``Summary".
-\end{enumerate}
 
 \subsection{Script di messa in vendita}
 \subsubsection{sell\_item}
-\textbf{Parametri}\\
-price: float - il prezzo in dollari della entry di pagamento.\\\\
-\textbf{Valore Restituito}\\
-entry id: int - l'id dell'entry inserita in blockchain (-1 in caso di errore).\\\\
-\textbf{Comportamento}\\
+\paragraph{Parametri}\\
+price: float - il prezzo in dollari della entry di pagamento.
+\paragraph{Valore Restituito}\\
+entry id: int - l'id dell'entry inserita in blockchain (-1 in caso di errore).
+\paragraph{Comportamento}\\
 Il metodo inserisce una nuova entry di pagamento in blockchain con il prezzo specificato.\\
-Sia in caso si successo che di errore tutte le informazioni vengono salvate nel file \textit{sell.log}.
+Sia in caso di successo che di errore tutte le informazioni vengono salvate nel file \textit{sell.log}.
+\subsubsection{Testing}
+I test vengono eseguiti usando il framework PyTest alla versione 6.2.5 (\href{https://docs.pytest.org/en/6.2.x/}{https://docs.pytest.org/en/6.2.x/}). \\
+I test coprono sia un caso di successo, sia un caso di fallimento. I test eseguono sia lo script simulando una linea di comando, sia importando la funzione \texttt{sell\_item} ed eseguendola.
 
 \section{Diagrammi di sequenza}
 \subsection{Inizializzazione server web}
