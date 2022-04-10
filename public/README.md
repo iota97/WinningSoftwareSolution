@@ -14,7 +14,7 @@ Ignorare qualsiasi contentuto al di fuori di questa cartella.
 - [Piano di Qualifica v2.2.0](esterni/piano_di_qualifica_v2.2.0.pdf)
 
 ## Piano di Progetto
-- [Piano di Progetto v2.3.0](esterni/piano_di_progetto_v2.3.0.pdf)
+- [Piano di Progetto v2.4.1](esterni/piano_di_progetto_v2.4.1.pdf)
 
 ## Norme di Progetto
 - [Norme di Progetto v2.0.0](interni/norme_di_progetto_v2.0.0.pdf)
