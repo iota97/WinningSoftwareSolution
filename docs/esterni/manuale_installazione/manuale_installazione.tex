@@ -1,0 +1,281 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{listings}
+\settitolo{Manuale Installazione Shop Chain}
+\setredattori{WinningSoftwareSolution}
+\setdestuso{esterno}
+\setdescrizione{
+Manuale installazione.
+}
+
+\begin{document}
+
+\makefrontpage
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+\label{sec:intro}
+Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'installazione di tutte le componenti necessarie per il corretto funzionamento di Shop Chain.
+\\È necessario clonare la repository GitHub al seguente indirizzo: \url{https://github.com/iota97/WinningSoftwareSolution}.
+\section{Server}
+\subsection{Requisiti}
+\subsubsection{Node Js}
+Installare \href{https://nodejs.org/en/download/}{Node Js} se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella "Server" per l'installazione delle dipendenze:
+\begin{lstlisting}[language=bash]
+  $ npm install
+\end{lstlisting}
+\subsubsection{Provider}
+\label{sec:provider}
+Per ottenere il provider per la testnet di Polygon Mumbai è necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
+\begin{enumerate}
+  \item selezionare la sezione "SpeedyNodes" dal menù;
+  \item selezionare l'endpoint per Polygon Network;
+  \item selezionare il protocollo WS;
+  \item copiare l'url dell'endpoint per la testnet Mumbai (Fig. 1).
+\end{enumerate}
+Nell'url copiato è possibile visualizzare le api key, si tratta infatti del codice evidenziato in grassetto nel seguente esempio:\\\\
+wss://speedy-nodes-nyc.moralis.io/\textbf{a8d734a415dd368a3498db63}/polygon/mainnet/ws\\\\
+È necessario salvare l'url e le api key per i passi successivi.
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.6\linewidth]{img/moralis.png}
+\caption{Provider su moralis.io.}
+\end{figure}
+\FloatBarrier
+\subsubsection{MariaDB}
+\label{sec:db}
+Installare il database \href{https://mariadb.org/download/}{MariaDB} se non è gia stato installato precedentemente. Una volta eseguita l'installazione del database, collegarsi con il comando:
+\begin{lstlisting}[language=bash]
+  $ sudo mysql -u <user> -p <password>
+\end{lstlisting}
+e sostituire:
+\begin{itemize}
+  \item \verb|<user>|: con l'user con il quale si desidera creare il database;
+  \item \verb|<password>|: con la password dell'user selezionato.
+\end{itemize}
+Effettuato il collegamento eseguire la seguente query per la creazione del database:
+\begin{verbatim}
+CREATE DATABASE OnlineStore;
+\end{verbatim}
+Successivamente creare le tabelle con le seguenti query:
+\begin{verbatim}
+USE OnlineStore;
+DROP TABLE PaymentEntries;
+DROP TABLE SettledPayments;
+DROP TABLE LastBlockSynced;
+CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255) not null,
+price bigint not null, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint not null,
+buyer varchar(255) not null, status int not null, created bigint not null,
+confirmed bigint, primary key(id));
+CREATE TABLE LastBlockSynced (id int(1), value bigint not null, primary key(id));
+INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
+\end{verbatim}
+\subsubsection{Metamask}
+Per poter utilizzare la webbapp è necessario metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.\\\\
+Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi.
+\paragraph{Configurazione network}\\
+Per l'inserimento e la configurazione del network Mumbai nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
+\begin{itemize}
+\item Network Name: \textbf{Mumbai};
+\item New RPC Url: \textbf{https://rpc-mumbai.maticvigil.com/};
+\item ChainID: \textbf{80001};
+\item Currency Simbol: \textbf{MATIC};
+\item Block Explorer URL: \textbf{https://polygonscan.com/}.
+\end{itemize}
+Una volta inseriti i dati e aggiunto il network, ricordare di selezionare il network.
+\subsection{Configurazione}
+\label{sec:config_server}
+Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella "Server". Il file deve essere strutturato come segue:
+\begin{verbatim}
+  PORT=8080
+  DB_HOST="localhost"
+  DB_USER="username"
+  DB_PWD="password"
+  DB_NAME="OnlineStore"
+  API_KEY=xxxxxxxxxxxxxxxxxxxxxxxx
+  SERVER_URL="tinyurl.com/xxxxxxxx"
+\end{verbatim}
+dove ciascun campo indica:
+\begin{itemize}
+  \item \textbf{PORT}: la porta che si desidera utilizzare;
+  \item \textbf{DB\_HOST}: l'host selezionato;
+  \item \textbf{DB\_USER}: l'user associato al database;
+  \item \textbf{DB\_PWD}: password dell' user utilizzato;
+  \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso "OnlineStore";
+  \item \textbf{API\_KEY}: le api key, ottenibili come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+  \mbox{}
+  \item \textbf{SERVER\_URL}: strutturare il server url come segue:
+  \begin{verbatim}
+    http://<ip_locale>.sslip.io:<port>/
+  \end{verbatim}
+  dove:
+  \begin{itemize}
+    \item \verb|<ip_locale>| va sostituito con il proprio IP locale;
+    \item \verb|<port>| va sostituito con la porta utilizzata
+  \end{itemize}
+   Successivamente inserire il server url su \href{https://tinyurl.com/app}{tinyurl} e utilizzare l'url ritornato.
+\end{itemize}
+\subsection{Avvio server e test}
+\label{sec:avvio}
+Conclusa la configurazione è possibile far partire il server con il comando:
+\begin{lstlisting}[language=bash]
+  $ npm start
+\end{lstlisting}
+Mentre per i test è sufficiente la creazione del database "OnlineStoreTest" inserendo le seguenti query come spiegato al punto \hyperref[sec:db]{2.1.3}:
+\begin{verbatim}
+CREATE DATABASE OnlineStoreTest;
+USE OnlineStoreTest;
+DROP TABLE PaymentEntries;
+DROP TABLE SettledPayments;
+DROP TABLE LastBlockSynced;
+CREATE TABLE PaymentEntries (id bigint, ecommerce varchar(255) not null,
+price bigint not null, primary key(id));
+CREATE TABLE SettledPayments (id bigint, item_id bigint not null,
+buyer varchar(255) not null, status int not null, created bigint not null,
+confirmed bigint, primary key(id));
+CREATE TABLE LastBlockSynced (id int(1), value bigint not null, primary key(id));
+INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
+\end{verbatim}
+e successivamente eseguire il comando:
+\begin{lstlisting}[language=bash]
+  $ npm test
+\end{lstlisting}
+\subsection{Test sulla Web App}
+Per eseguire i test sulla web app si utilizza JSCover in modalità proxy. I file Javascript della web app passano attraverso un server proxy che li trasforma e tiene traccia della loro copertura. Per eseguire correttamente il test seguire la seguente procedura:
+\begin{itemize}
+  \item avviare il server di Shop Chain come spiegato al punto \hyperref[sec:avvio]{2.3};
+  \item avviare il server proxy con il comando:
+  \begin{lstlisting}[language=bash]
+    $ java -jar JSCover-all.jar -ws --proxy --port=3128
+    --report-dir=jscoverage --local-storage
+  \end{lstlisting}
+  è possibile cambiare porta nel caso la porta \verb|3128| sia già occupata;
+  \item configurare il proxy aggiungendo come host \verb|localhost-proxy| e impostare come proxy \verb|localhost-proxy:3128|;
+  \item per eseguire i test è necessario connettersi a \url{http://localhost-proxy:8080}.
+\end{itemize}
+\paragraph{Salvataggio dati}\\
+JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localStorage di HTML5. Per salvare i dati nella cartella "jscoverage" è necessario:
+\begin{itemize}
+  \item caricare la pagina \url{http://localhost-proxy:8080/jscoverage.html};
+  \item aprire la tab "Store";
+  \item selezionare "Store Report".
+\end{itemize}
+\paragraph{Cancellazione dati}\\
+Essendo i dati dei test cumulativi, quando si desidera effettuare il test da zero è necessario cancellare i dati salvati. Per la cancellazione dei dati è sufficiente caricare la pagina \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
+\paragraph{Visualizzazione report}\\
+Per la visualizzazione del report è sufficiente selezionare la tab "Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
+\section{Script}
+\subsection{Requisiti}
+\subsubsection{Python e dipendenze}
+Al fine di utilizzare correttamente lo script è necessario:
+\begin{itemize}
+  \item \href{https://www.python.org/downloads/}{python3.8};
+  \item pip3.8;
+  \item installare le seguenti dipendenze:
+  \begin{itemize}
+    \item web3;
+    \item python-dotenv;
+    \item pytest.
+  \end{itemize}
+\end{itemize}
+\subsection{Configurazione}
+È necessario creare un file chiamato `.env` all'interno della stessa cartella contenente lo script \textit{sell.py}. Il file dovrà contenere:
+\begin{itemize}
+  \item la mnemonic phrase del proprio wallet;
+  \item il provider ottenuto al punto \hyperref[sec:provider]{2.1.2}.
+\end{itemize}
+Di seguito un esempio del formato corretto da utilizzare:
+\begin{verbatim}
+MNEMONIC=mnemonic phrase del proprio wallet
+PROVIDER=provider url
+\end{verbatim}
+\subsection{Eseguire lo script}
+Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python. Verranno illustrati due modi per la corretta esecuzione dello script \textit{sell.py}.
+\subsubsection{Sell.py da terminale}
+È possibile eseguire lo script \textit{sell.py} direttamente da terminale, attraverso il comando:
+\begin{lstlisting}[language=bash]
+  $ python3 sell.py [item price]
+\end{lstlisting}
+Sostituire \verb|[item price]| con il prezzo con il quale si desidera vendere il proprio prodotto.
+Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo del prodotto messo in vendita.
+\subsubsection{Script python}
+È possibile realizzare un proprio script in python per la vendita di prodotti.\\
+La funzione per mettere in vendita il proprio prodotto è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
+È dunque necessario includere nel proprio script la funzione come segue:
+\begin{verbatim}
+from sell import sell_item
+\end{verbatim}
+\subsection{Test}
+Per eseguire il test sullo script è sufficiente eseguire il seguente comando:
+\begin{lstlisting}[language=bash]
+$ pytest
+\end{lstlisting}
+\section{Contract}
+\subsection{Requisiti}
+\subsubsection{Truffle, plugin e librerie}
+Per compilare lo smart contract e deployarlo è necessario installare Truffle e alcuni plugin e librerie all'interno della cartella "Contract". Eseguire i seguenti comandi per una corretta installazione:
+\begin{lstlisting}[language=bash]
+  $ npm install
+  $ npm install -g truffle
+  $ npm install @truffle/hdwallet-provider
+\end{lstlisting}
+per le librerie eseguire:
+\begin{lstlisting}[language=bash]
+  $ npm install @openzeppelin/contracts
+  $ npm install @chainlink/contracts
+\end{lstlisting}
+infine per la verifica e test installare:
+\begin{lstlisting}[language=bash]
+  $ npm install truffle-plugin-verify
+  $ npm install solidity-coverage
+\end{lstlisting}
+\subsection{Configurazione}
+È necessaria la creazione di tre file nella cartella "Contract" per il deployment del contratto:
+\begin{itemize}
+  \item \textbf{mnemonic.secret}: deve contenere la mnemonic del proprio wallet;
+  \item \textbf{providerlink.secret}: deve contenere l'url del provider ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}, può essere utilizzato anche l'url in http;
+  \item \textbf{apikey.secret}: deve contenere le api key ottenibili come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+\end{itemize}
+\subsection{Compilazione, deployment e verifica}
+\paragraph{Compilazione}\\
+Per la compilazione del contract è sufficiente eseguire il seguente comando:
+\begin{lstlisting}[language=bash]
+  $ truffle compile
+\end{lstlisting}
+\paragraph{Deployment}\\
+Per il deployment del contratto eseguire il seguente comando:
+\begin{lstlisting}[language=bash]
+  $ truffle deploy --netowrk <YOUR_NETWORK>
+\end{lstlisting}
+dove \verb|<YOUR_NETWORK>| rappresenta il network che si desidera utilizzare, in questo caso viene utilizzato \verb|polygon_mumbai|. Il network è definito nel file \textit{truffle-config.js}.\\ \\
+In caso di errori di timeout cambiare l'url nel file \textit{providerlink.secret} da http a wss e/o eseguire il comando aggiungendo:
+\begin{lstlisting}[language=bash]
+  $ truffle deploy --netowrk <YOUR_NETWORK> --reset --compile-none
+\end{lstlisting}
+\paragraph{Verifica}\\
+Per la verifica del contratto eseguire il comando:
+\begin{lstlisting}[language=bash]
+  $ truffle run verify ShopContract --network <YOUR-NETWORK>
+\end{lstlisting}
+questo comando ritorna un link a PolygonScan nel quale è possibile visualizzare il codice verificato e le ABI del contratto.
+\subsection{Test}
+Per testare senza copertura del codice eseguire il comando:
+\begin{lstlisting}[language=bash]
+  $ truffle test --network <YOUR-NETWORK> ./test/shopcontract.js
+\end{lstlisting}
+mentre per testare con copertura del codice eseguire il comando:
+\begin{lstlisting}[language=bash]
+  $ sudo truffle run coverage --file="./test/shopcontract.js"
+    --solcoverjs ./.solcover.js
+\end{lstlisting}
+\end{document}
