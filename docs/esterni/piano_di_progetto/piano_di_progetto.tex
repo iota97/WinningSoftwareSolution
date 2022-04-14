@@ -29,6 +29,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.3.0}{07/04/2021}{Matteo Galvagni}{Redazione}{Aggiornamento ciclo 2.}
 \addversione{2.4.0}{07/04/2022}{Federico Marchi}{Redazione}{Aggiunto preventivo per ciclo 3.}
 \addversione{2.4.1}{08/04/2022}{Matteo Galvagni}{Redazione}{Correzione errore Gantt.}
+\addversione{2.5.0}{13/04/2022}{Federico Marchi}{Redazione}{Aggiornamento ciclo 3.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -61,15 +62,15 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Analisi dei requisiti}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi delle tecnologie}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Sviluppo PoC}{2022-01-02}{2022-02-08} \\
-\ganttgroup[progress=90]{PB}{2022-02-26}{2022-04-07} \\
-\ganttbar[progress=80]{Specifica architetturale}{2022-02-26}{2022-04-07} \\
+\ganttgroup[progress=100]{PB}{2022-02-26}{2022-04-07} \\
+\ganttbar[progress=100]{Specifica architetturale}{2022-02-26}{2022-04-07} \\
 \ganttbar[progress=100]{Manuale Utente}{2022-02-26}{2022-04-07} \\
 \ganttbar[progress=100]{Sviluppo Contratto}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=0]{CA}{2022-04-07}{2022-04-29} \\
-
+\ganttgroup[progress=15]{CA}{2022-04-07}{2022-04-29} \\
+\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-14} \\
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gannt del progetto}
 
@@ -83,20 +84,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 58  & 1740\\
+        Responsabile    & 30 & 63  & 1890\\
         \hline
-        Amministratore  & 20 & 65  & 1300\\
+        Amministratore  & 20 & 80  & 1600\\
         \hline
-        Analista        & 25 & 92  & 2300 \\
+        Analista        & 25 & 101.5  & 2537.5 \\
         \hline
-        Progettista     & 25 & 102  & 2550\\
+        Progettista     & 25 & 105  & 2625\\
         \hline
-        Programmatore   & 15 & 116  & 1740\\
+        Programmatore   & 15 & 141  & 2115\\
         \hline
-        Verificatore    & 15 & 42.5  & 637.5 \\
+        Verificatore    & 15 & 50.5  & 757.5 \\
         \hline
         \hline
-        \textbf{Totale} &    & 475.5 & 10267.5\\
+        \textbf{Totale} &    & 541 & 11525\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -111,20 +112,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 40  & 1200\\
+        Responsabile    & 30 & 25  & 750\\
         \hline
         Amministratore  & 20 & 20  & 400\\
         \hline
         Analista        & 25 & 10  & 250\\
         \hline
-        Progettista     & 25 & 20  & 625\\
+        Progettista     & 25 & 10  & 250\\
         \hline
-        Programmatore   & 15 & 70  & 1050\\
+        Programmatore   & 15 & 60  & 900\\
         \hline
-        Verificatore    & 15 & 40  & 600\\
+        Verificatore    & 15 & 25  & 375\\
         \hline
         \hline
-        \textbf{Totale} &    & 200 & 4125\\
+        \textbf{Totale} &    & 150 & 2925\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -563,7 +564,7 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
 \subsection{Sprint 3}
 \textbf{Data di inizio:} 06-04-2022\\
 \textbf{Data di fine pianificata:} 13-04-2022\\
-\textbf{Data di fine effettiva:} TODO
+\textbf{Data di fine effettiva:} 13-04-2022
 
 \subsubsection{Pianificazione}\mbox{}
 
@@ -627,5 +628,60 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
     \end{tabularx}\\[8pt]
     \mbox{}\\
 \end{center}
+\subsubsection{Resoconto}\mbox{}
 
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 5  & 150\\
+        \hline
+        Amministratore  & 20 & 15  & 300\\
+        \hline
+        Analista        & 25 & 9.5 (+4.5)  & 237.5 (+112.5)\\
+        \hline
+        Progettista     & 25 & 3 (-2) & 75 (-50)\\
+        \hline
+        Programmatore   & 15 & 25 (-5)  & 375 (-75)\\
+        \hline
+        Verificatore    & 15 & 8 (-7)  & 120 (-105)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 65.5 (-9.5) & 1257.5 (-117.5)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Difficoltà nel tener traccia nella cartella "Public" dei documenti aggiornati e delle relative versioni & Realizzazione di uno script per automatizzare il processo\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Necessità di migliorare l'accessibilità della web app & Futura aggiunta di alcune ore da programmatore nel preventivo \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
 \end{document}
