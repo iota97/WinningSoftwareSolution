@@ -12,7 +12,7 @@
 \input{\templates/history}
 
 \settitolo{Piano di Progetto}
-\setredattori{Elia Scandaletti \\ Giovanni Cocco \\ Matteo Galvagni \\ Federico Marchi}
+\setredattori{Elia Scandaletti \\ Giovanni Cocco \\ Matteo Galvagni \\ Federico Marchi \\ Alberto Nicoletti}
 \setresponsabili{Giovanni Cocco}
 \setdestuso{esterno}
 \setdescrizione{
@@ -30,6 +30,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.4.0}{07/04/2022}{Federico Marchi}{Redazione}{Aggiunto preventivo per ciclo 3.}
 \addversione{2.4.1}{08/04/2022}{Matteo Galvagni}{Redazione}{Correzione errore Gantt.}
 \addversione{2.5.0}{13/04/2022}{Federico Marchi}{Redazione}{Aggiornamento ciclo 3.}
+\addversione{2.6.0}{16/04/2022}{Alberto Nicoletti}{Redazione}{Aggiunto preventivo per ciclo 4.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -56,7 +57,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
     y unit title = .8cm,
     y unit chart = .7cm,
     group peaks width = 2,
-]{2021-12-01}{2022-05-29}
+]{2021-12-01}{2022-06-29}
 \gantttitlecalendar{year, month=itname} \\
 \ganttgroup[progress=100]{RTB}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi dei requisiti}{2021-12-01}{2022-02-08} \\
@@ -69,8 +70,10 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=15]{CA}{2022-04-07}{2022-04-29} \\
-\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-14} \\
+\ganttgroup[progress=15]{CA}{2022-04-07}{2022-05-12} \\
+\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
+\ganttbar[progress=10]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
+\ganttbar[progress=0]{Validazione}{2022-04-27}{2022-05-11}
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gannt del progetto}
 
@@ -684,4 +687,79 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
     \end{tabularx}\\[8pt]
     \mbox{}\\
 \end{center}
+
+\subsection{Sprint 4}
+\textbf{Data di inizio:} 13-04-2022\\
+\textbf{Data di fine pianificata:} 20-04-2022\\
+\textbf{Data di fine effettiva:} TBD
+
+\subsubsection{Pianificazione}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Scrivere uno script per la pubblicazione automatica dei documenti redatti. & 1\\
+        \hline
+        Aggiornare la cartella public e le norme di progetto. & 1\\
+        \hline
+        Correggere l’ortografia in alcuni documenti. & 1\\
+        \hline
+        Finire la stesura del manuale d'installazione. & 1\\
+        \hline
+		Sviluppare la grafica della web-app. & 2 \\
+		\hline
+		Completare le funzionalità della web-app. & 2 \\
+		\hline
+		Rendere accessibile la web-app. & 2 \\
+		\hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 3  & 90\\
+        \hline
+        Amministratore  & 20 & 3  & 60\\
+        \hline
+        Analista        & 25 & 0  & 0\\
+        \hline
+        Progettista     & 25 & 2  & 50\\
+        \hline
+        Programmatore   & 15 & 10  & 150\\
+        \hline
+        Verificatore    & 15 & 3  & 45\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 21 & 395\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        Il colloquio PB può non avere un riscontro positivo. & Verrano messe in pausa le task programmate per concentrarsi sulla correzione degli errori.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
 \end{document}
