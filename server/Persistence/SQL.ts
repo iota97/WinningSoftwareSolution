@@ -23,7 +23,7 @@ export class SQL implements SQL_Interface {
 	
 	public insertPaymentEntry(entry: paymentEntry): Promise<void> {
 		return new Promise((resolve, reject) => {
-			const queryString = "INSERT INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
+			const queryString = "INSERT IGNORE INTO PaymentEntries (id, ecommerce, price) VALUES (?, ?, ?)"
 			
 			this.db.query(queryString, [entry.id, entry.seller, entry.price], (err, result) => {
 				if (err) {
@@ -37,7 +37,7 @@ export class SQL implements SQL_Interface {
 	
 	public insertSettledPayment(entry: settledPayment): Promise<void> {
 		return new Promise((resolve, reject) => {
-			const queryString = "INSERT INTO SettledPayments (id, item_id, buyer, status, created, confirmed) VALUES (?, ?, ?, ?, ?, ?)"
+			const queryString = "INSERT IGNORE INTO SettledPayments (id, item_id, buyer, status, created, confirmed) VALUES (?, ?, ?, ?, ?, ?)"
 			this.db.query(queryString, [entry.id, entry.paymentEntryId, entry.client, entry.status, entry.created, entry.confirmed], (err, result) => {
 				if (err) {
 					return reject(err)
@@ -193,9 +193,9 @@ export class SQL implements SQL_Interface {
 	
 	public setLastSyncBlock(block: number): Promise<void> {
 		return new Promise((resolve, reject) => {
-			const queryString = `UPDATE LastBlockSynced SET value=? WHERE id=0`
+			const queryString = `UPDATE LastBlockSynced SET value=? WHERE id=0 AND value<?`
 			
-			this.db.query(queryString, [block, block], (err, result) => {
+			this.db.query(queryString, [block, block, block], (err, result) => {
 				if (err) {
 					return reject(err)
 				}
