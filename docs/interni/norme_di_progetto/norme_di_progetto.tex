@@ -25,6 +25,7 @@ Questo documento contiene le procedure, gli strumenti e i criteri di qualità ch
 \addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Redazione}{Stesura di: analisi dei requisiti, analisi delle tecnologie e piano di progetto}
 \addversione{0.0.9}{16/02/2022}{Giovanni Cocco}{Redazione}{Stesura di norme software}
 \addversione{2.0.0}{20/03/2022}{Alberto Nicoletti}{Redazione}{Rifacimento documento completo}
+\addversione{2.0.1}{17/04/2022}{Elia Scandaletti}{Redazione}{Aggiornamento processo fornitura}
 
 \begin{document}
 
@@ -42,11 +43,12 @@ Lo scopo del presente documento è definire procedure, strumenti e criteri di qu
 
 \section{Processi Primari}
 \subsection{Fornitura}\label{fornitura}
-Il processo di fornitura determina le attività e le risorse che servo per gestire e assicurare il progetto. In qusta sezione vengono stilate le norme per la gestione dei rapporti con il proponente ed il committente.
+Il processo di fornitura determina le attività e le risorse che servo per gestire e assicurare il progetto. In questa sezione vengono stilate le norme per la gestione dei rapporti con il proponente ed il committente.
 \subsubsection{Repository pubblica}
-Durante tutto il progetto verrà usata un unica repository pubblica. La parte di repository che interessa al proponente ed al committente è la cartella \textit{public} definita come parte pubblica della repository. Questa cartella contiene un file read-me in cui viene spiegato ed elencato il contenuto della parte pubblica con un avviso che chiede di restarne all'interno, ignorando il resto della repository, detta parte privata.\\\\
+Durante tutto il progetto verrà usata un unica repository pubblica. La parte di repository che interessa al proponente ed al committente è la cartella \texttt{public} definita come parte pubblica della repository. Questa cartella contiene un file read-me in cui viene spiegato ed elencato il contenuto della parte pubblica con un avviso che chiede di restarne all'interno, ignorando il resto della repository, detta parte privata.\\\\
 La parte pubblica contiene i documenti necessari alle revisioni di periodo con il committente.\\
-Ogni file nella parte pubblica deve indicare la versione nel nome del file stesso nel seguente modo: $<$NomeFile$>$\_v$<$versione$>$.pdf.\\
+La struttura della cartella \texttt{public} rispecchia la struttura della cartella \texttt{docs}. \\
+Ogni documento che prevede versionamento deve indicare la versione nel nome del file stesso nel seguente modo: \texttt{$<$NomeFile$>$\_v$<$versione$>$.pdf}. I documenti con le versioni vecchie andranno mantenuti. \\
 Ogni modifica alla parte pubblica deve essere approvata dal responsabile, cui spetta accettare le pull request della parte pubblica.
 \subsubsection{Contatti con proponente e committente}
 
