@@ -55,10 +55,13 @@ function mobileCheck() {
 }
 
 function toggleMenu() {
+    hamb=document.getElementById('hamb');
     if (menu.style.display == "none") {
-        menu.style.display = "block"
+        menu.style.display = "block";
+        hamb.setAttribute('aria-expanded','true');
     } else {
-        menu.style.display = "none"
+        menu.style.display = "none";
+        hamb.setAttribute('aria-expanded','false');
     }
 }
 
