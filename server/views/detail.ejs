@@ -23,8 +23,8 @@
     <%-qr%>
     <input id="idTimestamp" type="hidden" value="<%=timestamp%>">
     <input id="idPag" type="hidden" value="<%=id%>">
-    <a id="cancelPaymentButton" onclick="onCancelPayment()">Cancel transaction</a>
-    <a id="refundPaymentButton" onclick="onRefundPayment()">Refund transaction</a>
+    <a id="cancelPaymentButton" onclick="onCancelPayment()" role="button">Cancel transaction</a>
+    <a id="refundPaymentButton" onclick="onRefundPayment()" role="button">Refund transaction</a>
 </div>
 
 <%- include('footer.ejs') %>

@@ -21,7 +21,7 @@
     <span class="status" id="status"><%-status%></span>
     
     <input id="idPag" type="hidden" value="<%=id%>">
-    <a id="unlockFundsButton" onclick="onClickUnlockFunds()">Confirm</a>
+    <a id="unlockFundsButton" onclick="onClickUnlockFunds()" role="button" aria-label="confirm delivery">Confirm</a>
 </div>
 
 <%- include('footer.ejs') %>

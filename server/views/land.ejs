@@ -12,7 +12,7 @@
     <span class="addr extraspace">Seller: <%-seller%></span>
     
     <input id="idPag" type="hidden" value="<%=id%>">
-    <button id="settlePaymentButton" onclick="onClickSettlePayment()">Confirm</button>
+    <button id="settlePaymentButton" onclick="onClickSettlePayment()" aria-label="confirm payment">Confirm</button>
 </div>
 
 <%- include('footer.ejs') %>

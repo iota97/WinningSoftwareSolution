@@ -27,6 +27,7 @@ const confirmPop = document.getElementById("confirm")
 const sendingPop =  document.getElementById("sending")
 const successPop = document.getElementById("success")
 const errorPop = document.getElementById("error")
+const hamb = document.getElementById("hamb")
 
 // Global gariables
 let chainId;
@@ -56,9 +57,11 @@ function mobileCheck() {
 
 function toggleMenu() {
     if (menu.style.display == "none") {
-        menu.style.display = "block"
+        menu.style.display = "block";
+        hamb.setAttribute('aria-expanded','true');
     } else {
-        menu.style.display = "none"
+        menu.style.display = "none";
+        hamb.setAttribute('aria-expanded','false');
     }
 }
 
