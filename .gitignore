@@ -32,3 +32,4 @@ __pycache__
 contract/coverage
 .apikey.secret.swp
 !public/**/*.pdf
+!server/public/**/*.pdf
