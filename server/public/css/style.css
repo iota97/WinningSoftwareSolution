@@ -279,10 +279,6 @@ header a.logo {
   flex: 1 0 auto;
 }
 
-footer a:hover{
-  text-decoration: underline;
-}
-
 footer a {
   text-decoration: none;
   color: white;
@@ -292,7 +288,7 @@ footer {
   background-color: #0c162c;
   padding: 0em;
   color: white;
-  font-size: 10.5pt;
+  font-size: 0.72em;
 }
 
 footer .grid-container{
@@ -314,6 +310,7 @@ footer .items{
   font-weight: normal;
   padding: 0.3125em;
   font-family: Arial, Helvetica, sans-serif;
+  text-decoration: underline;
 }
 
 footer .items li{
