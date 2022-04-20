@@ -56,17 +56,15 @@ function mobileCheck() {
 }
 
 function toggleMenu() {
-    if (menu.style.display == "none") {
-        menu.style.display = "block";
-        hamb.setAttribute('aria-expanded','true');
-    } else {
+    if (menu.style.display == "block") {
         menu.style.display = "none";
         hamb.setAttribute('aria-expanded','false');
+    } else {
+        menu.style.display = "block";
+        hamb.setAttribute('aria-expanded','true');
     }
-}
 
-function transactionHamb(x) {
-    x.classList.toggle("change");
+    hamb.classList.toggle("change");
 }
 
 function setGetParameter(paramName, paramValue) {

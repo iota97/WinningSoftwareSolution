@@ -32,11 +32,11 @@ html body {
 }
 
 .nascosto {
-  height: 0.0625em;
+  height: 1px;
   overflow: hidden;
   position: absolute;
   top: auto;
-  width: 0.0625em;
+  width: 1px;
 }
 
 .transactions {

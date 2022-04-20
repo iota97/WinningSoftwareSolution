@@ -25,8 +25,8 @@
 }
 
 .containerHamb {
-display: inline-block;
-cursor: pointer;
+    display: inline-block;
+    cursor: pointer;
 }
 
 .bar1, .bar2, .bar3 {
@@ -42,7 +42,9 @@ cursor: pointer;
     transform: rotate(-45deg) translate(-0.5625em, 0.375em);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+    opacity: 0;
+}
 
 .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-0.5em, -0.5em);
