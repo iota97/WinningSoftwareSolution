@@ -31,6 +31,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.4.1}{08/04/2022}{Matteo Galvagni}{Redazione}{Correzione errore Gantt.}
 \addversione{2.5.0}{13/04/2022}{Federico Marchi}{Redazione}{Aggiornamento ciclo 3.}
 \addversione{2.6.0}{16/04/2022}{Alberto Nicoletti}{Redazione}{Aggiunto preventivo per ciclo 4.}
+\addversione{2.6.1}{20/04/2022}{Alberto Nicoletti}{Redazione}{Chiusura ciclo 4.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -70,9 +71,9 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=15]{CA}{2022-04-07}{2022-05-12} \\
+\ganttgroup[progress=30]{CA}{2022-04-07}{2022-05-12} \\
 \ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
-\ganttbar[progress=10]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
+\ganttbar[progress=45]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
 \ganttbar[progress=0]{Validazione}{2022-04-27}{2022-05-11}
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gannt del progetto}
@@ -757,6 +758,62 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Problema} & \textbf{Misure di mitigazione}\\
         \hline
         Il colloquio PB può non avere un riscontro positivo. & Verrano messe in pausa le task programmate per concentrarsi sulla correzione degli errori.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 3  & 90\\
+        \hline
+        Amministratore  & 20 & 3  & 60\\
+        \hline
+        Analista        & 25 & 0  & 0\\
+        \hline
+        Progettista     & 25 & 4(+2) & 100(+50)\\
+        \hline
+        Programmatore   & 15 & 13(+3)  & 195(+45)\\
+        \hline
+        Verificatore    & 15 & 2(-1)  & 30(-15)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 25(+4) & 475(+80)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Non è stato tenuto conto delle festività pasquali, causa di ritardi nello svolgimento delle task. & Alcune task vengono protratte al ciclo successivo. In futuro si farà una valutazione più sincera della disponibilità di lavoro dei singoli componenti. \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        La qualità di presentazione durante la revisione è da migliorare. Soprattutto nella gestione dei tempi e nel selezionare le cose da esporre in base all'interlocutore.  & Maggiore impegno nella preparazione delle slides e nel provare l'esposizione. \\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
