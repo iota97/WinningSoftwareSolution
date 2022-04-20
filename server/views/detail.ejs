@@ -11,10 +11,12 @@
     <strong class="price">Price <%-price%>$</strong>
     <div class="addr">
         From: <span id="buyer"><%-buyer%></span>
+        <button class="copyButton" onclick="copyAddress('buyer')">copy text</button>
     </div>
     
     <div class="addr">
         To: <span id="seller"><%-seller%></span>
+        <button class="copyButton" onclick="copyAddress('seller')">copy text</button>
     </div>
     
     <div class="date">Opened <%-created%></div>
