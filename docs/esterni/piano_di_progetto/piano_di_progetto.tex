@@ -12,7 +12,7 @@
 \input{\templates/history}
 
 \settitolo{Piano di Progetto}
-\setredattori{Elia Scandaletti}
+\setredattori{Elia Scandaletti \\ Giovanni Cocco \\ Matteo Galvagni \\ Federico Marchi \\ Alberto Nicoletti}
 \setresponsabili{Giovanni Cocco}
 \setdestuso{esterno}
 \setdescrizione{
@@ -27,8 +27,10 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.1.0}{27/03/2022}{Giovanni Cocco}{Redazione}{Ciclo 1}
 \addversione{2.2.0}{03/04/2021}{Matteo Galvagni}{Redazione}{Aggiunto preventivo per ciclo 2.}
 \addversione{2.3.0}{07/04/2021}{Matteo Galvagni}{Redazione}{Aggiornamento ciclo 2.}
-\addversione{2.4.0}{02/04/2022}{Federico Marchi}{Redazione}{Aggiunto preventivo per ciclo 3.}
-
+\addversione{2.4.0}{07/04/2022}{Federico Marchi}{Redazione}{Aggiunto preventivo per ciclo 3.}
+\addversione{2.4.1}{08/04/2022}{Matteo Galvagni}{Redazione}{Correzione errore Gantt.}
+\addversione{2.5.0}{13/04/2022}{Federico Marchi}{Redazione}{Aggiornamento ciclo 3.}
+\addversione{2.6.0}{16/04/2022}{Alberto Nicoletti}{Redazione}{Aggiunto preventivo per ciclo 4.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -55,21 +57,23 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
     y unit title = .8cm,
     y unit chart = .7cm,
     group peaks width = 2,
-]{2021-12-01}{2022-05-29}
+]{2021-12-01}{2022-06-29}
 \gantttitlecalendar{year, month=itname} \\
 \ganttgroup[progress=100]{RTB}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi dei requisiti}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Analisi delle tecnologie}{2021-12-01}{2022-02-08} \\
 \ganttbar[progress=100]{Sviluppo PoC}{2022-01-02}{2022-02-08} \\
-\ganttgroup[progress=75]{PB}{2022-02-26}{2022-04-7} \\
-\ganttbar[progress=50]{Specifica architetturale}{2022-02-26}{2022-04-07} \\
-\ganttbar[progress=65]{Manuale Utente}{2022-02-26}{2022-04-07} \\
+\ganttgroup[progress=100]{PB}{2022-02-26}{2022-04-07} \\
+\ganttbar[progress=100]{Specifica architetturale}{2022-02-26}{2022-04-07} \\
+\ganttbar[progress=100]{Manuale Utente}{2022-02-26}{2022-04-07} \\
 \ganttbar[progress=100]{Sviluppo Contratto}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=0]{CA}{2022-04-07}{2022-04-29} \\
-
+\ganttgroup[progress=15]{CA}{2022-04-07}{2022-05-12} \\
+\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
+\ganttbar[progress=10]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
+\ganttbar[progress=0]{Validazione}{2022-04-27}{2022-05-11}
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gannt del progetto}
 
@@ -83,20 +87,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 53  & 1590\\
+        Responsabile    & 30 & 63  & 1890\\
         \hline
-        Amministratore  & 20 & 62  & 1240\\
+        Amministratore  & 20 & 80  & 1600\\
         \hline
-        Analista        & 25 & 67  & 1675 \\
+        Analista        & 25 & 101.5  & 2537.5 \\
         \hline
-        Progettista     & 25 & 100  & 2500\\
+        Progettista     & 25 & 105  & 2625\\
         \hline
-        Programmatore   & 15 & 106  & 1590\\
+        Programmatore   & 15 & 141  & 2115\\
         \hline
-        Verificatore    & 15 & 29  & 435 \\
+        Verificatore    & 15 & 50.5  & 757.5 \\
         \hline
         \hline
-        \textbf{Totale} &    & 437 & 9030\\
+        \textbf{Totale} &    & 541 & 11525\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -111,20 +115,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 50  & 1500\\
+        Responsabile    & 30 & 25  & 750\\
         \hline
         Amministratore  & 20 & 20  & 400\\
         \hline
-        Analista        & 25 & 10  & 2500\\
+        Analista        & 25 & 10  & 250\\
         \hline
-        Progettista     & 25 & 20  & 5000\\
+        Progettista     & 25 & 10  & 250\\
         \hline
-        Programmatore   & 15 & 50  & 750\\
+        Programmatore   & 15 & 60  & 900\\
         \hline
-        Verificatore    & 15 & 100  & 1500\\
+        Verificatore    & 15 & 25  & 375\\
         \hline
         \hline
-        \textbf{Totale} &    & 250 & 11650\\
+        \textbf{Totale} &    & 150 & 2925\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -563,7 +567,7 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
 \subsection{Sprint 3}
 \textbf{Data di inizio:} 06-04-2022\\
 \textbf{Data di fine pianificata:} 13-04-2022\\
-\textbf{Data di fine effettiva:} TODO
+\textbf{Data di fine effettiva:} 13-04-2022
 
 \subsubsection{Pianificazione}\mbox{}
 
@@ -623,6 +627,136 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Problema} & \textbf{Misure di mitigazione}\\
         \hline
         Eventuali dubbi sulla realizzazione della grafica della webapp & Si richiederà un colloquio con il proponente per dei chiarimenti\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 5  & 150\\
+        \hline
+        Amministratore  & 20 & 15  & 300\\
+        \hline
+        Analista        & 25 & 9.5 (+4.5)  & 237.5 (+112.5)\\
+        \hline
+        Progettista     & 25 & 3 (-2) & 75 (-50)\\
+        \hline
+        Programmatore   & 15 & 25 (-5)  & 375 (-75)\\
+        \hline
+        Verificatore    & 15 & 8 (-7)  & 120 (-105)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 65.5 (-9.5) & 1257.5 (-117.5)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Difficoltà nel tener traccia nella cartella "Public" dei documenti aggiornati e delle relative versioni & Realizzazione di uno script per automatizzare il processo\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Necessità di migliorare l'accessibilità della web app & Futura aggiunta di alcune ore da programmatore nel preventivo \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsection{Sprint 4}
+\textbf{Data di inizio:} 13-04-2022\\
+\textbf{Data di fine pianificata:} 20-04-2022\\
+\textbf{Data di fine effettiva:} TBD
+
+\subsubsection{Pianificazione}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Scrivere uno script per la pubblicazione automatica dei documenti redatti. & 1\\
+        \hline
+        Aggiornare la cartella public e le norme di progetto. & 1\\
+        \hline
+        Correggere l’ortografia in alcuni documenti. & 1\\
+        \hline
+        Finire la stesura del manuale d'installazione. & 1\\
+        \hline
+		Sviluppare la grafica della web-app. & 2 \\
+		\hline
+		Completare le funzionalità della web-app. & 2 \\
+		\hline
+		Rendere accessibile la web-app. & 2 \\
+		\hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 3  & 90\\
+        \hline
+        Amministratore  & 20 & 3  & 60\\
+        \hline
+        Analista        & 25 & 0  & 0\\
+        \hline
+        Progettista     & 25 & 2  & 50\\
+        \hline
+        Programmatore   & 15 & 10  & 150\\
+        \hline
+        Verificatore    & 15 & 3  & 45\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 21 & 395\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        Il colloquio PB può non avere un riscontro positivo. & Verrano messe in pausa le task programmate per concentrarsi sulla correzione degli errori.\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\

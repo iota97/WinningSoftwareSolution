@@ -41,7 +41,7 @@
       <h1>Awaiting confirmation</h1>
       <img src="img/meta.png" width="260" height="256" />
       <p>Please confirm the transaction in MetaMask</p>
-      <button onclick="closePop(event)">Cancel</button>
+      <button onclick="closePop(event)" aria-label="cancel transaction">Cancel</button>
     </div>
   </div>
   
@@ -68,7 +68,7 @@
       <h1>Wrong chain</h1>
       <img src="img/error.png" width="260" height="256" />
       <p>Please select <span id="chainName"></span> from MetaMask</p>
-      <button onclick="location.reload()">Retry</button>
+      <button onclick="location.reload()" aria-label="retry connection with metamask">Retry</button>
     </div>
   </div>
   
