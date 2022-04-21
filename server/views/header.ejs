@@ -16,7 +16,11 @@
 <body>
   <header>
     <a href="/" class="logo">Shop&nbsp;Chain</a>
-    <button id="hamb" onclick="toggleMenu()">Menù</button>
+    <div id="hamb" class="containerHamb" onclick="toggleMenu();" aria-haspopup="true" role="button" aria-label="menu">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
     <div id="header-right">
       <a id="listSeller" href="seller">Incoming</a>
       <a id="listBuyer" href="buyer">Outgoing</a>
@@ -37,7 +41,7 @@
       <h1>Awaiting confirmation</h1>
       <img src="img/meta.png" width="260" height="256" />
       <p>Please confirm the transaction in MetaMask</p>
-      <button onclick="closePop(event)">Cancel</button>
+      <button onclick="closePop(event)" aria-label="cancel transaction">Cancel</button>
     </div>
   </div>
   
@@ -64,7 +68,7 @@
       <h1>Wrong chain</h1>
       <img src="img/error.png" width="260" height="256" />
       <p>Please select <span id="chainName"></span> from MetaMask</p>
-      <button onclick="location.reload()">Retry</button>
+      <button onclick="location.reload()" aria-label="retry connection with metamask">Retry</button>
     </div>
   </div>
   

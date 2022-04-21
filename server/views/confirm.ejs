@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex">
   <meta charset="utf-8">
   <title>Confirm | Shop Chain</title>
 
@@ -20,7 +21,7 @@
     <span class="status" id="status"><%-status%></span>
     
     <input id="idPag" type="hidden" value="<%=id%>">
-    <a id="unlockFundsButton" onclick="onClickUnlockFunds()">Confirm</a>
+    <a id="unlockFundsButton" onclick="onClickUnlockFunds()" role="button" aria-label="confirm delivery">Confirm</a>
 </div>
 
 <%- include('footer.ejs') %>
