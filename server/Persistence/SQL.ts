@@ -38,7 +38,7 @@ export class SQL implements SQL_Interface {
 	public insertSettledPayment(entry: settledPayment): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const queryString = "INSERT IGNORE INTO SettledPayments (id, item_id, buyer, status, created, confirmed) VALUES (?, ?, ?, ?, ?, ?)"
-			this.db.query(queryString, [entry.id, entry.paymentEntryId, entry.client, entry.status, entry.created, entry.confirmed], (err, result) => {
+			this.db.query(queryString, [entry.id, entry.paymentEntryId, entry.client, entry.status, entry.time, entry.finalizedTime == BigInt(0) ? null : entry.finalizedTime], (err, result) => {
 				if (err) {
 					return reject(err)
 				}

@@ -51,6 +51,7 @@ contract ShopContract is KeeperCompatibleInterface {
         Status status;
         address client;
         uint256 time;
+        uint256 finalizedTime;
         uint256 amountInDAI;
     }
 
@@ -147,6 +148,7 @@ contract ShopContract is KeeperCompatibleInterface {
 
                 DAI.transfer(settledPayments[i].client, settledPayments[i].amountInDAI);
                 settledPayments[i].status = Status.EXPIRED;
+                settledPayments[i].finalizedTime = block.timestamp;
                 emit statusChanged(i);
 
             }
@@ -184,7 +186,7 @@ contract ShopContract is KeeperCompatibleInterface {
 
         uint[] memory amountsDAI = uniswapV2Router.swapExactETHForTokens{value: msg.value}(minAmountDAI, path, address(this), block.timestamp); //EXACT amount of DAI received
 
-        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, Status.PAID, msg.sender, block.timestamp, amountsDAI[amountsDAI.length - 1]);
+        settledPayments[freeSettledPaymentId] = SettledPayment(paymentEntryId, Status.PAID, msg.sender, block.timestamp, 0, amountsDAI[amountsDAI.length - 1]);
         freeSettledPaymentId = freeSettledPaymentId + 1;
 
         emit paymentSettled(freeSettledPaymentId - 1);
@@ -201,6 +203,7 @@ contract ShopContract is KeeperCompatibleInterface {
         DAI.transferFrom(address(this), shopchainAddress, amountToTake);
 
         settledPayments[settledPaymentId].status = Status.UNLOCKED;
+        settledPayments[settledPaymentId].finalizedTime = block.timestamp;
 
         emit statusChanged(settledPaymentId);
     }
@@ -211,6 +214,7 @@ contract ShopContract is KeeperCompatibleInterface {
         DAI.transfer(addr, settledPayments[settledPaymentId].amountInDAI);
 
         settledPayments[settledPaymentId].status = Status.CANCELLED;
+        settledPayments[settledPaymentId].finalizedTime = block.timestamp;
 
         emit statusChanged(settledPaymentId);
     }
@@ -220,6 +224,8 @@ contract ShopContract is KeeperCompatibleInterface {
 
         DAI.transfer(settledPayments[settledPaymentId].client, settledPayments[settledPaymentId].amountInDAI);
         settledPayments[settledPaymentId].status = Status.EXPIRED;
+        settledPayments[settledPaymentId].finalizedTime = block.timestamp;
+
         emit statusChanged(settledPaymentId);
     }
 

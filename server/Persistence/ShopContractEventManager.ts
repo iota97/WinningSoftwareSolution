@@ -58,15 +58,13 @@ class ShopContractEventManager {
 	private OnPaymentSettled(event: EventData, shopContract: ShopContract_Interface, sql: SQL_Interface): void {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
 		.then(async (res: settledPayment)  => {
-			let time = await this.shopContract.getBlockTime(event.blockNumber);
-	
 			sql.insertSettledPayment({
 				id: event.returnValues.settledPaymentId,
 				paymentEntryId: res.paymentEntryId,
 				client: res.client,
 				status: res.status,
-				created: time,
-				confirmed: null
+				time: res.time,
+				finalizedTime: res.finalizedTime
 			})
 		})
 		.then(() => {
@@ -80,9 +78,7 @@ class ShopContractEventManager {
 	private OnStatusChange(event: EventData, shopContract: ShopContract_Interface, sql: SQL_Interface): void {
 		shopContract.getSettledPayment(event.returnValues.settledPaymentId)
 		.then(async (res: settledPayment) => {
-			let time = await this.shopContract.getBlockTime(event.blockNumber);
-
-			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status, time)
+			sql.updateSettledPayment(event.returnValues.settledPaymentId, res.status, res.finalizedTime)
 		})
 		.then(() => {
 			sql.setLastSyncBlock(event.blockNumber);
