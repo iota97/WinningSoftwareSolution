@@ -27,27 +27,83 @@ Manuale installazione.
 
 \section{Introduzione}
 \label{sec:intro}
-Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'installazione di tutte le componenti necessarie per il corretto funzionamento di Shop Chain.
-\\È necessario clonare la repository GitHub al seguente indirizzo: \url{https://github.com/iota97/WinningSoftwareSolution}.
+Il presente documento ha la funzione di descrivere in dettaglio la procedura da seguire per l'installazione di tutte le componenti necessarie per il corretto funzionamento di Shop Chain. Si garantisce il corretto funzionamento del prodotto con le versioni indicate nel documento per i software utilizzati.\\
+È necessario clonare la repository GitHub al seguente indirizzo: \url{https://github.com/iota97/WinningSoftwareSolution}.\\
+
+\newpage{}
 \section{Server}
 \subsection{Requisiti}
 \subsubsection{Node Js}
-Installare \href{https://nodejs.org/en/download/}{Node Js} se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella "Server" per l'installazione delle dipendenze:
+Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella "Server" per l'installazione delle dipendenze:
 \begin{lstlisting}[language=bash]
   $ npm install
 \end{lstlisting}
+\subsubsection{Metamask}
+Per poter utilizzare la web app è necessario Metamask (v. 10.11.3).\\
+Per avere il proprio wallet Metamask è possibile recarsi su \href{https://www.metamask.io}{metamask.io}, installare l'estensione e scegliere se:
+\begin{itemize}
+  \item \textbf{Creare un nuovo wallet}: è possibile creare un nuovo wallet selezionando "Create a Wallet" (Fig. 1 freccia blu). Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi;
+  \item \textbf{Importare un wallet già esistente}: è possibile anche importare un wallet già esistente selezionando l'opzione "Import wallet" (Fig. 1 freccia rossa). È sufficiente inserire la mnemonic phrase per poter utilizzare il proprio wallet su Metamask.
+\end{itemize}
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\linewidth]{img/metamask.png}
+\caption{Creazione/Importazione wallet su Metamask.}
+\end{figure}
+\FloatBarrier
+\paragraph{Recupero mnemonic phrase}\\
+Nel caso in cui non si ricordi più la mnemonic phrase del proprio wallet è possibile recuperarla dal proprio account Metamask con la seguente procedura:
+\begin{enumerate}
+  \item accedere al proprio wallet Metamask;
+  \item selezionare il proprio account in alto a destra (Fig. 2);
+  \item selezionare l'opzione "Settings";
+  \item selezionare l'opzione "Security \& Privacy";
+  \item selezionare l'opzione "Reveal Secret Recovery Phrase";
+  \item inserire la propria password.
+\end{enumerate}
+Una volta ottenuta la propria mnemonic phrase salvarla per i passi successivi.
+\FloatBarrier
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.4\linewidth]{img/account_meta.png}
+\caption{Selezione account Metamask.}
+\end{figure}
+\FloatBarrier
+\paragraph{Configurazione mainnet Polygon}\\
+Per l'inserimento e la configurazione della rete Polygon nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
+\begin{itemize}
+\item Network Name: \textbf{Polygon};
+\item New RPC Url: \textbf{https://rpc-mainnet.matic.network};
+\item ChainID: \textbf{137};
+\item Currency Simbol: \textbf{MATIC};
+\item Block Explorer URL: \textbf{https://polygonscan.com/}.
+\end{itemize}
+\paragraph{Configurazione testnet Mumbai}\\
+Nel caso in cui si desidrasse operare sulla testnet Mumbai di Polygon, utilizzare i seguenti dati:
+\begin{itemize}
+\item Network Name: \textbf{Mumbai};
+\item New RPC Url: \textbf{https://rpc-mumbai.maticvigil.com/};
+\item ChainID: \textbf{80001};
+\item Currency Simbol: \textbf{MATIC};
+\item Block Explorer URL: \textbf{https://mumbai.polygonscan.com/}.
+\end{itemize}
+Nella testnet Mumbai è possibile eseguire qualsiasi operazione senza dover necessariamente spendere soldi. Infatti per rifornire il proprio wallet di MATIC di prova si può utilizzare il faucet all'indirizzo \url{https://faucet.polygon.technology/}.\\ \\
+Una volta inseriti i dati e aggiunta la rete, ricordare di selezionarla.
 \subsubsection{Provider}
 \label{sec:provider}
-Per ottenere il provider per la testnet di Polygon Mumbai è necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
+Per ottenere il provider per la mainnet Polygon è necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
 \begin{enumerate}
   \item selezionare la sezione "SpeedyNodes" dal menù;
   \item selezionare l'endpoint per Polygon Network;
   \item selezionare il protocollo WS;
-  \item copiare l'url dell'endpoint per la testnet Mumbai (Fig. 1).
+  \item copiare l'url dell'endpoint per la mainnet (Fig. 3 freccia rossa).
 \end{enumerate}
-Nell'url copiato è possibile visualizzare le api key, si tratta infatti del codice evidenziato in grassetto nel seguente esempio:\\\\
+Nell'url copiato è possibile visualizzare l' api key, si tratta infatti del codice evidenziato in grassetto nel seguente esempio:\\\\
 wss://speedy-nodes-nyc.moralis.io/\textbf{a8d734a415dd368a3498db63}/polygon/mainnet/ws\\\\
-È necessario salvare l'url e le api key per i passi successivi.
+È necessario salvare l'url per i passi successivi.
+\paragraph{Testnet Mumbai}\\
+Nel caso in cui si volesse invece utilizzare una rete di test, è possibile utilizzare la rete Mumbai la quale è una testnet di Polygon. Per selezionare il provider corretto per Mumbai è sufficiente copiare l'url nel campo "Mumbai" (Fig. 3 freccia blu).
 \FloatBarrier
 \begin{figure}[!h]
 \centering
@@ -57,7 +113,7 @@ wss://speedy-nodes-nyc.moralis.io/\textbf{a8d734a415dd368a3498db63}/polygon/main
 \FloatBarrier
 \subsubsection{MariaDB}
 \label{sec:db}
-Installare il database \href{https://mariadb.org/download/}{MariaDB} se non è gia stato installato precedentemente. Una volta eseguita l'installazione del database, collegarsi con il comando:
+Installare il database \href{https://mariadb.org/download/}{MariaDB} (v. 10.7.3) se non è già stato installato precedentemente. Una volta eseguita l'installazione del database, collegarsi con il comando:
 \begin{lstlisting}[language=bash]
   $ sudo mysql -u <user> -p <password>
 \end{lstlisting}
@@ -84,19 +140,6 @@ confirmed bigint, primary key(id));
 CREATE TABLE LastBlockSynced (id int(1), value bigint not null, primary key(id));
 INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 \end{verbatim}
-\subsubsection{Metamask}
-Per poter utilizzare la webbapp è necessario metamask. Visitare \href{https://www.metamask.io}{metamask.io} per maggiori informazioni.\\\\
-Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi.
-\paragraph{Configurazione network}\\
-Per l'inserimento e la configurazione del network Mumbai nel proprio wallet Metamask è necessario utilizzare i seguenti dati:
-\begin{itemize}
-\item Network Name: \textbf{Mumbai};
-\item New RPC Url: \textbf{https://rpc-mumbai.maticvigil.com/};
-\item ChainID: \textbf{80001};
-\item Currency Simbol: \textbf{MATIC};
-\item Block Explorer URL: \textbf{https://polygonscan.com/}.
-\end{itemize}
-Una volta inseriti i dati e aggiunto il network, ricordare di selezionare il network.
 \subsection{Configurazione}
 \label{sec:config_server}
 Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella "Server". Il file deve essere strutturato come segue:
@@ -116,9 +159,11 @@ dove ciascun campo indica:
   \item \textbf{DB\_USER}: l'user associato al database;
   \item \textbf{DB\_PWD}: password dell' user utilizzato;
   \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso "OnlineStore";
-  \item \textbf{API\_KEY}: le api key, ottenibili come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+  \item \textbf{API\_KEY}: l' api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
   \mbox{}
-  \item \textbf{SERVER\_URL}: strutturare il server url come segue:
+  \item \textbf{SERVER\_URL}: poiché Metamask richiede una connessione HTTPS nella versione da mobile, è necessario inserire l'url del server in HTTPS.\\
+  \paragraph{Sviluppo e testing locale}\\
+  Nel caso in cui invece si volesse sviluppare/testare in locale l'applicazione Metamask per Android, Metamask ha inserito nel proprio manifest una whitelist per le connessioni HTTP provenienti dal dominio \textit{sslip.io}; questo servizio permette a un qualunque url nella forma \verb|IP_ADDR.sslip.io| di essere risolto dal DNS come \verb|IP_ADDR|. Tuttavia il supporto ai deep link di Metamask richiede comunque che puntino ad un indirizzo HTTPS, è dunque necessario inserire il server url su \href{https://tinyurl.com/app}{Tinyurl} e utilizzare l'url ritornato, il quale oltre a fornire pagine in HTTPS mantiene anche eventuali aggiunte all'url come pagine e parametri GET. L'url da inserire su Tinyurl deve essere strutturato come segue:
   \begin{verbatim}
     http://<ip_locale>.sslip.io:<port>/
   \end{verbatim}
@@ -127,7 +172,7 @@ dove ciascun campo indica:
     \item \verb|<ip_locale>| va sostituito con il proprio IP locale;
     \item \verb|<port>| va sostituito con la porta utilizzata
   \end{itemize}
-   Successivamente inserire il server url su \href{https://tinyurl.com/app}{tinyurl} e utilizzare l'url ritornato.
+  Una volta inserito l'url su Tinyurl sarà sufficiente utilizzare l'url ritornato nel campo SERVER\_URL.
 \end{itemize}
 \subsection{Avvio server e test}
 \label{sec:avvio}
@@ -178,6 +223,7 @@ JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localS
 Essendo i dati dei test cumulativi, quando si desidera effettuare il test da zero è necessario cancellare i dati salvati. Per la cancellazione dei dati è sufficiente caricare la pagina \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \paragraph{Visualizzazione report}\\
 Per la visualizzazione del report è sufficiente selezionare la tab "Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
+\newpage{}
 \section{Script}
 \subsection{Requisiti}
 \subsubsection{Python e dipendenze}
@@ -185,12 +231,12 @@ Al fine di utilizzare correttamente lo script è necessario:
 \begin{itemize}
   \item \href{https://www.python.org/downloads/}{python3.8};
   \item pip3.8;
-  \item installare le seguenti dipendenze:
-  \begin{itemize}
-    \item web3;
-    \item python-dotenv;
-    \item pytest.
-  \end{itemize}
+  \item installare le seguenti dipendenze con i comandi:
+  \begin{lstlisting}[language=bash]
+    $ pip3.8 install web3
+    $ pip3.8 install python-dotenv
+    $ pip3.8 install pytest
+  \end{lstlisting}
 \end{itemize}
 \subsection{Configurazione}
 È necessario creare un file chiamato `.env` all'interno della stessa cartella contenente lo script \textit{sell.py}. Il file dovrà contenere:
@@ -213,8 +259,8 @@ Una volta soddisfatti i requisiti e ultimata la configurazione è possibile proc
 Sostituire \verb|[item price]| con il prezzo con il quale si desidera vendere il proprio prodotto.
 Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo del prodotto messo in vendita.
 \subsubsection{Script python}
-È possibile realizzare un proprio script in python per la vendita di prodotti.\\
-La funzione per mettere in vendita il proprio prodotto è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
+È possibile includere un proprio script in python nel backend dell' e-commerce per permettere direttamente la messa in vendita dei prodotti dal proprio sito.\\
+La funzione per mettere in vendita un prodotto è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
 È dunque necessario includere nel proprio script la funzione come segue:
 \begin{verbatim}
 from sell import sell_item
@@ -248,7 +294,7 @@ infine per la verifica e test installare:
 \begin{itemize}
   \item \textbf{mnemonic.secret}: deve contenere la mnemonic del proprio wallet;
   \item \textbf{providerlink.secret}: deve contenere l'url del provider ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}, può essere utilizzato anche l'url in http;
-  \item \textbf{apikey.secret}: deve contenere le api key ottenibili come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+  \item \textbf{apikey.secret}: deve contenere l' api key necessaria per la verifica del contratto. Per ottenere l'api key registrarsi su \href{https://polygonscan.com/}{PolygonScan}, una volta eseguita la registrazione andare al seguente url per generare la propria api key: \url{https://polygonscan.com/myapikey}.
 \end{itemize}
 \subsection{Compilazione, deployment e verifica}
 \paragraph{Compilazione}\\
@@ -259,13 +305,14 @@ Per la compilazione del contract è sufficiente eseguire il seguente comando:
 \paragraph{Deployment}\\
 Per il deployment del contratto eseguire il seguente comando:
 \begin{lstlisting}[language=bash]
-  $ truffle deploy --netowrk <YOUR_NETWORK>
+  $ truffle deploy --network <YOUR_NETWORK>
 \end{lstlisting}
 dove \verb|<YOUR_NETWORK>| rappresenta il network che si desidera utilizzare, in questo caso viene utilizzato \verb|polygon_mumbai|. Il network è definito nel file \textit{truffle-config.js}.\\ \\
 In caso di errori di timeout cambiare l'url nel file \textit{providerlink.secret} da http a wss e/o eseguire il comando aggiungendo:
 \begin{lstlisting}[language=bash]
-  $ truffle deploy --netowrk <YOUR_NETWORK> --reset --compile-none
+  $ truffle deploy --network <YOUR_NETWORK> --reset --compile-none
 \end{lstlisting}
+A questo punto è necessario registrare l'upkeeper di ChainLink per il proprio contratto al fine di poter utilizzare un timer per la scadenza degli ordini. Registrarsi dunque su \url{https://keepers.chain.link/} e seguire la procedura illustrata nella documentazione di ChainLink al seguente url: \url{https://docs.chain.link/docs/chainlink-keepers/register-upkeep/}.
 \paragraph{Verifica}\\
 Per la verifica del contratto eseguire il comando:
 \begin{lstlisting}[language=bash]
