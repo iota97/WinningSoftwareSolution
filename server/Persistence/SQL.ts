@@ -64,7 +64,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentByBuyer(buyer: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=? ORDER BY created DESC`
 			
 			this.db.query(queryString, buyer, (err, result) => {
 				if (err) {
@@ -94,7 +94,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentBySeller(seller: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=?`
+			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=? ORDER BY created DESC`
 			
 			this.db.query(queryString, seller, (err, result) => {
 				if (err) {
