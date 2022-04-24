@@ -24,3 +24,18 @@ header a {
     margin-top: 1em;
     float: none;
 }
+
+.addr{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.copyButton{
+  margin: auto;
+}
+
+#seller, #buyer{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
