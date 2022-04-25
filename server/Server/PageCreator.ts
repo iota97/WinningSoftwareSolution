@@ -75,6 +75,7 @@ class PageCreator {
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
+                "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
@@ -145,6 +146,7 @@ class PageCreator {
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
+                "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"

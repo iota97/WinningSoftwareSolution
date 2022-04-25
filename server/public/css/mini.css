@@ -1,11 +1,8 @@
-header a {
-    float: none;
-    text-align: left;
-}
+
 
 #hamb {
     display: block;
-    margin-right: 1em;
+    margin-right: 0.3em;
     float: right;
     width: 2.8em;
     height: 2.5em;
@@ -17,12 +14,14 @@ header a {
 
 #header-right a {
     display: block;
+    float: none;
+    text-align: right;
 }
 
 #header-right {
     display: none;
-    margin-top: 1em;
-    float: none;
+    margin-top: 0em;
+    clear: both;
 }
 
 .addr{
@@ -38,4 +37,31 @@ header a {
 #seller, #buyer{
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.containerHamb {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 2.1875em;
+    height: 0.3125em;
+    background-color: #FFFFFF;
+    margin: 0.375em 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-0.5625em, 0.375em);
+    transform: rotate(-45deg) translate(-0.5625em, 0.375em);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-0.5em, -0.5em);
+    transform: rotate(45deg) translate(-0.5em, -0.5em);
 }
