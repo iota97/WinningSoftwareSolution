@@ -11,12 +11,12 @@
     <strong class="price">Price <%-price%>$</strong>
     <div class="addr">
         From: <span id="buyer"><%-buyer%></span>
-        <button class="copyButton" onclick="copyAddress('buyer')"></button>
+        <button class="copyButton" onclick="copyAddress('buyer')" aria-label="copy buyer address"></button>
     </div>
 
     <div class="addr">
         To: <span id="seller"><%-seller%></span>
-        <button class="copyButton" onclick="copyAddress('seller')"></button>
+        <button class="copyButton" onclick="copyAddress('seller')" aria-label="copy seller address"></button>
     </div>
 
     <div class="date">Opened <%-created%></div>
