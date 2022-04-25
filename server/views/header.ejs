@@ -15,7 +15,9 @@
 
 <body>
   <header>
-    <a href="/" class="logo">Shop&nbsp;Chain</a>
+    <a href="/" class="logo">
+      <img id="logo" src="../img/logo.png" alt="Logo Shop Chain"/>
+    </a>
     <div id="hamb" class="containerHamb" onclick="toggleMenu();" aria-haspopup="true" role="button" aria-label="menu">
       <div class="bar1"></div>
       <div class="bar2"></div>
@@ -35,7 +37,7 @@
     </div>
     <input id="serverURL" type="hidden" value="<%=serverURL%>" />
   </div>
-  
+
   <div id="confirm" class="pop">
     <div>
       <h1>Awaiting confirmation</h1>
@@ -44,7 +46,7 @@
       <button onclick="closePop(event)" aria-label="cancel transaction">Cancel</button>
     </div>
   </div>
-  
+
   <div id="success" class="pop">
     <div>
       <h1>Transaction completed</h1>
@@ -53,7 +55,7 @@
       <button onclick="closePop(event)" id="relocButton">Done</button>
     </div>
   </div>
-  
+
   <div id="error" class="pop">
     <div>
       <h1>Transaction failed</h1>
@@ -62,7 +64,7 @@
       <button onclick="closePop(event)">Close</button>
     </div>
   </div>
-  
+
   <div id="wrongChain" class="pop">
     <div>
       <h1>Wrong chain</h1>
@@ -71,7 +73,7 @@
       <button onclick="location.reload()" aria-label="retry connection with metamask">Retry</button>
     </div>
   </div>
-  
+
   <div id="sending" class="pop">
     <div>
       <h1>Awaiting receipt</h1>
@@ -81,4 +83,3 @@
   </div>
   <div class="notfooter">
     <div id="con">
-      
