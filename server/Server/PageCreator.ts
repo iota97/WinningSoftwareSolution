@@ -7,10 +7,6 @@ import * as CONTRACT from "../public/contract/contract.json";
 
 class PageCreator {
 
-    private static formatPrice(price: Number) {
-        return price.toFixed(2)
-    }
-
     public landPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
@@ -24,7 +20,7 @@ class PageCreator {
             res.render("land", {
                 serverURL: process.env.SERVER_URL + req.originalUrl,
                 seller: item.seller,
-                price: PageCreator.formatPrice(Number(item.price) / 100),
+                price: PageCreator.priceConverter(item.price),
                 id: req.query.id
             });
         })
@@ -56,7 +52,7 @@ class PageCreator {
                 confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
             }      
             res.render("confirm", {
-                price: PageCreator.formatPrice(Number(item.price) / 100),
+                price: PageCreator.priceConverter(item.price),
                 buyer: item.buyer,
                 seller: item.seller,
                 created: this.timeConverter(item.created),
@@ -79,7 +75,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + PageCreator.formatPrice(Number(items[i].price) / 100) + "$</strong>" +
+                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
@@ -125,7 +121,7 @@ class PageCreator {
                 }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + req.originalUrl,
-                    price: PageCreator.formatPrice(Number(item.price) / 100),
+                    price: PageCreator.priceConverter(item.price),
                     buyer: item.buyer,
                     seller: item.seller,
                     created: this.timeConverter(item.created),
@@ -150,7 +146,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + PageCreator.formatPrice(Number(items[i].price) / 100) + "$</strong>" +
+                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
                 "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
@@ -196,6 +192,10 @@ class PageCreator {
         var sec = String(a.getSeconds()).padStart(2,'0');
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
+    }
+
+    private static priceConverter(price: bigint) {
+        return (Number(price) / 100).toFixed(2);
     }
 }
 
