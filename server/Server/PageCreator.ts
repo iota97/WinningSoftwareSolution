@@ -6,6 +6,7 @@ import { Request, Response } from "express"
 import * as CONTRACT from "../public/contract/contract.json";
 
 class PageCreator {
+
     public landPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
@@ -19,7 +20,7 @@ class PageCreator {
             res.render("land", {
                 serverURL: process.env.SERVER_URL + req.originalUrl,
                 seller: item.seller,
-                price: Number(item.price) / 100,
+                price: PageCreator.priceConverter(item.price),
                 id: req.query.id
             });
         })
@@ -48,15 +49,15 @@ class PageCreator {
         .then((item: payment) => {
             let confirmed = ""
             if (item.confirmed != null) {
-                confirmed = "<span class=\"date\">Closed "+this.timeConverter(item.confirmed)+"</span>"
+                confirmed = "<span class=\"date\">Closed "+PageCreator.timeConverter(item.confirmed)+"</span>"
             }      
             res.render("confirm", {
-                price: Number(item.price) / 100,
+                price: PageCreator.priceConverter(item.price),
                 buyer: item.buyer,
                 seller: item.seller,
-                created: this.timeConverter(item.created),
+                created: PageCreator.timeConverter(item.created),
                 confirmed: confirmed,
-                status:  this.statusConverter(item.status),
+                status:  PageCreator.statusConverter(item.status),
                 serverURL: process.env.SERVER_URL + req.originalUrl,
                 id: req.query.id
             });
@@ -74,9 +75,9 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
-                "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
-                "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
+                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
+                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
+                "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
             }
@@ -110,22 +111,22 @@ class PageCreator {
             qr.toDataURL(qr_url)
             .then((img_data) => {
                 const qr_str = "<a id=\"qr\" download=\"qr_"+item.id+".png\" href=\""+img_data+"\">Download QR</a>"
-                let conf = "Expire " + this.timeConverter(BigInt(item.created) + BigInt(CONTRACT.TIMEOUT));
+                let conf = "Expire " + PageCreator.timeConverter(BigInt(item.created) + BigInt(CONTRACT.TIMEOUT));
                 if (item.status == 2) {
-                    conf = "Confirmed " + this.timeConverter(item.confirmed as bigint);
+                    conf = "Confirmed " + PageCreator.timeConverter(item.confirmed as bigint);
                 } else if (item.status == 3) {
-                    conf = "Expired " + this.timeConverter(item.confirmed as bigint);
+                    conf = "Expired " + PageCreator.timeConverter(item.confirmed as bigint);
                 } else if (item.status == 0) {
-                    conf = "Cancelled " + this.timeConverter(item.confirmed as bigint);
+                    conf = "Cancelled " + PageCreator.timeConverter(item.confirmed as bigint);
                 }
                 res.render("detail", {
                     serverURL: process.env.SERVER_URL + req.originalUrl,
-                    price: Number(item.price) / 100,
+                    price: PageCreator.priceConverter(item.price),
                     buyer: item.buyer,
                     seller: item.seller,
-                    created: this.timeConverter(item.created),
+                    created: PageCreator.timeConverter(item.created),
                     confirmed: conf,
-                    status:  this.statusConverter(item.status),
+                    status:  PageCreator.statusConverter(item.status),
                     qr: qr_str,
                     id: req.query.id,
                     timestamp: item.created
@@ -145,9 +146,9 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + Number(items[i].price) / 100 + "$</strong>" +
-                "<span class=\"nascosto\">" + this.statusConverter(items[i].status) + "</span>"+
-                "<span class=\"date\">" + this.timeConverter(items[i].created) + "</span>" +
+                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
+                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
+                "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
             }
@@ -167,7 +168,7 @@ class PageCreator {
         })
     }
     
-    private statusConverter(status: number): string {
+    private static statusConverter(status: number): string {
         if (status == 0) {
             return "Cancelled"
         }
@@ -180,7 +181,7 @@ class PageCreator {
         return "Open"    
     }
     
-    private timeConverter(timestamp: bigint): string {
+    private static timeConverter(timestamp: bigint): string {
         var a = new Date(Number(timestamp)*1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var year = a.getFullYear();
@@ -191,6 +192,10 @@ class PageCreator {
         var sec = String(a.getSeconds()).padStart(2,'0');
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
+    }
+
+    private static priceConverter(price: bigint): string {
+        return (Number(price) / 100).toFixed(2);
     }
 }
 
