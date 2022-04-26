@@ -26,17 +26,22 @@
 
 .addr{
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  text-align: center;
+  padding-left: 1.2em;
 }
 
 .copyButton{
-  margin: auto;
+  float: right;
+  margin-left: 1em;
+  min-width: 1.5em;
+  min-width: 1.5em;
 }
 
 #seller, #buyer{
+  float: left;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 0.5em;
 }
 
 .containerHamb {
