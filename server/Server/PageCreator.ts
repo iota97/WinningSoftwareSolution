@@ -194,7 +194,7 @@ class PageCreator {
         return time;
     }
 
-    private static priceConverter(price: bigint) {
+    private static priceConverter(price: bigint): string {
         return (Number(price) / 100).toFixed(2);
     }
 }
