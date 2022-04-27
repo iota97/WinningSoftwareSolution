@@ -34,6 +34,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.7.0}{20/04/2022}{Alberto Nicoletti}{Redazione}{Chiusura ciclo 4.}
 \addversione{2.7.1}{21/04/2022}{Elia Scandaletti}{Redazione}{Correzione grammatica.}
 \addversione{2.8.0}{21/04/2022}{Raffaele Oliviero}{Redazione}{Aggiunto preventivo per ciclo 5.}
+\addversione{2.9.0}{27/04/2022}{Raffaele Oliviero}{Redazione}{Chiusura ciclo 5.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -73,9 +74,9 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=30]{CA}{2022-04-07}{2022-05-12} \\
-\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
-\ganttbar[progress=45]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
+\ganttgroup[progress=50]{CA}{2022-04-07}{2022-05-12} \\
+\ganttbar[progress=100]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
+\ganttbar[progress=70]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
 \ganttbar[progress=0]{Validazione}{2022-04-27}{2022-05-11}
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gantt del progetto}
@@ -90,20 +91,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 66  & 1980\\
+        Responsabile    & 30 & 68  & 2040\\
         \hline
-        Amministratore  & 20 & 83  & 1660\\
+        Amministratore  & 20 & 85  & 1700\\
         \hline
         Analista        & 25 & 101.5  & 2537.5 \\
         \hline
         Progettista     & 25 & 109  & 2725\\
         \hline
-        Programmatore   & 15 & 154  & 2310\\
+        Programmatore   & 15 & 170.5  & 2557.5\\
         \hline
-        Verificatore    & 15 & 52.5  & 787.5 \\
+        Verificatore    & 15 & 57  & 855 \\
         \hline
         \hline
-        \textbf{Totale} &    & 566 & 12000\\
+        \textbf{Totale} &    & 591 & 12415\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -120,18 +121,18 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         Responsabile    & 30 & 22  & 660\\
         \hline
-        Amministratore  & 20 & 17  & 340\\
+        Amministratore  & 20 & 6  & 120\\
         \hline
-        Analista        & 25 & 10  & 250\\
+        Analista        & 25 & 3  & 75\\
         \hline
-        Progettista     & 25 & 6  & 150\\
+        Progettista     & 25 & 1  & 25\\
         \hline
         Programmatore   & 15 & 47  & 705\\
         \hline
         Verificatore    & 15 & 23  & 345\\
         \hline
         \hline
-        \textbf{Totale} &    & 125 & 2450\\
+        \textbf{Totale} &    & 102 & 1930\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -889,6 +890,51 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Problema} & \textbf{Misure di mitigazione}\\
         \hline
         Qualora il colloquio con il prof. Cardin dovesse risultare positivo, sarà necessario un incontro per preparare la presentazione PB in vista del colloquio con il prof. Vardanega. & I membri del gruppo sono stati avvisati della possibilità e alcuni membri sono stati assegnati per la creazione di una bozza che verrà visionata e potenzialmente modificata da tutti i membri del gruppo.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 7 (+3)  & 210 (+90)\\
+        \hline
+        Amministratore  & 20 & 2 (-10)  & 40 (-200)\\
+        \hline
+        Analista        & 25 & 0  & 0\\
+        \hline
+        Progettista     & 25 & 0 (-2) & 0 (-50)\\
+        \hline
+        Programmatore   & 15 & 16.5 (+6.5)  & 247.5(+97.5)\\
+        \hline
+        Verificatore    & 15 & 4.5 (+1.5)  & 67.5(+22.5)\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 30 (-1) & 565 (-40)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+Durante il ciclo di sprint 5 non sono state riscontrate alcune problematiche
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        La parte della web app dedicata alla visualizzazione della lista delle transazioni è poco fruibile, seppur accessibil.e & Sono state create delle Issues per rendere la sezione più usabile da parte degli utenti e in generale per migliorare la grafica. Alcuni di questi cambiamenti potrebbero richiedere la modifica dell'Analisi dei Requisiti. \\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
