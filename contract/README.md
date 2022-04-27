@@ -52,4 +52,4 @@ sudo truffle run coverage --file="./test/shopcontract.js" --solcoverjs ./.solcov
 per testare (con coperture del codice).
 
 
-Attualmente deployato all'address [0x16FF728153e4F55734D388E387FF3C1DA415b2ba](https://mumbai.polygonscan.com/address/0x16FF728153e4F55734D388E387FF3C1DA415b2ba).
+Attualmente deployato all'address [0xE1a3e540f18eF1c65396aba672ea7Aefa750Bea8](https://mumbai.polygonscan.com/address/0xE1a3e540f18eF1c65396aba672ea7Aefa750Bea8).

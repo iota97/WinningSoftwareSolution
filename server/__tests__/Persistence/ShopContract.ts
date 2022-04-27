@@ -34,7 +34,6 @@ describe('ShopContract', () => {
         shopContract.statusChange(options)
         shopContract.getSettledPayment(BigInt(0))
         shopContract.getPaymentEntry(BigInt(0))
-        shopContract.getBlockTime(0)
         provider.disconnect(0, "")
         await delay(500);
     })

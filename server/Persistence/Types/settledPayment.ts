@@ -3,6 +3,6 @@ export interface settledPayment {
   paymentEntryId: bigint,
   client: string,
   status: number,
-  created: bigint,
-  confirmed: bigint | null // Also cancelled
+  time: bigint,
+  finalizedTime: bigint // Also cancelled
 }

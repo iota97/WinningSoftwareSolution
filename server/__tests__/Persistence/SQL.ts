@@ -80,8 +80,8 @@ describe('SQL', function () {
             paymentEntryId: BigInt(13),
             client: "0x6FA95dc7d52719cC61B9966CbFFa6d7E70B3F4c1",
             status: 1,
-            created: BigInt(123),
-            confirmed: null,
+            time: BigInt(123),
+            finalizedTime: BigInt(0),
         })
     })
 
@@ -230,8 +230,8 @@ describe('SQL', function () {
             paymentEntryId: BigInt(12312321),
             client: "asdf",
             status: 0,
-            created: BigInt(123),
-            confirmed: null,
+            time: BigInt(123),
+            finalizedTime: BigInt(12),
         })
         .catch(async (e: any) => {
             expect(e[0] == "E") 
