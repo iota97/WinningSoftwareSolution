@@ -4,13 +4,15 @@
   <meta name="robots" content="noindex">
   <meta charset="utf-8">
   <title>Landing page | Shop Chain</title>
-  
+
 <%- include('header.ejs') %>
 
 <div class="info">
     <strong class="price">Price <%-price%>$</strong>
-    <span class="addr extraspace">Seller: <%-seller%></span>
-    
+    <div class="addr extraspace">
+      Seller: <span id="seller" ><%-seller%></span>
+      <button class="copyButton" onclick="copyAddress('seller')" aria-label="copy seller address"></button>
+    </div>
     <input id="idPag" type="hidden" value="<%=id%>">
     <button id="settlePaymentButton" onclick="onClickSettlePayment()" aria-label="confirm payment">Confirm</button>
 </div>

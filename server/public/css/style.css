@@ -237,6 +237,19 @@ html body {
   font-weight: bold;
 }
 
+.copyButton {
+  width:1.5em;
+  height: 1.5em;
+  float: right;
+  background-image: url(../img/copy.png);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size:1.5em;
+  border:none;
+  cursor: pointer;
+}
+
 .extraspace {
   margin-bottom: 7em;
 }

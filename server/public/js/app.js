@@ -384,4 +384,13 @@ function onClickUnlockFunds() {
     }
 }
 
+function copyAddress(cAddr) {
+    if(cAddr=="buyer") {
+        navigator.clipboard.writeText(buyer.innerText);
+    }
+    if(cAddr=="seller") {
+        navigator.clipboard.writeText(seller.innerText);
+    }
+}
+
 window.addEventListener('DOMContentLoaded', initialize);

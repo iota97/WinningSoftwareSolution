@@ -24,6 +24,26 @@
     clear: both;
 }
 
+.addr{
+  display: flex;
+  text-align: center;
+  padding-left: 1.2em;
+}
+
+.copyButton{
+  float: right;
+  margin-left: 1em;
+  min-width: 1.5em;
+  min-width: 1.5em;
+}
+
+#seller, #buyer{
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.5em;
+}
+
 .containerHamb {
     display: inline-block;
     cursor: pointer;
