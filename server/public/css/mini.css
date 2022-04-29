@@ -70,3 +70,58 @@
     -webkit-transform: rotate(45deg) translate(-0.5em, -0.5em);
     transform: rotate(45deg) translate(-0.5em, -0.5em);
 }
+
+.specific{
+  display: none;
+}
+
+.transactions {
+  max-height: 100%;
+  margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactions li {
+  grid-template-columns: 100%;
+  grid-template-rows: 33% 33% 33%;
+  width: 15em;
+  height: 10em;
+}
+
+.price_list{
+  font-size: 1.2em;
+  margin: 0.5em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: bold;
+}
+
+.date_list{
+  display: block;
+  font-size: 0.8em;
+  margin: 1.5em;
+}
+
+.transactions #state{
+  display: none;
+}
+
+.transactions li.stato0 {
+  background-image: url("../img/grey_mini.png");
+}
+
+.transactions li.stato1 {
+  background-image: url("../img/yellow_mini.png");
+}
+
+.transactions li.stato2 {
+  background-image: url("../img/green_mini.png");
+}
+
+.transactions li.stato3 {
+  background-image: url("../img/red_mini.png");
+}

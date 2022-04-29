@@ -28,15 +28,15 @@ class PageCreator {
             res.redirect('/')
         })
     }
-    
+
     public helpPage(req: Request, res: Response): void {
-        res.render("help", {serverURL: process.env.SERVER_URL + req.originalUrl});   
+        res.render("help", {serverURL: process.env.SERVER_URL + req.originalUrl});
     }
-    
+
     public mainPage(req: Request, res: Response): void {
         res.render("main", {serverURL: process.env.SERVER_URL + req.originalUrl});
     }
-    
+
     public confirmPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
@@ -50,7 +50,7 @@ class PageCreator {
             let confirmed = ""
             if (item.confirmed != null) {
                 confirmed = "<span class=\"date\">Closed "+PageCreator.timeConverter(item.confirmed)+"</span>"
-            }      
+            }
             res.render("confirm", {
                 price: PageCreator.priceConverter(item.price),
                 buyer: item.buyer,
@@ -61,28 +61,37 @@ class PageCreator {
                 serverURL: process.env.SERVER_URL + req.originalUrl,
                 id: req.query.id
             });
-        })    
+        })
         .catch(() => {
             res.redirect('/')
         })
     }
-    
-    public paymentByBuyerPage(req: Request, res: Response, db: Persistence): void {    
+
+    public paymentByBuyerPage(req: Request, res: Response, db: Persistence): void {
         db.getPaymentByBuyer(req.query.id as string || "")
         .then((items: payment[]) => {
-            let item_string: string = "<ul class=\"transactions\">"
+            let item_string: string = "<div class=\"specific\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
+            "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
-                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
-                "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
-                "</li>" +
-                "</a>"
+                "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
+                "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
+                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"
+                if(items[i].status == 3) {
+                  item_string += "<img id=\"state\" src=\"img/red.png\">"
+                } else if(items[i].status == 2) {
+                  item_string += "<img id=\"state\" src=\"img/green.png\">"
+                } else if(items[i].status == 0) {
+                  item_string += "<img id=\"state\" src=\"img/yellow.png\">"
+                } else {
+                  item_string += "<img id=\"state\" src=\"img/grey.png\">"
+                }
+                item_string += "</li>" + "</a>"
             }
             item_string += "</ul>";
-            
+
             if (items.length == 0) {
                 item_string = "<div class=\"info\" id=\"none-found\">No transaction found</div>"
             }
@@ -96,7 +105,7 @@ class PageCreator {
             res.redirect('/')
         })
     }
-    
+
     public detailPage(req: Request, res: Response, db: Persistence): void {
         let id: bigint
         try {
@@ -137,23 +146,32 @@ class PageCreator {
             res.redirect('/')
         })
     }
-    
+
     public paymentBySellerPage(req: Request, res: Response, db: Persistence): void {
         db.getPaymentBySeller(req.query.id as string || "")
         .then((items: payment[]) => {
-            let item_string: string = "<ul class=\"transactions\">"
+            let item_string: string = "<div class=\"specific\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
+            "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
-                "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
-                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
-                "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
-                "</li>" +
-                "</a>"
+                "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
+                "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
+                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"
+                if(items[i].status == 3) {
+                  item_string += "<img id=\"state\" src=\"img/red.png\">"
+                } else if(items[i].status == 2) {
+                  item_string += "<img id=\"state\" src=\"img/green.png\">"
+                } else if(items[i].status == 1) {
+                  item_string += "<img id=\"state\" src=\"img/yellow.png\">"
+                } else {
+                  item_string += "<img id=\"state\" src=\"img/grey.png\">"
+                }
+                item_string += "</li>" + "</a>"
             }
             item_string += "</ul>";
-            
+
             if (items.length == 0) {
                 item_string = "<div class=\"info\" id=\"none-found\">No transaction found</div>"
             }
@@ -161,13 +179,13 @@ class PageCreator {
                 items: item_string,
                 id: req.query.id,
                 serverURL: process.env.SERVER_URL + req.originalUrl,
-            });       
+            });
         })
         .catch(() => {
             res.redirect('/')
         })
     }
-    
+
     private static statusConverter(status: number): string {
         if (status == 0) {
             return "Cancelled"
@@ -177,10 +195,10 @@ class PageCreator {
         }
         if (status == 3) {
             return "Expired"
-        } 
-        return "Open"    
+        }
+        return "Open"
     }
-    
+
     private static timeConverter(timestamp: bigint): string {
         var a = new Date(Number(timestamp)*1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
