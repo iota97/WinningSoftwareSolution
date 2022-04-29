@@ -74,9 +74,10 @@ class PageCreator {
             for (let i = 0; i < items.length; i++) {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
-                "<li class=\"stato"+items[i].status+"\">"+
+                "<li class=\"stato"+items[i].status+"\">" +
+                "<span class=\"placeholder\"> ID: " + items[i].itemID + "</span>" +
                 "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
-                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
+                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>" +
                 "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
                 "</li>" +
                 "</a>"
@@ -146,6 +147,7 @@ class PageCreator {
                 item_string +=
                 "<a href=\"detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
+                "<span class=\"placeholder\"> ID: " + items[i].itemID + "</span>" +
                 "<strong class=\"price\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"+
                 "<span class=\"date\">" + PageCreator.timeConverter(items[i].created) + "</span>" +

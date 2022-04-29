@@ -64,7 +64,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentByBuyer(buyer: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=? ORDER BY created DESC`
+			const queryString = `SELECT S.id, S.item_id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE S.buyer=? ORDER BY created DESC`
 			
 			this.db.query(queryString, buyer, (err, result) => {
 				if (err) {
@@ -77,6 +77,7 @@ export class SQL implements SQL_Interface {
 				rows.forEach(row => {
 					const payment: payment =  {
 						id: row.id,
+						itemID: row.item_id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: BigInt(row.price),
@@ -94,7 +95,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentBySeller(seller: string): Promise<payment[]> {
 		return new Promise<payment[]>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=? ORDER BY created DESC`
+			const queryString = `SELECT S.id, S.item_id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON E.id=S.item_id WHERE E.ecommerce=? ORDER BY created DESC`
 			
 			this.db.query(queryString, seller, (err, result) => {
 				if (err) {
@@ -107,6 +108,7 @@ export class SQL implements SQL_Interface {
 				rows.forEach(row => {
 					const payment: payment =  {
 						id: row.id,
+						itemID: row.item_id,
 						buyer: row.buyer,
 						seller: row.ecommerce,
 						price: BigInt(row.price),
@@ -149,7 +151,7 @@ export class SQL implements SQL_Interface {
 	
 	public getPaymentByID(id: bigint): Promise<payment> {
 		return new Promise<payment>((resolve, reject) => {
-			const queryString = `SELECT S.id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.item_id=E.id WHERE S.id=?`
+			const queryString = `SELECT S.id, S.item_id, buyer, ecommerce, price, status, created, confirmed FROM SettledPayments S JOIN PaymentEntries E ON S.item_id=E.id WHERE S.id=?`
 			
 			this.db.query(queryString, id.toString(), (err, result) => {
 				if (err) {
@@ -163,6 +165,7 @@ export class SQL implements SQL_Interface {
 				
 				const payment: payment =  {
 					id: rows[0].id,
+					itemID: rows[0].item_id,
 					buyer: rows[0].buyer,
 					seller: rows[0].ecommerce,
 					price: BigInt(rows[0].price),

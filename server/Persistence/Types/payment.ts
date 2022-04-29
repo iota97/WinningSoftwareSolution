@@ -1,5 +1,6 @@
 export interface payment {
 	id: bigint,
+	itemID: bigint,
 	buyer: string,
 	seller: string,
 	price: bigint, // Dollar cents
