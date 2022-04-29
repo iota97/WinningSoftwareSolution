@@ -169,6 +169,10 @@ html body {
   width: 40%;
 }
 
+#settlePaymentButton{
+  margin-top: 2.1em;
+}
+
 #sending img {
   margin-top: 1.2em;
   margin-bottom: -0.5em;
@@ -248,10 +252,6 @@ html body {
   background-size:1.5em;
   border:none;
   cursor: pointer;
-}
-
-.extraspace {
-  margin-bottom: 7em;
 }
 
 header {
