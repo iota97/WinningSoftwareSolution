@@ -70,7 +70,7 @@ class PageCreator {
     public paymentByBuyerPage(req: Request, res: Response, db: Persistence): void {
         db.getPaymentByBuyer(req.query.id as string || "")
         .then((items: payment[]) => {
-            let item_string: string = "<div class=\"specific\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
+            let item_string: string = "<div class=\"data_type\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
             "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
@@ -150,7 +150,7 @@ class PageCreator {
     public paymentBySellerPage(req: Request, res: Response, db: Persistence): void {
         db.getPaymentBySeller(req.query.id as string || "")
         .then((items: payment[]) => {
-            let item_string: string = "<div class=\"specific\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
+            let item_string: string = "<div class=\"data_type\"> <span> Price </span> <span> Date </span> <span> State </span> </div>" +
             "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=

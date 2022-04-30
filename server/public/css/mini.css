@@ -24,20 +24,20 @@
     clear: both;
 }
 
-.addr{
+.addr {
   display: flex;
   text-align: center;
   padding-left: 1.2em;
 }
 
-.copyButton{
+.copyButton {
   float: right;
   margin-left: 1em;
   min-width: 1.5em;
   min-width: 1.5em;
 }
 
-#seller, #buyer{
+#seller, #buyer {
   float: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,18 +71,13 @@
     transform: rotate(45deg) translate(-0.5em, -0.5em);
 }
 
-.specific{
+.data_type {
   display: none;
 }
 
 .transactions {
   max-height: 100%;
   margin-top: 2em;
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-  align-items: center;
-  justify-content: center;
 }
 
 .transactions li {
@@ -92,21 +87,21 @@
   height: 10em;
 }
 
-.price_list{
+.price_list {
+  display: block;
   font-size: 1.2em;
   margin: 0.5em;
   margin-bottom: 0.8em;
-  display: block;
   font-weight: bold;
 }
 
-.date_list{
+.date_list {
   display: block;
   font-size: 0.8em;
   margin: 1.5em;
 }
 
-.transactions #state{
+.transactions #state {
   display: none;
 }
 
