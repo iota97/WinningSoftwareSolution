@@ -78,17 +78,8 @@ class PageCreator {
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
-                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"
-                if(items[i].status == 3) {
-                  item_string += "<img id=\"state\" src=\"img/red.png\">"
-                } else if(items[i].status == 2) {
-                  item_string += "<img id=\"state\" src=\"img/green.png\">"
-                } else if(items[i].status == 0) {
-                  item_string += "<img id=\"state\" src=\"img/yellow.png\">"
-                } else {
-                  item_string += "<img id=\"state\" src=\"img/grey.png\">"
-                }
-                item_string += "</li>" + "</a>"
+                "<span class=\"state_list\">" + PageCreator.statusConverter(items[i].status) + "</span>" +
+                "</li>" + "</a>"
             }
             item_string += "</ul>";
 
@@ -158,17 +149,8 @@ class PageCreator {
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
-                "<span class=\"nascosto\">" + PageCreator.statusConverter(items[i].status) + "</span>"
-                if(items[i].status == 3) {
-                  item_string += "<img id=\"state\" src=\"img/red.png\">"
-                } else if(items[i].status == 2) {
-                  item_string += "<img id=\"state\" src=\"img/green.png\">"
-                } else if(items[i].status == 1) {
-                  item_string += "<img id=\"state\" src=\"img/yellow.png\">"
-                } else {
-                  item_string += "<img id=\"state\" src=\"img/grey.png\">"
-                }
-                item_string += "</li>" + "</a>"
+                "<span class=\"state_list\">" + PageCreator.statusConverter(items[i].status) + "</span>"
+                + "</li>" + "</a>"
             }
             item_string += "</ul>";
 

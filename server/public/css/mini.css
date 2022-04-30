@@ -37,7 +37,7 @@
   min-width: 1.5em;
 }
 
-#seller, #buyer {
+#seller, #buyer{
   float: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -77,18 +77,19 @@
 
 .transactions {
   max-height: 100%;
-  margin-top: 2em;
+  margin: auto;
+  text-align: center;
 }
 
 .transactions li {
   grid-template-columns: 100%;
-  grid-template-rows: 33% 33% 33%;
-  width: 15em;
+  grid-template-rows: 24% 32% 29% 11%;
+  max-width: 18em;
   height: 10em;
+  margin: auto;
 }
 
 .price_list {
-  display: block;
   font-size: 1.2em;
   margin: 0.5em;
   margin-bottom: 0.8em;
@@ -96,27 +97,30 @@
 }
 
 .date_list {
-  display: block;
   font-size: 0.8em;
   margin: 1.5em;
 }
 
-.transactions #state {
-  display: none;
-}
-
 .transactions li.stato0 {
-  background-image: url("../img/grey_mini.png");
+  background-image: url("../img/grey.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
 }
 
 .transactions li.stato1 {
-  background-image: url("../img/yellow_mini.png");
+  background-image: url("../img/yellow.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
 }
 
-.transactions li.stato2 {
-  background-image: url("../img/green_mini.png");
+.transactions li.stato2  {
+  background-image: url("../img/green.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
 }
 
 .transactions li.stato3 {
-  background-image: url("../img/red_mini.png");
+  background-image: url("../img/red.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
 }
