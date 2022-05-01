@@ -70,3 +70,7 @@
     -webkit-transform: rotate(45deg) translate(-0.5em, -0.5em);
     transform: rotate(45deg) translate(-0.5em, -0.5em);
 }
+
+footer dl{
+    grid-template-rows: 1fr 3fr 1fr;
+}
