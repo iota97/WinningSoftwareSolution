@@ -314,13 +314,12 @@ footer a {
 footer dl{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr;
 }
 
 footer dt{
   grid-row:1;
   font-size: 1.15em;
-  margin: 0.5em 0;
 }
 footer dd{
   grid-row:2;
@@ -329,8 +328,7 @@ footer dd{
 }
 
 footer p{
-  grid-row:3;
-  margin:0 0.5em;
+  margin:1em 0.5em;
   font-style: italic;
 }
 
