@@ -72,5 +72,10 @@
 }
 
 footer dl{
-    grid-template-rows: 1fr 3fr 1fr;
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+footer dd{
+    display: none;
 }
