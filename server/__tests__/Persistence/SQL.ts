@@ -7,8 +7,6 @@ import { setTimeout } from 'timers'
 
 dotenv.config()
 
-process.env.DB_NAME = "OnlineStoreTest"
-
 let db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
