@@ -32,9 +32,21 @@
       <div class="bar3"></div>
     </div>
     <div id="header-right">
-      <a id="listSeller" href="seller">Incoming</a>
-      <a id="listBuyer" href="buyer">Outgoing</a>
-      <a href="help">Help</a>
+      <% if(locals.current && current === 'seller') { %>
+        <a id="listSeller" class="current" aria-disabled="true">Incoming</a>
+      <% } else { %>
+        <a id="listSeller" href="seller">Incoming</a>
+      <% } %>
+      <% if(locals.current && current === 'buyer') { %>
+        <a id="listBuyer" class="current" aria-disabled="true">Outgoing</a>
+      <% } else { %>
+        <a id="listBuyer" href="buyer">Outgoing</a>
+      <% } %>
+      <% if(locals.current && current === 'help') { %>
+        <a id="listBuyer" class="current" aria-disabled="true">Help</a>
+      <% } else { %>
+        <a href="help">Help</a>
+      <% } %>
     </div>
   </header>
   <div id="connect" class="pop">
