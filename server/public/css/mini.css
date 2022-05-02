@@ -24,13 +24,22 @@
     clear: both;
 }
 
+.pop>div>button:hover, .info>button:hover, #qr:hover, #cancelPaymentButton:hover, #unlockFundsButton:hover, #refundPaymentButton:hover {
+  background-color: #0c162c;
+}
+
+.pop>div>button:active, .info>button:active, #qr:active, #cancelPaymentButton:active, #unlockFundsButton:active, #refundPaymentButton:active {
+  background-color: white;
+}
+
 .addr {
   display: flex;
   text-align: center;
   padding-left: 1.2em;
 }
 
-.copyButton {
+.copyButton, .copyButton:hover, .copyButton:active{
+  display: none;
   float: right;
   margin-left: 1em;
   min-width: 1.5em;
