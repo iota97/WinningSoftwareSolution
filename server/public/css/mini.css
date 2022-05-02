@@ -82,6 +82,7 @@
 
 footer dl{
     grid-template-rows: 1fr;
+    margin-bottom: 1.2em;
 }
 
 footer dd{
