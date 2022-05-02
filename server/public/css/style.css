@@ -49,9 +49,6 @@ html body {
 
 .transactions {
   width: 80%;
-  max-height: 23em;
-  overflow-y: scroll;
-  overflow-x: hidden;
   list-style: none;
 	margin: auto;
 	padding: 2em;
