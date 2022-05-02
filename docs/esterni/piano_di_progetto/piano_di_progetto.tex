@@ -12,7 +12,7 @@
 \input{\templates/history}
 
 \settitolo{Piano di Progetto}
-\setredattori{Elia Scandaletti \\ Giovanni Cocco \\ Matteo Galvagni \\ Federico Marchi \\ Alberto Nicoletti \\ Raffaele Oliviero}
+\setredattori{Elia Scandaletti \\ Giovanni Cocco \\ Matteo Galvagni \\ Federico Marchi \\ Alberto Nicoletti \\ Raffaele Oliviero \\ Andrea Volpe}
 \setresponsabili{Giovanni Cocco}
 \setdestuso{esterno}
 \setdescrizione{
@@ -35,6 +35,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.7.1}{21/04/2022}{Elia Scandaletti}{Redazione}{Correzione grammatica.}
 \addversione{2.8.0}{21/04/2022}{Raffaele Oliviero}{Redazione}{Aggiunto preventivo per ciclo 5.}
 \addversione{2.9.0}{27/04/2022}{Raffaele Oliviero}{Redazione}{Chiusura ciclo 5.}
+\addversione{2.10.0}{28/04/2022}{Andrea Volpe}{Redazione}{Aggiunto preventivo per ciclo 6.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -119,20 +120,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 22  & 660\\
+        Responsabile    & 30 & 9  & 270\\
         \hline
-        Amministratore  & 20 & 6  & 120\\
+        Amministratore  & 20 & 7  & 140\\
         \hline
-        Analista        & 25 & 3  & 75\\
+        Analista        & 25 & 2  & 50\\
         \hline
-        Progettista     & 25 & 1  & 25\\
+        Progettista     & 25 & 2  & 50\\
         \hline
-        Programmatore   & 15 & 47  & 705\\
+        Programmatore   & 15 & 35  & 525\\
         \hline
-        Verificatore    & 15 & 23  & 345\\
+        Verificatore    & 15 & 16  & 240\\
         \hline
         \hline
-        \textbf{Totale} &    & 102 & 1930\\
+        \textbf{Totale} &    & 72 & 1275\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -947,6 +948,84 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
         \hline
         La parte della web app dedicata alla visualizzazione della lista delle transazioni è poco fruibile, seppur accessibile. & Sono state create delle Issues per rendere la sezione più usabile da parte degli utenti e in generale per migliorare la grafica. Alcuni di questi cambiamenti potrebbero richiedere la modifica dell'Analisi dei Requisiti. \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsection{Sprint 6}
+\textbf{Data di inizio:} 27-04-2022\\
+\textbf{Data di fine pianificata:} 04-05-2022\\
+\textbf{Data di fine effettiva:} N/A
+
+\subsubsection{Pianificazione}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Modificare presentazione transazioni. & 1\\
+		\hline
+        Togliere link circolari e segnalare link pagina corrente. & 1\\
+		\hline
+        Aggiungere breadcrumb. & 1\\
+		\hline
+        Togliere extraspace landing page. & 1\\
+		\hline
+        Fare bottoni responsive. & 1\\
+		\hline
+        Aggiungere id del prodotto per transazioni. & 1\\
+		\hline
+        Mettere stato transazione. & 2\\
+		\hline
+        Abbellire il footer. & 1\\
+		\hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 5  & 150\\
+        \hline
+        Amministratore  & 20 & 3  & 60\\
+        \hline
+        Analista        & 25 & 2  & 50\\
+        \hline
+        Progettista     & 25 & 2  & 50\\
+        \hline
+        Programmatore   & 15 & 25  & 375\\
+        \hline
+        Verificatore    & 15 & 10  & 150\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 48 & 835\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        La modifica della presentazione delle transazioni potrebbe risultare poco fruibile. & Tale modifica verrà scartata, mantenendo la presentazione delle transazioni attuale.\\
+        \hline
+        Lo studio di fattibilità per valutare la possibilità di togliere i link circolari e segnalare la pagina corrente potrebbe dare esito negativo. & Le attività di rimozione link circolari e la segnalazione del link della pagina corrente non verranno svolte.\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
