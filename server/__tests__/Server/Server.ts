@@ -164,8 +164,12 @@ describe('Server', () => {
         server.seller();
     })
 
-    it('Server - detail', async () => {
-        server.detail();
+    it('Server - buyer detail', async () => {
+        server.buyerDetail();
+    })
+
+    it('Server - seller detail', async () => {
+        server.sellerDetail();
     })
 
     it('Server - land', async () => {

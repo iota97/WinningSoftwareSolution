@@ -41,7 +41,8 @@ class Server {
         this.app.get("/confirm", this.confirm.bind(this));
         this.app.get("/buyer", this.buyer.bind(this));
         this.app.get("/seller", this.seller.bind(this));
-        this.app.get("/detail", this.detail.bind(this));
+        this.app.get("/buyer_detail", this.buyerDetail.bind(this));
+        this.app.get("/seller_detail", this.sellerDetail.bind(this));
         this.app.get("/land", this.land.bind(this));
 
         // Last route, none matched
@@ -60,8 +61,12 @@ class Server {
         this.page.paymentBySellerPage(req, res, this.db)
     }
 
-    private detail(req: Request, res: Response): void {
-        this.page.detailPage(req, res, this.db)
+    private buyerDetail(req: Request, res: Response): void {
+        this.page.detailPage(req, res, this.db, "buyer")
+    }
+
+    private sellerDetail(req: Request, res: Response): void {
+        this.page.detailPage(req, res, this.db, "seller")
     }
 
     private land(req: Request, res: Response): void {

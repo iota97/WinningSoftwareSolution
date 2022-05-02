@@ -74,7 +74,7 @@ class PageCreator {
             "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<a href=\"detail?id="+items[i].id+"\">" +
+                "<a href=\"buyer_detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
@@ -93,11 +93,11 @@ class PageCreator {
             });
         })
         .catch(() => {
-            res.redirect('/')
+           res.redirect('/')
         })
     }
 
-    public detailPage(req: Request, res: Response, db: Persistence): void {
+    public detailPage(req: Request, res: Response, db: Persistence, type: String): void {
         let id: bigint
         try {
             id = BigInt(req.query.id as string)
@@ -129,7 +129,8 @@ class PageCreator {
                     status:  PageCreator.statusConverter(item.status),
                     qr: qr_str,
                     id: req.query.id,
-                    timestamp: item.created
+                    timestamp: item.created,
+                    bread: type == "seller" ? "<a id=\"bread-seller\" href=\"seller\">Incoming Transactions</a>" : "<a id=\"bread-buyer\" href=\"buyer\">Outgoing Transactions</a>"
                 });
             })
         })
@@ -145,7 +146,7 @@ class PageCreator {
             "<ul class=\"transactions\">"
             for (let i = 0; i < items.length; i++) {
                 item_string +=
-                "<a href=\"detail?id="+items[i].id+"\">" +
+                "<a href=\"seller_detail?id="+items[i].id+"\">" +
                 "<li class=\"stato"+items[i].status+"\">"+
                 "<strong class=\"price_list\">" + PageCreator.priceConverter(items[i].price) + "$</strong>" +
                 "<span class=\"date_list\">" + PageCreator.timeConverter(items[i].created) + "</span>" +
