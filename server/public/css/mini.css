@@ -24,13 +24,13 @@
     clear: both;
 }
 
-.addr{
+.addr {
   display: flex;
   text-align: center;
   padding-left: 1.2em;
 }
 
-.copyButton{
+.copyButton {
   float: right;
   margin-left: 1em;
   min-width: 1.5em;
@@ -69,4 +69,58 @@
 .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-0.5em, -0.5em);
     transform: rotate(45deg) translate(-0.5em, -0.5em);
+}
+
+.data_type {
+  display: none;
+}
+
+.transactions {
+  max-height: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.transactions li {
+  grid-template-columns: 100%;
+  grid-template-rows: 24% 32% 29% 11%;
+  max-width: 18em;
+  height: 10em;
+  margin: auto;
+}
+
+.price_list {
+  font-size: 1.2em;
+  margin: 0.5em;
+  margin-bottom: 0.8em;
+  font-weight: bold;
+}
+
+.date_list {
+  font-size: 0.8em;
+  margin: 1.5em;
+}
+
+.transactions li.stato0 {
+  background-image: url("../img/grey.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
+}
+
+.transactions li.stato1 {
+  background-image: url("../img/yellow.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
+}
+
+.transactions li.stato2  {
+  background-image: url("../img/green.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
+}
+
+.transactions li.stato3 {
+  background-image: url("../img/red.png");
+  background-size: 0.9em;
+  background-position: 50% 90%;
 }
