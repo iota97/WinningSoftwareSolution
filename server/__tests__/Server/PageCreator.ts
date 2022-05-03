@@ -336,7 +336,7 @@ describe('PageCreator', () => {
                 expect(false).toBe(true)
             },
         } as Response
-        page.detailPage(req, res, db);
+        page.detailPage(req, res, db, "seller");
     })
     
     it('Detail Page - Cancelled', async () => {
@@ -350,7 +350,7 @@ describe('PageCreator', () => {
                 expect(false).toBe(true)
             },
         } as Response
-        page.detailPage(req, res, db);
+        page.detailPage(req, res, db, "buyer");
     })
 
     it('Detail Page - Confirmed', async () => {
@@ -364,7 +364,7 @@ describe('PageCreator', () => {
                 expect(false).toBe(true)
             },
         } as Response
-        page.detailPage(req, res, db);
+        page.detailPage(req, res, db, "seller");
     })
     
     
@@ -379,7 +379,7 @@ describe('PageCreator', () => {
                 expect(false).toBe(true)
             },
         } as Response
-        page.detailPage(req, res, db);
+        page.detailPage(req, res, db, "buyer");
     })
     
     it('Landing Page - Redirect', async () => {
@@ -472,7 +472,7 @@ describe('PageCreator', () => {
                 expect(path).toBe("/")
             }
         } as Response
-        page.detailPage({query: {}} as Request, res, db);
+        page.detailPage({query: {}} as Request, res, db, "seller");
     })
     
     it('Detail Page - Redirect', async () => { 
@@ -484,7 +484,7 @@ describe('PageCreator', () => {
                 expect(path).toBe("/")
             }
         } as Response
-        page.detailPage({query: {id: 12312} as any} as Request, res, db);
+        page.detailPage({query: {id: 12312} as any} as Request, res, db, "buyer");
     })
     
     it('Confirm Page - Redirect 2', async () => { 
@@ -497,6 +497,6 @@ describe('PageCreator', () => {
             }
         } as Response
         page.confirmPage({query: { id: "asdf" } as any} as Request, res, db);
-        await delay(1000)
+        await delay(2500)
     })
 })

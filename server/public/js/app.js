@@ -28,6 +28,8 @@ const sendingPop =  document.getElementById("sending")
 const successPop = document.getElementById("success")
 const errorPop = document.getElementById("error")
 const hamb = document.getElementById("hamb")
+const breadBuyer = document.getElementById("bread-buyer")
+const breadSeller = document.getElementById("bread-seller")
 
 // Global gariables
 let chainId;
@@ -63,7 +65,7 @@ function toggleMenu() {
         menu.style.display = "block";
         hamb.setAttribute('aria-expanded','true');
     }
-
+    
     hamb.classList.toggle("change");
 }
 
@@ -128,7 +130,7 @@ function showBuyerButton() {
     && statusTrans.innerText == "Open") {
         unlockFundsButton.style.display = "block";
     }
-
+    
     if (refundPaymentButton  && accounts[0].toUpperCase() == buyer.innerText.toUpperCase()
     && statusTrans.innerText == "Open" && BigInt(idTimestamp.value) + BigInt(timeout) < (+ new Date())/1000) {
         refundPaymentButton.style.display = "block";
@@ -143,6 +145,12 @@ function showContents() {
 function updateMenuLink() {
     listBuyer.setAttribute("href", "buyer?id=" + accounts[0])
     listSeller.setAttribute("href", "seller?id=" + accounts[0])
+    if (breadSeller) {
+        breadSeller.setAttribute("href", "seller?id=" + accounts[0])
+    } 
+    if (breadBuyer) {
+        breadBuyer.setAttribute("href", "buyer?id=" + accounts[0])
+    }
 }
 
 async function onMetamaskConnected() {
@@ -253,29 +261,30 @@ function showStatus(id) {
         errorPop,
     ]
     arr.forEach(item => item.style.display = "none")
-    if (id >= 0)
+    if (id >= 0) {
         arr[id].style.display = "flex"
+    }
 }
 
 async function getLatestPrice(){
-
+    
     const addr = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada";
     const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
-
+    
     const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
     const rec = await priceFeed.methods.latestRoundData().call();
-
+    
     return (10**24)/rec.answer;
-
+    
 }
 
 async function onClickSettlePayment() {    
     if (checkChainID()) {
         settlePaymentButton.disabled = true;
         const shopContract = new web3.eth.Contract(contractABI, contractAddress);
-      
+        
         let conversion = await getLatestPrice();
-
+        
         shopContract.methods.getPaymentEntry(idPag.value).call()
         .then(paymentEntry => { 
             shopContract.methods.settlePayment(idPag.value).send({from: accounts[0], value: paymentEntry.price*conversion + 500})

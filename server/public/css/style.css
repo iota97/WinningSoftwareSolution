@@ -19,6 +19,20 @@ html body {
   background-color: #f5f7fd;
 }
 
+#breadcrumb {
+  margin-top: -0.5em;
+  font-size: 0.9em;
+  background-color: #192f5e;
+  font-weight: bold;
+  color: white;
+  padding: 0.34em;
+  border-bottom: 0.55em solid #0c162c;
+}
+
+#breadcrumb a {
+  color: white;
+}
+
 #main h2 {
   margin: 1em;
 }
