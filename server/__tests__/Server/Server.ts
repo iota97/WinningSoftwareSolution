@@ -164,6 +164,10 @@ describe('Server', () => {
         server.seller();
     })
 
+    it('Server - 404', async () => {
+        server.page404(null, {redirect: function(f: string) {}});
+    })
+
     it('Server - buyer detail', async () => {
         server.buyerDetail();
     })

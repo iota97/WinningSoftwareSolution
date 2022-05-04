@@ -46,11 +46,15 @@ class Server {
         this.app.get("/land", this.land.bind(this));
 
         // Last route, none matched
-        this.app.get('*', this.page.mainPage);
+        this.app.get('*', this.page404);
     }
 
     private confirm(req: Request, res: Response): void {
         this.page.confirmPage(req, res, this.db)
+    }
+
+    private page404(req: Request, res: Response): void {
+        res.redirect("/");
     }
 
     private buyer(req: Request, res: Response): void {
