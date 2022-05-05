@@ -36,6 +36,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.8.0}{21/04/2022}{Raffaele Oliviero}{Redazione}{Aggiunto preventivo per ciclo 5.}
 \addversione{2.9.0}{27/04/2022}{Raffaele Oliviero}{Redazione}{Chiusura ciclo 5.}
 \addversione{2.10.0}{28/04/2022}{Andrea Volpe}{Redazione}{Aggiunto preventivo per ciclo 6.}
+\addversione{2.11.0}{04/05/2022}{Andrea Volpe}{Redazione}{Chiusura ciclo 6.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -75,9 +76,9 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Sviluppo Server}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
-\ganttgroup[progress=50]{CA}{2022-04-07}{2022-05-12} \\
-\ganttbar[progress=100]{Manuale Installazione}{2022-03-30}{2022-04-20} \\
-\ganttbar[progress=70]{Completamento WebApp}{2022-04-14}{2022-04-25} \\
+\ganttgroup[progress=75]{CA}{2022-04-07}{2022-05-12} \\
+\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-05-04} \\
+\ganttbar[progress=100]{Completamento WebApp}{2022-04-14}{2022-05-04} \\
 \ganttbar[progress=0]{Validazione}{2022-04-27}{2022-05-11}
 \end{ganttchart}
 \captionof{figure}{Diagramma di Gantt del progetto}
@@ -92,7 +93,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 68  & 2040\\
+        Responsabile    & 30 & 78  & 2340\\
         \hline
         Amministratore  & 20 & 85  & 1700\\
         \hline
@@ -100,12 +101,12 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         Progettista     & 25 & 109  & 2725\\
         \hline
-        Programmatore   & 15 & 170.5  & 2557.5\\
+        Programmatore   & 15 & 204.5  & 3067.5\\
         \hline
-        Verificatore    & 15 & 57  & 855 \\
+        Verificatore    & 15 & 67  & 1005 \\
         \hline
         \hline
-        \textbf{Totale} &    & 591 & 12415\\
+        \textbf{Totale} &    & 645 & 13375\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -956,7 +957,7 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
 \subsection{Sprint 6}
 \textbf{Data di inizio:} 27-04-2022\\
 \textbf{Data di fine pianificata:} 04-05-2022\\
-\textbf{Data di fine effettiva:} N/A
+\textbf{Data di fine effettiva:} 04-05-2022
 
 \subsubsection{Pianificazione}\mbox{}
 
@@ -1026,6 +1027,65 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         La modifica della presentazione delle transazioni potrebbe risultare poco fruibile. & Tale modifica verrà scartata, mantenendo la presentazione delle transazioni attuale.\\
         \hline
         Lo studio di fattibilità per valutare la possibilità di togliere i link circolari e segnalare la pagina corrente potrebbe dare esito negativo. & Le attività di rimozione link circolari e la segnalazione del link della pagina corrente non verranno svolte.\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsubsection{Resoconto}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Ore effettive}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 11 (+5)  & 330 (+180) \\
+        \hline
+        Amministratore  & 20 & 0 (-3)  &  0 (-60) \\
+        \hline
+        Analista        & 25 & 0 (-2)  & 0 (-50) \\
+        \hline
+        Progettista     & 25 & 0 (-2) & 0 (-50) \\
+        \hline
+        Programmatore   & 15 & 34 (+9)  & 510 (+135) \\
+        \hline
+        Verificatore    & 15 & 10 &  150 \\
+        \hline
+        \hline
+        \textbf{Totale} &    & 55 (+7) & 990 (+155)\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Problematiche riscontrate}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Soluzione adottata}\\
+        \hline
+        Durante il ciclo si è discusso più volte sul fatto di implementare l'attività "Aggiungere breadcrub", rallentando il lavoro. & Si è deciso di seguire le attività preventivate, quindi realizzare la breadcrub. \\
+        \hline
+        E' emerso durante il ciclo che i bottoni di copy non sono realizzabili per la versione mobile della webapp. & Si è deciso di modificare l'attività durante il ciclo, implementando i bottoni solo per la versione desktop della webapp. \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Nozioni apprese}}\\
+        \hline
+        \hline
+        \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
+        \hline
+        Potrebbe capitare che un'attività pianificata sia fonte di discussione durante il ciclo. & Bisogna prestare maggiore attenzione durante la fase di pianificazione e nel caso vengano riscontrate problematiche per evitare di perdere tempo, le attività pianificate devono essere portate avanti durante il ciclo e poi eventualmente discusse al ciclo successivo. \\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
