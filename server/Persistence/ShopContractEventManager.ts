@@ -26,15 +26,15 @@ class ShopContractEventManager {
 			}
 			
 			this.shopContract.addedPaymentEntry(options)
-			.on('error', (err: Error) => console.error(err))
+			.on('error', (err: Error) => process.exit(1))
 			.on('data', (event: EventData) => { this.OnAddedPaymentEntry(event, this.shopContract, this.sql) })
 			
 			this.shopContract.paymentSettled(options)
-			.on('error', (err: Error) => console.error(err))
+			.on('error', (err: Error) => process.exit(1))
 			.on('data', (event: EventData) => { this.OnPaymentSettled(event, this.shopContract, this.sql) })
 
 			this.shopContract.statusChange(options)
-			.on('error', (err: Error) => console.error(err))
+			.on('error', (err: Error) => process.exit(1))
 			.on('data', (event: EventData) => { this.OnStatusChange(event, this.shopContract, this.sql) })
 		})
 		.catch((err: Error) => {
