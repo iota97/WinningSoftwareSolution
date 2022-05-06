@@ -1,0 +1,55 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 05/05/2022}
+\setredattori{Elia Scandaletti}
+\setrevisori{Matteo Galvagni}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 05/05/2022.
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 05/05/2022\\
+\textbf{Ora}: 16:45\\
+\textbf{Durata}: 40 minuti\\
+\textbf{Luogo}: Server Discord\\
+
+\textbf{Partecipanti:}
+\begin{itemize}
+	\item Matteo Galvagni;
+	\item Federico Marchi;
+	\item Elia Scandaletti.
+\end{itemize}
+
+
+\section{Ordine del giorno}
+\begin{itemize}
+	\item identificazione causa fallimento delle transazioni durante colloquio col proponente. Vedi verbale esterno del 05/05/2022.
+\end{itemize}
+
+\section{Svolgimento}
+
+\subsection{Causa del fallimento}
+Durante la riunione, facendo varie prove, è emerso che la causa di ciò sta nell'indirizzo RPC impostato nell'estensione MetaMask per la testnet Mumbai. Per risolvere il problema, è stato deciso di passare a una RPC privata. \\
+Nel mentre, è emerso un problema che provoca occasionalmente il crash del server a causa di interruzioni alla connessione socket dal lato di Moralis. Per ovviare a questi rari casi, poiché modificare l'architettura costerebbe troppo, si è optato per un riavvio automatico del server.
+
+Sono state create la seguente issue:
+\begin{enumerate}[label=\textbf{\#\theenumi}]
+  \setcounter{enumi}{191}
+	\item far ripartire il server in caso di crash.
+\end{enumerate}
+
+\section{Impegni presi}
+La task \#192 è stata assegnata a Giovanni Cocco. \\
+Matteo Galvagni si è preso in carico il compito di trovare una soluzione che consenta di collegarsi a un server locale da remoto.
+
+\end{document}
