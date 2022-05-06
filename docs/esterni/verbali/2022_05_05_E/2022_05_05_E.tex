@@ -1,0 +1,70 @@
+\documentclass[a4paper, 12pt]{article}
+
+\newcommand{\templates}{../../../template}
+\input{\templates/style}
+\input{\templates/front_page}
+\input{\templates/history}
+
+\settitolo{Verbale del 05/05/2022 con SyncLab}
+\setredattori{Alberto Nicoletti}
+\setrevisori{Elia Scandaletti}
+\setdestuso{interno}
+\setdescrizione{
+Verbale dell'incontro del 05/05/2022 con l'azienda SyncLab.
+}
+
+\begin{document}
+
+\makefrontpage
+
+\section{Informazioni}
+\textbf{Data}: 05/05/2022\\
+\textbf{Durata}: 45 minuti\\
+\textbf{Luogo}: Call Google Meet\\
+
+\textbf{Partecipanti}
+\begin{itemize}
+	\item Giovanni Cocco;
+	\item Matteo Galvagni;
+	\item Federico Marchi;
+	\item Alberto Nicoletti;
+	\item Elia Scandaletti;
+	\item Andrea Volpe;
+	\item Fabio Pallaro.
+\end{itemize}
+
+
+\section{Ordine del giorno}
+\begin{enumerate}
+	\item Illustrazione del prodotto completo;
+	\item prova d'esposizione per il colloquio CA.
+\end{enumerate}
+
+\section{Svolgimento}
+\subsection{Illustrazione del prodotto completo}
+Il proponente si è mostrato soddisfatto del risultato ottenuto dal gruppo. Il prodotto rispecchia le aspettative.
+\\Riguardo l'interfaccia grafica è stata sollevata una considerazione da Fabio Pallaro. E' spesso preferibile differenziare l'interfaccia delle varie categorie d'utente. Nel nostro caso le grafiche della parte acquirente e della parte venditore sono molto simili.
+
+\subsection{Prova d'esposizione per il colloquio CA}
+Nella prova d'esposizione si è mostrato il funzionamento del prodotto in tutte le sue parti. Durante la dimostrazione il pagamento non è andato a buon fine. Questo problema è dovuto all'RPC settato nella network di Metamask. La soluzione è utilizzare un RPC privato.
+\\Il server è in locale sulla macchina dei componenti. Ciò significa che durante la dimostrazione l'acquirente ed il venditore devono essere simulati dalla stessa persona. Così è stato fatto anche durante il colloquio PB con il docente Cardin. Il proponente ha sottolineato che sarebbe preferibile trovare delle alternative in modo da differenziare i due utenti di Shop Chain. Le soluzioni discusse sono: 
+\begin{itemize}
+	\item server in hosting da parte di un componente del gruppo;
+	\item un'unica persona può usare più account Metamask.
+\end{itemize}
+
+\subsection{Altro}
+È stato chiesto al proponente se tenere come timer per la scadenza della transazione 5 minuti o 14 giorni per il colloquio CA.
+\begin{itemize}
+	\item Mettere la scadenza a 14 giorni significa mostrare il prodotto esattamente come verrà consegnato. Non ci saranno modifiche tra la dimostrazione in CA e la consegna. Durante l'esposizione non si potrà però mostrare il caso di transazione scaduta.
+	\item Tenere la scadenza a 5 minuti permette di dimostrare tutte le funzionalità del prodotto. La differenza tra prodotto mostrato e prodotto consegnato è minima. Un solo parametro.
+\end{itemize}
+Il proponente ha chiesto e consigliato che venga tenuta la scadenza a 5 minuti. In questo modo si potrà mostrare il prodotto nella sua completezza.
+
+\section{Impegni presi}
+\begin{itemize}
+\item Mantenere la scadenza transazione a 5 minuti.
+\item Utilizzare un RPC privato.
+\end{itemize}
+
+\end{document}
