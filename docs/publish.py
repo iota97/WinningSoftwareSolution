@@ -59,6 +59,8 @@ def get_dest_dir(source):
     dest_dir = dest_dir.replace('docs', 'public')
     if 'verbali' in source:
         dest_dir = os.path.dirname(dest_dir)
+    else:
+        dest_dir = dest_dir[:dest_dir.rfind("/")]
     return dest_dir
 
 
@@ -74,6 +76,9 @@ def get_dest(file):
 
 
 def publish(file):
+    if 'lettera' in file:
+        return
+
     dest = get_dest(file)
     if os.path.exists(dest):
         if os.path.getctime(dest) < os.path.getmtime(file):
