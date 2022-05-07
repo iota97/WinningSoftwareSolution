@@ -81,6 +81,9 @@ def publish(file):
         else:
             return False
 
+    for old in glob.glob(dest.split('_v')[0]+'_v*.pdf'):
+        os.remove(old)
+
     compile(file, dest)
     return True
 
