@@ -109,9 +109,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         setTimeout(() => {
             this.e1.emit('data', { returnValues: {paymentEntryId: 10} })
         }, 50)
-        setTimeout(() => {
-            this.e1.emit('error', "Fake Error")
-        }, 150)
+       
         return this.e1
     }
     
@@ -119,9 +117,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         setTimeout(() => {
             this.e2.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
-        setTimeout(() => {
-            this.e2.emit('error', "Fake Error")
-        }, 150)
+       
         return this.e2
     }
     
@@ -129,9 +125,7 @@ class Web3_Contract_Mock1 implements ShopContract_Interface {
         setTimeout(() => {
             this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
-        setTimeout(() => {
-            this.e3.emit('error', "Fake Error")
-        }, 150)
+        
         return this.e3
     }
     
@@ -210,9 +204,7 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
         setTimeout(() => {
             this.e1.emit('data', { returnValues: {paymentEntryId: 10} })
         }, 50)
-        setTimeout(() => {
-            this.e1.emit('error', "Fake Error")
-        }, 150)
+       
         return this.e1
     }
     
@@ -220,9 +212,7 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
         setTimeout(() => {
             this.e2.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
-        setTimeout(() => {
-            this.e2.emit('error', "Fake Error")
-        }, 150)
+        
         return this.e2
     }
     
@@ -230,9 +220,7 @@ class Web3_Contract_Mock3 implements ShopContract_Interface {
         setTimeout(() => {
             this.e3.emit('data', { returnValues: {paymentEntryId: 11} })
         }, 50)
-        setTimeout(() => {
-            this.e3.emit('error', "Fake Error")
-        }, 150)
+      
         return this.e3
     }
     
