@@ -8,25 +8,28 @@
 \settitolo{Norme di progetto}
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
-\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco \\ Alberto Nicoletti}
+\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco \\ Alberto Nicoletti \\ Matteo Galvagni}
 \setdestuso{interno}
 \setdescrizione{
 Questo documento contiene le procedure, gli strumenti e i criteri di qualità che verranno usati nel progetto.
 }
 
-\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Redazione}{Stesura documentazione.}
-\addversione{0.0.1}{14/11/2021}{Elia Scandaletti}{Redazione}{Stesura configurazione Github.}
-\addversione{0.0.2}{07/12/2021}{Elia Scandaletti}{Redazione}{Inserimento norme da verbale del 01/12/2021.}
-\addversione{0.0.3}{22/12/2021}{Elia Scandaletti}{Redazione}{Stesura regole stesura verbali.}
-\addversione{0.0.4}{09/01/2022}{Raffaele Oliviero}{Redazione}{Ristrutturazione documento.}
-\addversione{0.0.5}{09/01/2022}{Raffaele Oliviero}{Redazione}{Stesura struttura del piano di qualifica e della verifica e validazione.}
-\addversione{0.0.6}{16/01/2022}{Elia Scandaletti}{Redazione}{Adeguamento di verifica e validazione secondo decisioni collettive.}
-\addversione{0.0.7}{04/02/2022}{Giovanni Cocco}{Redazione}{Stesure delle revisioni di avanzamento interne.}
-\addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Redazione}{Stesura di: analisi dei requisiti, analisi delle tecnologie e piano di progetto.}
-\addversione{0.0.9}{16/02/2022}{Giovanni Cocco}{Redazione}{Stesura di norme software.}
-\addversione{2.0.0}{20/03/2022}{Alberto Nicoletti}{Redazione}{Rifacimento documento completo.}
-\addversione{2.0.1}{17/04/2022}{Elia Scandaletti}{Redazione}{Aggiornamento processo fornitura.}
-\addversione{2.0.2}{18/04/2022}{Elia Scandaletti}{Redazione}{Correzione grammatica.}
+\addversione{0.0.0}{13/11/2021}{Elia Scandaletti}{Giovanni Cocco}{Stesura documentazione.}
+\addversione{0.0.1}{14/11/2021}{Elia Scandaletti}{Giovanni Cocco}{Stesura configurazione Github.}
+\addversione{0.0.2}{07/12/2021}{Elia Scandaletti}{Giovanni Cocco}{Inserimento norme da verbale del 01/12/2021.}
+\addversione{0.0.3}{22/12/2021}{Elia Scandaletti}{Giovanni Cocco}{Stesura regole stesura verbali.}
+\addversione{0.0.4}{09/01/2022}{Raffaele Oliviero}{Giovanni Cocco}{Ristrutturazione documento.}
+\addversione{0.0.5}{09/01/2022}{Raffaele Oliviero}{Giovanni Cocco}{Stesura struttura del piano di qualifica e della verifica e validazione.}
+\addversione{0.0.6}{16/01/2022}{Elia Scandaletti}{Giovanni Cocco}{Adeguamento di verifica e validazione secondo decisioni collettive.}
+\addversione{0.0.7}{04/02/2022}{Giovanni Cocco}{Elia Scandaletti}{Stesure delle revisioni di avanzamento interne.}
+\addversione{0.0.8}{08/02/2022}{Raffaele Oliviero}{Elia Scandaletti}{Stesura di: analisi dei requisiti, analisi delle tecnologie e piano di progetto.}
+\addversione{0.0.9}{16/02/2022}{Giovanni Cocco}{Elia Scandalett}{Stesura di norme software.}
+\addversione{2.0.0}{20/03/2022}{Alberto Nicoletti}{Raffaele Oliviero}{Rifacimento documento completo.}
+\addversione{2.0.1}{17/04/2022}{Elia Scandaletti}{Raffaele Oliviero}{Aggiornamento processo fornitura.}
+\addversione{2.0.2}{18/04/2022}{Elia Scandaletti}{Giovanni Cocco}{Correzione grammatica.}
+\addversione{2.0.3}{07/05/2022}{Matteo Galvagni}{Elia Scandaletti}{Correzione dopo revisione PB.}
+
+
 
 \begin{document}
 
@@ -61,7 +64,7 @@ I colloqui con il proponente si svolgono su Meet o su Discord. I colloqui con il
 \subsection{Sviluppo}\label{processi-primari-sviluppo}
 \subsubsection{Gestione}
 \paragraph{Gestione tempistiche}
-Lo sviluppo del prodotto va da mercoledì (corrispondente all'inizio del ciclo di Sprint) al sabato estremi inclusi, i restanti 3 giorni vengono spesi per effettuare la verifica sul lavoro svolto. 
+Lo sviluppo del prodotto va da mercoledì (corrispondente all'inizio del ciclo di Sprint) al sabato estremi inclusi, i restanti 3 giorni vengono spesi per effettuare la verifica sul lavoro svolto.
 \subsubsection{Analisi dei requisiti}
 \paragraph{Scopo}
 Fornire un'analisi dettagliata del capitolato proposto al fine di trovare i requisiti che coprano interamente le esigenze della proponente.
@@ -84,7 +87,7 @@ Fonti da cui rilevare le informazioni:
 		\item Numerare ogni caso d'uso come \textit{UCX}. \\
 		Ogni generalizzazione di X viene numerata come \textit{UCX.x} .\\
 		Dove \textit{X} e \textit{x} sono numeri interi positivi $>$= 1, progressivi.\\
-		\`E buona norma seguire una numerazione progressiva in base all'ordine in cui sono 
+		\`E buona norma seguire una numerazione progressiva in base all'ordine in cui sono
 		disposti i diagrammi, sebbene nel tempo possono essere eliminati/aggiunti casi d'uso.\\
 		Per evitare di dover rinumerare tutti i diagrammi: \\
 		Se si aggiungono casi d'uso, partire dalla numerazione del caso d'uso con indice \textit{X} maggiore.\\
@@ -94,14 +97,14 @@ Fonti da cui rilevare le informazioni:
 	\end{itemize}
 	\item Requisiti
 	\begin{itemize}
-		\item Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia: 
-		funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile, 
+		\item Ogni requisito è identificato da un codice univoco composto da: R(per requisito)+F/Q/V(per la tipologia:
+		funzionale, qualità, vincolo)+O/D/F(per la rilevanza: obbligatorio, desiderabile,
 		facoltativo)+x(un numero univoco a due cifre).
 	\end{itemize}
 \end{itemize}
 \paragraph{Modifiche al documento}
-Prima di apportare qualsiasi modifica significativa funzionale al documento (e.g. 
-aggiunta/rimozione casi d'uso, requisiti...) bisogna contattare il proponente 
+Prima di apportare qualsiasi modifica significativa funzionale al documento (e.g.
+aggiunta/rimozione casi d'uso, requisiti...) bisogna contattare il proponente
 e attendere conferma di accettazione delle modifiche che si vogliono apportare
 al documento.
 
@@ -122,11 +125,11 @@ Tramite questa attività si andrà a fissare l'architettura del prodotto.
 Implementare codice tramite l'uso di design pattern solo ove il costo di un'architettura simile sia inferiore ai benefici.
 \paragraph{Diagrammi UML}
 \begin{itemize}
-	\item \textbf{Diagramma delle classi}: consentono di descrivere tipi di entità, con le loro caratteristiche e le 
-	relazioni tra esse. Si astraggono da un linguaggio di programmazione specifico, permettendo di non 
+	\item \textbf{Diagramma delle classi}: consentono di descrivere tipi di entità, con le loro caratteristiche e le
+	relazioni tra esse. Si astraggono da un linguaggio di programmazione specifico, permettendo di non
 	dipendere da esso nella rappresentazione.\\
 	\href{https://www.math.unipd.it/~rcardin/swea/2021/Diagrammi%20delle%20Classi_4x4.pdf}{\underline{Riferimento diagramma delle classi}}
-	\item \textbf{Diagramma di sequenza}: modellano le iterazioni tra gli oggetti in un unico caso d'uso. Illustrano come 
+	\item \textbf{Diagramma di sequenza}: modellano le iterazioni tra gli oggetti in un unico caso d'uso. Illustrano come
 	le diverse parti di un sistema interagiscono per lo svolgimento di un compito e l'ordine in cui queste interazioni
 	avvengono durante l'esecuzione di un specifico caso d'uso.\\
 	\href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Sequenza.pdf}{\underline{Riferimento diagramma di sequenza}}
@@ -176,7 +179,7 @@ Quando il verificatore accetta un pull request, dovrà eliminare il branch relat
 
 Non è consentito fare il caricamento diretto di file tramite interfaccia web o desktop.
 
-Non è consentito forzare i push sulla repository remota.	
+Non è consentito forzare i push sulla repository remota.
 
 \subsubsection{Codifica}
 \paragraph{Scopo}
@@ -192,13 +195,13 @@ La scrittura del codice deve rispettare le norme elencate di seguito
 	\begin{itemize}
 		\item Nel caso il file contenga una classe, il nome del file deve essere: \textit{NomeClasse.EstensioneFile}.
 		\item Nel caso il file non descriva una classe dare un nome significativo al file che ne descriva il compito
-		(e.i. \textit{index.html} per la pagina principale di un sito). 
+		(e.i. \textit{index.html} per la pagina principale di un sito).
 	\end{itemize}
 \paragraph{Convenzioni documentazione}
 	\begin{itemize}
 		\item Se il compito di un metodo è particolarmente complesso e difficile da dedurre, aggiungere un commento
 		per esplicitare il suo funzionamento.
-		\item Indicare all'interno di un commento la stringa \textit{TODO:} seguita dal lavoro/correzione da fare su quel 
+		\item Indicare all'interno di un commento la stringa \textit{TODO:} seguita dal lavoro/correzione da fare su quel
 		blocco di codice in futuro.
 	\end{itemize}
 \paragraph{Convenzioni stile di codifica}
@@ -215,12 +218,12 @@ La scrittura del codice deve rispettare le norme elencate di seguito
 \end{itemize}
 \subparagraph{HTML}
 \begin{itemize}
-	\item Utilizzare tutte le buone prassi per rendere il sito accessibile, seguendo le linee guida 
+	\item Utilizzare tutte le buone prassi per rendere il sito accessibile, seguendo le linee guida
 	\href{https://www.w3.org/Translations/WCAG21-it/}{\underline{WCAG 2.1}}
 \end{itemize}
 \subparagraph{CSS}
 	\begin{itemize}
-		\item Mantenere un solo file chiamato \textit{style.css} per la versione desktop 
+		\item Mantenere un solo file chiamato \textit{style.css} per la versione desktop
 		\item Mantenere un solo file chiamato \textit{mini.css} per la versione mobile
 		\item Specificare le unità di misura in \textit{em} o in \textit{\%}
 	\end{itemize}
@@ -340,7 +343,7 @@ All'inizio di ogni riunione verrà nominato un partecipante che redigerà il ver
 Chi redige il verbale ha 24 ore per completare il lavoro. Chi approva il verbale ha 24 ore per approvarlo o segnalare eventuali correzioni da apportare.
 
 Nel secondo caso, il redattore avrà ulteriori 24 ore per adeguarsi alle indicazioni.
-\subparagraph{Dettagli} %TODO: inserire label
+\subparagraph{Dettagli}\label{documentazione-documenti-verbali-dettagli}
 In caso di verbale di chiusura di ciclo di sprint, la parte di \textit{svolgimento} dovà essere strutturata nel seguente modo:
 \begin{itemize}
 	\item Resoconto del ciclo di sprint precedente
@@ -441,12 +444,12 @@ Il verificatore può far uso dei test automatici presenti nel \textit{Piano di q
 
 Per le sezioni di codice è consigliato un walkthrough del prodotto, similmente si dovrebbe chiedere a chi abbia scritto il codice eventuali delucidazioni su elementi poco chiari
 \subsection{Change Management}
-Nel caso si dovessero cambiare sezione del codice bisogna controllare che eventuali modifiche non vadano ad impattare altri elementi. 
+Nel caso si dovessero cambiare sezione del codice bisogna controllare che eventuali modifiche non vadano ad impattare altri elementi.
 
 Per evitare ciò bisogna fare uso del \textit{Diagramma delle classi} presente nelle \textit{Specifiche architetturali}.
 \section{Processi organizzativi}
 \subsection{Gestione dei processi}
-È stato scelto il modello SCRUM con sprint di durata settimanale.
+È stato scelto il modello Scrum con sprint di durata settimanale.
 Si è deciso di effettuare una riunione interna ogni mercoledì dove discutere dei seguenti punti:
 \begin{itemize}
 \item Resoconto dello sprint precedente;
@@ -459,7 +462,7 @@ Ogni incontro dovrà produrre un aggiornamento delle milestones (e diagramma di 
 La pianificazione dei prossimi sprint consisterà nel dividere il lavoro in item e decidere il numero di membri adatto per item.\\
 Gli item pianificati non potranno subire modifiche o cancellazioni durante il ciclo di sprint e dovranno essere portati a termine
 entro il ciclo successivo. In caso emergessero importati contestazioni o criticità il responsabile deciderà come agire.\\
-Ogni ciclo di SCRUM prevederà un nuovo responsabile, scelto per cognome in ordine alfabetico.\\
+Ogni ciclo di Scrum prevederà un nuovo responsabile, scelto per cognome in ordine alfabetico.\\
 Il responsabile dovrà assegnare le persone agli item considerando la rotazione dei ruoli.\\
 Il responsabile dovrà poi creare le issues su GitHub relative agli item e assegnarvici i membri.\\
 Le issues dovranno essere collegate alle milestones di appartenenza dal responsabile.\\
@@ -470,7 +473,7 @@ Il responsabile dovrà creare la issue su GitHub relativa al problema assegnando
 Le soluzioni adottate per la risoluzione del problema andranno documentate dal responsabile stesso.\\
 
 \subsection{Miglioramento dei processi}
-Durante l'attività di consuntivo di periodo dell'incontro settimanale, viene discusso il lavoro fatto fino ad ora, dando particolare peso ai problemi riscontrati. 
+Durante l'attività di consuntivo di periodo dell'incontro settimanale, viene discusso il lavoro fatto fino ad ora, dando particolare peso ai problemi riscontrati.
 
 In base a ciò si valutano le eventuali migliorie e correzioni applicabili.
 
