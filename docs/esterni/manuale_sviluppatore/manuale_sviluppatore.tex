@@ -8,14 +8,15 @@
 \usepackage{graphicx}
 \usepackage{placeins}
 \usepackage{listings}
-\settitolo{Manuale Installazione Shop Chain}
+\settitolo{Manuale Sviluppatore Shop Chain}
 \setredattori{WinningSoftwareSolution}
 \setdestuso{esterno}
 \setdescrizione{
-Manuale installazione.
+Manuale sviluppatore.
 }
 
-\addversione{0.0.0}{04/04/2022}{Federico Marchi}{Matteo Galvagni}{Stesura Manuale}
+\addversione{0.1.0}{04/04/2022}{Federico Marchi}{Redazione}{Stesura iniziale}
+\addversione{1.0.0}{07/05/2022}{Federico Marchi}{Redazione}{Stesura finale}
 
 \begin{document}
 \makefrontpage
@@ -161,18 +162,22 @@ dove ciascun campo indica:
   \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso "OnlineStore";
   \item \textbf{API\_KEY}: l' api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
   \mbox{}
-  \item \textbf{SERVER\_URL}: poiché Metamask richiede una connessione HTTPS nella versione da mobile, è necessario inserire l'url del server in HTTPS.\\
-  \paragraph{Sviluppo e testing locale}\\
-  Nel caso in cui invece si volesse sviluppare/testare in locale l'applicazione Metamask per Android, Metamask ha inserito nel proprio manifest una whitelist per le connessioni HTTP provenienti dal dominio \textit{sslip.io}; questo servizio permette a un qualunque url nella forma \verb|IP_ADDR.sslip.io| di essere risolto dal DNS come \verb|IP_ADDR|. Tuttavia il supporto ai deep link di Metamask richiede comunque che puntino ad un indirizzo HTTPS, è dunque necessario inserire il server url su \href{https://tinyurl.com/app}{Tinyurl} e utilizzare l'url ritornato, il quale oltre a fornire pagine in HTTPS mantiene anche eventuali aggiunte all'url come pagine e parametri GET. L'url da inserire su Tinyurl deve essere strutturato come segue:
-  \begin{verbatim}
-    http://<ip_locale>.sslip.io:<port>/
-  \end{verbatim}
-  dove:
+  \item \textbf{SERVER\_URL}: inserire il link ritornato da localtunnel come spiegato nel seguente paragrafo.\\
+  \paragraph{Sviluppo e testing con Localtunnel}\\
+  Per lo sviluppo e il testing è stato utilizzato il tool localtunnel, il quale permette di rendere accessibile da remoto il server locale. Per utilizzare localtunnel è necessario:
   \begin{itemize}
-    \item \verb|<ip_locale>| va sostituito con il proprio IP locale;
-    \item \verb|<port>| va sostituito con la porta utilizzata
+    \item eseguire l'installazione globalmente con il comando:
+    \begin{lstlisting}[language=bash]
+      $ npm install -g localtunnel
+    \end{lstlisting}
+    \item avviare localtunnel con il comando:
+    \begin{lstlisting}[language=bash]
+      $ lt --port <port>
+    \end{lstlisting}
+    con \verb|<port>| la porta che si desidera utilizzare (deve corrispondere con la porta specificata nella variabile d'ambiente \verb|PORT|);\\
+    \item il link ritornato inserirlo nella variabile d'ambiente \verb|SERVER_URL|. Importante ricordarsi di aggiornare il link ogni qualvolta si riavvia localtunnel.
   \end{itemize}
-  Una volta inserito l'url su Tinyurl sarà sufficiente utilizzare l'url ritornato nel campo SERVER\_URL.
+
 \end{itemize}
 \subsection{Avvio server e test}
 \label{sec:avvio}
@@ -225,6 +230,7 @@ Essendo i dati dei test cumulativi, quando si desidera effettuare il test da zer
 Per la visualizzazione del report è sufficiente selezionare la tab "Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \newpage{}
 \section{Script}
+Lo script in python permette all'e-commerce di creare una istanza di pagamento in blockchain e dunque permettere all'acquirente di acquistare attraverso il servizio Shop Chain.
 \subsection{Requisiti}
 \subsubsection{Python e dipendenze}
 Al fine di utilizzare correttamente lo script è necessario:
@@ -249,22 +255,54 @@ Di seguito un esempio del formato corretto da utilizzare:
 MNEMONIC=mnemonic phrase del proprio wallet
 PROVIDER=provider url
 \end{verbatim}
-\subsection{Eseguire lo script}
-Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python. Verranno illustrati due modi per la corretta esecuzione dello script \textit{sell.py}.
+\subsection{Creazione di un'istanza di pagamento}
+Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python per la creazione di un'istanza di pagamento. Verranno illustrati due modi per la corretta esecuzione dello script \textit{sell.py}.
 \subsubsection{Sell.py da terminale}
 È possibile eseguire lo script \textit{sell.py} direttamente da terminale, attraverso il comando:
 \begin{lstlisting}[language=bash]
   $ python3 sell.py [item price]
 \end{lstlisting}
-Sostituire \verb|[item price]| con il prezzo con il quale si desidera vendere il proprio prodotto.
-Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo del prodotto messo in vendita.
+Sostituire \verb|[item price]| con il prezzo con il quale si creare l'istanza di pagamento.
+Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo dell'istanza creata.
+\textbf{Esempio}
+\\
+Se vogliamo vendere un prodotto al prezzo di 2\$, basterà inviare il comando:
+\begin{lstlisting}[language=bash]
+  $ python3 sell.py 2
+\end{lstlisting}
+l'output visualizzato sarà:
+\begin{lstlisting}[language=bash]
+  $ [Adding] Price: 2
+  $ [Added] Payment entry id: 3, price: 2
+\end{lstlisting}
+Dove :
+\begin{itemize}
+  \item \textbf{paymement entry id: 3}: indica che l'id dell'oggetto messo in vendita è 3;
+  \item \textbf{price: 2}: indica che il prezzo a cui è stato messo in vendita il prodotto è di 2\$.
+\end{itemize}
 \subsubsection{Script python}
-È possibile includere un proprio script in python nel backend dell' e-commerce per permettere direttamente la messa in vendita dei prodotti dal proprio sito.\\
-La funzione per mettere in vendita un prodotto è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
+È possibile includere un proprio script in python nel backend dell' e-commerce per permettere direttamente la creazione delle istanze per i pagamenti.\\
+La funzione che viene utilizzata è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari che si desidera assegnare all'istanza di pagamento.\\
 È dunque necessario includere nel proprio script la funzione come segue:
 \begin{verbatim}
 from sell import sell_item
 \end{verbatim}
+\subsection{Reindirizzamento alla landing page}
+Al fine di permettere all'acquirente, direttamente dal proprio e-commerce, di essere reindirizzato sulla landing page di Shop Chain per effettuare l'acquisto è necessario strutturare l'url di reindirizzamento come segue:
+\begin{quote}
+  \verb|\land?id=<id_item>&r=<pagina_di_ritorno>|.
+\end{quote}
+e dunque sostituire:
+\begin{itemize}
+  \item \verb|<id_item>| con l'id dell'istanza che si riferisce all'acquisto che l'acquirente desidera effettuare;
+  \item \verb|<pagina_di_ritorno>| con l'url della pagina alla quale si vuole reindirizzare l'acquirente al termine dell'acquisto.
+\end{itemize}
+Dopo aver confermato il pagamento l'acquirente verrà direttamente reindirizzato alla pagina di ritorno, l'url sarà strutturato come segue:
+\begin{quote}
+  \verb|<pagina_di_ritorno>?transaction_id=<id_transazione>|.
+\end{quote}
+dove \verb|<id_transazione>| corrisponde all'id della transazione effettuata dall'acquirente per l'acquisto.
+\end{document}
 \subsection{Test}
 Per eseguire il test sullo script è sufficiente eseguire il seguente comando:
 \begin{lstlisting}[language=bash]
