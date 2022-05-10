@@ -37,6 +37,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \addversione{2.10.0}{28/04/2022}{Andrea Volpe}{Raffaele Oliviero}{Aggiunto preventivo per ciclo 6.}
 \addversione{2.11.0}{04/05/2022}{Andrea Volpe}{Alberto Nicoletti}{Chiusura ciclo 6.}
 \addversione{2.11.1}{07/05/2022}{Matteo Galvagni}{Elia Scandaletti}{Correzione dopo revisione PB.}
+\addversione{2.12.0}{08/05/2022}{Elia Scandaletti}{Andrea Volpe}{Aggiunto preventivo per ciclo 7.}
 
 \def\pgfcalendarmonthitname#1{%
 \ifcase#1 \or Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi%
@@ -77,7 +78,7 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
 \ganttbar[progress=100]{Sviluppo Script Python}{2022-02-26}{2022-03-29} \\
 \ganttbar[progress=100]{Sviluppo WebApp}{2022-02-26}{2022-03-29} \\
 \ganttgroup[progress=75]{CA}{2022-04-07}{2022-05-12} \\
-\ganttbar[progress=75]{Manuale Installazione}{2022-03-30}{2022-05-12} \\
+\ganttbar[progress=100]{Manuale Installazione}{2022-03-30}{2022-05-12} \\
 \ganttbar[progress=100]{Completamento WebApp}{2022-04-14}{2022-05-04} \\
 \ganttbar[progress=0]{Validazione}{2022-05-04}{2022-05-11}
 \end{ganttchart}
@@ -121,20 +122,20 @@ Questo documento serve a tracciare l'efficienza del progetto. Tiene traccia dei 
         \hline
         \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
         \hline
-        Responsabile    & 30 & 9  & 270\\
+        Responsabile    & 30 & 5  & 150\\
         \hline
-        Amministratore  & 20 & 7  & 140\\
+        Amministratore  & 20 & 6  & 120\\
         \hline
         Analista        & 25 & 2  & 50\\
         \hline
         Progettista     & 25 & 2  & 50\\
         \hline
-        Programmatore   & 15 & 35  & 525\\
+        Programmatore   & 15 & 20  & 300\\
         \hline
-        Verificatore    & 15 & 16  & 240\\
+        Verificatore    & 15 & 25  & 375\\
         \hline
         \hline
-        \textbf{Totale} &    & 71 & 1275\\
+        \textbf{Totale} &    & 60 & 1045\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
@@ -1086,6 +1087,84 @@ Il primo ciclo sarà riassuntivo del lavoro fino alla conclusione dell'RTB. Incl
         \textbf{Nozione} & \textbf{Conseguenza sulla pianificazione}\\
         \hline
         Potrebbe capitare che un'attività pianificata sia fonte di discussione durante il ciclo. & Bisogna prestare maggiore attenzione durante la fase di pianificazione e nel caso vengano riscontrate problematiche per evitare di perdere tempo, le attività pianificate devono essere portate avanti durante il ciclo e poi eventualmente discusse al ciclo successivo. \\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\subsection{Sprint 7}
+\textbf{Data di inizio:} 04-05-2022\\
+\textbf{Data di fine pianificata:} 11-05-2022\\
+\textbf{Data di fine effettiva:} TBD
+
+\subsubsection{Pianificazione}\mbox{}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Item da realizzare}}\\
+        \hline
+        \hline
+        \textbf{Item} & \textbf{Persone richieste}\\
+        \hline
+        Aggiornamento cronologia delle modifiche dei documenti. & 1\\
+		\hline
+        Modificare SCRUM in Scrum. & 1\\
+		\hline
+        Completamento manuali. & 1\\
+		\hline
+        Analisi narrativa d'insieme Piano di Progetto. & 1\\
+		\hline
+        Analisi narrativa d'insieme Piano di Qualifica. & 1\\
+		\hline
+        Sistemazione cartella public come da esito PB. & 1\\
+		\hline
+        Aggiornamento NdP come da verbale del 04/05. & 1\\
+		\hline
+        Validazione. & 3\\
+		\hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Preventivo ore/costi}}\\
+        \hline
+        \hline
+        \textbf{Ruolo} & \textbf{Costo orario (\euro)} & \textbf{Ore} & \textbf{Prezzo (\euro)}\\
+        \hline
+        Responsabile    & 30 & 5  & 150\\
+        \hline
+        Amministratore  & 20 & 6  & 120\\
+        \hline
+        Analista        & 25 & 2  & 50\\
+        \hline
+        Progettista     & 25 & 2  & 50\\
+        \hline
+        Programmatore   & 15 & 20  & 300\\
+        \hline
+        Verificatore    & 15 & 25  & 375\\
+        \hline
+        \hline
+        \textbf{Totale} &    & 60 & 1045\\
+        \hline
+    \end{tabularx}\\[8pt]
+    \mbox{}\\
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Possibili problematiche}}\\
+        \hline
+        \hline
+        \textbf{Problema} & \textbf{Misure di mitigazione}\\
+        \hline
+        È prevista una riunione con il proponente. Potrebbe non essere soddisfatto del lavoro svolto finora e potrebbe richiedere modifiche al prodotto. & Non sono previste misure di mitigazione da applicare in questo ciclo. Questo perché la mitigazione di questo rischio dev'essere una conseguenza del Way of Working.\\
+        \hline
+        Durante l'attività di validazione potrebbero emergere dei requisiti non rispettati o non completamente soddisfatti. & Non sono previste misure di mitigazione da applicare in questo ciclo. Questo perché la mitigazione di questo rischio dev'essere una conseguenza del Way of Working.\\
         \hline
     \end{tabularx}\\[8pt]
     \mbox{}\\
