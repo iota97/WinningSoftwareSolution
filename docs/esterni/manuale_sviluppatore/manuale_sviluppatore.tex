@@ -8,14 +8,15 @@
 \usepackage{graphicx}
 \usepackage{placeins}
 \usepackage{listings}
-\settitolo{Manuale Installazione Shop Chain}
+\settitolo{Manuale Sviluppatore Shop Chain}
 \setredattori{WinningSoftwareSolution}
 \setdestuso{esterno}
 \setdescrizione{
-Manuale installazione.
+Manuale sviluppatore.
 }
 
-\addversione{0.0.0}{04/04/2022}{Federico Marchi}{Matteo Galvagni}{Stesura Manuale}
+\addversione{0.1.0}{04/04/2022}{Federico Marchi}{Matteo Galvagni}{Stesura iniziale}
+\addversione{1.0.0}{07/05/2022}{Federico Marchi}{Elia Scandaletti}{Stesura finale}
 
 \begin{document}
 \makefrontpage
@@ -34,7 +35,7 @@ Il presente documento ha la funzione di descrivere in dettaglio la procedura da 
 \section{Server}
 \subsection{Requisiti}
 \subsubsection{Node Js}
-Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella "Server" per l'installazione delle dipendenze:
+Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella \texttt{server} per l'installazione delle dipendenze:
 \begin{lstlisting}[language=bash]
   $ npm install
 \end{lstlisting}
@@ -42,8 +43,8 @@ Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non �
 Per poter utilizzare la web app è necessario Metamask (v. 10.11.3).\\
 Per avere il proprio wallet Metamask è possibile recarsi su \href{https://www.metamask.io}{metamask.io}, installare l'estensione e scegliere se:
 \begin{itemize}
-  \item \textbf{Creare un nuovo wallet}: è possibile creare un nuovo wallet selezionando "Create a Wallet" (Fig. 1 freccia blu). Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi;
-  \item \textbf{Importare un wallet già esistente}: è possibile anche importare un wallet già esistente selezionando l'opzione "Import wallet" (Fig. 1 freccia rossa). È sufficiente inserire la mnemonic phrase per poter utilizzare il proprio wallet su Metamask.
+  \item \textbf{Creare un nuovo wallet}: è possibile creare un nuovo wallet selezionando ``Create a Wallet" (Fig. 1 freccia blu). Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi;
+  \item \textbf{Importare un wallet già esistente}: è possibile anche importare un wallet già esistente selezionando l'opzione ``Import wallet" (Fig. 1 freccia rossa). È sufficiente inserire la mnemonic phrase per poter utilizzare il proprio wallet su Metamask.
 \end{itemize}
 \FloatBarrier
 \begin{figure}[!h]
@@ -57,9 +58,9 @@ Nel caso in cui non si ricordi più la mnemonic phrase del proprio wallet è pos
 \begin{enumerate}
   \item accedere al proprio wallet Metamask;
   \item selezionare il proprio account in alto a destra (Fig. 2);
-  \item selezionare l'opzione "Settings";
-  \item selezionare l'opzione "Security \& Privacy";
-  \item selezionare l'opzione "Reveal Secret Recovery Phrase";
+  \item selezionare l'opzione ``Settings";
+  \item selezionare l'opzione ``Security \& Privacy";
+  \item selezionare l'opzione ``Reveal Secret Recovery Phrase";
   \item inserire la propria password.
 \end{enumerate}
 Una volta ottenuta la propria mnemonic phrase salvarla per i passi successivi.
@@ -94,7 +95,7 @@ Una volta inseriti i dati e aggiunta la rete, ricordare di selezionarla.
 \label{sec:provider}
 Per ottenere il provider per la mainnet Polygon è necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
 \begin{enumerate}
-  \item selezionare la sezione "SpeedyNodes" dal menù;
+  \item selezionare la sezione ``SpeedyNodes" dal menù;
   \item selezionare l'endpoint per Polygon Network;
   \item selezionare il protocollo WS;
   \item copiare l'url dell'endpoint per la mainnet (Fig. 3 freccia rossa).
@@ -103,7 +104,7 @@ Nell'url copiato è possibile visualizzare l' api key, si tratta infatti del cod
 wss://speedy-nodes-nyc.moralis.io/\textbf{a8d734a415dd368a3498db63}/polygon/mainnet/ws\\\\
 È necessario salvare l'url per i passi successivi.
 \paragraph{Testnet Mumbai}\\
-Nel caso in cui si volesse invece utilizzare una rete di test, è possibile utilizzare la rete Mumbai la quale è una testnet di Polygon. Per selezionare il provider corretto per Mumbai è sufficiente copiare l'url nel campo "Mumbai" (Fig. 3 freccia blu).
+Nel caso in cui si volesse invece utilizzare una rete di test, è possibile utilizzare la rete Mumbai la quale è una testnet di Polygon. Per selezionare il provider corretto per Mumbai è sufficiente copiare l'url nel campo ``Mumbai" (Fig. 3 freccia blu).
 \FloatBarrier
 \begin{figure}[!h]
 \centering
@@ -142,7 +143,7 @@ INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 \end{verbatim}
 \subsection{Configurazione}
 \label{sec:config_server}
-Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella "Server". Il file deve essere strutturato come segue:
+Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella ``Server". Il file deve essere strutturato come segue:
 \begin{verbatim}
   PORT=8080
   DB_HOST="localhost"
@@ -150,7 +151,7 @@ Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduz
   DB_PWD="password"
   DB_NAME="OnlineStore"
   API_KEY=xxxxxxxxxxxxxxxxxxxxxxxx
-  SERVER_URL="tinyurl.com/xxxxxxxx"
+  SERVER_URL="xxxxxxx.loca.ltx"
 \end{verbatim}
 dove ciascun campo indica:
 \begin{itemize}
@@ -158,21 +159,25 @@ dove ciascun campo indica:
   \item \textbf{DB\_HOST}: l'host selezionato;
   \item \textbf{DB\_USER}: l'user associato al database;
   \item \textbf{DB\_PWD}: password dell' user utilizzato;
-  \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso "OnlineStore";
-  \item \textbf{API\_KEY}: l' api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+  \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso \texttt{OnlineStore};
+  \item \textbf{API\_KEY}: l'api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
   \mbox{}
-  \item \textbf{SERVER\_URL}: poiché Metamask richiede una connessione HTTPS nella versione da mobile, è necessario inserire l'url del server in HTTPS.\\
-  \paragraph{Sviluppo e testing locale}\\
-  Nel caso in cui invece si volesse sviluppare/testare in locale l'applicazione Metamask per Android, Metamask ha inserito nel proprio manifest una whitelist per le connessioni HTTP provenienti dal dominio \textit{sslip.io}; questo servizio permette a un qualunque url nella forma \verb|IP_ADDR.sslip.io| di essere risolto dal DNS come \verb|IP_ADDR|. Tuttavia il supporto ai deep link di Metamask richiede comunque che puntino ad un indirizzo HTTPS, è dunque necessario inserire il server url su \href{https://tinyurl.com/app}{Tinyurl} e utilizzare l'url ritornato, il quale oltre a fornire pagine in HTTPS mantiene anche eventuali aggiunte all'url come pagine e parametri GET. L'url da inserire su Tinyurl deve essere strutturato come segue:
-  \begin{verbatim}
-    http://<ip_locale>.sslip.io:<port>/
-  \end{verbatim}
-  dove:
+  \item \textbf{SERVER\_URL}: inserire il link ritornato da localtunnel come spiegato nel seguente paragrafo. Importante: l'URL va inserito senza il protocollo.\\
+  \paragraph{Sviluppo e testing con Localtunnel}\\
+  Per lo sviluppo e il testing è stato utilizzato il tool localtunnel, il quale permette di rendere accessibile da remoto il server locale. Per utilizzare localtunnel è necessario:
   \begin{itemize}
-    \item \verb|<ip_locale>| va sostituito con il proprio IP locale;
-    \item \verb|<port>| va sostituito con la porta utilizzata
+    \item eseguire l'installazione globalmente con il comando:
+    \begin{lstlisting}[language=bash]
+      $ npm install -g localtunnel
+    \end{lstlisting}
+    \item avviare localtunnel con il comando:
+    \begin{lstlisting}[language=bash]
+      $ lt --port <port>
+    \end{lstlisting}
+    con \verb|<port>| la porta che si desidera utilizzare (deve corrispondere con la porta specificata nella variabile d'ambiente \verb|PORT|);\\
+    \item il link ritornato inserirlo nella variabile d'ambiente \verb|SERVER_URL|. Importante ricordarsi di aggiornare la variabile ogni qualvolta si riavvia localtunnel.
   \end{itemize}
-  Una volta inserito l'url su Tinyurl sarà sufficiente utilizzare l'url ritornato nel campo SERVER\_URL.
+
 \end{itemize}
 \subsection{Avvio server e test}
 \label{sec:avvio}
@@ -180,7 +185,7 @@ Conclusa la configurazione è possibile far partire il server con il comando:
 \begin{lstlisting}[language=bash]
   $ npm start
 \end{lstlisting}
-Mentre per i test è sufficiente la creazione del database "OnlineStoreTest" inserendo le seguenti query come spiegato al punto \hyperref[sec:db]{2.1.3}:
+Mentre per i test è sufficiente la creazione del database \texttt{OnlineStoreTest} inserendo le seguenti query come spiegato al punto \hyperref[sec:db]{2.1.3}:
 \begin{verbatim}
 CREATE DATABASE OnlineStoreTest;
 USE OnlineStoreTest;
@@ -213,18 +218,19 @@ Per eseguire i test sulla web app si utilizza JSCover in modalità proxy. I file
   \item per eseguire i test è necessario connettersi a \url{http://localhost-proxy:8080}.
 \end{itemize}
 \paragraph{Salvataggio dati}\\
-JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localStorage di HTML5. Per salvare i dati nella cartella "jscoverage" è necessario:
+JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localStorage di HTML5. Per salvare i dati nella cartella \texttt{jscoverage} è necessario:
 \begin{itemize}
   \item caricare la pagina \url{http://localhost-proxy:8080/jscoverage.html};
-  \item aprire la tab "Store";
-  \item selezionare "Store Report".
+  \item aprire la tab ``Store";
+  \item selezionare ``Store Report".
 \end{itemize}
 \paragraph{Cancellazione dati}\\
 Essendo i dati dei test cumulativi, quando si desidera effettuare il test da zero è necessario cancellare i dati salvati. Per la cancellazione dei dati è sufficiente caricare la pagina \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \paragraph{Visualizzazione report}\\
-Per la visualizzazione del report è sufficiente selezionare la tab "Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
+Per la visualizzazione del report è sufficiente selezionare la tab ``Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \newpage{}
 \section{Script}
+Lo script in python permette all'e-commerce di creare una istanza di pagamento in blockchain e dunque permettere all'acquirente di acquistare attraverso il servizio Shop Chain.
 \subsection{Requisiti}
 \subsubsection{Python e dipendenze}
 Al fine di utilizzare correttamente lo script è necessario:
@@ -249,22 +255,54 @@ Di seguito un esempio del formato corretto da utilizzare:
 MNEMONIC=mnemonic phrase del proprio wallet
 PROVIDER=provider url
 \end{verbatim}
-\subsection{Eseguire lo script}
-Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python. Verranno illustrati due modi per la corretta esecuzione dello script \textit{sell.py}.
+\subsection{Creazione di un'istanza di pagamento}
+Una volta soddisfatti i requisiti e ultimata la configurazione è possibile procedere con l'esecuzione dello script python per la creazione di un'istanza di pagamento. Verranno illustrati due modi per la corretta esecuzione dello script \textit{sell.py}.
 \subsubsection{Sell.py da terminale}
 È possibile eseguire lo script \textit{sell.py} direttamente da terminale, attraverso il comando:
 \begin{lstlisting}[language=bash]
   $ python3 sell.py [item price]
 \end{lstlisting}
-Sostituire \verb|[item price]| con il prezzo con il quale si desidera vendere il proprio prodotto.
-Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo del prodotto messo in vendita.
+Sostituire \verb|[item price]| con il prezzo con il quale si vuole creare l'istanza di pagamento.
+Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo dell'istanza creata.
+\textbf{Esempio}
+\\
+Se vogliamo vendere un prodotto al prezzo di 2\$, basterà inviare il comando:
+\begin{lstlisting}[language=bash]
+  $ python3 sell.py 2
+\end{lstlisting}
+l'output visualizzato sarà:
+\begin{lstlisting}[language=bash]
+  $ [Adding] Price: 2
+  $ [Added] Payment entry id: 3, price: 2
+\end{lstlisting}
+Dove :
+\begin{itemize}
+  \item \textbf{paymement entry id: 3}: indica che l'id dell'oggetto messo in vendita è 3;
+  \item \textbf{price: 2}: indica che il prezzo a cui è stato messo in vendita il prodotto è di 2\$.
+\end{itemize}
 \subsubsection{Script python}
-È possibile includere un proprio script in python nel backend dell' e-commerce per permettere direttamente la messa in vendita dei prodotti dal proprio sito.\\
-La funzione per mettere in vendita un prodotto è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari del prodotto che si desidera vendere.\\
+È possibile includere un proprio script in python nel backend dell' e-commerce per permettere direttamente la creazione delle istanze per i pagamenti.\\
+La funzione che viene utilizzata è \textbf{sell\_item} di \textit{sell.py}. La funzione richiede in input un solo parametro, ovvero il prezzo in dollari che si desidera assegnare all'istanza di pagamento.\\
 È dunque necessario includere nel proprio script la funzione come segue:
 \begin{verbatim}
 from sell import sell_item
 \end{verbatim}
+\subsection{Reindirizzamento alla landing page}
+Al fine di permettere all'acquirente, direttamente dal proprio e-commerce, di essere reindirizzato sulla landing page di Shop Chain per effettuare l'acquisto è necessario strutturare l'url di reindirizzamento come segue:
+\begin{quote}
+  \verb|\land?id=<id_item>&r=<pagina_di_ritorno>|.
+\end{quote}
+e dunque sostituire:
+\begin{itemize}
+  \item \verb|<id_item>| con l'id dell'istanza che si riferisce all'acquisto che l'acquirente desidera effettuare;
+  \item \verb|<pagina_di_ritorno>| con l'url della pagina alla quale si vuole reindirizzare l'acquirente al termine dell'acquisto.
+\end{itemize}
+Dopo aver confermato il pagamento l'acquirente verrà direttamente reindirizzato alla pagina di ritorno, l'url sarà strutturato come segue:
+\begin{quote}
+  \verb|<pagina_di_ritorno>?transaction_id=<id_transazione>|.
+\end{quote}
+dove \verb|<id_transazione>| corrisponde all'id della transazione effettuata dall'acquirente per l'acquisto.
+
 \subsection{Test}
 Per eseguire il test sullo script è sufficiente eseguire il seguente comando:
 \begin{lstlisting}[language=bash]
@@ -273,7 +311,7 @@ $ pytest
 \section{Contract}
 \subsection{Requisiti}
 \subsubsection{Truffle, plugin e librerie}
-Per compilare lo smart contract e deployarlo è necessario installare Truffle e alcuni plugin e librerie all'interno della cartella "Contract". Eseguire i seguenti comandi per una corretta installazione:
+Per compilare lo smart contract e deployarlo è necessario installare Truffle e alcuni plugin e librerie all'interno della cartella \texttt{contract}. Eseguire i seguenti comandi per una corretta installazione:
 \begin{lstlisting}[language=bash]
   $ npm install
   $ npm install -g truffle
@@ -290,7 +328,7 @@ infine per la verifica e test installare:
   $ npm install solidity-coverage
 \end{lstlisting}
 \subsection{Configurazione}
-È necessaria la creazione di tre file nella cartella "Contract" per il deployment del contratto:
+È necessaria la creazione di tre file nella cartella \texttt{contract} per il deployment del contratto:
 \begin{itemize}
   \item \textbf{mnemonic.secret}: deve contenere la mnemonic del proprio wallet;
   \item \textbf{providerlink.secret}: deve contenere l'url del provider ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}, può essere utilizzato anche l'url in http;

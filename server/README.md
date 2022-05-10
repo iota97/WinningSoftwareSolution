@@ -8,8 +8,18 @@ La configurazione è nel file: `.env`, crearlo se non esiste
 
 Configurare la login del proprio server SQL MariaDB
 
-#### Testing locale
-Configurare SERVER_URL con un URL a tinyurl che punto al proprio IP locale che passa per sslip.io, ad esempio `http://192.168.0.15.sslip.io:8080/`
+#### Testing
+Installare dipendenze con:
+
+`npm install`
+
+Installare globalmente il tool localtunnel con:
+
+`npm install -g localtunnel`
+
+Prima di avviare il server, configurare con SERVER_URL il link ritornato eseguendo:
+
+`lt --port 8080`
 
 #### Deploy
 Configurare SEVER_URL con l'URL del proprio server (deve essere in HTTPS)
@@ -22,7 +32,7 @@ DB_USER="username"
 DB_PWD="password"
 DB_NAME="OnlineStore"
 API_KEY=5c29520422f9528344aa64a1
-SERVER_URL="tinyurl.com/2p8vu62x"
+SERVER_URL="yummy-squids-jam-93-70-101-17.loca.lt"
 ```
 
 # Creare le tabelle del database
