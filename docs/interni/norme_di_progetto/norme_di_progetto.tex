@@ -8,7 +8,7 @@
 \settitolo{Norme di progetto}
 \setprogetto{ShopChain}
 \setcommittenti{SyncLab}
-\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco \\ Alberto Nicoletti \\ Matteo Galvagni}
+\setredattori{Elia Scandaletti \\ Raffaele Oliviero \\ Giovanni Cocco \\ Alberto Nicoletti \\ Matteo Galvagni \\ Andrea Volpe}
 \setdestuso{interno}
 \setdescrizione{
 Questo documento contiene le procedure, gli strumenti e i criteri di qualità che verranno usati nel progetto.
@@ -28,6 +28,8 @@ Questo documento contiene le procedure, gli strumenti e i criteri di qualità ch
 \addversione{2.0.1}{17/04/2022}{Elia Scandaletti}{Raffaele Oliviero}{Aggiornamento processo fornitura.}
 \addversione{2.0.2}{18/04/2022}{Elia Scandaletti}{Giovanni Cocco}{Correzione grammatica.}
 \addversione{2.0.3}{07/05/2022}{Matteo Galvagni}{Elia Scandaletti}{Correzione dopo revisione PB.}
+\addversione{2.1.0}{08/05/2022}{Andrea Volpe}{Raffaele Oliviero}{Aggiornamento verbali e processi organizzativi.}
+\addversione{2.1.1}{10/05/2022}{Elia Scandaletti}{Andrea Volpe}{Correzione processo fornitura dopo revisione PB.}
 
 
 
@@ -52,7 +54,7 @@ Il processo di fornitura determina le attività e le risorse che servono per ges
 Durante tutto il progetto verrà usata un unica repository pubblica. La parte di repository che interessa al proponente ed al committente è la cartella \texttt{public} definita come parte pubblica della repository. Questa cartella contiene un file read-me in cui viene spiegato ed elencato il contenuto della parte pubblica con un avviso che chiede di restarne all'interno, ignorando il resto della repository, detta parte privata.\\\\
 La parte pubblica contiene i documenti necessari alle revisioni di periodo con il committente.\\
 La struttura della cartella \texttt{public} rispecchia la struttura della cartella \texttt{docs}. Fanno eccezione i verbali che saranno tutti all'interno delle cartelle \texttt{esterni/verbali} e \texttt{interni/verbali} e non avranno ciascuno la propria cartella.\\
-Ogni documento che prevede versionamento deve indicare la versione nel nome del file stesso nel seguente modo: \texttt{$<$NomeFile$>$\_v$<$versione$>$.pdf}. I documenti con le versioni vecchie andranno mantenuti. \\
+Ogni documento che prevede versionamento deve indicare la versione nel nome del file stesso nel seguente modo: \texttt{$<$NomeFile$>$\_v$<$versione$>$.pdf}. I documenti con le versioni vecchie andranno rimossi. \\
 Ogni modifica alla parte pubblica deve essere approvata dal responsabile, cui spetta accettare le pull request della parte pubblica.
 \subsubsection{Contatti con proponente e committente}
 
@@ -334,7 +336,7 @@ Ogni verbale deve riportare:
 \item Luogo;
 \item Partecipanti;
 \item Ordine del giorno;
-\item Riassunto dei contenuti;
+\item Riassunto dei contenuti / Svolgimento (per verbale chiusura ciclo di sprint);
 \item Eventuali impegni assunti.
 \end{itemize}
 \subparagraph{Stesura}\label{documentazione-documenti-verbali-stesura}
@@ -343,7 +345,17 @@ All'inizio di ogni riunione verrà nominato un partecipante che redigerà il ver
 Chi redige il verbale ha 24 ore per completare il lavoro. Chi approva il verbale ha 24 ore per approvarlo o segnalare eventuali correzioni da apportare.
 
 Nel secondo caso, il redattore avrà ulteriori 24 ore per adeguarsi alle indicazioni.
-
+\subparagraph{Dettagli}\label{documentazione-documenti-verbali-dettagli}
+In caso di verbale di chiusura di ciclo di sprint, la parte di \textit{svolgimento} dovrà essere strutturata nel seguente modo:
+\begin{itemize}
+	\item Resoconto del ciclo di sprint precedente
+	\item Criticità del ciclo di sprint precedente
+	\item Task per il ciclo di sprint successivo:
+    \begin{itemize}
+		\item Indicare il responsabile per il ciclo di sprint successivo
+		\item Elencare le attività numerate con il corrispondente id della issue su GitHub
+	\end{itemize}
+\end{itemize}
 \paragraph{Piano di Qualifica}\label{documentazione-documenti-piano-di-qualifica}
 \subparagraph{Scopo}
 Lo scopo del \textit{Piano di Qualifica} è definire le metriche e i requisiti minimi di qualità per l'approvazione dei prodotti del progetto.
@@ -351,7 +363,6 @@ Lo scopo del \textit{Piano di Qualifica} è definire le metriche e i requisiti m
 Il titolo del documento è ``Piano di Qualifica".
 \subparagraph{Nome del file}
 Il file sarà chiamato \texttt{piano\_di\_qualifica.tex}.
-
 \paragraph{Piano di Progetto}\label{piano-di-progetto}
 \subparagraph{Scopo}
 Lo scopo del \textit{Piano di Progetto} è definire gli obiettivi da raggiungere, stabilendo le tempistiche e chi se ne occupa e tiene traccia del loro progresso, valutando i costi sostenuti rispetto a quelli preventivati.
@@ -451,6 +462,8 @@ Si è deciso di effettuare una riunione interna ogni mercoledì dove discutere d
 I resoconti dovranno essere preparati dai singoli membri prima di ogni esposizione.\\
 Ogni incontro dovrà produrre un aggiornamento delle milestones (e diagramma di Gantt).\\
 La pianificazione dei prossimi sprint consisterà nel dividere il lavoro in item e decidere il numero di membri adatto per item.\\
+Gli item pianificati non potranno subire modifiche o cancellazioni durante il ciclo di sprint e dovranno essere portati a termine
+entro il ciclo successivo. In caso emergessero importanti contestazioni o criticità il responsabile deciderà come agire.\\
 Ogni ciclo di Scrum prevederà un nuovo responsabile, scelto per cognome in ordine alfabetico.\\
 Il responsabile dovrà assegnare le persone agli item considerando la rotazione dei ruoli.\\
 Il responsabile dovrà poi creare le issues su GitHub relative agli item e assegnarvici i membri.\\

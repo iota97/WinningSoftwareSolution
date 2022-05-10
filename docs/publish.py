@@ -56,9 +56,9 @@ def compile(source, dest):
 
 def get_dest_dir(source):
     dest_dir = os.path.dirname(source)
-    dest_dir = dest_dir.replace('docs', 'public')
-    if 'verbali' in source:
-        dest_dir = os.path.dirname(dest_dir)
+    dest_dir = dest_dir.replace('docs', 'public', 1)
+    dest_dir = os.path.dirname(dest_dir)
+
     return dest_dir
 
 
@@ -74,12 +74,18 @@ def get_dest(file):
 
 
 def publish(file):
+    if 'lettera' in file:
+        return
+
     dest = get_dest(file)
     if os.path.exists(dest):
         if os.path.getctime(dest) < os.path.getmtime(file):
             os.remove(dest)
         else:
             return False
+
+    for old in glob.glob(dest.split('_v')[0]+'_v*.pdf'):
+        os.remove(old)
 
     compile(file, dest)
     return True
