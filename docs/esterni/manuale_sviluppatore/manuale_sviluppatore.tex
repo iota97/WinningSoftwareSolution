@@ -15,8 +15,8 @@
 Manuale sviluppatore.
 }
 
-\addversione{0.1.0}{04/04/2022}{Federico Marchi}{Redazione}{Stesura iniziale}
-\addversione{1.0.0}{07/05/2022}{Federico Marchi}{Redazione}{Stesura finale}
+\addversione{0.1.0}{04/04/2022}{Federico Marchi}{Matteo Galvagni}{Stesura iniziale}
+\addversione{1.0.0}{07/05/2022}{Federico Marchi}{Elia Scandaletti}{Stesura finale}
 
 \begin{document}
 \makefrontpage
@@ -35,7 +35,7 @@ Il presente documento ha la funzione di descrivere in dettaglio la procedura da 
 \section{Server}
 \subsection{Requisiti}
 \subsubsection{Node Js}
-Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella "Server" per l'installazione delle dipendenze:
+Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non è già stato installato precedentemente. Una volta effettuata correttamente l'installazione, è necessario eseguire il seguente comando direttamente nella cartella \texttt{server} per l'installazione delle dipendenze:
 \begin{lstlisting}[language=bash]
   $ npm install
 \end{lstlisting}
@@ -43,8 +43,8 @@ Installare \href{https://nodejs.org/en/download/}{Node Js} (v. 16.13.1) se non �
 Per poter utilizzare la web app è necessario Metamask (v. 10.11.3).\\
 Per avere il proprio wallet Metamask è possibile recarsi su \href{https://www.metamask.io}{metamask.io}, installare l'estensione e scegliere se:
 \begin{itemize}
-  \item \textbf{Creare un nuovo wallet}: è possibile creare un nuovo wallet selezionando "Create a Wallet" (Fig. 1 freccia blu). Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi;
-  \item \textbf{Importare un wallet già esistente}: è possibile anche importare un wallet già esistente selezionando l'opzione "Import wallet" (Fig. 1 freccia rossa). È sufficiente inserire la mnemonic phrase per poter utilizzare il proprio wallet su Metamask.
+  \item \textbf{Creare un nuovo wallet}: è possibile creare un nuovo wallet selezionando ``Create a Wallet" (Fig. 1 freccia blu). Durante la creazione del wallet ricordare di salvare la mnemonic phrase poiché necessaria nei passi successivi;
+  \item \textbf{Importare un wallet già esistente}: è possibile anche importare un wallet già esistente selezionando l'opzione ``Import wallet" (Fig. 1 freccia rossa). È sufficiente inserire la mnemonic phrase per poter utilizzare il proprio wallet su Metamask.
 \end{itemize}
 \FloatBarrier
 \begin{figure}[!h]
@@ -58,9 +58,9 @@ Nel caso in cui non si ricordi più la mnemonic phrase del proprio wallet è pos
 \begin{enumerate}
   \item accedere al proprio wallet Metamask;
   \item selezionare il proprio account in alto a destra (Fig. 2);
-  \item selezionare l'opzione "Settings";
-  \item selezionare l'opzione "Security \& Privacy";
-  \item selezionare l'opzione "Reveal Secret Recovery Phrase";
+  \item selezionare l'opzione ``Settings";
+  \item selezionare l'opzione ``Security \& Privacy";
+  \item selezionare l'opzione ``Reveal Secret Recovery Phrase";
   \item inserire la propria password.
 \end{enumerate}
 Una volta ottenuta la propria mnemonic phrase salvarla per i passi successivi.
@@ -95,7 +95,7 @@ Una volta inseriti i dati e aggiunta la rete, ricordare di selezionarla.
 \label{sec:provider}
 Per ottenere il provider per la mainnet Polygon è necessario registrarsi su \href{https://www.moralis.io}{moralis.io}. Una volta effettuata la registrazione:
 \begin{enumerate}
-  \item selezionare la sezione "SpeedyNodes" dal menù;
+  \item selezionare la sezione ``SpeedyNodes" dal menù;
   \item selezionare l'endpoint per Polygon Network;
   \item selezionare il protocollo WS;
   \item copiare l'url dell'endpoint per la mainnet (Fig. 3 freccia rossa).
@@ -104,7 +104,7 @@ Nell'url copiato è possibile visualizzare l' api key, si tratta infatti del cod
 wss://speedy-nodes-nyc.moralis.io/\textbf{a8d734a415dd368a3498db63}/polygon/mainnet/ws\\\\
 È necessario salvare l'url per i passi successivi.
 \paragraph{Testnet Mumbai}\\
-Nel caso in cui si volesse invece utilizzare una rete di test, è possibile utilizzare la rete Mumbai la quale è una testnet di Polygon. Per selezionare il provider corretto per Mumbai è sufficiente copiare l'url nel campo "Mumbai" (Fig. 3 freccia blu).
+Nel caso in cui si volesse invece utilizzare una rete di test, è possibile utilizzare la rete Mumbai la quale è una testnet di Polygon. Per selezionare il provider corretto per Mumbai è sufficiente copiare l'url nel campo ``Mumbai" (Fig. 3 freccia blu).
 \FloatBarrier
 \begin{figure}[!h]
 \centering
@@ -143,7 +143,7 @@ INSERT INTO LastBlockSynced (id, value) VALUES (0, 0);
 \end{verbatim}
 \subsection{Configurazione}
 \label{sec:config_server}
-Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella "Server". Il file deve essere strutturato come segue:
+Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduzione}, è necessaria la creazione di un file `.env` dentro la cartella ``Server". Il file deve essere strutturato come segue:
 \begin{verbatim}
   PORT=8080
   DB_HOST="localhost"
@@ -159,8 +159,8 @@ dove ciascun campo indica:
   \item \textbf{DB\_HOST}: l'host selezionato;
   \item \textbf{DB\_USER}: l'user associato al database;
   \item \textbf{DB\_PWD}: password dell' user utilizzato;
-  \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso "OnlineStore";
-  \item \textbf{API\_KEY}: l' api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
+  \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso \texttt{OnlineStore};
+  \item \textbf{API\_KEY}: l'api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
   \mbox{}
   \item \textbf{SERVER\_URL}: inserire il link ritornato da localtunnel come spiegato nel seguente paragrafo.\\
   \paragraph{Sviluppo e testing con Localtunnel}\\
@@ -185,7 +185,7 @@ Conclusa la configurazione è possibile far partire il server con il comando:
 \begin{lstlisting}[language=bash]
   $ npm start
 \end{lstlisting}
-Mentre per i test è sufficiente la creazione del database "OnlineStoreTest" inserendo le seguenti query come spiegato al punto \hyperref[sec:db]{2.1.3}:
+Mentre per i test è sufficiente la creazione del database \texttt{OnlineStoreTest} inserendo le seguenti query come spiegato al punto \hyperref[sec:db]{2.1.3}:
 \begin{verbatim}
 CREATE DATABASE OnlineStoreTest;
 USE OnlineStoreTest;
@@ -218,16 +218,16 @@ Per eseguire i test sulla web app si utilizza JSCover in modalità proxy. I file
   \item per eseguire i test è necessario connettersi a \url{http://localhost-proxy:8080}.
 \end{itemize}
 \paragraph{Salvataggio dati}\\
-JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localStorage di HTML5. Per salvare i dati nella cartella "jscoverage" è necessario:
+JScover tiene traccia di ogni linea di codice eseguita e salva i dati nel localStorage di HTML5. Per salvare i dati nella cartella \texttt{jscoverage} è necessario:
 \begin{itemize}
   \item caricare la pagina \url{http://localhost-proxy:8080/jscoverage.html};
-  \item aprire la tab "Store";
-  \item selezionare "Store Report".
+  \item aprire la tab ``Store";
+  \item selezionare ``Store Report".
 \end{itemize}
 \paragraph{Cancellazione dati}\\
 Essendo i dati dei test cumulativi, quando si desidera effettuare il test da zero è necessario cancellare i dati salvati. Per la cancellazione dei dati è sufficiente caricare la pagina \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \paragraph{Visualizzazione report}\\
-Per la visualizzazione del report è sufficiente selezionare la tab "Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
+Per la visualizzazione del report è sufficiente selezionare la tab ``Summary" nella seguente pagina:  \url{http://localhost-proxy:8080/jscoverage-clear-local-storage.html}.
 \newpage{}
 \section{Script}
 Lo script in python permette all'e-commerce di creare una istanza di pagamento in blockchain e dunque permettere all'acquirente di acquistare attraverso il servizio Shop Chain.
@@ -262,7 +262,7 @@ Una volta soddisfatti i requisiti e ultimata la configurazione è possibile proc
 \begin{lstlisting}[language=bash]
   $ python3 sell.py [item price]
 \end{lstlisting}
-Sostituire \verb|[item price]| con il prezzo con il quale si creare l'istanza di pagamento.
+Sostituire \verb|[item price]| con il prezzo con il quale si vuole creare l'istanza di pagamento.
 Una volta eseguito lo script, verrà ritornato e stampato l'id e il prezzo dell'istanza creata.
 \textbf{Esempio}
 \\
@@ -302,7 +302,7 @@ Dopo aver confermato il pagamento l'acquirente verrà direttamente reindirizzato
   \verb|<pagina_di_ritorno>?transaction_id=<id_transazione>|.
 \end{quote}
 dove \verb|<id_transazione>| corrisponde all'id della transazione effettuata dall'acquirente per l'acquisto.
-\end{document}
+
 \subsection{Test}
 Per eseguire il test sullo script è sufficiente eseguire il seguente comando:
 \begin{lstlisting}[language=bash]
@@ -311,7 +311,7 @@ $ pytest
 \section{Contract}
 \subsection{Requisiti}
 \subsubsection{Truffle, plugin e librerie}
-Per compilare lo smart contract e deployarlo è necessario installare Truffle e alcuni plugin e librerie all'interno della cartella "Contract". Eseguire i seguenti comandi per una corretta installazione:
+Per compilare lo smart contract e deployarlo è necessario installare Truffle e alcuni plugin e librerie all'interno della cartella \texttt{contract}. Eseguire i seguenti comandi per una corretta installazione:
 \begin{lstlisting}[language=bash]
   $ npm install
   $ npm install -g truffle
@@ -328,7 +328,7 @@ infine per la verifica e test installare:
   $ npm install solidity-coverage
 \end{lstlisting}
 \subsection{Configurazione}
-È necessaria la creazione di tre file nella cartella "Contract" per il deployment del contratto:
+È necessaria la creazione di tre file nella cartella \texttt{contract} per il deployment del contratto:
 \begin{itemize}
   \item \textbf{mnemonic.secret}: deve contenere la mnemonic del proprio wallet;
   \item \textbf{providerlink.secret}: deve contenere l'url del provider ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}, può essere utilizzato anche l'url in http;
