@@ -32,7 +32,7 @@ DB_USER="username"
 DB_PWD="password"
 DB_NAME="OnlineStore"
 API_KEY=5c29520422f9528344aa64a1
-SERVER_URL="yummy-squids-jam-93-70-101-17.loca.ltx"
+SERVER_URL="yummy-squids-jam-93-70-101-17.loca.lt"
 ```
 
 # Creare le tabelle del database

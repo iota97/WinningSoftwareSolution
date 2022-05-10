@@ -151,7 +151,7 @@ Una volta clonata la repository come spiegato nell'\hyperref[sec:intro]{introduz
   DB_PWD="password"
   DB_NAME="OnlineStore"
   API_KEY=xxxxxxxxxxxxxxxxxxxxxxxx
-  SERVER_URL="tinyurl.com/xxxxxxxx"
+  SERVER_URL="xxxxxxx.loca.ltx"
 \end{verbatim}
 dove ciascun campo indica:
 \begin{itemize}
@@ -162,7 +162,7 @@ dove ciascun campo indica:
   \item \textbf{DB\_NAME}: il nome del database da utilizzare, in questo caso \texttt{OnlineStore};
   \item \textbf{API\_KEY}: l'api key, ottenibile come spiegato al punto \hyperref[sec:provider]{2.1.2}.
   \mbox{}
-  \item \textbf{SERVER\_URL}: inserire il link ritornato da localtunnel come spiegato nel seguente paragrafo.\\
+  \item \textbf{SERVER\_URL}: inserire il link ritornato da localtunnel come spiegato nel seguente paragrafo. Importante: l'URL va inserito senza il protocollo.\\
   \paragraph{Sviluppo e testing con Localtunnel}\\
   Per lo sviluppo e il testing è stato utilizzato il tool localtunnel, il quale permette di rendere accessibile da remoto il server locale. Per utilizzare localtunnel è necessario:
   \begin{itemize}
@@ -175,7 +175,7 @@ dove ciascun campo indica:
       $ lt --port <port>
     \end{lstlisting}
     con \verb|<port>| la porta che si desidera utilizzare (deve corrispondere con la porta specificata nella variabile d'ambiente \verb|PORT|);\\
-    \item il link ritornato inserirlo nella variabile d'ambiente \verb|SERVER_URL|. Importante ricordarsi di aggiornare il link ogni qualvolta si riavvia localtunnel.
+    \item il link ritornato inserirlo nella variabile d'ambiente \verb|SERVER_URL|. Importante ricordarsi di aggiornare la variabile ogni qualvolta si riavvia localtunnel.
   \end{itemize}
 
 \end{itemize}
