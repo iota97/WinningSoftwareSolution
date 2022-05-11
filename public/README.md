@@ -26,11 +26,11 @@ Ignorare qualsiasi contenuto al di fuori di questa cartella.
 ## Verbali Interni
 - [Verbale del 27/04/2022](interni/verbali/2022_04_27_I.pdf)
 
-- [Verbale del 04/04/2022](interni/verbali/2022_05_04_I.pdf)
+- [Verbale del 04/05/2022](interni/verbali/2022_05_04_I.pdf)
 
-- [Verbale del 05/04/2022](interni/verbali/2022_05_05_I.pdf)
+- [Verbale del 05/05/2022](interni/verbali/2022_05_05_I.pdf)
 
-- [Verbale del 11/04/2022](interni/verbali/2022_05_11_I.pdf)
+- [Verbale del 11/05/2022](interni/verbali/2022_05_11_I.pdf)
 
 ## Verbali Esterni
-- [Verbale del 05/04/2022](esterni/verbali/2022_05_05_E.pdf)
+- [Verbale del 05/05/2022](esterni/verbali/2022_05_05_E.pdf)
