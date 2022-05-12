@@ -1,5 +1,6 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage{amsmath}
+\usepackage{eurosym}
 \usepackage{pgfplots}
 \usepackage{tabularx}
 \usepackage[font=small,labelfont=bf]{caption}
@@ -33,6 +34,7 @@ Questo documento serve a definire le metriche e i criteri di accettazione dei pr
 \addversione{2.5.0}{01/05/2022}{Raffaele Oliviero}{Andrea Volpe}{Aggiornamento per ciclo 5.}
 \addversione{2.6.0}{04/05/2022}{Andrea Volpe}{Raffaele Oliviero}{Aggiornamento per ciclo 6.}
 \addversione{2.7.0}{04/05/2022}{Raffaele Oliviero}{Alberto Nicoletti}{Aggiunta analisi d'insieme.}
+\addversione{2.8.0}{11/05/2022}{Elia Scandaletti}{Giovanni Cocco}{Aggiornamento per ciclo 7.}
 
 \begin{document}
 
@@ -49,11 +51,12 @@ La qualità dei documenti in generale è soddisfacente. \\
 L'indice di Gulpease dei documenti che superano la soglia ottimale rimane tendenzialmente costante. \\
 I documenti che superano solo la soglia di accettabilità hanno invece registrato un leggero aumento del loro indice, ma non raggiungono ancora l'ottimalità.\\
 
-É da molto che non vengono effettuati test su certi prodotti software e, anche se non sono state effettuate modifiche, ciò potrebbe dare l'impressione al proponente che la qualità di tali prodotti non sia garantita, riflettendo negativamente sull'operato del gruppo WSWS.
+Per alcune settimane nono sono stati effettuati test su alcuni prodotti software; questo perché non sono state effettuate modifiche. Ciò potrebbe dare l'impressione al proponente che la qualità di tali prodotti non sia garantita, riflettendo negativamente sull'operato del gruppo WSWS.
 
 \paragraph{Qualità di processo}
 Negli ultimi due cicli di sprint è stato sovrastimato il costo in ore dei ruoli di amministratore, analista e progettista, mentre è stato sottostimato il costo in ore dei ruoli di responsabile e programmatore. \\
 A causa dell'alto costo orario del responsabile, queste stime errate hanno portato nell'ultimo sprint ad un costo superiore a quello preventivato, ma i costi rimangono nei parametri accettabili. \\
+A conclusione del progetto, il consuntivo è di poco superiore alle preventivo iniziale sia in termini di ore (+35) che in termini di prezzo (+215 \euro)
 
 \section{Qualità di prodotto}
 
@@ -136,11 +139,13 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-02-09, 52.46)
 					(2022-02-26, 72.56)
 					(2022-03-23, 72.44)
-					(2022-04-07, 66.92)
-					(2022-04-13, 68.26)
-					(2022-04-20, 69.12)
+					(2022-03-29, 60.99)
+					(2022-04-06, 66.92)
+					(2022-04-13, 71.94)
+					(2022-04-20, 67.91)
 					(2022-04-27, 71.94)
 					(2022-05-04, 63.84)
+					(2022-05-05, 55.78)
 				};\addlegendentry{Verbali interni}
 
 			\addplot coordinates {
@@ -151,6 +156,7 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-04-20, 55.15)
 					(2022-05-01, 56.08)
 					(2022-05-04, 56.08)
+					(2022-05-10, 55.54)
 				};\addlegendentry{Norme di progetto}
 
 		\end{axis}
@@ -197,6 +203,7 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2021-12-22, 46.31)
 					(2022-02-16, 63.87)
 					(2022-03-01, 47.52)
+					(2022-05-05, 63.73)
 				};\addlegendentry{Verbali esterni}
 			\addplot coordinates {
 					(2022-03-23, 55.2)
@@ -205,7 +212,7 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-04-13, 55.53)
 					(2022-04-20, 55.53)
 					(2022-05-01, 56.32)
-					(2022-05-04, 56.32)
+					(2022-05-07, 56.22)
 				};\addlegendentry{Analisi dei requisiti}
 
 			\addplot coordinates {
@@ -216,6 +223,7 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-04-20, 42.18)
 					(2022-05-01, 48.37)
 					(2022-05-04, 48.4)
+					(2022-05-11, 50.12)
 				};\addlegendentry{Piano di progetto}
 
 			\addplot coordinates {
@@ -226,6 +234,7 @@ Fanno eccezione i verbali in cui ogni punto indica un verbale specifico.
 					(2022-04-20, 56.08)
 					(2022-05-01, 57.01)
 					(2022-05-04, 56.42)
+					(2022-05-11, 55.52)
 				};\addlegendentry{Piano di qualifica}
 
 		\end{axis}
@@ -299,21 +308,25 @@ Ogni punto indica la copertura percentuale degli statement nella data indicata.
 					(2022-03-27, 85)
 					(2022-04-13, 85)
 					(2022-04-20, 86)
+					(2022-05-11, 86)
 				};\addlegendentry{WebApp - frontend}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 95)
 					(2022-03-27, 100)
+					(2022-05-11, 98.7)
 				};\addlegendentry{Server - backend}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 80)
 					(2022-03-27, 100)
+					(2022-05-11, 100)
 				};\addlegendentry{Contratto}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 90)
 					(2022-03-27, 100)
+					(2022-05-11, 100)
 				};\addlegendentry{Script}
 		\end{axis}
 	\end{tikzpicture}
@@ -380,22 +393,26 @@ Ogni punto indica la copertura percentuale delle branch nella data indicata.
 					(2022-03-22, 50)
 					(2022-03-27, 80)
 					(2022-04-13, 80)
+					(2022-05-11, 80)
 				};\addlegendentry{WebApp - frontend}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 85)
 					(2022-03-27, 100)
+					(2022-05-11, 100)
 				};\addlegendentry{Server - backend}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 75.1)
 					(2022-03-27, 95.1)
 					(2022-04-07, 95.56)
+					(2022-05-11, 95.56)
 				};\addlegendentry{Contratto}
 			\addplot coordinates {
 					(2022-03-02, 0)
 					(2022-03-22, 57)
 					(2022-03-27, 100)
+					(2022-05-11, 100)
 				};\addlegendentry{Script}
 		\end{axis}
 	\end{tikzpicture}
@@ -461,6 +478,7 @@ Ogni punto indica la variazione del consuntivo rispetto al preventivo di un cicl
 					(2022-04-20, +22)
 					(2022-05-01, -6.5)
 					(2022-05-04, -1)
+					(2022-05-11, -7.8)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
 					(2022-03-23, 0)
@@ -470,6 +488,7 @@ Ogni punto indica la variazione del consuntivo rispetto al preventivo di un cicl
 					(2022-04-20, +15)
 					(2022-05-01, +5.5)
 					(2022-05-04, +3)
+					(2022-05-11, -15)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}
@@ -534,6 +553,7 @@ Ogni punto indica la variazione del consuntivo rispetto al preventivo di un cicl
 					(2022-04-20, +23)
 					(2022-05-01, -36)
 					(2022-05-04, +6)
+					(2022-05-11, -9.5)
 				};\addlegendentry{Documenti}
 			\addplot coordinates {
 					(2022-03-23, 0)
@@ -544,6 +564,7 @@ Ogni punto indica la variazione del consuntivo rispetto al preventivo di un cicl
 					(2022-05-01, +27)
 					(2022-05-01, +27)
 					(2022-05-04, +12)
+					(2022-05-11, -20)
 				};\addlegendentry{Software}
 		\end{axis}
 	\end{tikzpicture}
